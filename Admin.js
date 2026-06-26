@@ -1,5 +1,5 @@
 // ATENÇÃO: Use sempre a URL completa do seu script terminando com /exec
-const API = "https://google.com";
+const API = "https://google.commacros/s/AKfycbzs99-zCpmhX7fEK81dLDoJEkTMMv5gF2Q7lFjWvEDoDjzPyGq-Gt47EvYf6TzWyJNG8A/exec";"
 
 // 1. FUNÇÃO PARA SALVAR O AGENDAMENTO (Disparada pelo botão do HTML)
 async function agendar() {
