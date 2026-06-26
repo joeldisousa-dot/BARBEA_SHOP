@@ -1,59 +1,113 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
 <meta charset="utf-8">
-
 <title>Barbearia</title>
-
-<link rel="stylesheet" href="css/style.css">
-
+<style>
+  /* Se você tiver estilos CSS, cole aqui dentro para funcionarem na página */
+</style>
 </head>
-
 <body>
 
 <div class="container">
-
-<h1>Agendar Horário</h1>
-
-<input id="cliente" placeholder="Nome">
-
-<input id="telefone" placeholder="Telefone">
-
-<select id="barbeiro">
-
-<option>João</option>
-
-<option>Pedro</option>
-
-</select>
-
-<select id="servico">
-
-<option>Corte</option>
-
-<option>Barba</option>
-
-<option>Corte + Barba</option>
-
-</select>
-
-<input id="data" type="date">
-
-<select id="hora"></select>
-
-<button onclick="agendar()">
-
-Agendar
-
-</button>
-
+  <h1>Agendar Horário</h1>
+  <input id="cliente" placeholder="Nome">
+  <input id="telefone" placeholder="Telefone">
+  
+  <select id="barbeiro">
+    <option>João</option>
+    <option>Pedro</option>
+  </select>
+  
+  <select id="servico">
+    <option>Corte</option>
+    <option>Barba</option>
+    <option>Corte + Barba</option>
+  </select>
+  
+  <input id="data" type="date">
+  <select id="hora">
+    <option value="">Selecione uma data primeiro</option>
+  </select>
+  
+  <button onclick="agendar()">Agendar</button>
 </div>
 
-<script src="js/app.js"></script>
+<script>
+// Usando a tecnologia nativa do Google para salvar dados
+function agendar() {
+    const cliente = document.getElementById("cliente").value;
+    const telefone = document.getElementById("telefone").value;
+    const barbeiro = document.getElementById("barbeiro").value;
+    const servico = document.getElementById("servico").value;
+    const data = document.getElementById("data").value;
+    const hora = document.getElementById("hora").value;
+
+    if (!cliente || !telefone || !barbeiro || !servico || !data || !hora) {
+        alert("Por favor, preencha todos os campos!");
+        return;
+    }
+
+    const dados = {
+        data: data,
+        hora: hora,
+        cliente: cliente,
+        telefone: telefone,
+        servico: servico,
+        barbeiro: barbeiro
+    };
+
+    // Desabilita o botão para evitar cliques duplos
+    document.querySelector("button").disabled = true;
+
+    // Executa a função do arquivo .gs diretamente!
+    google.script.run
+        .withSuccessHandler(function(resposta) {
+            alert("Agendamento realizado com sucesso!");
+            // Limpa o formulário
+            document.getElementById("cliente").value = "";
+            document.getElementById("telefone").value = "";
+            document.getElementById("hora").innerHTML = '<option value="">Selecione uma data primeiro</option>';
+            document.querySelector("button").disabled = false;
+        })
+        .withFailureHandler(function(erro) {
+            alert("Erro ao salvar agendamento: " + erro);
+            document.querySelector("button").disabled = false;
+        })
+        .salvarAgendamento(dados); // Nome da função lá no seu Código.gs
+}
+
+// Carregar horários disponíveis dinamicamente
+document.getElementById("data").addEventListener("change", function(e) {
+    const dataSelecionada = e.target.value;
+    if (!dataSelecionada) return;
+
+    const selectHora = document.getElementById("hora");
+    selectHora.innerHTML = "<option>Carregando horários...</option>";
+
+    // Executa a função de listar os horários que está no seu Código.gs
+    google.script.run
+        .withSuccessHandler(function(respostaJson) {
+            // Como a função original retorna uma 'resposta()' em formato texto JSON, precisamos converter aqui
+            const horariosLivres = JSON.parse(respostaJson);
+            
+            selectHora.innerHTML = "";
+            
+            if(horariosLivres.length === 0) {
+                selectHora.innerHTML = "<option value=''>Nenhum horário disponível</option>";
+                return;
+            }
+
+            horariosLivres.forEach(function(hora) {
+                const option = document.createElement("option");
+                option.value = hora;
+                option.textContent = hora;
+                selectHora.appendChild(option);
+            });
+        })
+        .listarHorarios(dataSelecionada);
+});
+</script>
 
 </body>
-
-</html> 
+</html>
