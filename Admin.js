@@ -1,7 +1,6 @@
 const API="AKfycby-c2Trv1hfk3jPPp8CmxXV-RfGcvo9p-QnPXkr_flJH1Si7ry2FLe7-Ov4wciq7A2jdg";
 
 async function carregar(){
-
 const resposta=await fetch(
 
 `${API}?acao=listar`
