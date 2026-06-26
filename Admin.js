@@ -1,42 +1,84 @@
-const API="AKfycby-c2Trv1hfk3jPPp8CmxXV-RfGcvo9p-QnPXkr_flJH1Si7ry2FLe7-Ov4wciq7A2jdg";
+// ATENÇÃO: Use sempre a URL completa do seu script terminando com /exec
+const API = "https://google.com";
 
-async function carregar(){
-const resposta=await fetch(
+// 1. FUNÇÃO PARA SALVAR O AGENDAMENTO (Disparada pelo botão do HTML)
+async function agendar() {
+    const cliente = document.getElementById("cliente").value;
+    const telefone = document.getElementById("telefone").value;
+    const barbeiro = document.getElementById("barbeiro").value;
+    const servico = document.getElementById("servico").value;
+    const data = document.getElementById("data").value;
+    const hora = document.getElementById("hora").value;
 
-`${API}?acao=listar`
+    // Validação básica para evitar campos vazios
+    if (!cliente || !telefone || !barbeiro || !servico || !data || !hora) {
+        alert("Por favor, preencha todos os campos!");
+        return;
+    }
 
-);
+    // Monta o objeto exatamente como o seu doPost espera receber
+    const dados = {
+        data: data,
+        hora: hora,
+        cliente: cliente,
+        telefone: telefone,
+        servico: servico,
+        barbeiro: barbeiro
+    };
 
-const dados=await resposta.json();
+    try {
+        // Faz a requisição POST enviando o JSON no corpo (body)
+        const resposta = await fetch(API, {
+            method: "POST",
+            mode: "no-cors", // Necessário para evitar bloqueio de CORS com o Apps Script em requisições POST
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(dados)
+        });
 
-let html="";
-
-dados.forEach(a=>{
-
-html+=`
-
-<tr>
-
-<td>${a.data}</td>
-
-<td>${a.hora}</td>
-
-<td>${a.cliente}</td>
-
-<td>${a.servico}</td>
-
-</tr>
-
-`;
-
-});
-
-document.getElementById(
-
-"tabela"
-
-).innerHTML=html;
-
+        // Como usamos 'no-cors', o navegador não consegue ler a resposta JSON por segurança.
+        // Se a requisição não cair no 'catch', significa que foi enviada com sucesso.
+        alert("Agendamento enviado com sucesso!");
+        
+        // Limpa o formulário
+        document.getElementById("cliente").value = "";
+        document.getElementById("telefone").value = "";
+        document.getElementById("hora").innerHTML = "";
+    } catch (erro) {
+        console.error("Erro ao agendar:", erro);
+        alert("Houve um erro ao tentar salvar o agendamento.");
+    }
 }
 
-carregar();
+// 2. FUNÇÃO BÔNUS: Carregar horários disponíveis quando o usuário escolher a data
+document.getElementById("data").addEventListener("change", async (e) => {
+    const dataSelecionada = e.target.value;
+    if (!dataSelecionada) return;
+
+    const selectHora = document.getElementById("hora");
+    selectHora.innerHTML = "<option>Carregando...</option>";
+
+    try {
+        // Consome a rota 'horarios' do seu doGet
+        const resposta = await fetch(`${API}?acao=horarios&data=${dataSelecionada}`);
+        const horariosLivres = await resposta.json();
+
+        selectHora.innerHTML = ""; // Limpa o carregando
+        
+        if(horariosLivres.length === 0) {
+            selectHora.innerHTML = "<option>Nenhum horário disponível</option>";
+            return;
+        }
+
+        horariosLivres.forEach(hora => {
+            const option = document.createElement("option");
+            option.value = hora;
+            option.textContent = hora;
+            selectHora.appendChild(option);
+        });
+    } catch (erro) {
+        console.error("Erro ao carregar horários:", erro);
+        selectHora.innerHTML = "<option>Erro ao carregar</option>";
+    }
+});
