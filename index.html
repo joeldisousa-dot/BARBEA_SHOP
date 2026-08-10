@@ -1,2277 +1,1993 @@
 ```html
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<meta
-  name="description"
-  content="Agendamento online da barbearia"
->
-
-<title>Agendamento Online</title>
-
-<style>
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-
-  margin: 0;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
-  background:
-    #111;
-
-  color:
-    #fff;
-
-}
-
-.container {
-
-  width:
-    100%;
-
-  max-width:
-    600px;
-
-  margin:
-    auto;
-
-  padding:
-    20px;
-
-}
-
-.cabecalho {
-
-  text-align:
-    center;
-
-  padding:
-    20px 0 30px;
-
-}
-
-.logo {
-
-  font-size:
-    42px;
-
-  margin-bottom:
-    10px;
-
-}
-
-h1 {
-
-  margin:
-    0;
-
-  font-size:
-    28px;
-
-}
-
-.subtitulo {
-
-  color:
-    #aaa;
-
-  margin-top:
-    8px;
-
-}
-
-.etapa {
-
-  display:
-    none;
-
-}
-
-.etapa.ativa {
-
-  display:
-    block;
-
-}
-
-.progresso {
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  margin-bottom:
-    30px;
-
-}
-
-.progresso-item {
-
-  width:
-    36px;
-
-  height:
-    36px;
-
-  border-radius:
-    50%;
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  background:
-    #333;
-
-  color:
-    #aaa;
-
-  font-weight:
-    bold;
-
-}
-
-.progresso-item.ativo,
-.progresso-item.concluido {
-
-  background:
-    #d4af37;
-
-  color:
-    #111;
-
-}
-
-.linha {
-
-  width:
-    45px;
-
-  height:
-    2px;
-
-  background:
-    #333;
-
-}
-
-.linha.concluida {
-
-  background:
-    #d4af37;
-
-}
-
-.campo {
-
-  margin-bottom:
-    20px;
-
-}
-
-label {
-
-  display:
-    block;
-
-  margin-bottom:
-    8px;
-
-  font-weight:
-    bold;
-
-}
-
-select,
-input {
-
-  width:
-    100%;
-
-  padding:
-    14px;
-
-  border:
-    1px solid #444;
-
-  border-radius:
-    10px;
-
-  background:
-    #1d1d1d;
-
-  color:
-    #fff;
-
-  font-size:
-    16px;
-
-}
-
-.servicos-wrapper {
-
-  overflow-x:
-    auto;
-
-}
-
-.servicos-cards {
-
-  display:
-    flex;
-
-  gap:
-    12px;
-
-  overflow-x:
-    auto;
-
-  padding:
-    5px 2px 15px;
-
-}
-
-.servico-card {
-
-  min-width:
-    160px;
-
-  padding:
-    16px;
-
-  background:
-    #1d1d1d;
-
-  border:
-    2px solid #333;
-
-  border-radius:
-    12px;
-
-  cursor:
-    pointer;
-
-  flex-shrink:
-    0;
-
-}
-
-.servico-card:hover {
-
-  border-color:
-    #d4af37;
-
-}
-
-.servico-card.selecionado {
-
-  border-color:
-    #d4af37;
-
-  background:
-    #29240f;
-
-}
-
-.servico-nome {
-
-  font-weight:
-    bold;
-
-  margin-bottom:
-    8px;
-
-}
-
-.servico-detalhe {
-
-  color:
-    #aaa;
-
-  font-size:
-    14px;
-
-}
-
-.horarios-box {
-
-  margin-top:
-    25px;
-
-}
-
-.titulo-horarios {
-
-  display:
-    flex;
-
-  justify-content:
-    space-between;
-
-  gap:
-    10px;
-
-  margin-bottom:
-    15px;
-
-}
-
-.titulo-horarios span {
-
-  color:
-    #aaa;
-
-  font-size:
-    13px;
-
-}
-
-#listaHorarios {
-
-  display:
-    grid;
-
-  grid-template-columns:
-    repeat(3, 1fr);
-
-  gap:
-    10px;
-
-}
-
-.horario {
-
-  padding:
-    12px;
-
-  background:
-    #1d1d1d;
-
-  border:
-    1px solid #444;
-
-  border-radius:
-    8px;
-
-  text-align:
-    center;
-
-  cursor:
-    pointer;
-
-}
-
-.horario:hover,
-.horario.selecionado {
-
-  background:
-    #d4af37;
-
-  color:
-    #111;
-
-}
-
-.btn {
-
-  width:
-    100%;
-
-  padding:
-    15px;
-
-  border:
-    none;
-
-  border-radius:
-    10px;
-
-  font-size:
-    16px;
-
-  font-weight:
-    bold;
-
-  cursor:
-    pointer;
-
-  margin-top:
-    15px;
-
-}
-
-.btn.principal {
-
-  background:
-    #d4af37;
-
-  color:
-    #111;
-
-}
-
-.btn.principal:disabled {
-
-  opacity:
-    .4;
-
-  cursor:
-    not-allowed;
-
-}
-
-.btn.secundario {
-
-  background:
-    #333;
-
-  color:
-    #fff;
-
-}
-
-.botoes {
-
-  display:
-    grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap:
-    10px;
-
-}
-
-.resumo {
-
-  background:
-    #1d1d1d;
-
-  padding:
-    20px;
-
-  border-radius:
-    12px;
-
-  margin-bottom:
-    20px;
-
-}
-
-.resumo h2 {
-
-  margin-top:
-    0;
-
-}
-
-.resumo-item {
-
-  display:
-    flex;
-
-  justify-content:
-    space-between;
-
-  gap:
-    15px;
-
-  padding:
-    10px 0;
-
-  border-bottom:
-    1px solid #333;
-
-}
-
-.resumo-item span {
-
-  color:
-    #aaa;
-
-}
-
-.resumo-item.preco strong {
-
-  color:
-    #d4af37;
-
-}
-
-.confirmacao {
-
-  text-align:
-    center;
-
-}
-
-.icone-sucesso {
-
-  width:
-    70px;
-
-  height:
-    70px;
-
-  margin:
-    10px auto 20px;
-
-  border-radius:
-    50%;
-
-  background:
-    #d4af37;
-
-  color:
-    #111;
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  font-size:
-    40px;
-
-}
-
-.comprovante {
-
-  text-align:
-    left;
-
-  background:
-    #1d1d1d;
-
-  border-radius:
-    12px;
-
-  padding:
-    20px;
-
-  margin:
-    25px 0;
-
-}
-
-.comprovante-header {
-
-  display:
-    flex;
-
-  gap:
-    10px;
-
-  align-items:
-    center;
-
-  padding-bottom:
-    15px;
-
-  margin-bottom:
-    10px;
-
-  border-bottom:
-    1px solid #444;
-
-}
-
-.comprovante-linha {
-
-  display:
-    flex;
-
-  justify-content:
-    space-between;
-
-  gap:
-    15px;
-
-  padding:
-    9px 0;
-
-}
-
-.comprovante-linha span {
-
-  color:
-    #aaa;
-
-}
-
-.mensagem {
-
-  margin:
-    10px 0;
-
-  padding:
-    12px;
-
-  border-radius:
-    8px;
-
-}
-
-.erro {
-
-  background:
-    #401b1b;
-
-  color:
-    #ffaaaa;
-
-}
-
-.mensagem-global {
-
-  position:
-    fixed;
-
-  bottom:
-    20px;
-
-  left:
-    50%;
-
-  transform:
-    translateX(-50%);
-
-  background:
-    #222;
-
-  padding:
-    12px 18px;
-
-  border-radius:
-    10px;
-
-  display:
-    none;
-
-  z-index:
-    1000;
-
-}
-
-.loading {
-
-  color:
-    #aaa;
-
-  padding:
-    20px;
-
-}
-
-@media (max-width: 500px) {
-
-  #listaHorarios {
-
-    grid-template-columns:
-      repeat(2, 1fr);
-
-  }
-
-  .botoes {
-
-    grid-template-columns:
-      1fr;
-
-  }
-
-}
-
-</style>
-
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Agendamento online da barbearia"
+  >
+
+  <title>Agendamento Online</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f5f5;
+      color: #222;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .cabecalho {
+      text-align: center;
+      padding: 25px 10px 20px;
+    }
+
+    .logo {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #111;
+      color: #fff;
+      font-size: 28px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .subtitulo {
+      margin: 8px 0 0;
+      color: #666;
+    }
+
+    .etapa {
+      display: none;
+      background: #fff;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+    }
+
+    .etapa.ativa {
+      display: block;
+    }
+
+    .progresso {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+
+    .progresso-item {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ddd;
+      color: #666;
+      font-weight: bold;
+    }
+
+    .progresso-item.ativo,
+    .progresso-item.concluido {
+      background: #111;
+      color: #fff;
+    }
+
+    .linha {
+      width: 55px;
+      height: 2px;
+      background: #ddd;
+    }
+
+    .linha.concluida {
+      background: #111;
+    }
+
+    .campo {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input,
+    select {
+      width: 100%;
+      height: 48px;
+      padding: 0 14px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: #fff;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #111;
+    }
+
+    .servicos-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 8px;
+    }
+
+    .servicos-cards {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+    }
+
+    .servico-card {
+      width: 170px;
+      min-height: 110px;
+      padding: 16px;
+      border: 2px solid #e1e1e1;
+      border-radius: 14px;
+      background: #fff;
+      cursor: pointer;
+      transition: .2s;
+      flex-shrink: 0;
+    }
+
+    .servico-card:hover {
+      border-color: #555;
+    }
+
+    .servico-card.selecionado {
+      border-color: #111;
+      background: #111;
+      color: #fff;
+    }
+
+    .servico-nome {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .servico-detalhes {
+      font-size: 14px;
+      color: #777;
+    }
+
+    .servico-card.selecionado .servico-detalhes {
+      color: #ddd;
+    }
+
+    .servico-info {
+      margin: -5px 0 20px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .loading {
+      padding: 20px;
+      color: #777;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      border: 2px solid #ddd;
+      border-top-color: #111;
+      border-radius: 50%;
+      animation: girar .8s linear infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes girar {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .horarios-box {
+      margin-bottom: 20px;
+    }
+
+    .titulo-horarios {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    #textoSelecao {
+      color: #777;
+    }
+
+    #listaHorarios {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .horario {
+      padding: 13px 5px;
+      border: 1px solid #ddd;
+      border-radius: 9px;
+      background: #fff;
+      cursor: pointer;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .horario:hover {
+      border-color: #111;
+    }
+
+    .horario.selecionado {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    .mensagem-horarios {
+      grid-column: 1 / -1;
+      padding: 18px;
+      text-align: center;
+      color: #777;
+      background: #f7f7f7;
+      border-radius: 10px;
+    }
+
+    .btn {
+      width: 100%;
+      height: 50px;
+      border: 0;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn.principal {
+      background: #111;
+      color: #fff;
+    }
+
+    .btn.principal:hover {
+      background: #333;
+    }
+
+    .btn.principal:disabled {
+      background: #bbb;
+      cursor: not-allowed;
+    }
+
+    .btn.secundario {
+      background: #eee;
+      color: #222;
+    }
+
+    .botoes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .resumo {
+      margin-bottom: 25px;
+    }
+
+    .resumo h2 {
+      margin-top: 0;
+    }
+
+    .resumo-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .resumo-item span {
+      color: #777;
+    }
+
+    .resumo-item.preco strong {
+      font-size: 20px;
+    }
+
+    .mensagem {
+      display: none;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 9px;
+      font-size: 14px;
+    }
+
+    .mensagem.erro {
+      display: block;
+      background: #ffeaea;
+      color: #a00000;
+    }
+
+    .confirmacao {
+      text-align: center;
+    }
+
+    .icone-sucesso {
+      width: 65px;
+      height: 65px;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      background: #16a34a;
+      color: #fff;
+      font-size: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .comprovante {
+      margin: 25px 0;
+      padding: 18px;
+      text-align: left;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      background: #fafafa;
+    }
+
+    .comprovante-header {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding-bottom: 15px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .comprovante-linha {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 9px 0;
+    }
+
+    .comprovante-linha span {
+      color: #777;
+    }
+
+    .mensagem-final {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .mensagem-global {
+      position: fixed;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%);
+      width: calc(100% - 40px);
+      max-width: 500px;
+      padding: 14px 18px;
+      border-radius: 10px;
+      background: #111;
+      color: #fff;
+      text-align: center;
+      display: none;
+      z-index: 9999;
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding: 12px;
+      }
+
+      .etapa {
+        padding: 16px;
+      }
+
+      #listaHorarios {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .botoes {
+        grid-template-columns: 1fr;
+      }
+
+      .resumo-item,
+      .comprovante-linha {
+        flex-direction: column;
+        gap: 4px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+  <main class="container">
 
-<section class="cabecalho">
+    <section class="cabecalho">
+      <div class="logo">✂</div>
 
-  <div class="logo">
-    ✂
-  </div>
+      <h1>Agende seu horário</h1>
 
-  <h1>
-    Agende seu horário
-  </h1>
+      <p class="subtitulo">
+        Escolha o serviço, profissional e horário
+      </p>
+    </section>
 
-  <p class="subtitulo">
-    Escolha o serviço, profissional e horário
-  </p>
+    <!-- ETAPA 1 -->
+    <section class="etapa ativa" id="etapa1">
 
-</section>
+      <div class="progresso">
+        <span class="progresso-item ativo">1</span>
+        <span class="linha"></span>
+        <span class="progresso-item">2</span>
+        <span class="linha"></span>
+        <span class="progresso-item">3</span>
+      </div>
 
+      <div class="campo">
+        <label>Serviço</label>
 
-<!-- =====================================================
-ETAPA 1
-===================================================== -->
+        <div class="servicos-wrapper">
+          <div id="servicosCards" class="servicos-cards">
+            <div class="loading">
+              <span class="spinner"></span>
+              Carregando serviços...
+            </div>
+          </div>
+        </div>
+      </div>
 
-<section
-  class="etapa ativa"
-  id="etapa1"
->
+      <div id="servicoInfo" class="servico-info"></div>
 
-  <div class="progresso">
+      <div class="campo">
+        <label for="profissional">Profissional</label>
 
-    <span class="progresso-item ativo">
-      1
-    </span>
+        <select id="profissional">
+          <option value="">
+            Carregando profissionais...
+          </option>
+        </select>
+      </div>
 
-    <span class="linha"></span>
+      <div class="campo">
+        <label for="data">Data</label>
 
-    <span class="progresso-item">
-      2
-    </span>
+        <input
+          type="date"
+          id="data"
+        >
+      </div>
 
-    <span class="linha"></span>
+      <div class="horarios-box">
 
-    <span class="progresso-item">
-      3
-    </span>
+        <div class="titulo-horarios">
+          <strong>Horários disponíveis</strong>
 
-  </div>
+          <span id="textoSelecao">
+            Selecione um horário
+          </span>
+        </div>
 
-
-  <div class="campo">
-
-    <label>
-      Serviço
-    </label>
-
-    <div class="servicos-wrapper">
-
-      <div
-        id="servicosCards"
-        class="servicos-cards"
-      >
-
-        <div class="loading">
-          Carregando serviços...
+        <div id="listaHorarios">
+          <div class="mensagem-horarios">
+            Selecione o serviço, profissional e data.
+          </div>
         </div>
 
       </div>
 
-    </div>
+      <button
+        type="button"
+        id="btnContinuar"
+        class="btn principal"
+        disabled
+      >
+        Continuar
+      </button>
 
-  </div>
+    </section>
 
+    <!-- ETAPA 2 -->
+    <section class="etapa" id="etapa2">
 
-  <div class="campo">
-
-    <label for="profissional">
-      Profissional
-    </label>
-
-    <select id="profissional">
-
-      <option value="">
-        Carregando profissionais...
-      </option>
-
-    </select>
-
-  </div>
-
-
-  <div class="campo">
-
-    <label for="data">
-      Data
-    </label>
-
-    <input
-      type="date"
-      id="data"
-    >
-
-  </div>
-
-
-  <div class="horarios-box">
-
-    <div class="titulo-horarios">
-
-      <strong>
-        Horários disponíveis
-      </strong>
-
-      <span id="textoSelecao">
-        Selecione um horário
-      </span>
-
-    </div>
-
-    <div id="listaHorarios">
-
-      <div class="mensagem-horarios">
-        Selecione serviço,
-        profissional e data.
+      <div class="progresso">
+        <span class="progresso-item concluido">✓</span>
+        <span class="linha concluida"></span>
+        <span class="progresso-item ativo">2</span>
+        <span class="linha"></span>
+        <span class="progresso-item">3</span>
       </div>
 
-    </div>
+      <div class="resumo">
 
-  </div>
+        <h2>Confira seu agendamento</h2>
 
+        <div class="resumo-item">
+          <span>Serviço</span>
+          <strong id="resumoServico">-</strong>
+        </div>
 
-  <button
-    type="button"
-    id="btnContinuar"
-    class="btn principal"
-    disabled
-  >
-    Continuar
-  </button>
+        <div class="resumo-item">
+          <span>Profissional</span>
+          <strong id="resumoProfissional">-</strong>
+        </div>
 
-</section>
+        <div class="resumo-item">
+          <span>Data</span>
+          <strong id="resumoData">-</strong>
+        </div>
 
+        <div class="resumo-item">
+          <span>Horário</span>
+          <strong id="resumoHorario">-</strong>
+        </div>
 
-<!-- =====================================================
-ETAPA 2
-===================================================== -->
+        <div class="resumo-item preco">
+          <span>Valor</span>
+          <strong id="resumoPreco">-</strong>
+        </div>
 
-<section
-  class="etapa"
-  id="etapa2"
->
+      </div>
 
-  <div class="progresso">
+      <div class="campo">
+        <label for="cliente">Seu nome</label>
 
-    <span class="progresso-item concluido">
-      ✓
-    </span>
+        <input
+          type="text"
+          id="cliente"
+          placeholder="Digite seu nome"
+          autocomplete="name"
+        >
+      </div>
 
-    <span class="linha concluida"></span>
+      <div class="campo">
+        <label for="telefone">WhatsApp</label>
 
-    <span class="progresso-item ativo">
-      2
-    </span>
+        <input
+          type="tel"
+          id="telefone"
+          placeholder="(31) 99999-9999"
+          autocomplete="tel"
+        >
+      </div>
 
-    <span class="linha"></span>
+      <div
+        id="erroFormulario"
+        class="mensagem"
+      ></div>
 
-    <span class="progresso-item">
-      3
-    </span>
+      <div class="botoes">
 
-  </div>
+        <button
+          type="button"
+          id="btnVoltar"
+          class="btn secundario"
+        >
+          Voltar
+        </button>
 
+        <button
+          type="button"
+          id="btnConfirmar"
+          class="btn principal"
+        >
+          Confirmar agendamento
+        </button>
 
-  <div class="resumo">
+      </div>
 
-    <h2>
-      Confira seu agendamento
-    </h2>
+    </section>
 
-    <div class="resumo-item">
-      <span>Serviço</span>
-      <strong id="resumoServico">-</strong>
-    </div>
+    <!-- ETAPA 3 -->
+    <section class="etapa" id="etapa3">
 
-    <div class="resumo-item">
-      <span>Profissional</span>
-      <strong id="resumoProfissional">-</strong>
-    </div>
+      <div class="confirmacao">
 
-    <div class="resumo-item">
-      <span>Data</span>
-      <strong id="resumoData">-</strong>
-    </div>
+        <div class="icone-sucesso">
+          ✓
+        </div>
 
-    <div class="resumo-item">
-      <span>Horário</span>
-      <strong id="resumoHorario">-</strong>
-    </div>
+        <h2>Agendamento confirmado!</h2>
 
-    <div class="resumo-item preco">
-      <span>Valor</span>
-      <strong id="resumoPreco">-</strong>
-    </div>
+        <p>
+          Seu horário foi reservado com sucesso.
+        </p>
 
-  </div>
+        <div class="comprovante">
 
+          <div class="comprovante-header">
+            <span>✂</span>
+            <strong>Comprovante do agendamento</strong>
+          </div>
 
-  <div class="campo">
+          <div class="comprovante-linha">
+            <span>Cliente</span>
+            <strong id="confirmacaoCliente">-</strong>
+          </div>
 
-    <label for="cliente">
-      Seu nome
-    </label>
+          <div class="comprovante-linha">
+            <span>Serviço</span>
+            <strong id="confirmacaoServico">-</strong>
+          </div>
 
-    <input
-      type="text"
-      id="cliente"
-      placeholder="Digite seu nome"
-      autocomplete="name"
-    >
+          <div class="comprovante-linha">
+            <span>Profissional</span>
+            <strong id="confirmacaoProfissional">-</strong>
+          </div>
 
-  </div>
+          <div class="comprovante-linha">
+            <span>Data</span>
+            <strong id="confirmacaoData">-</strong>
+          </div>
 
+          <div class="comprovante-linha">
+            <span>Horário</span>
+            <strong id="confirmacaoHorario">-</strong>
+          </div>
 
-  <div class="campo">
+          <div class="comprovante-linha">
+            <span>Código</span>
+            <strong id="confirmacaoId">-</strong>
+          </div>
 
-    <label for="telefone">
-      WhatsApp
-    </label>
+        </div>
 
-    <input
-      type="tel"
-      id="telefone"
-      placeholder="(31) 99999-9999"
-      autocomplete="tel"
-    >
+        <p class="mensagem-final">
+          Guarde essas informações para consultar seu horário.
+        </p>
 
-  </div>
+        <button
+          type="button"
+          id="btnNovoAgendamento"
+          class="btn principal"
+        >
+          Fazer novo agendamento
+        </button>
 
+      </div>
+
+    </section>
+
+  </main>
 
   <div
-    id="erroFormulario"
-    class="mensagem erro"
+    id="mensagemGlobal"
+    class="mensagem-global"
   ></div>
 
 
-  <div class="botoes">
+  <script>
 
-    <button
-      type="button"
-      id="btnVoltar"
-      class="btn secundario"
-    >
-      Voltar
-    </button>
+    /*
+     * ==========================================================
+     * CONFIGURAÇÃO
+     * ==========================================================
+     */
 
-    <button
-      type="button"
-      id="btnConfirmar"
-      class="btn principal"
-    >
-      Confirmar agendamento
-    </button>
+    const API_URL =
+      "https://script.google.com/macros/s/AKfycbxO0p0Uke80_Wo8v7OX97mDK33YaFrqoSdLBBMKnNgvIWGexdebzb8AXJl_TbnAkC8/exec";
 
-  </div>
 
-</section>
+    /*
+     * ==========================================================
+     * ESTADO
+     * ==========================================================
+     */
 
+    let servicos = [];
 
-<!-- =====================================================
-ETAPA 3
-===================================================== -->
+    let profissionais = [];
 
-<section
-  class="etapa"
-  id="etapa3"
->
+    let servicoSelecionado = null;
 
-  <div class="confirmacao">
+    let horarioSelecionado = null;
 
-    <div class="icone-sucesso">
-      ✓
-    </div>
 
-    <h2>
-      Agendamento confirmado!
-    </h2>
+    /*
+     * ==========================================================
+     * ELEMENTOS
+     * ==========================================================
+     */
 
-    <p>
-      Seu horário foi reservado com sucesso.
-    </p>
+    const servicosCards =
+      document.getElementById("servicosCards");
 
+    const profissional =
+      document.getElementById("profissional");
 
-    <div class="comprovante">
+    const data =
+      document.getElementById("data");
 
-      <div class="comprovante-header">
+    const listaHorarios =
+      document.getElementById("listaHorarios");
 
-        <span>
-          ✂
-        </span>
+    const textoSelecao =
+      document.getElementById("textoSelecao");
 
-        <strong>
-          Comprovante do agendamento
-        </strong>
+    const btnContinuar =
+      document.getElementById("btnContinuar");
 
-      </div>
+    const btnConfirmar =
+      document.getElementById("btnConfirmar");
 
+    const btnVoltar =
+      document.getElementById("btnVoltar");
 
-      <div class="comprovante-linha">
-        <span>Cliente</span>
-        <strong id="confirmacaoCliente">-</strong>
-      </div>
+    const btnNovoAgendamento =
+      document.getElementById("btnNovoAgendamento");
 
-      <div class="comprovante-linha">
-        <span>Serviço</span>
-        <strong id="confirmacaoServico">-</strong>
-      </div>
 
-      <div class="comprovante-linha">
-        <span>Profissional</span>
-        <strong id="confirmacaoProfissional">-</strong>
-      </div>
+    /*
+     * ==========================================================
+     * INÍCIO
+     * ==========================================================
+     */
 
-      <div class="comprovante-linha">
-        <span>Data</span>
-        <strong id="confirmacaoData">-</strong>
-      </div>
+    document.addEventListener(
+      "DOMContentLoaded",
+      function() {
 
-      <div class="comprovante-linha">
-        <span>Horário</span>
-        <strong id="confirmacaoHorario">-</strong>
-      </div>
+        configurarDataMinima();
 
-      <div class="comprovante-linha">
-        <span>Código</span>
-        <strong id="confirmacaoId">-</strong>
-      </div>
-
-    </div>
-
-
-    <p>
-      Guarde essas informações para consultar seu horário.
-    </p>
-
-
-    <button
-      type="button"
-      id="btnNovoAgendamento"
-      class="btn principal"
-    >
-      Fazer novo agendamento
-    </button>
-
-  </div>
-
-</section>
-
-
-<div
-  id="mensagemGlobal"
-  class="mensagem-global"
-></div>
-
-</div>
-
-
-<script>
-
-/*
- * ==========================================================
- * URL DO SEU GOOGLE APPS SCRIPT
- * ==========================================================
- */
-
-const API_URL =
-  "https://script.google.com/macros/s/AKfycbxO0p0Uke80_Wo8v7OX97mDK33YaFrqoSdLBBMKnNgvIWGexdebzb8AXJl_TbnAkC8/exec";
-
-
-/*
- * ==========================================================
- * ESTADO
- * ==========================================================
- */
-
-let servicos = [];
-
-let profissionais = [];
-
-let servicoSelecionado = null;
-
-let horarioSelecionado = null;
-
-
-/*
- * ==========================================================
- * ELEMENTOS
- * ==========================================================
- */
-
-const servicosCards =
-  document.getElementById(
-    "servicosCards"
-  );
-
-const profissional =
-  document.getElementById(
-    "profissional"
-  );
-
-const dataInput =
-  document.getElementById(
-    "data"
-  );
-
-const listaHorarios =
-  document.getElementById(
-    "listaHorarios"
-  );
-
-const btnContinuar =
-  document.getElementById(
-    "btnContinuar"
-  );
-
-
-/*
- * ==========================================================
- * INICIALIZAÇÃO
- * ==========================================================
- */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  function() {
-
-    definirDataMinima();
-
-    carregarServicos();
-
-    carregarProfissionais();
-
-  }
-);
-
-
-/*
- * ==========================================================
- * DATA MÍNIMA
- * ==========================================================
- */
-
-function definirDataMinima() {
-
-  const hoje =
-    new Date();
-
-  const ano =
-    hoje.getFullYear();
-
-  const mes =
-    String(
-      hoje.getMonth() + 1
-    ).padStart(2, "0");
-
-  const dia =
-    String(
-      hoje.getDate()
-    ).padStart(2, "0");
-
-  dataInput.min =
-    ano +
-    "-" +
-    mes +
-    "-" +
-    dia;
-
-}
-
-
-/*
- * ==========================================================
- * SERVIÇOS
- * ==========================================================
- */
-
-async function carregarServicos() {
-
-  try {
-
-    const url =
-      API_URL +
-      "?acao=servicos&_=" +
-      Date.now();
-
-
-    const resposta =
-      await fetch(
-        url,
-        {
-          method:
-            "GET",
-          cache:
-            "no-store"
-        }
-      );
-
-
-    if (!resposta.ok) {
-
-      throw new Error(
-        "HTTP " +
-        resposta.status
-      );
-
-    }
-
-
-    const resultado =
-      await resposta.json();
-
-
-    if (
-      !resultado.sucesso
-    ) {
-
-      throw new Error(
-        resultado.mensagem ||
-        "Erro ao carregar serviços."
-      );
-
-    }
-
-
-    servicos =
-      resultado.servicos ||
-      [];
-
-
-    renderizarServicos();
-
-  }
-  catch (erro) {
-
-    console.error(
-      erro
-    );
-
-    servicosCards.innerHTML =
-
-      '<div class="loading">' +
-      'Não foi possível conectar ao sistema.' +
-      '</div>';
-
-  }
-
-}
-
-
-/*
- * ==========================================================
- * RENDERIZAR SERVIÇOS
- * ==========================================================
- */
-
-function renderizarServicos() {
-
-  servicosCards.innerHTML = "";
-
-
-  if (
-    !servicos.length
-  ) {
-
-    servicosCards.innerHTML =
-
-      '<div class="loading">' +
-      'Nenhum serviço disponível.' +
-      '</div>';
-
-    return;
-
-  }
-
-
-  servicos.forEach(
-    function(servico) {
-
-      const card =
-        document.createElement(
-          "div"
-        );
-
-      card.className =
-        "servico-card";
-
-
-      card.innerHTML =
-
-        '<div class="servico-nome">' +
-          escaparHTML(
-            servico.nome
-          ) +
-        '</div>' +
-
-        '<div class="servico-detalhe">' +
-          Number(
-            servico.duracao || 0
-          ) +
-          ' min' +
-        '</div>' +
-
-        '<div class="servico-detalhe">' +
-          formatarMoeda(
-            servico.preco
-          ) +
-        '</div>';
-
-
-      card.addEventListener(
-        "click",
-        function() {
-
-          document
-            .querySelectorAll(
-              ".servico-card"
-            )
-            .forEach(
-              function(c) {
-                c.classList.remove(
-                  "selecionado"
-                );
-              }
-            );
-
-
-          card.classList.add(
-            "selecionado"
-          );
-
-
-          servicoSelecionado =
-            servico;
-
-
-          horarioSelecionado =
-            null;
-
-
-          atualizarBotao();
-
-          carregarHorarios();
-
-        }
-      );
-
-
-      servicosCards.appendChild(
-        card
-      );
-
-    }
-  );
-
-}
-
-
-/*
- * ==========================================================
- * PROFISSIONAIS
- * ==========================================================
- */
-
-async function carregarProfissionais() {
-
-  try {
-
-    const resposta =
-      await fetch(
-        API_URL +
-        "?acao=profissionais&_=" +
-        Date.now(),
-        {
-          method:
-            "GET",
-          cache:
-            "no-store"
-        }
-      );
-
-
-    if (!resposta.ok) {
-
-      throw new Error(
-        "HTTP " +
-        resposta.status
-      );
-
-    }
-
-
-    const resultado =
-      await resposta.json();
-
-
-    if (
-      !resultado.sucesso
-    ) {
-
-      throw new Error(
-        resultado.mensagem ||
-        "Erro ao carregar profissionais."
-      );
-
-    }
-
-
-    profissionais =
-      resultado.profissionais ||
-      [];
-
-
-    profissional.innerHTML =
-      '<option value="">Selecione o profissional</option>';
-
-
-    profissionais.forEach(
-      function(p) {
-
-        const option =
-          document.createElement(
-            "option"
-          );
-
-        option.value =
-          p.nome;
-
-        option.textContent =
-          p.nome;
-
-        profissional.appendChild(
-          option
-        );
+        carregarDados();
 
       }
     );
 
-  }
-  catch (erro) {
 
-    console.error(
-      erro
-    );
+    /*
+     * ==========================================================
+     * DATA MÍNIMA
+     * ==========================================================
+     */
 
-    profissional.innerHTML =
-      '<option value="">Erro ao carregar profissionais</option>';
+    function configurarDataMinima() {
 
-  }
+      const hoje =
+        new Date();
 
-}
+      const ano =
+        hoje.getFullYear();
 
+      const mes =
+        String(
+          hoje.getMonth() + 1
+        ).padStart(2, "0");
 
-/*
- * ==========================================================
- * EVENTOS
- * ==========================================================
- */
+      const dia =
+        String(
+          hoje.getDate()
+        ).padStart(2, "0");
 
-profissional.addEventListener(
-  "change",
-  function() {
+      data.min =
+        ano +
+        "-" +
+        mes +
+        "-" +
+        dia;
 
-    horarioSelecionado =
-      null;
-
-    carregarHorarios();
-
-  }
-);
-
-
-dataInput.addEventListener(
-  "change",
-  function() {
-
-    horarioSelecionado =
-      null;
-
-    carregarHorarios();
-
-  }
-);
+    }
 
 
-/*
- * ==========================================================
- * CARREGAR HORÁRIOS
- * ==========================================================
- */
+    /*
+     * ==========================================================
+     * CHAMADA API
+     * ==========================================================
+     */
 
-async function carregarHorarios() {
+    async function chamarAPI(
+      acao,
+      parametros = {}
+    ) {
 
-  listaHorarios.innerHTML =
+      const url =
+        new URL(API_URL);
 
-    '<div class="loading">' +
-    'Carregando horários...' +
-    '</div>';
+      url.searchParams.set(
+        "acao",
+        acao
+      );
+
+      Object.keys(parametros)
+        .forEach(
+          function(chave) {
+
+            const valor =
+              parametros[chave];
+
+            if (
+              valor !== undefined &&
+              valor !== null
+            ) {
+
+              url.searchParams.set(
+                chave,
+                valor
+              );
+
+            }
+
+          }
+        );
+
+      const resposta =
+        await fetch(
+          url.toString(),
+          {
+            method: "GET",
+            cache: "no-store"
+          }
+        );
+
+      if (!resposta.ok) {
+
+        throw new Error(
+          "HTTP " +
+          resposta.status
+        );
+
+      }
+
+      const texto =
+        await resposta.text();
+
+      let resultado;
+
+      try {
+
+        resultado =
+          JSON.parse(texto);
+
+      }
+      catch (erro) {
+
+        console.error(
+          "Resposta recebida:",
+          texto
+        );
+
+        throw new Error(
+          "O servidor não retornou JSON."
+        );
+
+      }
+
+      if (
+        resultado &&
+        resultado.sucesso === false
+      ) {
+
+        throw new Error(
+          resultado.mensagem ||
+          "Erro no servidor."
+        );
+
+      }
+
+      return resultado;
+
+    }
 
 
-  btnContinuar.disabled =
-    true;
+    /*
+     * ==========================================================
+     * CARREGAR SERVIÇOS E PROFISSIONAIS
+     * ==========================================================
+     */
+
+    async function carregarDados() {
+
+      try {
+
+        servicosCards.innerHTML =
+          `
+            <div class="loading">
+              <span class="spinner"></span>
+              Carregando serviços...
+            </div>
+          `;
+
+        const resultado =
+          await chamarAPI(
+            "dados"
+          );
+
+        servicos =
+          Array.isArray(
+            resultado.servicos
+          )
+            ? resultado.servicos
+            : [];
+
+        profissionais =
+          Array.isArray(
+            resultado.profissionais
+          )
+            ? resultado.profissionais
+            : [];
+
+        renderizarServicos();
+
+        renderizarProfissionais();
+
+      }
+      catch (erro) {
+
+        console.error(
+          "Erro ao carregar dados:",
+          erro
+        );
+
+        servicosCards.innerHTML =
+          `
+            <div
+              class="mensagem-horarios"
+              style="width:100%;"
+            >
+              Não foi possível conectar ao sistema.
+              <br><br>
+              <small>
+                ${escaparHTML(
+                  erro.message ||
+                  "Verifique a conexão."
+                )}
+              </small>
+            </div>
+          `;
+
+        mostrarMensagem(
+          "Não foi possível conectar ao sistema.",
+          true
+        );
+
+      }
+
+    }
 
 
-  if (
-    !servicoSelecionado ||
-    !profissional.value ||
-    !dataInput.value
-  ) {
+    /*
+     * ==========================================================
+     * SERVIÇOS
+     * ==========================================================
+     */
 
-    listaHorarios.innerHTML =
+    function renderizarServicos() {
 
-      '<div class="loading">' +
-      'Selecione serviço, profissional e data.' +
-      '</div>';
+      servicosCards.innerHTML = "";
 
-    return;
+      if (
+        !servicos.length
+      ) {
 
-  }
+        servicosCards.innerHTML =
+          `
+            <div class="mensagem-horarios">
+              Nenhum serviço disponível.
+            </div>
+          `;
 
+        return;
 
-  try {
+      }
 
-    const params =
-      new URLSearchParams({
+      servicos.forEach(
+        function(servico, indice) {
 
-        acao:
-          "horarios",
+          const card =
+            document.createElement(
+              "div"
+            );
 
-        servico:
-          servicoSelecionado.nome,
+          card.className =
+            "servico-card";
 
-        profissional:
-          profissional.value,
+          card.dataset.indice =
+            indice;
 
-        data:
-          dataInput.value
+          const preco =
+            formatarMoeda(
+              servico.preco
+            );
 
-      });
+          card.innerHTML =
+            `
+              <div class="servico-nome">
+                ${escaparHTML(
+                  servico.nome
+                )}
+              </div>
 
+              <div class="servico-detalhes">
+                ${Number(
+                  servico.duracao || 0
+                )} min
+                <br>
+                ${preco}
+              </div>
+            `;
 
-    const resposta =
-      await fetch(
-        API_URL +
-        "?" +
-        params.toString() +
-        "&_=" +
-        Date.now(),
-        {
-          method:
-            "GET",
-          cache:
-            "no-store"
+          card.addEventListener(
+            "click",
+            function() {
+
+              selecionarServico(
+                indice
+              );
+
+            }
+          );
+
+          servicosCards.appendChild(
+            card
+          );
+
         }
       );
 
-
-    if (!resposta.ok) {
-
-      throw new Error(
-        "HTTP " +
-        resposta.status
-      );
-
     }
 
 
-    const resultado =
-      await resposta.json();
+    /*
+     * ==========================================================
+     * SELECIONAR SERVIÇO
+     * ==========================================================
+     */
 
-
-    if (
-      !resultado.sucesso
+    function selecionarServico(
+      indice
     ) {
 
-      throw new Error(
-        resultado.mensagem ||
-        "Erro ao carregar horários."
+      servicoSelecionado =
+        servicos[indice];
+
+      document
+        .querySelectorAll(
+          ".servico-card"
+        )
+        .forEach(
+          function(card) {
+
+            card.classList.toggle(
+              "selecionado",
+              Number(
+                card.dataset.indice
+              ) === indice
+            );
+
+          }
+        );
+
+      document.getElementById(
+        "servicoInfo"
+      ).textContent =
+        servicoSelecionado.nome +
+        " • " +
+        servicoSelecionado.duracao +
+        " min • " +
+        formatarMoeda(
+          servicoSelecionado.preco
+        );
+
+      horarioSelecionado =
+        null;
+
+      atualizarBotaoContinuar();
+
+      carregarHorarios();
+
+    }
+
+
+    /*
+     * ==========================================================
+     * PROFISSIONAIS
+     * ==========================================================
+     */
+
+    function renderizarProfissionais() {
+
+      profissional.innerHTML =
+        `
+          <option value="">
+            Selecione o profissional
+          </option>
+        `;
+
+      profissionais.forEach(
+        function(item) {
+
+          const option =
+            document.createElement(
+              "option"
+            );
+
+          option.value =
+            item.nome;
+
+          option.textContent =
+            item.nome;
+
+          profissional.appendChild(
+            option
+          );
+
+        }
       );
 
     }
 
 
-    renderizarHorarios(
-      resultado.horarios ||
-      []
+    /*
+     * ==========================================================
+     * EVENTOS
+     * ==========================================================
+     */
+
+    profissional.addEventListener(
+      "change",
+      function() {
+
+        horarioSelecionado =
+          null;
+
+        atualizarBotaoContinuar();
+
+        carregarHorarios();
+
+      }
     );
 
-  }
-  catch (erro) {
 
-    console.error(
-      erro
+    data.addEventListener(
+      "change",
+      function() {
+
+        horarioSelecionado =
+          null;
+
+        atualizarBotaoContinuar();
+
+        carregarHorarios();
+
+      }
     );
 
-    listaHorarios.innerHTML =
 
-      '<div class="loading">' +
-      'Não foi possível carregar os horários.' +
-      '</div>';
+    /*
+     * ==========================================================
+     * HORÁRIOS
+     * ==========================================================
+     */
 
-  }
+    async function carregarHorarios() {
 
-}
+      listaHorarios.innerHTML =
+        `
+          <div class="mensagem-horarios">
+            Selecione o serviço, profissional e data.
+          </div>
+        `;
 
+      if (
+        !servicoSelecionado ||
+        !profissional.value ||
+        !data.value
+      ) {
 
-/*
- * ==========================================================
- * RENDERIZAR HORÁRIOS
- * ==========================================================
- */
+        return;
 
-function renderizarHorarios(
-  horarios
-) {
+      }
 
-  listaHorarios.innerHTML =
-    "";
+      listaHorarios.innerHTML =
+        `
+          <div class="mensagem-horarios">
+            <span class="spinner"></span>
+            Carregando horários...
+          </div>
+        `;
 
+      try {
 
-  if (
-    !horarios.length
-  ) {
+        const resultado =
+          await chamarAPI(
+            "horarios",
+            {
+              servico:
+                servicoSelecionado.nome,
 
-    listaHorarios.innerHTML =
+              profissional:
+                profissional.value,
 
-      '<div class="loading">' +
-      'Nenhum horário disponível para esta data.' +
-      '</div>';
-
-    return;
-
-  }
-
-
-  horarios.forEach(
-    function(horario) {
-
-      const div =
-        document.createElement(
-          "div"
-        );
-
-      div.className =
-        "horario";
-
-
-      div.textContent =
-        horario.inicio;
-
-
-      div.addEventListener(
-        "click",
-        function() {
-
-          document
-            .querySelectorAll(
-              ".horario"
-            )
-            .forEach(
-              function(h) {
-
-                h.classList.remove(
-                  "selecionado"
-                );
-
-              }
-            );
-
-
-          div.classList.add(
-            "selecionado"
+              data:
+                data.value
+            }
           );
 
+        const horarios =
+          Array.isArray(
+            resultado.horarios
+          )
+            ? resultado.horarios
+            : [];
 
-          horarioSelecionado =
-            horario;
+        renderizarHorarios(
+          horarios
+        );
+
+      }
+      catch (erro) {
+
+        console.error(
+          erro
+        );
+
+        listaHorarios.innerHTML =
+          `
+            <div class="mensagem-horarios">
+              Não foi possível carregar os horários.
+            </div>
+          `;
+
+      }
+
+    }
 
 
-          document.getElementById(
-            "textoSelecao"
-          ).textContent =
+    /*
+     * ==========================================================
+     * RENDERIZAR HORÁRIOS
+     * ==========================================================
+     */
+
+    function renderizarHorarios(
+      horarios
+    ) {
+
+      listaHorarios.innerHTML =
+        "";
+
+      if (
+        !horarios.length
+      ) {
+
+        listaHorarios.innerHTML =
+          `
+            <div class="mensagem-horarios">
+              Nenhum horário disponível para esta data.
+            </div>
+          `;
+
+        textoSelecao.textContent =
+          "Nenhum horário disponível";
+
+        return;
+
+      }
+
+      textoSelecao.textContent =
+        "Selecione um horário";
+
+      horarios.forEach(
+        function(horario) {
+
+          const botao =
+            document.createElement(
+              "button"
+            );
+
+          botao.type =
+            "button";
+
+          botao.className =
+            "horario";
+
+          botao.textContent =
             horario.inicio;
 
+          botao.addEventListener(
+            "click",
+            function() {
 
-          atualizarBotao();
+              document
+                .querySelectorAll(
+                  ".horario"
+                )
+                .forEach(
+                  function(item) {
 
-        }
-      );
+                    item.classList.remove(
+                      "selecionado"
+                    );
 
+                  }
+                );
 
-      listaHorarios.appendChild(
-        div
-      );
+              botao.classList.add(
+                "selecionado"
+              );
 
-    }
-  );
+              horarioSelecionado =
+                horario;
 
-}
+              textoSelecao.textContent =
+                horario.inicio +
+                " selecionado";
 
+              atualizarBotaoContinuar();
 
-/*
- * ==========================================================
- * BOTÃO CONTINUAR
- * ==========================================================
- */
+            }
+          );
 
-function atualizarBotao() {
-
-  btnContinuar.disabled =
-    !servicoSelecionado ||
-    !profissional.value ||
-    !dataInput.value ||
-    !horarioSelecionado;
-
-}
-
-
-btnContinuar.addEventListener(
-  "click",
-  function() {
-
-    if (
-      btnContinuar.disabled
-    ) {
-      return;
-    }
-
-
-    document.getElementById(
-      "resumoServico"
-    ).textContent =
-      servicoSelecionado.nome;
-
-
-    document.getElementById(
-      "resumoProfissional"
-    ).textContent =
-      profissional.value;
-
-
-    document.getElementById(
-      "resumoData"
-    ).textContent =
-      formatarDataBR(
-        dataInput.value
-      );
-
-
-    document.getElementById(
-      "resumoHorario"
-    ).textContent =
-      horarioSelecionado.inicio;
-
-
-    document.getElementById(
-      "resumoPreco"
-    ).textContent =
-      formatarMoeda(
-        servicoSelecionado.preco
-      );
-
-
-    mostrarEtapa(
-      2
-    );
-
-  }
-);
-
-
-/*
- * ==========================================================
- * VOLTAR
- * ==========================================================
- */
-
-document.getElementById(
-  "btnVoltar"
-).addEventListener(
-  "click",
-  function() {
-
-    mostrarEtapa(
-      1
-    );
-
-  }
-);
-
-
-/*
- * ==========================================================
- * CONFIRMAR
- * ==========================================================
- */
-
-document.getElementById(
-  "btnConfirmar"
-).addEventListener(
-  "click",
-  confirmarAgendamento
-);
-
-
-async function confirmarAgendamento() {
-
-  const cliente =
-    document.getElementById(
-      "cliente"
-    ).value.trim();
-
-
-  const telefone =
-    document.getElementById(
-      "telefone"
-    ).value.trim();
-
-
-  const erro =
-    document.getElementById(
-      "erroFormulario"
-    );
-
-
-  erro.textContent =
-    "";
-
-
-  if (
-    cliente.length < 2
-  ) {
-
-    erro.textContent =
-      "Digite seu nome.";
-
-    return;
-
-  }
-
-
-  if (
-    telefone.replace(
-      /\D/g,
-      ""
-    ).length < 8
-  ) {
-
-    erro.textContent =
-      "Digite um WhatsApp válido.";
-
-    return;
-
-  }
-
-
-  const btn =
-    document.getElementById(
-      "btnConfirmar"
-    );
-
-
-  btn.disabled =
-    true;
-
-  btn.textContent =
-    "Confirmando...";
-
-
-  try {
-
-    const dados = {
-
-      data:
-        dataInput.value,
-
-      horaInicio:
-        horarioSelecionado.inicio,
-
-      profissional:
-        profissional.value,
-
-      servico:
-        servicoSelecionado.nome,
-
-      cliente:
-        cliente,
-
-      telefone:
-        telefone
-
-    };
-
-
-    const resposta =
-      await fetch(
-        API_URL,
-        {
-
-          method:
-            "POST",
-
-          headers: {
-
-            "Content-Type":
-              "text/plain;charset=utf-8"
-
-          },
-
-          body:
-            JSON.stringify(
-              dados
-            )
-
-        }
-      );
-
-
-    if (!resposta.ok) {
-
-      throw new Error(
-        "HTTP " +
-        resposta.status
-      );
-
-    }
-
-
-    const resultado =
-      await resposta.json();
-
-
-    if (
-      !resultado.sucesso
-    ) {
-
-      throw new Error(
-        resultado.mensagem ||
-        "Não foi possível realizar o agendamento."
-      );
-
-    }
-
-
-    preencherConfirmacao(
-      resultado
-    );
-
-
-    mostrarEtapa(
-      3
-    );
-
-  }
-  catch (erro) {
-
-    console.error(
-      erro
-    );
-
-    document.getElementById(
-      "erroFormulario"
-    ).textContent =
-      erro.message ||
-      "Não foi possível conectar ao sistema.";
-
-  }
-  finally {
-
-    btn.disabled =
-      false;
-
-    btn.textContent =
-      "Confirmar agendamento";
-
-  }
-
-}
-
-
-/*
- * ==========================================================
- * CONFIRMAÇÃO
- * ==========================================================
- */
-
-function preencherConfirmacao(
-  resultado
-) {
-
-  document.getElementById(
-    "confirmacaoCliente"
-  ).textContent =
-    resultado.cliente ||
-    "-";
-
-
-  document.getElementById(
-    "confirmacaoServico"
-  ).textContent =
-    resultado.servico ||
-    "-";
-
-
-  document.getElementById(
-    "confirmacaoProfissional"
-  ).textContent =
-    resultado.profissional ||
-    "-";
-
-
-  document.getElementById(
-    "confirmacaoData"
-  ).textContent =
-    resultado.dataBR ||
-    formatarDataBR(
-      resultado.data
-    );
-
-
-  document.getElementById(
-    "confirmacaoHorario"
-  ).textContent =
-    resultado.horaInicio ||
-    "-";
-
-
-  document.getElementById(
-    "confirmacaoId"
-  ).textContent =
-    resultado.id ||
-    "-";
-
-}
-
-
-/*
- * ==========================================================
- * NOVO AGENDAMENTO
- * ==========================================================
- */
-
-document.getElementById(
-  "btnNovoAgendamento"
-).addEventListener(
-  "click",
-  function() {
-
-    servicoSelecionado =
-      null;
-
-    horarioSelecionado =
-      null;
-
-
-    document.getElementById(
-      "cliente"
-    ).value =
-      "";
-
-
-    document.getElementById(
-      "telefone"
-    ).value =
-      "";
-
-
-    dataInput.value =
-      "";
-
-
-    profissional.value =
-      "";
-
-
-    document
-      .querySelectorAll(
-        ".servico-card"
-      )
-      .forEach(
-        function(card) {
-
-          card.classList.remove(
-            "selecionado"
+          listaHorarios.appendChild(
+            botao
           );
 
         }
       );
 
-
-    listaHorarios.innerHTML =
-
-      '<div class="mensagem-horarios">' +
-      'Selecione serviço, profissional e data.' +
-      '</div>';
+    }
 
 
-    btnContinuar.disabled =
-      true;
+    /*
+     * ==========================================================
+     * BOTÃO CONTINUAR
+     * ==========================================================
+     */
+
+    function atualizarBotaoContinuar() {
+
+      btnContinuar.disabled =
+        !servicoSelecionado ||
+        !profissional.value ||
+        !data.value ||
+        !horarioSelecionado;
+
+    }
 
 
-    mostrarEtapa(
-      1
-    );
+    btnContinuar.addEventListener(
+      "click",
+      function() {
 
-  }
-);
+        preencherResumo();
 
-
-/*
- * ==========================================================
- * ETAPAS
- * ==========================================================
- */
-
-function mostrarEtapa(
-  numero
-) {
-
-  document
-    .querySelectorAll(
-      ".etapa"
-    )
-    .forEach(
-      function(etapa) {
-
-        etapa.classList.remove(
-          "ativa"
+        mostrarEtapa(
+          2
         );
 
       }
     );
 
 
-  document.getElementById(
-    "etapa" + numero
-  ).classList.add(
-    "ativa"
-  );
+    /*
+     * ==========================================================
+     * RESUMO
+     * ==========================================================
+     */
 
+    function preencherResumo() {
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+      document.getElementById(
+        "resumoServico"
+      ).textContent =
+        servicoSelecionado.nome;
 
-}
+      document.getElementById(
+        "resumoProfissional"
+      ).textContent =
+        profissional.value;
 
+      document.getElementById(
+        "resumoData"
+      ).textContent =
+        formatarDataBR(
+          data.value
+        );
 
-/*
- * ==========================================================
- * FORMATAÇÕES
- * ==========================================================
- */
+      document.getElementById(
+        "resumoHorario"
+      ).textContent =
+        horarioSelecionado.inicio +
+        " às " +
+        horarioSelecionado.fim;
 
-function formatarMoeda(
-  valor
-) {
+      document.getElementById(
+        "resumoPreco"
+      ).textContent =
+        formatarMoeda(
+          servicoSelecionado.preco
+        );
 
-  return Number(
-    valor || 0
-  ).toLocaleString(
-    "pt-BR",
-    {
-      style:
-        "currency",
-      currency:
-        "BRL"
     }
-  );
-
-}
 
 
-function formatarDataBR(
-  data
-) {
+    /*
+     * ==========================================================
+     * VOLTAR
+     * ==========================================================
+     */
 
-  if (!data) {
-    return "-";
-  }
+    btnVoltar.addEventListener(
+      "click",
+      function() {
 
+        esconderErro();
 
-  const partes =
-    data.split("-");
+        mostrarEtapa(
+          1
+        );
 
-
-  if (
-    partes.length !== 3
-  ) {
-
-    return data;
-
-  }
+      }
+    );
 
 
-  return (
-    partes[2] +
-    "/" +
-    partes[1] +
-    "/" +
-    partes[0]
-  );
+    /*
+     * ==========================================================
+     * CONFIRMAR
+     * ==========================================================
+     */
 
-}
+    btnConfirmar.addEventListener(
+      "click",
+      confirmarAgendamento
+    );
 
 
-/*
- * ==========================================================
- * SEGURANÇA HTML
- * ==========================================================
- */
+    async function confirmarAgendamento() {
 
-function escaparHTML(
-  texto
-) {
+      esconderErro();
 
-  return String(
-    texto || ""
-  )
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-  .replace(
-    /</g,
-    "&lt;"
-  )
-  .replace(
-    />/g,
-    "&gt;"
-  )
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-  .replace(
-    /'/g,
-    "&#039;"
-  );
+      const cliente =
+        document.getElementById(
+          "cliente"
+        ).value.trim();
 
-}
+      const telefone =
+        document.getElementById(
+          "telefone"
+        ).value.trim();
 
-</script>
+      if (
+        cliente.length < 2
+      ) {
+
+        mostrarErro(
+          "Digite seu nome."
+        );
+
+        return;
+
+      }
+
+      if (
+        telefone.replace(
+          /\D/g,
+          ""
+        ).length < 8
+      ) {
+
+        mostrarErro(
+          "Digite um WhatsApp válido."
+        );
+
+        return;
+
+      }
+
+      if (
+        !servicoSelecionado ||
+        !profissional.value ||
+        !data.value ||
+        !horarioSelecionado
+      ) {
+
+        mostrarErro(
+          "Confira os dados do agendamento."
+        );
+
+        return;
+
+      }
+
+      btnConfirmar.disabled =
+        true;
+
+      btnConfirmar.textContent =
+        "Confirmando...";
+
+      try {
+
+        /*
+         * IMPORTANTE:
+         *
+         * O POST é enviado como texto simples
+         * para reduzir problemas de CORS/preflight.
+         */
+
+        const dados =
+          {
+            cliente:
+              cliente,
+
+            telefone:
+              telefone,
+
+            servico:
+              servicoSelecionado.nome,
+
+            profissional:
+              profissional.value,
+
+            data:
+              data.value,
+
+            horaInicio:
+              horarioSelecionado.inicio
+          };
+
+        const resposta =
+          await fetch(
+            API_URL,
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type":
+                  "text/plain;charset=utf-8"
+              },
+
+              body:
+                JSON.stringify(
+                  dados
+                )
+            }
+          );
+
+        const texto =
+          await resposta.text();
+
+        let resultado;
+
+        try {
+
+          resultado =
+            JSON.parse(
+              texto
+            );
+
+        }
+        catch (erro) {
+
+          console.error(
+            "Resposta do servidor:",
+            texto
+          );
+
+          throw new Error(
+            "O servidor não retornou uma resposta válida."
+          );
+
+        }
+
+        if (
+          !resultado.sucesso
+        ) {
+
+          throw new Error(
+            resultado.mensagem ||
+            "Não foi possível realizar o agendamento."
+          );
+
+        }
+
+        mostrarConfirmacao(
+          resultado
+        );
+
+        mostrarEtapa(
+          3
+        );
+
+      }
+      catch (erro) {
+
+        console.error(
+          "Erro ao agendar:",
+          erro
+        );
+
+        mostrarErro(
+          erro.message ||
+          "Não foi possível realizar o agendamento."
+        );
+
+      }
+      finally {
+
+        btnConfirmar.disabled =
+          false;
+
+        btnConfirmar.textContent =
+          "Confirmar agendamento";
+
+      }
+
+    }
+
+
+    /*
+     * ==========================================================
+     * CONFIRMAÇÃO
+     * ==========================================================
+     */
+
+    function mostrarConfirmacao(
+      resultado
+    ) {
+
+      document.getElementById(
+        "confirmacaoCliente"
+      ).textContent =
+        resultado.cliente ||
+        document.getElementById(
+          "cliente"
+        ).value;
+
+      document.getElementById(
+        "confirmacaoServico"
+      ).textContent =
+        resultado.servico ||
+        servicoSelecionado.nome;
+
+      document.getElementById(
+        "confirmacaoProfissional"
+      ).textContent =
+        resultado.profissional ||
+        profissional.value;
+
+      document.getElementById(
+        "confirmacaoData"
+      ).textContent =
+        resultado.dataBR ||
+        formatarDataBR(
+          data.value
+        );
+
+      document.getElementById(
+        "confirmacaoHorario"
+      ).textContent =
+        (
+          resultado.horaInicio ||
+          horarioSelecionado.inicio
+        ) +
+        " às " +
+        (
+          resultado.horaFim ||
+          horarioSelecionado.fim
+        );
+
+      document.getElementById(
+        "confirmacaoId"
+      ).textContent =
+        resultado.id ||
+        "-";
+
+    }
+
+
+    /*
+     * ==========================================================
+     * NOVO AGENDAMENTO
+     * ==========================================================
+     */
+
+    btnNovoAgendamento.addEventListener(
+      "click",
+      function() {
+
+        servicoSelecionado =
+          null;
+
+        horarioSelecionado =
+          null;
+
+        profissional.value =
+          "";
+
+        data.value =
+          "";
+
+        document.getElementById(
+          "cliente"
+        ).value =
+          "";
+
+        document.getElementById(
+          "telefone"
+        ).value =
+          "";
+
+        document.getElementById(
+          "servicoInfo"
+        ).textContent =
+          "";
+
+        textoSelecao.textContent =
+          "Selecione um horário";
+
+        listaHorarios.innerHTML =
+          `
+            <div class="mensagem-horarios">
+              Selecione o serviço, profissional e data.
+            </div>
+          `;
+
+        document
+          .querySelectorAll(
+            ".servico-card"
+          )
+          .forEach(
+            function(card) {
+
+              card.classList.remove(
+                "selecionado"
+              );
+
+            }
+          );
+
+        atualizarBotaoContinuar();
+
+        mostrarEtapa(
+          1
+        );
+
+      }
+    );
+
+
+    /*
+     * ==========================================================
+     * ETAPAS
+     * ==========================================================
+     */
+
+    function mostrarEtapa(
+      numero
+    ) {
+
+      document
+        .querySelectorAll(
+          ".etapa"
+        )
+        .forEach(
+          function(etapa) {
+
+            etapa.classList.remove(
+              "ativa"
+            );
+
+          }
+        );
+
+      document.getElementById(
+        "etapa" + numero
+      ).classList.add(
+        "ativa"
+      );
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    /*
+     * ==========================================================
+     * MENSAGENS
+     * ==========================================================
+     */
+
+    function mostrarErro(
+      mensagem
+    ) {
+
+      const elemento =
+        document.getElementById(
+          "erroFormulario"
+        );
+
+      elemento.textContent =
+        mensagem;
+
+      elemento.className =
+        "mensagem erro";
+
+    }
+
+
+    function esconderErro() {
+
+      const elemento =
+        document.getElementById(
+          "erroFormulario"
+        );
+
+      elemento.textContent =
+        "";
+
+      elemento.className =
+        "mensagem";
+
+    }
+
+
+    function mostrarMensagem(
+      mensagem,
+      erro = false
+    ) {
+
+      const elemento =
+        document.getElementById(
+          "mensagemGlobal"
+        );
+
+      elemento.textContent =
+        mensagem;
+
+      elemento.style.display =
+        "block";
+
+      elemento.style.background =
+        erro
+          ? "#a00000"
+          : "#111";
+
+      setTimeout(
+        function() {
+
+          elemento.style.display =
+            "none";
+
+        },
+        4000
+      );
+
+    }
+
+
+    /*
+     * ==========================================================
+     * FORMATAÇÃO
+     * ==========================================================
+     */
+
+    function formatarMoeda(
+      valor
+    ) {
+
+      const numero =
+        Number(
+          valor || 0
+        );
+
+      return numero.toLocaleString(
+        "pt-BR",
+        {
+          style: "currency",
+          currency: "BRL"
+        }
+      );
+
+    }
+
+
+    function formatarDataBR(
+      valor
+    ) {
+
+      if (!valor) {
+        return "-";
+      }
+
+      const partes =
+        String(
+          valor
+        ).split("-");
+
+      if (
+        partes.length !== 3
+      ) {
+
+        return valor;
+
+      }
+
+      return (
+        partes[2] +
+        "/" +
+        partes[1] +
+        "/" +
+        partes[0]
+      );
+
+    }
+
+
+    /*
+     * ==========================================================
+     * SEGURANÇA
+     * ==========================================================
+     */
+
+    function escaparHTML(
+      valor
+    ) {
+
+      return String(
+        valor ?? ""
+      )
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+  </script>
 
 </body>
-
 </html>
 ```
