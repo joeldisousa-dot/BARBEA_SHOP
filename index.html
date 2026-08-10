@@ -1,6 +1,9 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -15,15 +18,660 @@
 
   <title>Agende seu horário</title>
 
-  <link
-    rel="stylesheet"
-    href="style.css"
-  >
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+      background:
+        linear-gradient(
+          135deg,
+          #111111,
+          #1b1b1b
+        );
+      color: #ffffff;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 24px 16px 50px;
+    }
+
+    .cabecalho {
+      text-align: center;
+      padding: 20px 0 26px;
+    }
+
+    .logo {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 14px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 20px;
+
+      background: #c99a4a;
+      color: #111111;
+
+      font-size: 32px;
+
+      box-shadow:
+        0 10px 30px
+        rgba(201, 154, 74, .25);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      font-weight: 800;
+    }
+
+    .subtitulo {
+      margin: 8px 0 0;
+      color: #aaaaaa;
+      font-size: 15px;
+    }
+
+    .etapa {
+      display: none;
+    }
+
+    .etapa.ativa {
+      display: block;
+    }
+
+    .progresso {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    .progresso-item {
+      width: 34px;
+      height: 34px;
+
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: #2a2a2a;
+      color: #777777;
+
+      font-weight: 700;
+    }
+
+    .progresso-item.ativo {
+      background: #c99a4a;
+      color: #111111;
+    }
+
+    .progresso-item.concluido {
+      background: #2e8b57;
+      color: white;
+    }
+
+    .linha {
+      width: 60px;
+      height: 2px;
+      background: #333333;
+    }
+
+    .linha.concluida {
+      background: #2e8b57;
+    }
+
+    .campo {
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 9px;
+      color: #dddddd;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    input,
+    select {
+      width: 100%;
+      height: 50px;
+
+      border: 1px solid #363636;
+      border-radius: 12px;
+
+      padding: 0 14px;
+
+      background: #202020;
+      color: #ffffff;
+
+      outline: none;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #c99a4a;
+    }
+
+    input[type="date"] {
+      color-scheme: dark;
+    }
+
+    /*
+     * SERVIÇOS HORIZONTAIS
+     */
+
+    .servicos-wrapper {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .servicos-cards {
+      display: flex;
+      gap: 12px;
+
+      overflow-x: auto;
+      overflow-y: hidden;
+
+      padding: 4px 2px 14px;
+
+      scroll-snap-type: x mandatory;
+
+      scrollbar-width: thin;
+      scrollbar-color:
+        #c99a4a
+        transparent;
+    }
+
+    .servicos-cards::-webkit-scrollbar {
+      height: 5px;
+    }
+
+    .servicos-cards::-webkit-scrollbar-thumb {
+      background: #c99a4a;
+      border-radius: 20px;
+    }
+
+    .servico-card {
+      flex:
+        0 0
+        180px;
+
+      min-height: 120px;
+
+      padding: 16px;
+
+      border: 1px solid #363636;
+      border-radius: 16px;
+
+      background: #202020;
+
+      cursor: pointer;
+
+      scroll-snap-align: start;
+
+      transition:
+        .2s ease;
+
+      position: relative;
+    }
+
+    .servico-card:hover {
+      border-color: #8f6a2e;
+      transform: translateY(-2px);
+    }
+
+    .servico-card.selecionado {
+      border-color: #c99a4a;
+
+      background:
+        linear-gradient(
+          145deg,
+          #29210f,
+          #202020
+        );
+
+      box-shadow:
+        0 0 0 1px
+        rgba(201,154,74,.25);
+    }
+
+    .servico-card .check {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+
+      width: 22px;
+      height: 22px;
+
+      border-radius: 50%;
+
+      display: none;
+      align-items: center;
+      justify-content: center;
+
+      background: #c99a4a;
+      color: #111111;
+
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .servico-card.selecionado .check {
+      display: flex;
+    }
+
+    .servico-nome {
+      font-weight: 800;
+      font-size: 16px;
+
+      padding-right: 20px;
+    }
+
+    .servico-duracao {
+      margin-top: 9px;
+      color: #999999;
+      font-size: 13px;
+    }
+
+    .servico-preco {
+      margin-top: 12px;
+      color: #c99a4a;
+      font-weight: 800;
+      font-size: 17px;
+    }
+
+    .servico-info {
+      margin-top: -10px;
+      margin-bottom: 20px;
+
+      color: #999999;
+      font-size: 13px;
+    }
+
+    .horarios-box {
+      margin-bottom: 22px;
+    }
+
+    .titulo-horarios {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 12px;
+
+      margin-bottom: 12px;
+    }
+
+    .titulo-horarios strong {
+      font-size: 15px;
+    }
+
+    #textoSelecao {
+      color: #888888;
+      font-size: 12px;
+      text-align: right;
+    }
+
+    #listaHorarios {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          auto-fill,
+          minmax(105px, 1fr)
+        );
+
+      gap: 9px;
+    }
+
+    .horario {
+      min-height: 45px;
+
+      border: 1px solid #383838;
+      border-radius: 10px;
+
+      background: #202020;
+      color: #ffffff;
+
+      cursor: pointer;
+
+      font-weight: 700;
+    }
+
+    .horario:hover {
+      border-color: #c99a4a;
+    }
+
+    .horario.selecionado {
+      background: #c99a4a;
+      border-color: #c99a4a;
+      color: #111111;
+    }
+
+    .mensagem-horarios,
+    .loading {
+      width: 100%;
+
+      padding: 18px;
+
+      border-radius: 12px;
+
+      background: #202020;
+      color: #888888;
+
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .spinner {
+      display: inline-block;
+
+      width: 15px;
+      height: 15px;
+
+      margin-right: 7px;
+
+      vertical-align: -3px;
+
+      border: 2px solid #555555;
+      border-top-color: #c99a4a;
+
+      border-radius: 50%;
+
+      animation:
+        girar .7s linear infinite;
+    }
+
+    @keyframes girar {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .btn {
+      width: 100%;
+      min-height: 52px;
+
+      border: 0;
+      border-radius: 13px;
+
+      cursor: pointer;
+
+      font-weight: 800;
+
+      transition:
+        .2s ease;
+    }
+
+    .btn.principal {
+      background: #c99a4a;
+      color: #111111;
+    }
+
+    .btn.principal:hover {
+      background: #ddb363;
+    }
+
+    .btn.principal:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .btn.secundario {
+      background: #292929;
+      color: #ffffff;
+    }
+
+    .botoes {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1.5fr;
+
+      gap: 10px;
+    }
+
+    .resumo {
+      padding: 20px;
+      margin-bottom: 20px;
+
+      border: 1px solid #333333;
+      border-radius: 16px;
+
+      background: #1d1d1d;
+    }
+
+    .resumo h2 {
+      margin: 0 0 18px;
+
+      font-size: 20px;
+    }
+
+    .resumo-item,
+    .comprovante-linha {
+      display: flex;
+
+      justify-content: space-between;
+      gap: 15px;
+
+      padding: 12px 0;
+
+      border-bottom:
+        1px solid #303030;
+    }
+
+    .resumo-item:last-child,
+    .comprovante-linha:last-child {
+      border-bottom: 0;
+    }
+
+    .resumo-item span,
+    .comprovante-linha span {
+      color: #888888;
+      font-size: 13px;
+    }
+
+    .resumo-item strong,
+    .comprovante-linha strong {
+      text-align: right;
+      font-size: 14px;
+    }
+
+    .resumo-item.preco strong {
+      color: #c99a4a;
+      font-size: 18px;
+    }
+
+    .mensagem {
+      display: none;
+
+      margin-bottom: 16px;
+      padding: 12px 14px;
+
+      border-radius: 10px;
+
+      font-size: 13px;
+    }
+
+    .mensagem.erro {
+      display: block;
+      background: #3a1f1f;
+      color: #ffaaaa;
+    }
+
+    .confirmacao {
+      text-align: center;
+    }
+
+    .icone-sucesso {
+      width: 72px;
+      height: 72px;
+
+      margin: 5px auto 20px;
+
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: #2e8b57;
+      color: white;
+
+      font-size: 35px;
+      font-weight: 900;
+    }
+
+    .confirmacao h2 {
+      margin: 0;
+      font-size: 25px;
+    }
+
+    .confirmacao > p {
+      color: #999999;
+      margin: 8px 0 24px;
+    }
+
+    .comprovante {
+      padding: 20px;
+
+      border: 1px solid #383838;
+      border-radius: 16px;
+
+      background: #1d1d1d;
+
+      text-align: left;
+
+      margin-bottom: 14px;
+    }
+
+    .comprovante-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      padding-bottom: 14px;
+      margin-bottom: 4px;
+
+      border-bottom:
+        1px solid #383838;
+
+      color: #c99a4a;
+    }
+
+    .mensagem-final {
+      font-size: 13px;
+      color: #777777;
+    }
+
+    .mensagem-global {
+      position: fixed;
+
+      left: 50%;
+      bottom: 20px;
+
+      transform:
+        translateX(-50%)
+        translateY(20px);
+
+      width:
+        calc(
+          100% - 30px
+        );
+
+      max-width: 500px;
+
+      padding: 13px 16px;
+
+      border-radius: 12px;
+
+      background: #c99a4a;
+      color: #111111;
+
+      font-weight: 700;
+      font-size: 13px;
+
+      text-align: center;
+
+      opacity: 0;
+      pointer-events: none;
+
+      transition:
+        .25s ease;
+
+      z-index: 999;
+    }
+
+    .mensagem-global.visivel {
+      opacity: 1;
+      transform:
+        translateX(-50%)
+        translateY(0);
+    }
+
+    @media (max-width: 430px) {
+
+      .container {
+        padding:
+          18px
+          12px
+          40px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+      .servico-card {
+        flex-basis: 165px;
+      }
+
+      .botoes {
+        grid-template-columns: 1fr;
+      }
+
+      .resumo-item,
+      .comprovante-linha {
+        align-items: flex-start;
+      }
+
+    }
+
+  </style>
+
 </head>
+
 
 <body>
 
   <main class="container">
+
 
     <section class="cabecalho">
 
@@ -42,9 +690,9 @@
     </section>
 
 
-    <!-- ==========================================
+    <!-- =====================================================
          ETAPA 1
-    =========================================== -->
+    ====================================================== -->
 
     <section
       class="etapa ativa"
@@ -52,11 +700,23 @@
     >
 
       <div class="progresso">
-        <span class="progresso-item ativo">1</span>
+
+        <span class="progresso-item ativo">
+          1
+        </span>
+
         <span class="linha"></span>
-        <span class="progresso-item">2</span>
+
+        <span class="progresso-item">
+          2
+        </span>
+
         <span class="linha"></span>
-        <span class="progresso-item">3</span>
+
+        <span class="progresso-item">
+          3
+        </span>
+
       </div>
 
 
@@ -161,9 +821,9 @@
     </section>
 
 
-    <!-- ==========================================
+    <!-- =====================================================
          ETAPA 2
-    =========================================== -->
+    ====================================================== -->
 
     <section
       class="etapa"
@@ -171,11 +831,23 @@
     >
 
       <div class="progresso">
-        <span class="progresso-item concluido">✓</span>
+
+        <span class="progresso-item concluido">
+          ✓
+        </span>
+
         <span class="linha concluida"></span>
-        <span class="progresso-item ativo">2</span>
+
+        <span class="progresso-item ativo">
+          2
+        </span>
+
         <span class="linha"></span>
-        <span class="progresso-item">3</span>
+
+        <span class="progresso-item">
+          3
+        </span>
+
       </div>
 
 
@@ -184,6 +856,7 @@
         <h2>
           Confira seu agendamento
         </h2>
+
 
         <div class="resumo-item">
 
@@ -286,7 +959,7 @@
 
       <div
         id="erroFormulario"
-        class="mensagem erro"
+        class="mensagem"
       ></div>
 
 
@@ -314,9 +987,9 @@
     </section>
 
 
-    <!-- ==========================================
+    <!-- =====================================================
          ETAPA 3
-    =========================================== -->
+    ====================================================== -->
 
     <section
       class="etapa"
@@ -341,6 +1014,7 @@
         <div class="comprovante">
 
           <div class="comprovante-header">
+
             <span>
               ✂
             </span>
@@ -348,6 +1022,7 @@
             <strong>
               Comprovante do agendamento
             </strong>
+
           </div>
 
 
@@ -450,15 +1125,1420 @@
     </section>
 
 
-    <div
-      id="mensagemGlobal"
-      class="mensagem-global"
-    ></div>
-
   </main>
 
 
-  <script src="script.js"></script>
+  <div
+    id="mensagemGlobal"
+    class="mensagem-global"
+  ></div>
+
+
+  <script>
+
+    /*
+     * ========================================================
+     * CONFIGURAÇÃO
+     * ========================================================
+     *
+     * Coloque aqui a URL /exec do seu Google Apps Script.
+     */
+
+    const API_URL =
+      "https://script.google.com/macros/s/AKfycbxO0p0Uke80_Wo8v7OX97mDK33YaFrqoSdLBBMKnNgvIWGexdebzb8AXJl_TbnAkC8/exec";
+
+
+    /*
+     * ========================================================
+     * ESTADO
+     * ========================================================
+     */
+
+    const estado = {
+
+      servicos: [],
+
+      profissionais: [],
+
+      servico: null,
+
+      profissional: "",
+
+      data: "",
+
+      horario: null
+
+    };
+
+
+    /*
+     * ========================================================
+     * ELEMENTOS
+     * ========================================================
+     */
+
+    const $ = function(id) {
+
+      return document.getElementById(id);
+
+    };
+
+
+    /*
+     * ========================================================
+     * API JSONP
+     * ========================================================
+     */
+
+    function chamarAPI(params) {
+
+      return new Promise(
+        function(resolve, reject) {
+
+          const callbackName =
+            "apiCallback_" +
+            Date.now() +
+            "_" +
+            Math.floor(
+              Math.random() * 100000
+            );
+
+
+          const script =
+            document.createElement(
+              "script"
+            );
+
+
+          const query =
+            new URLSearchParams(
+              params
+            );
+
+
+          query.set(
+            "callback",
+            callbackName
+          );
+
+
+          query.set(
+            "_",
+            Date.now()
+          );
+
+
+          const timeout =
+            setTimeout(
+              function() {
+
+                limpar();
+
+                reject(
+                  new Error(
+                    "Tempo limite de conexão."
+                  )
+                );
+
+              },
+              20000
+            );
+
+
+          function limpar() {
+
+            clearTimeout(
+              timeout
+            );
+
+            delete window[
+              callbackName
+            ];
+
+            if (
+              script.parentNode
+            ) {
+
+              script.parentNode.removeChild(
+                script
+              );
+
+            }
+
+          }
+
+
+          window[
+            callbackName
+          ] =
+            function(resposta) {
+
+              limpar();
+
+              resolve(
+                resposta
+              );
+
+            };
+
+
+          script.onerror =
+            function() {
+
+              limpar();
+
+              reject(
+                new Error(
+                  "Não foi possível conectar ao sistema."
+                )
+              );
+
+            };
+
+
+          script.src =
+            API_URL +
+            "?" +
+            query.toString();
+
+
+          document
+            .head
+            .appendChild(
+              script
+            );
+
+        }
+      );
+
+    }
+
+
+    /*
+     * ========================================================
+     * INICIALIZAÇÃO
+     * ========================================================
+     */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      iniciar
+    );
+
+
+    async function iniciar() {
+
+      configurarDataMinima();
+
+      configurarEventos();
+
+      await Promise.all([
+        carregarServicos(),
+        carregarProfissionais()
+      ]);
+
+    }
+
+
+    /*
+     * ========================================================
+     * DATA MÍNIMA
+     * ========================================================
+     */
+
+    function configurarDataMinima() {
+
+      const hoje =
+        new Date();
+
+
+      const ano =
+        hoje.getFullYear();
+
+
+      const mes =
+        String(
+          hoje.getMonth() + 1
+        ).padStart(2, "0");
+
+
+      const dia =
+        String(
+          hoje.getDate()
+        ).padStart(2, "0");
+
+
+      $("data").min =
+        ano +
+        "-" +
+        mes +
+        "-" +
+        dia;
+
+    }
+
+
+    /*
+     * ========================================================
+     * EVENTOS
+     * ========================================================
+     */
+
+    function configurarEventos() {
+
+      $("profissional")
+        .addEventListener(
+          "change",
+          function() {
+
+            estado.profissional =
+              this.value;
+
+            estado.horario =
+              null;
+
+            carregarHorarios();
+
+          }
+        );
+
+
+      $("data")
+        .addEventListener(
+          "change",
+          function() {
+
+            estado.data =
+              this.value;
+
+            estado.horario =
+              null;
+
+            carregarHorarios();
+
+          }
+        );
+
+
+      $("btnContinuar")
+        .addEventListener(
+          "click",
+          irParaConfirmacao
+        );
+
+
+      $("btnVoltar")
+        .addEventListener(
+          "click",
+          function() {
+
+            mostrarEtapa(1);
+
+          }
+        );
+
+
+      $("btnConfirmar")
+        .addEventListener(
+          "click",
+          confirmarAgendamento
+        );
+
+
+      $("btnNovoAgendamento")
+        .addEventListener(
+          "click",
+          novoAgendamento
+        );
+
+
+      $("telefone")
+        .addEventListener(
+          "input",
+          formatarTelefone
+        );
+
+    }
+
+
+    /*
+     * ========================================================
+     * SERVIÇOS
+     * ========================================================
+     */
+
+    async function carregarServicos() {
+
+      try {
+
+        const resposta =
+          await chamarAPI({
+
+            api: "servicos"
+
+          });
+
+
+        if (
+          !resposta ||
+          !resposta.sucesso
+        ) {
+
+          throw new Error(
+            resposta &&
+            resposta.mensagem
+              ? resposta.mensagem
+              : "Não foi possível carregar os serviços."
+          );
+
+        }
+
+
+        estado.servicos =
+          resposta.servicos ||
+          [];
+
+
+        renderizarServicos();
+
+
+      }
+      catch (erro) {
+
+        $("servicosCards")
+          .innerHTML =
+
+          '<div class="mensagem-horarios">' +
+          escapeHtml(
+            erro.message
+          ) +
+          "</div>";
+
+      }
+
+    }
+
+
+    function renderizarServicos() {
+
+      const container =
+        $("servicosCards");
+
+
+      if (
+        !estado.servicos.length
+      ) {
+
+        container.innerHTML =
+          '<div class="mensagem-horarios">' +
+          "Nenhum serviço disponível." +
+          "</div>";
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        estado.servicos
+          .map(
+            function(servico, index) {
+
+              return (
+
+                '<div ' +
+                  'class="servico-card" ' +
+                  'data-index="' +
+                  index +
+                  '">' +
+
+                  '<div class="check">✓</div>' +
+
+                  '<div class="servico-nome">' +
+                    escapeHtml(
+                      servico.nome
+                    ) +
+                  "</div>" +
+
+                  '<div class="servico-duracao">' +
+                    escapeHtml(
+                      String(
+                        servico.duracao
+                      )
+                    ) +
+                    " min" +
+                  "</div>" +
+
+                  '<div class="servico-preco">' +
+                    formatarMoeda(
+                      servico.preco
+                    ) +
+                  "</div>" +
+
+                "</div>"
+
+              );
+
+            }
+          )
+          .join("");
+
+
+      container
+        .querySelectorAll(
+          ".servico-card"
+        )
+        .forEach(
+          function(card) {
+
+            card.addEventListener(
+              "click",
+              function() {
+
+                selecionarServico(
+                  Number(
+                    this.dataset.index
+                  )
+                );
+
+              }
+            );
+
+          }
+        );
+
+    }
+
+
+    function selecionarServico(index) {
+
+      estado.servico =
+        estado.servicos[index] ||
+        null;
+
+
+      estado.horario =
+        null;
+
+
+      document
+        .querySelectorAll(
+          ".servico-card"
+        )
+        .forEach(
+          function(card, i) {
+
+            card.classList.toggle(
+              "selecionado",
+              i === index
+            );
+
+          }
+        );
+
+
+      if (
+        estado.servico
+      ) {
+
+        $("servicoInfo").textContent =
+          estado.servico.duracao +
+          " minutos de duração";
+
+      }
+      else {
+
+        $("servicoInfo").textContent =
+          "";
+
+      }
+
+
+      atualizarBotaoContinuar();
+
+      carregarHorarios();
+
+    }
+
+
+    /*
+     * ========================================================
+     * PROFISSIONAIS
+     * ========================================================
+     */
+
+    async function carregarProfissionais() {
+
+      try {
+
+        const resposta =
+          await chamarAPI({
+
+            api:
+              "profissionais"
+
+          });
+
+
+        if (
+          !resposta ||
+          !resposta.sucesso
+        ) {
+
+          throw new Error(
+            resposta &&
+            resposta.mensagem
+              ? resposta.mensagem
+              : "Não foi possível carregar os profissionais."
+          );
+
+        }
+
+
+        estado.profissionais =
+          resposta.profissionais ||
+          [];
+
+
+        const select =
+          $("profissional");
+
+
+        select.innerHTML =
+          '<option value="">' +
+          "Selecione o profissional" +
+          "</option>";
+
+
+        estado.profissionais
+          .forEach(
+            function(profissional) {
+
+              const option =
+                document.createElement(
+                  "option"
+                );
+
+
+              option.value =
+                profissional.nome;
+
+
+              option.textContent =
+                profissional.nome;
+
+
+              select.appendChild(
+                option
+              );
+
+            }
+          );
+
+      }
+      catch (erro) {
+
+        $("profissional").innerHTML =
+          '<option value="">' +
+          escapeHtml(
+            erro.message
+          ) +
+          "</option>";
+
+      }
+
+    }
+
+
+    /*
+     * ========================================================
+     * HORÁRIOS
+     * ========================================================
+     */
+
+    async function carregarHorarios() {
+
+      const lista =
+        $("listaHorarios");
+
+
+      estado.horario =
+        null;
+
+
+      atualizarBotaoContinuar();
+
+
+      if (
+        !estado.servico ||
+        !estado.profissional ||
+        !estado.data
+      ) {
+
+        lista.innerHTML =
+          '<div class="mensagem-horarios">' +
+          "Selecione o serviço, profissional e data." +
+          "</div>";
+
+        $("textoSelecao").textContent =
+          "Selecione um horário";
+
+        return;
+
+      }
+
+
+      lista.innerHTML =
+        '<div class="mensagem-horarios">' +
+        '<span class="spinner"></span>' +
+        "Carregando horários..." +
+        "</div>";
+
+
+      try {
+
+        const resposta =
+          await chamarAPI({
+
+            api:
+              "horarios",
+
+            servico:
+              estado.servico.nome,
+
+            profissional:
+              estado.profissional,
+
+            data:
+              estado.data
+
+          });
+
+
+        if (
+          !resposta ||
+          !resposta.sucesso
+        ) {
+
+          throw new Error(
+            resposta &&
+            resposta.mensagem
+              ? resposta.mensagem
+              : "Não foi possível carregar os horários."
+          );
+
+        }
+
+
+        const horarios =
+          resposta.horarios ||
+          [];
+
+
+        if (
+          !horarios.length
+        ) {
+
+          lista.innerHTML =
+            '<div class="mensagem-horarios">' +
+            "Nenhum horário disponível para esta data." +
+            "</div>";
+
+          return;
+
+        }
+
+
+        lista.innerHTML =
+          horarios
+            .map(
+              function(horario, index) {
+
+                return (
+
+                  '<button ' +
+                    'type="button" ' +
+                    'class="horario" ' +
+                    'data-index="' +
+                    index +
+                  '">' +
+
+                    escapeHtml(
+                      horario.inicio
+                    ) +
+
+                  "</button>"
+
+                );
+
+              }
+            )
+            .join("");
+
+
+        lista
+          .querySelectorAll(
+            ".horario"
+          )
+          .forEach(
+            function(botao) {
+
+              botao.addEventListener(
+                "click",
+                function() {
+
+                  const horario =
+                    horarios[
+                      Number(
+                        this.dataset.index
+                      )
+                    ];
+
+
+                  selecionarHorario(
+                    horario,
+                    this
+                  );
+
+                }
+              );
+
+            }
+          );
+
+      }
+      catch (erro) {
+
+        lista.innerHTML =
+          '<div class="mensagem-horarios">' +
+          escapeHtml(
+            erro.message
+          ) +
+          "</div>";
+
+      }
+
+    }
+
+
+    function selecionarHorario(
+      horario,
+      elemento
+    ) {
+
+      estado.horario =
+        horario;
+
+
+      document
+        .querySelectorAll(
+          ".horario"
+        )
+        .forEach(
+          function(botao) {
+
+            botao.classList.remove(
+              "selecionado"
+            );
+
+          }
+        );
+
+
+      elemento.classList.add(
+        "selecionado"
+      );
+
+
+      $("textoSelecao").textContent =
+        "Selecionado: " +
+        horario.inicio;
+
+
+      atualizarBotaoContinuar();
+
+    }
+
+
+    /*
+     * ========================================================
+     * BOTÃO CONTINUAR
+     * ========================================================
+     */
+
+    function atualizarBotaoContinuar() {
+
+      $("btnContinuar").disabled =
+        !(
+          estado.servico &&
+          estado.profissional &&
+          estado.data &&
+          estado.horario
+        );
+
+    }
+
+
+    function irParaConfirmacao() {
+
+      if (
+        $("btnContinuar").disabled
+      ) {
+
+        return;
+
+      }
+
+
+      $("resumoServico").textContent =
+        estado.servico.nome;
+
+
+      $("resumoProfissional").textContent =
+        estado.profissional;
+
+
+      $("resumoData").textContent =
+        formatarDataBR(
+          estado.data
+        );
+
+
+      $("resumoHorario").textContent =
+        estado.horario.inicio +
+        " às " +
+        estado.horario.fim;
+
+
+      $("resumoPreco").textContent =
+        formatarMoeda(
+          estado.servico.preco
+        );
+
+
+      $("erroFormulario").style.display =
+        "none";
+
+
+      mostrarEtapa(2);
+
+    }
+
+
+    /*
+     * ========================================================
+     * CONFIRMAR
+     * ========================================================
+     */
+
+    async function confirmarAgendamento() {
+
+      const cliente =
+        $("cliente")
+          .value
+          .trim();
+
+
+      const telefone =
+        $("telefone")
+          .value
+          .trim();
+
+
+      if (
+        cliente.length < 2
+      ) {
+
+        mostrarErro(
+          "Digite seu nome."
+        );
+
+        $("cliente").focus();
+
+        return;
+
+      }
+
+
+      if (
+        telefone.replace(
+          /\D/g,
+          ""
+        ).length < 8
+      ) {
+
+        mostrarErro(
+          "Digite um WhatsApp válido."
+        );
+
+        $("telefone").focus();
+
+        return;
+
+      }
+
+
+      if (
+        !estado.servico ||
+        !estado.profissional ||
+        !estado.data ||
+        !estado.horario
+      ) {
+
+        mostrarErro(
+          "Complete os dados do agendamento."
+        );
+
+        return;
+
+      }
+
+
+      const botao =
+        $("btnConfirmar");
+
+
+      botao.disabled =
+        true;
+
+
+      botao.textContent =
+        "Confirmando...";
+
+
+      $("erroFormulario").style.display =
+        "none";
+
+
+      try {
+
+        const resposta =
+          await chamarAPI({
+
+            api:
+              "criar",
+
+            data:
+              estado.data,
+
+            horaInicio:
+              estado.horario.inicio,
+
+            profissional:
+              estado.profissional,
+
+            servico:
+              estado.servico.nome,
+
+            cliente:
+              cliente,
+
+            telefone:
+              telefone
+
+          });
+
+
+        if (
+          !resposta ||
+          !resposta.sucesso
+        ) {
+
+          throw new Error(
+            resposta &&
+            resposta.mensagem
+              ? resposta.mensagem
+              : "Não foi possível realizar o agendamento."
+          );
+
+        }
+
+
+        mostrarConfirmacao(
+          resposta
+        );
+
+
+      }
+      catch (erro) {
+
+        mostrarErro(
+          erro.message
+        );
+
+        botao.disabled =
+          false;
+
+        botao.textContent =
+          "Confirmar agendamento";
+
+      }
+
+    }
+
+
+    /*
+     * ========================================================
+     * CONFIRMAÇÃO
+     * ========================================================
+     */
+
+    function mostrarConfirmacao(
+      resultado
+    ) {
+
+      $("confirmacaoCliente").textContent =
+        resultado.cliente ||
+        $("cliente").value;
+
+
+      $("confirmacaoServico").textContent =
+        resultado.servico ||
+        estado.servico.nome;
+
+
+      $("confirmacaoProfissional").textContent =
+        resultado.profissional ||
+        estado.profissional;
+
+
+      $("confirmacaoData").textContent =
+        resultado.dataBR ||
+        formatarDataBR(
+          estado.data
+        );
+
+
+      $("confirmacaoHorario").textContent =
+        (
+          resultado.horaInicio ||
+          estado.horario.inicio
+        ) +
+        " às " +
+        (
+          resultado.horaFim ||
+          estado.horario.fim
+        );
+
+
+      $("confirmacaoId").textContent =
+        resultado.id ||
+        "-";
+
+
+      mostrarEtapa(3);
+
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    /*
+     * ========================================================
+     * NOVO AGENDAMENTO
+     * ========================================================
+     */
+
+    function novoAgendamento() {
+
+      estado.servico =
+        null;
+
+      estado.profissional =
+        "";
+
+      estado.data =
+        "";
+
+      estado.horario =
+        null;
+
+
+      $("profissional").value =
+        "";
+
+
+      $("data").value =
+        "";
+
+
+      $("cliente").value =
+        "";
+
+
+      $("telefone").value =
+        "";
+
+
+      document
+        .querySelectorAll(
+          ".servico-card"
+        )
+        .forEach(
+          function(card) {
+
+            card.classList.remove(
+              "selecionado"
+            );
+
+          }
+        );
+
+
+      $("servicoInfo").textContent =
+        "";
+
+
+      $("listaHorarios").innerHTML =
+        '<div class="mensagem-horarios">' +
+        "Selecione o serviço, profissional e data." +
+        "</div>";
+
+
+      $("textoSelecao").textContent =
+        "Selecione um horário";
+
+
+      atualizarBotaoContinuar();
+
+
+      $("btnConfirmar").disabled =
+        false;
+
+
+      $("btnConfirmar").textContent =
+        "Confirmar agendamento";
+
+
+      mostrarEtapa(1);
+
+    }
+
+
+    /*
+     * ========================================================
+     * ETAPAS
+     * ========================================================
+     */
+
+    function mostrarEtapa(numero) {
+
+      document
+        .querySelectorAll(
+          ".etapa"
+        )
+        .forEach(
+          function(etapa) {
+
+            etapa.classList.remove(
+              "ativa"
+            );
+
+          }
+        );
+
+
+      $("etapa" + numero)
+        .classList.add(
+          "ativa"
+        );
+
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    /*
+     * ========================================================
+     * ERROS
+     * ========================================================
+     */
+
+    function mostrarErro(mensagem) {
+
+      const erro =
+        $("erroFormulario");
+
+
+      erro.textContent =
+        mensagem;
+
+
+      erro.style.display =
+        "block";
+
+    }
+
+
+    /*
+     * ========================================================
+     * TELEFONE
+     * ========================================================
+     */
+
+    function formatarTelefone(evento) {
+
+      let valor =
+        evento.target.value
+          .replace(
+            /\D/g,
+            ""
+          );
+
+
+      if (
+        valor.length > 11
+      ) {
+
+        valor =
+          valor.substring(
+            0,
+            11
+          );
+
+      }
+
+
+      if (
+        valor.length <= 10
+      ) {
+
+        valor =
+          valor.replace(
+            /^(\d{2})(\d)/,
+            "($1) $2"
+          );
+
+        valor =
+          valor.replace(
+            /(\d{4})(\d)/,
+            "$1-$2"
+          );
+
+      }
+      else {
+
+        valor =
+          valor.replace(
+            /^(\d{2})(\d)/,
+            "($1) $2"
+          );
+
+        valor =
+          valor.replace(
+            /(\d{5})(\d)/,
+            "$1-$2"
+          );
+
+      }
+
+
+      evento.target.value =
+        valor;
+
+    }
+
+
+    /*
+     * ========================================================
+     * FORMATAÇÕES
+     * ========================================================
+     */
+
+    function formatarMoeda(valor) {
+
+      return Number(
+        valor || 0
+      ).toLocaleString(
+        "pt-BR",
+        {
+          style: "currency",
+          currency: "BRL"
+        }
+      );
+
+    }
+
+
+    function formatarDataBR(data) {
+
+      if (!data) {
+        return "-";
+      }
+
+
+      const partes =
+        data.split("-");
+
+
+      if (
+        partes.length !== 3
+      ) {
+
+        return data;
+
+      }
+
+
+      return (
+        partes[2] +
+        "/" +
+        partes[1] +
+        "/" +
+        partes[0]
+      );
+
+    }
+
+
+    /*
+     * ========================================================
+     * SEGURANÇA
+     * ========================================================
+     */
+
+    function escapeHtml(valor) {
+
+      return String(
+        valor === null ||
+        valor === undefined
+          ? ""
+          : valor
+      )
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+      .replace(
+        /</g,
+        "&lt;"
+      )
+      .replace(
+        />/g,
+        "&gt;"
+      )
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+    }
+
+  </script>
 
 </body>
+
 </html>
+```
