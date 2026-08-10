@@ -15,7 +15,15 @@
     content="Agendamento online da barbearia"
   >
 
-  <title>Agende seu horário</title>
+  <meta
+    name="theme-color"
+    content="#111111"
+  >
+
+  <title>
+    Agendamento Online
+  </title>
+
 
   <style>
 
@@ -23,641 +31,1393 @@
       box-sizing: border-box;
     }
 
+
+    :root {
+
+      --preto:
+        #111111;
+
+      --preto-2:
+        #1a1a1a;
+
+      --cinza:
+        #6b7280;
+
+      --cinza-claro:
+        #f4f4f5;
+
+      --borda:
+        #e5e7eb;
+
+      --branco:
+        #ffffff;
+
+      --dourado:
+        #c9a227;
+
+      --dourado-escuro:
+        #a88312;
+
+      --verde:
+        #16a34a;
+
+      --vermelho:
+        #dc2626;
+
+      --raio:
+        16px;
+
+    }
+
+
     body {
+
       margin: 0;
+
       min-height: 100vh;
+
       font-family:
-        Inter,
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
+        Roboto,
         Arial,
         sans-serif;
+
       background:
         linear-gradient(
-          135deg,
-          #111111,
-          #1b1b1b
+          180deg,
+          #111111 0,
+          #111111 180px,
+          #f7f7f7 180px,
+          #f7f7f7 100%
         );
-      color: #ffffff;
+
+      color:
+        #18181b;
+
     }
 
-    button,
-    input,
-    select {
-      font: inherit;
-    }
 
     .container {
-      width: 100%;
-      max-width: 620px;
-      margin: 0 auto;
-      padding: 24px 16px 50px;
+
+      width:
+        min(100% - 32px, 560px);
+
+      margin:
+        0 auto;
+
+      padding:
+        28px 0 50px;
+
     }
+
 
     .cabecalho {
-      text-align: center;
-      padding: 20px 0 26px;
+
+      text-align:
+        center;
+
+      color:
+        white;
+
+      padding:
+        12px 0 30px;
+
     }
+
 
     .logo {
-      width: 64px;
-      height: 64px;
-      margin: 0 auto 14px;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width:
+        62px;
 
-      border-radius: 20px;
+      height:
+        62px;
 
-      background: #c99a4a;
-      color: #111111;
+      margin:
+        0 auto 14px;
 
-      font-size: 32px;
+      display:
+        flex;
 
-      box-shadow:
-        0 10px 30px
-        rgba(201, 154, 74, .25);
-    }
+      align-items:
+        center;
 
-    h1 {
-      margin: 0;
-      font-size: 30px;
-      font-weight: 800;
-    }
+      justify-content:
+        center;
 
-    .subtitulo {
-      margin: 8px 0 0;
-      color: #aaaaaa;
-      font-size: 15px;
-    }
+      border:
+        1px solid
+        rgba(255,255,255,.18);
 
-    .etapa {
-      display: none;
-    }
-
-    .etapa.ativa {
-      display: block;
-    }
-
-    .progresso {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 28px;
-    }
-
-    .progresso-item {
-      width: 34px;
-      height: 34px;
-
-      border-radius: 50%;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: #2a2a2a;
-      color: #777777;
-
-      font-weight: 700;
-    }
-
-    .progresso-item.ativo {
-      background: #c99a4a;
-      color: #111111;
-    }
-
-    .progresso-item.concluido {
-      background: #2e8b57;
-      color: white;
-    }
-
-    .linha {
-      width: 60px;
-      height: 2px;
-      background: #333333;
-    }
-
-    .linha.concluida {
-      background: #2e8b57;
-    }
-
-    .campo {
-      margin-bottom: 22px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 9px;
-      color: #dddddd;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    input,
-    select {
-      width: 100%;
-      height: 50px;
-
-      border: 1px solid #363636;
-      border-radius: 12px;
-
-      padding: 0 14px;
-
-      background: #202020;
-      color: #ffffff;
-
-      outline: none;
-    }
-
-    input:focus,
-    select:focus {
-      border-color: #c99a4a;
-    }
-
-    input[type="date"] {
-      color-scheme: dark;
-    }
-
-    /*
-     * SERVIÇOS HORIZONTAIS
-     */
-
-    .servicos-wrapper {
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .servicos-cards {
-      display: flex;
-      gap: 12px;
-
-      overflow-x: auto;
-      overflow-y: hidden;
-
-      padding: 4px 2px 14px;
-
-      scroll-snap-type: x mandatory;
-
-      scrollbar-width: thin;
-      scrollbar-color:
-        #c99a4a
-        transparent;
-    }
-
-    .servicos-cards::-webkit-scrollbar {
-      height: 5px;
-    }
-
-    .servicos-cards::-webkit-scrollbar-thumb {
-      background: #c99a4a;
-      border-radius: 20px;
-    }
-
-    .servico-card {
-      flex:
-        0 0
-        180px;
-
-      min-height: 120px;
-
-      padding: 16px;
-
-      border: 1px solid #363636;
-      border-radius: 16px;
-
-      background: #202020;
-
-      cursor: pointer;
-
-      scroll-snap-align: start;
-
-      transition:
-        .2s ease;
-
-      position: relative;
-    }
-
-    .servico-card:hover {
-      border-color: #8f6a2e;
-      transform: translateY(-2px);
-    }
-
-    .servico-card.selecionado {
-      border-color: #c99a4a;
+      border-radius:
+        50%;
 
       background:
-        linear-gradient(
-          145deg,
-          #29210f,
-          #202020
-        );
+        rgba(255,255,255,.08);
+
+      font-size:
+        29px;
+
+    }
+
+
+    h1 {
+
+      margin:
+        0;
+
+      font-size:
+        clamp(27px, 7vw, 38px);
+
+      line-height:
+        1.1;
+
+      font-weight:
+        800;
+
+    }
+
+
+    .subtitulo {
+
+      margin:
+        9px 0 0;
+
+      color:
+        rgba(255,255,255,.72);
+
+      font-size:
+        15px;
+
+    }
+
+
+    .etapa {
+
+      display:
+        none;
+
+      background:
+        white;
+
+      border-radius:
+        var(--raio);
+
+      padding:
+        24px;
 
       box-shadow:
-        0 0 0 1px
-        rgba(201,154,74,.25);
+        0 12px 35px
+        rgba(0,0,0,.08);
+
     }
 
-    .servico-card .check {
-      position: absolute;
-      top: 10px;
-      right: 10px;
 
-      width: 22px;
-      height: 22px;
+    .etapa.ativa {
 
-      border-radius: 50%;
+      display:
+        block;
 
-      display: none;
-      align-items: center;
-      justify-content: center;
+      animation:
+        aparecer .25s ease;
 
-      background: #c99a4a;
-      color: #111111;
-
-      font-size: 13px;
-      font-weight: 900;
     }
 
-    .servico-card.selecionado .check {
-      display: flex;
+
+    @keyframes aparecer {
+
+      from {
+        opacity: 0;
+        transform: translateY(7px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
     }
+
+
+    .progresso {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      margin:
+        0 0 28px;
+
+    }
+
+
+    .progresso-item {
+
+      width:
+        34px;
+
+      height:
+        34px;
+
+      border-radius:
+        50%;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      background:
+        #ececec;
+
+      color:
+        #777;
+
+      font-weight:
+        700;
+
+      font-size:
+        14px;
+
+    }
+
+
+    .progresso-item.ativo {
+
+      background:
+        var(--preto);
+
+      color:
+        white;
+
+    }
+
+
+    .progresso-item.concluido {
+
+      background:
+        var(--dourado);
+
+      color:
+        white;
+
+    }
+
+
+    .linha {
+
+      width:
+        55px;
+
+      height:
+        2px;
+
+      background:
+        #e5e5e5;
+
+    }
+
+
+    .linha.concluida {
+
+      background:
+        var(--dourado);
+
+    }
+
+
+    .campo {
+
+      margin:
+        0 0 21px;
+
+    }
+
+
+    label {
+
+      display:
+        block;
+
+      margin:
+        0 0 8px;
+
+      font-weight:
+        700;
+
+      font-size:
+        14px;
+
+    }
+
+
+    select,
+    input {
+
+      width:
+        100%;
+
+      min-height:
+        48px;
+
+      padding:
+        12px 14px;
+
+      border:
+        1px solid
+        var(--borda);
+
+      border-radius:
+        11px;
+
+      background:
+        white;
+
+      color:
+        #18181b;
+
+      font-size:
+        16px;
+
+      outline:
+        none;
+
+      transition:
+        .2s;
+
+    }
+
+
+    select:focus,
+    input:focus {
+
+      border-color:
+        var(--dourado);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(201,162,39,.12);
+
+    }
+
+
+    /* ========================================================
+       SERVIÇOS HORIZONTAIS
+    ======================================================== */
+
+    .servicos-wrapper {
+
+      width:
+        100%;
+
+      overflow:
+        hidden;
+
+      margin:
+        0 -2px;
+
+    }
+
+
+    .servicos-cards {
+
+      display:
+        flex;
+
+      gap:
+        12px;
+
+      overflow-x:
+        auto;
+
+      overflow-y:
+        hidden;
+
+      padding:
+        3px 2px 12px;
+
+      scroll-behavior:
+        smooth;
+
+      -webkit-overflow-scrolling:
+        touch;
+
+      scrollbar-width:
+        thin;
+
+    }
+
+
+    .servicos-cards::-webkit-scrollbar {
+
+      height:
+        5px;
+
+    }
+
+
+    .servicos-cards::-webkit-scrollbar-thumb {
+
+      background:
+        #d1d5db;
+
+      border-radius:
+        10px;
+
+    }
+
+
+    .servico-card {
+
+      flex:
+        0 0 155px;
+
+      min-height:
+        120px;
+
+      padding:
+        15px;
+
+      border:
+        1px solid
+        var(--borda);
+
+      border-radius:
+        14px;
+
+      background:
+        white;
+
+      cursor:
+        pointer;
+
+      transition:
+        .2s;
+
+      user-select:
+        none;
+
+    }
+
+
+    .servico-card:hover {
+
+      transform:
+        translateY(-2px);
+
+      border-color:
+        #c9c9c9;
+
+    }
+
+
+    .servico-card.selecionado {
+
+      border-color:
+        var(--dourado);
+
+      background:
+        #fffaf0;
+
+      box-shadow:
+        0 0 0 2px
+        rgba(201,162,39,.12);
+
+    }
+
 
     .servico-nome {
-      font-weight: 800;
-      font-size: 16px;
 
-      padding-right: 20px;
+      font-weight:
+        800;
+
+      line-height:
+        1.25;
+
+      margin:
+        0 0 10px;
+
     }
 
-    .servico-duracao {
-      margin-top: 9px;
-      color: #999999;
-      font-size: 13px;
+
+    .servico-detalhes {
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap:
+        4px;
+
+      color:
+        var(--cinza);
+
+      font-size:
+        13px;
+
     }
+
 
     .servico-preco {
-      margin-top: 12px;
-      color: #c99a4a;
-      font-weight: 800;
-      font-size: 17px;
+
+      margin-top:
+        9px;
+
+      color:
+        var(--preto);
+
+      font-size:
+        16px;
+
+      font-weight:
+        800;
+
     }
 
-    .servico-info {
-      margin-top: -10px;
-      margin-bottom: 20px;
 
-      color: #999999;
-      font-size: 13px;
-    }
-
-    .horarios-box {
-      margin-bottom: 22px;
-    }
-
-    .titulo-horarios {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      gap: 12px;
-
-      margin-bottom: 12px;
-    }
-
-    .titulo-horarios strong {
-      font-size: 15px;
-    }
-
-    #textoSelecao {
-      color: #888888;
-      font-size: 12px;
-      text-align: right;
-    }
-
-    #listaHorarios {
-      display: grid;
-
-      grid-template-columns:
-        repeat(
-          auto-fill,
-          minmax(105px, 1fr)
-        );
-
-      gap: 9px;
-    }
-
-    .horario {
-      min-height: 45px;
-
-      border: 1px solid #383838;
-      border-radius: 10px;
-
-      background: #202020;
-      color: #ffffff;
-
-      cursor: pointer;
-
-      font-weight: 700;
-    }
-
-    .horario:hover {
-      border-color: #c99a4a;
-    }
-
-    .horario.selecionado {
-      background: #c99a4a;
-      border-color: #c99a4a;
-      color: #111111;
-    }
-
-    .mensagem-horarios,
     .loading {
-      width: 100%;
 
-      padding: 18px;
+      width:
+        100%;
 
-      border-radius: 12px;
+      min-height:
+        70px;
 
-      background: #202020;
-      color: #888888;
+      display:
+        flex;
 
-      text-align: center;
-      font-size: 13px;
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      color:
+        var(--cinza);
+
+      font-size:
+        14px;
+
     }
+
 
     .spinner {
-      display: inline-block;
 
-      width: 15px;
-      height: 15px;
+      width:
+        18px;
 
-      margin-right: 7px;
+      height:
+        18px;
 
-      vertical-align: -3px;
+      border:
+        2px solid
+        #ddd;
 
-      border: 2px solid #555555;
-      border-top-color: #c99a4a;
+      border-top-color:
+        var(--dourado);
 
-      border-radius: 50%;
+      border-radius:
+        50%;
 
       animation:
         girar .7s linear infinite;
+
+      margin-right:
+        8px;
+
     }
 
+
     @keyframes girar {
+
       to {
         transform: rotate(360deg);
       }
+
     }
 
-    .btn {
-      width: 100%;
-      min-height: 52px;
 
-      border: 0;
-      border-radius: 13px;
+    .servico-info {
 
-      cursor: pointer;
+      min-height:
+        4px;
 
-      font-weight: 800;
+      margin:
+        -5px 0 18px;
+
+      color:
+        var(--cinza);
+
+      font-size:
+        13px;
+
+    }
+
+
+    /* ========================================================
+       HORÁRIOS
+    ======================================================== */
+
+    .horarios-box {
+
+      margin:
+        25px 0;
+
+    }
+
+
+    .titulo-horarios {
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      gap:
+        10px;
+
+      margin:
+        0 0 12px;
+
+    }
+
+
+    .titulo-horarios strong {
+
+      font-size:
+        15px;
+
+    }
+
+
+    #textoSelecao {
+
+      color:
+        var(--cinza);
+
+      font-size:
+        12px;
+
+      text-align:
+        right;
+
+    }
+
+
+    #listaHorarios {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap:
+        9px;
+
+    }
+
+
+    .horario {
+
+      min-height:
+        45px;
+
+      border:
+        1px solid
+        var(--borda);
+
+      background:
+        white;
+
+      border-radius:
+        10px;
+
+      cursor:
+        pointer;
+
+      font-size:
+        14px;
+
+      font-weight:
+        700;
+
+      color:
+        #333;
 
       transition:
-        .2s ease;
+        .2s;
+
     }
 
-    .btn.principal {
-      background: #c99a4a;
-      color: #111111;
+
+    .horario:hover {
+
+      border-color:
+        var(--dourado);
+
     }
 
-    .btn.principal:hover {
-      background: #ddb363;
+
+    .horario.selecionado {
+
+      background:
+        var(--preto);
+
+      color:
+        white;
+
+      border-color:
+        var(--preto);
+
     }
 
-    .btn.principal:disabled {
-      opacity: .45;
-      cursor: not-allowed;
+
+    .mensagem-horarios {
+
+      grid-column:
+        1 / -1;
+
+      padding:
+        20px 10px;
+
+      text-align:
+        center;
+
+      color:
+        var(--cinza);
+
+      font-size:
+        14px;
+
+      background:
+        #fafafa;
+
+      border-radius:
+        10px;
+
     }
 
-    .btn.secundario {
-      background: #292929;
-      color: #ffffff;
-    }
+
+    /* ========================================================
+       BOTÕES
+    ======================================================== */
 
     .botoes {
-      display: grid;
+
+      display:
+        grid;
 
       grid-template-columns:
         1fr 1.5fr;
 
-      gap: 10px;
+      gap:
+        10px;
+
+      margin-top:
+        24px;
+
     }
 
-    .resumo {
-      padding: 20px;
-      margin-bottom: 20px;
 
-      border: 1px solid #333333;
-      border-radius: 16px;
-
-      background: #1d1d1d;
-    }
-
-    .resumo h2 {
-      margin: 0 0 18px;
-
-      font-size: 20px;
-    }
-
-    .resumo-item,
-    .comprovante-linha {
-      display: flex;
-
-      justify-content: space-between;
-      gap: 15px;
-
-      padding: 12px 0;
-
-      border-bottom:
-        1px solid #303030;
-    }
-
-    .resumo-item:last-child,
-    .comprovante-linha:last-child {
-      border-bottom: 0;
-    }
-
-    .resumo-item span,
-    .comprovante-linha span {
-      color: #888888;
-      font-size: 13px;
-    }
-
-    .resumo-item strong,
-    .comprovante-linha strong {
-      text-align: right;
-      font-size: 14px;
-    }
-
-    .resumo-item.preco strong {
-      color: #c99a4a;
-      font-size: 18px;
-    }
-
-    .mensagem {
-      display: none;
-
-      margin-bottom: 16px;
-      padding: 12px 14px;
-
-      border-radius: 10px;
-
-      font-size: 13px;
-    }
-
-    .mensagem.erro {
-      display: block;
-      background: #3a1f1f;
-      color: #ffaaaa;
-    }
-
-    .confirmacao {
-      text-align: center;
-    }
-
-    .icone-sucesso {
-      width: 72px;
-      height: 72px;
-
-      margin: 5px auto 20px;
-
-      border-radius: 50%;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: #2e8b57;
-      color: white;
-
-      font-size: 35px;
-      font-weight: 900;
-    }
-
-    .confirmacao h2 {
-      margin: 0;
-      font-size: 25px;
-    }
-
-    .confirmacao > p {
-      color: #999999;
-      margin: 8px 0 24px;
-    }
-
-    .comprovante {
-      padding: 20px;
-
-      border: 1px solid #383838;
-      border-radius: 16px;
-
-      background: #1d1d1d;
-
-      text-align: left;
-
-      margin-bottom: 14px;
-    }
-
-    .comprovante-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      padding-bottom: 14px;
-      margin-bottom: 4px;
-
-      border-bottom:
-        1px solid #383838;
-
-      color: #c99a4a;
-    }
-
-    .mensagem-final {
-      font-size: 13px;
-      color: #777777;
-    }
-
-    .mensagem-global {
-      position: fixed;
-
-      left: 50%;
-      bottom: 20px;
-
-      transform:
-        translateX(-50%)
-        translateY(20px);
+    .btn {
 
       width:
-        calc(
-          100% - 30px
-        );
+        100%;
 
-      max-width: 500px;
+      min-height:
+        49px;
 
-      padding: 13px 16px;
+      border:
+        0;
 
-      border-radius: 12px;
+      border-radius:
+        11px;
 
-      background: #c99a4a;
-      color: #111111;
+      padding:
+        12px 16px;
 
-      font-weight: 700;
-      font-size: 13px;
+      cursor:
+        pointer;
 
-      text-align: center;
+      font-size:
+        15px;
 
-      opacity: 0;
-      pointer-events: none;
+      font-weight:
+        800;
 
       transition:
-        .25s ease;
+        .2s;
 
-      z-index: 999;
     }
+
+
+    .btn.principal {
+
+      background:
+        var(--preto);
+
+      color:
+        white;
+
+    }
+
+
+    .btn.principal:hover {
+
+      background:
+        #2a2a2a;
+
+    }
+
+
+    .btn.principal:disabled {
+
+      opacity:
+        .45;
+
+      cursor:
+        not-allowed;
+
+    }
+
+
+    .btn.secundario {
+
+      background:
+        #eeeeee;
+
+      color:
+        #333;
+
+    }
+
+
+    .btn.secundario:hover {
+
+      background:
+        #e2e2e2;
+
+    }
+
+
+    /* ========================================================
+       RESUMO
+    ======================================================== */
+
+    .resumo {
+
+      padding:
+        18px;
+
+      background:
+        #fafafa;
+
+      border:
+        1px solid
+        #eeeeee;
+
+      border-radius:
+        14px;
+
+      margin-bottom:
+        23px;
+
+    }
+
+
+    .resumo h2 {
+
+      margin:
+        0 0 16px;
+
+      font-size:
+        20px;
+
+    }
+
+
+    .resumo-item {
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      gap:
+        15px;
+
+      padding:
+        10px 0;
+
+      border-bottom:
+        1px solid
+        #eeeeee;
+
+      font-size:
+        14px;
+
+    }
+
+
+    .resumo-item:last-child {
+
+      border-bottom:
+        0;
+
+    }
+
+
+    .resumo-item span {
+
+      color:
+        var(--cinza);
+
+    }
+
+
+    .resumo-item strong {
+
+      text-align:
+        right;
+
+    }
+
+
+    .resumo-item.preco strong {
+
+      color:
+        var(--dourado-escuro);
+
+      font-size:
+        17px;
+
+    }
+
+
+    /* ========================================================
+       MENSAGENS
+    ======================================================== */
+
+    .mensagem {
+
+      display:
+        none;
+
+      padding:
+        12px 14px;
+
+      margin:
+        0 0 16px;
+
+      border-radius:
+        10px;
+
+      font-size:
+        14px;
+
+    }
+
+
+    .mensagem.visivel {
+
+      display:
+        block;
+
+    }
+
+
+    .mensagem.erro {
+
+      color:
+        #991b1b;
+
+      background:
+        #fef2f2;
+
+      border:
+        1px solid
+        #fecaca;
+
+    }
+
+
+    .mensagem-global {
+
+      position:
+        fixed;
+
+      left:
+        50%;
+
+      bottom:
+        20px;
+
+      transform:
+        translate(-50%, 120px);
+
+      width:
+        min(90%, 500px);
+
+      padding:
+        13px 16px;
+
+      border-radius:
+        12px;
+
+      background:
+        #18181b;
+
+      color:
+        white;
+
+      text-align:
+        center;
+
+      font-size:
+        14px;
+
+      box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.2);
+
+      opacity:
+        0;
+
+      transition:
+        .25s;
+
+      z-index:
+        9999;
+
+    }
+
 
     .mensagem-global.visivel {
-      opacity: 1;
+
+      opacity:
+        1;
+
       transform:
-        translateX(-50%)
-        translateY(0);
+        translate(-50%, 0);
+
     }
 
-    @media (max-width: 430px) {
+
+    .mensagem-global.sucesso {
+
+      background:
+        #166534;
+
+    }
+
+
+    .mensagem-global.erro {
+
+      background:
+        #991b1b;
+
+    }
+
+
+    /* ========================================================
+       CONFIRMAÇÃO
+    ======================================================== */
+
+    .confirmacao {
+
+      text-align:
+        center;
+
+    }
+
+
+    .icone-sucesso {
+
+      width:
+        66px;
+
+      height:
+        66px;
+
+      margin:
+        0 auto 17px;
+
+      border-radius:
+        50%;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      background:
+        #dcfce7;
+
+      color:
+        #15803d;
+
+      font-size:
+        30px;
+
+      font-weight:
+        900;
+
+    }
+
+
+    .confirmacao h2 {
+
+      margin:
+        0;
+
+      font-size:
+        25px;
+
+    }
+
+
+    .confirmacao > p {
+
+      color:
+        var(--cinza);
+
+      margin:
+        8px 0 23px;
+
+    }
+
+
+    .comprovante {
+
+      text-align:
+        left;
+
+      border:
+        1px solid
+        var(--borda);
+
+      border-radius:
+        14px;
+
+      overflow:
+        hidden;
+
+      background:
+        white;
+
+    }
+
+
+    .comprovante-header {
+
+      padding:
+        16px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        10px;
+
+      background:
+        var(--preto);
+
+      color:
+        white;
+
+    }
+
+
+    .comprovante-header span {
+
+      font-size:
+        20px;
+
+    }
+
+
+    .comprovante-linha {
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      gap:
+        15px;
+
+      padding:
+        13px 16px;
+
+      border-bottom:
+        1px solid
+        #eeeeee;
+
+      font-size:
+        14px;
+
+    }
+
+
+    .comprovante-linha:last-child {
+
+      border-bottom:
+        0;
+
+    }
+
+
+    .comprovante-linha span {
+
+      color:
+        var(--cinza);
+
+    }
+
+
+    .comprovante-linha strong {
+
+      text-align:
+        right;
+
+      word-break:
+        break-word;
+
+    }
+
+
+    .mensagem-final {
+
+      margin:
+        18px 0;
+
+      font-size:
+        13px;
+
+      color:
+        var(--cinza);
+
+    }
+
+
+    /* ========================================================
+       MOBILE
+    ======================================================== */
+
+    @media (
+      max-width: 480px
+    ) {
+
+      body {
+
+        background:
+          #f7f7f7;
+
+      }
+
 
       .container {
+
+        width:
+          100%;
+
         padding:
-          18px
-          12px
-          40px;
+          0 12px 35px;
+
       }
 
-      h1 {
-        font-size: 26px;
+
+      .cabecalho {
+
+        padding:
+          28px 8px 25px;
+
       }
 
-      .servico-card {
-        flex-basis: 165px;
+
+      .etapa {
+
+        padding:
+          18px;
+
+        border-radius:
+          14px;
+
       }
+
+
+      .linha {
+
+        width:
+          38px;
+
+      }
+
+
+      #listaHorarios {
+
+        grid-template-columns:
+          repeat(3, 1fr);
+
+      }
+
 
       .botoes {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
       }
 
-      .resumo-item,
-      .comprovante-linha {
-        align-items: flex-start;
+
+      .btn.secundario {
+
+        order:
+          2;
+
+      }
+
+
+      .resumo-item {
+
+        align-items:
+          flex-start;
+
+      }
+
+
+      .servico-card {
+
+        flex-basis:
+          150px;
+
       }
 
     }
@@ -669,10 +1429,15 @@
 
 <body>
 
+
   <main class="container">
 
 
-    <section class="cabecalho">
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
+
+    <header class="cabecalho">
 
       <div class="logo">
         ✂
@@ -686,7 +1451,7 @@
         Escolha o serviço, profissional e horário
       </p>
 
-    </section>
+    </header>
 
 
     <!-- =====================================================
@@ -700,19 +1465,25 @@
 
       <div class="progresso">
 
-        <span class="progresso-item ativo">
+        <span
+          class="progresso-item ativo"
+        >
           1
         </span>
 
         <span class="linha"></span>
 
-        <span class="progresso-item">
+        <span
+          class="progresso-item"
+        >
           2
         </span>
 
         <span class="linha"></span>
 
-        <span class="progresso-item">
+        <span
+          class="progresso-item"
+        >
           3
         </span>
 
@@ -725,6 +1496,7 @@
           Serviço
         </label>
 
+
         <div class="servicos-wrapper">
 
           <div
@@ -733,8 +1505,13 @@
           >
 
             <div class="loading">
-              <span class="spinner"></span>
+
+              <span
+                class="spinner"
+              ></span>
+
               Carregando serviços...
+
             </div>
 
           </div>
@@ -752,11 +1529,15 @@
 
       <div class="campo">
 
-        <label for="profissional">
+        <label
+          for="profissional"
+        >
           Profissional
         </label>
 
-        <select id="profissional">
+        <select
+          id="profissional"
+        >
 
           <option value="">
             Carregando profissionais...
@@ -769,7 +1550,9 @@
 
       <div class="campo">
 
-        <label for="data">
+        <label
+          for="data"
+        >
           Data
         </label>
 
@@ -789,16 +1572,22 @@
             Horários disponíveis
           </strong>
 
-          <span id="textoSelecao">
+          <span
+            id="textoSelecao"
+          >
             Selecione um horário
           </span>
 
         </div>
 
 
-        <div id="listaHorarios">
+        <div
+          id="listaHorarios"
+        >
 
-          <div class="mensagem-horarios">
+          <div
+            class="mensagem-horarios"
+          >
             Selecione o serviço,
             profissional e data.
           </div>
@@ -831,19 +1620,27 @@
 
       <div class="progresso">
 
-        <span class="progresso-item concluido">
+        <span
+          class="progresso-item concluido"
+        >
           ✓
         </span>
 
-        <span class="linha concluida"></span>
+        <span
+          class="linha concluida"
+        ></span>
 
-        <span class="progresso-item ativo">
+        <span
+          class="progresso-item ativo"
+        >
           2
         </span>
 
         <span class="linha"></span>
 
-        <span class="progresso-item">
+        <span
+          class="progresso-item"
+        >
           3
         </span>
 
@@ -863,7 +1660,9 @@
             Serviço
           </span>
 
-          <strong id="resumoServico">
+          <strong
+            id="resumoServico"
+          >
             -
           </strong>
 
@@ -876,7 +1675,9 @@
             Profissional
           </span>
 
-          <strong id="resumoProfissional">
+          <strong
+            id="resumoProfissional"
+          >
             -
           </strong>
 
@@ -889,7 +1690,9 @@
             Data
           </span>
 
-          <strong id="resumoData">
+          <strong
+            id="resumoData"
+          >
             -
           </strong>
 
@@ -902,20 +1705,26 @@
             Horário
           </span>
 
-          <strong id="resumoHorario">
+          <strong
+            id="resumoHorario"
+          >
             -
           </strong>
 
         </div>
 
 
-        <div class="resumo-item preco">
+        <div
+          class="resumo-item preco"
+        >
 
           <span>
             Valor
           </span>
 
-          <strong id="resumoPreco">
+          <strong
+            id="resumoPreco"
+          >
             -
           </strong>
 
@@ -926,7 +1735,9 @@
 
       <div class="campo">
 
-        <label for="cliente">
+        <label
+          for="cliente"
+        >
           Seu nome
         </label>
 
@@ -935,6 +1746,7 @@
           id="cliente"
           placeholder="Digite seu nome"
           autocomplete="name"
+          maxlength="100"
         >
 
       </div>
@@ -942,7 +1754,9 @@
 
       <div class="campo">
 
-        <label for="telefone">
+        <label
+          for="telefone"
+        >
           WhatsApp
         </label>
 
@@ -951,6 +1765,7 @@
           id="telefone"
           placeholder="(31) 99999-9999"
           autocomplete="tel"
+          maxlength="20"
         >
 
       </div>
@@ -958,7 +1773,7 @@
 
       <div
         id="erroFormulario"
-        class="mensagem"
+        class="mensagem erro"
       ></div>
 
 
@@ -997,13 +1812,17 @@
 
       <div class="confirmacao">
 
-        <div class="icone-sucesso">
+        <div
+          class="icone-sucesso"
+        >
           ✓
         </div>
+
 
         <h2>
           Agendamento confirmado!
         </h2>
+
 
         <p>
           Seu horário foi reservado com sucesso.
@@ -1012,7 +1831,9 @@
 
         <div class="comprovante">
 
-          <div class="comprovante-header">
+          <div
+            class="comprovante-header"
+          >
 
             <span>
               ✂
@@ -1025,78 +1846,102 @@
           </div>
 
 
-          <div class="comprovante-linha">
+          <div
+            class="comprovante-linha"
+          >
 
             <span>
               Cliente
             </span>
 
-            <strong id="confirmacaoCliente">
+            <strong
+              id="confirmacaoCliente"
+            >
               -
             </strong>
 
           </div>
 
 
-          <div class="comprovante-linha">
+          <div
+            class="comprovante-linha"
+          >
 
             <span>
               Serviço
             </span>
 
-            <strong id="confirmacaoServico">
+            <strong
+              id="confirmacaoServico"
+            >
               -
             </strong>
 
           </div>
 
 
-          <div class="comprovante-linha">
+          <div
+            class="comprovante-linha"
+          >
 
             <span>
               Profissional
             </span>
 
-            <strong id="confirmacaoProfissional">
+            <strong
+              id="confirmacaoProfissional"
+            >
               -
             </strong>
 
           </div>
 
 
-          <div class="comprovante-linha">
+          <div
+            class="comprovante-linha"
+          >
 
             <span>
               Data
             </span>
 
-            <strong id="confirmacaoData">
+            <strong
+              id="confirmacaoData"
+            >
               -
             </strong>
 
           </div>
 
 
-          <div class="comprovante-linha">
+          <div
+            class="comprovante-linha"
+          >
 
             <span>
               Horário
             </span>
 
-            <strong id="confirmacaoHorario">
+            <strong
+              id="confirmacaoHorario"
+            >
               -
             </strong>
 
           </div>
 
 
-          <div class="comprovante-linha">
+          <div
+            class="comprovante-linha"
+          >
 
             <span>
               Código
             </span>
 
-            <strong id="confirmacaoId">
+            <strong
+              id="confirmacaoId"
+            >
               -
             </strong>
 
@@ -1106,8 +1951,10 @@
 
 
         <p class="mensagem-final">
-          Guarde essas informações para consultar
-          seu horário.
+
+          Guarde o código do seu agendamento
+          para consultar seu horário.
+
         </p>
 
 
@@ -1135,23 +1982,17 @@
 
   <script>
 
-    /*
-     * ========================================================
-     * CONFIGURAÇÃO
-     * ========================================================
-     *
-     * Coloque aqui a URL /exec do seu Google Apps Script.
-     */
+    /* ========================================================
+       CONFIGURAÇÃO DA API
+    ======================================================== */
 
     const API_URL =
       "https://script.google.com/macros/s/AKfycbxO0p0Uke80_Wo8v7OX97mDK33YaFrqoSdLBBMKnNgvIWGexdebzb8AXJl_TbnAkC8/exec";
 
 
-    /*
-     * ========================================================
-     * ESTADO
-     * ========================================================
-     */
+    /* ========================================================
+       ESTADO
+    ======================================================== */
 
     const estado = {
 
@@ -1159,165 +2000,87 @@
 
       profissionais: [],
 
-      servico: null,
+      servicoSelecionado: null,
 
-      profissional: "",
+      profissionalSelecionado: "",
 
-      data: "",
+      dataSelecionada: "",
 
-      horario: null
+      horarioSelecionado: null,
 
-    };
-
-
-    /*
-     * ========================================================
-     * ELEMENTOS
-     * ========================================================
-     */
-
-    const $ = function(id) {
-
-      return document.getElementById(id);
+      enviando: false
 
     };
 
 
-    /*
-     * ========================================================
-     * API JSONP
-     * ========================================================
-     */
+    /* ========================================================
+       ELEMENTOS
+    ======================================================== */
 
-    function chamarAPI(params) {
-
-      return new Promise(
-        function(resolve, reject) {
-
-          const callbackName =
-            "apiCallback_" +
-            Date.now() +
-            "_" +
-            Math.floor(
-              Math.random() * 100000
-            );
-
-
-          const script =
-            document.createElement(
-              "script"
-            );
-
-
-          const query =
-            new URLSearchParams(
-              params
-            );
-
-
-          query.set(
-            "callback",
-            callbackName
-          );
-
-
-          query.set(
-            "_",
-            Date.now()
-          );
-
-
-          const timeout =
-            setTimeout(
-              function() {
-
-                limpar();
-
-                reject(
-                  new Error(
-                    "Tempo limite de conexão."
-                  )
-                );
-
-              },
-              20000
-            );
-
-
-          function limpar() {
-
-            clearTimeout(
-              timeout
-            );
-
-            delete window[
-              callbackName
-            ];
-
-            if (
-              script.parentNode
-            ) {
-
-              script.parentNode.removeChild(
-                script
-              );
-
-            }
-
-          }
-
-
-          window[
-            callbackName
-          ] =
-            function(resposta) {
-
-              limpar();
-
-              resolve(
-                resposta
-              );
-
-            };
-
-
-          script.onerror =
-            function() {
-
-              limpar();
-
-              reject(
-                new Error(
-                  "Não foi possível conectar ao sistema."
-                )
-              );
-
-            };
-
-
-          script.src =
-            API_URL +
-            "?" +
-            query.toString();
-
-
-          document
-            .head
-            .appendChild(
-              script
-            );
-
-        }
+    const servicosCards =
+      document.getElementById(
+        "servicosCards"
       );
 
-    }
+    const profissional =
+      document.getElementById(
+        "profissional"
+      );
+
+    const dataInput =
+      document.getElementById(
+        "data"
+      );
+
+    const listaHorarios =
+      document.getElementById(
+        "listaHorarios"
+      );
+
+    const textoSelecao =
+      document.getElementById(
+        "textoSelecao"
+      );
+
+    const btnContinuar =
+      document.getElementById(
+        "btnContinuar"
+      );
+
+    const btnVoltar =
+      document.getElementById(
+        "btnVoltar"
+      );
+
+    const btnConfirmar =
+      document.getElementById(
+        "btnConfirmar"
+      );
+
+    const btnNovoAgendamento =
+      document.getElementById(
+        "btnNovoAgendamento"
+      );
+
+    const cliente =
+      document.getElementById(
+        "cliente"
+      );
+
+    const telefone =
+      document.getElementById(
+        "telefone"
+      );
+
+    const erroFormulario =
+      document.getElementById(
+        "erroFormulario"
+      );
 
 
-    /*
-     * ========================================================
-     * INICIALIZAÇÃO
-     * ========================================================
-     */
+    /* ========================================================
+       INICIALIZAÇÃO
+    ======================================================== */
 
     document.addEventListener(
       "DOMContentLoaded",
@@ -1331,292 +2094,442 @@
 
       configurarEventos();
 
-      await Promise.all([
-        carregarServicos(),
-        carregarProfissionais()
-      ]);
+      try {
+
+        await Promise.all([
+          carregarServicos(),
+          carregarProfissionais()
+        ]);
+
+      }
+      catch (erro) {
+
+        console.error(
+          erro
+        );
+
+        mostrarGlobal(
+          "Não foi possível conectar ao sistema.",
+          "erro"
+        );
+
+      }
 
     }
 
 
-    /*
-     * ========================================================
-     * DATA MÍNIMA
-     * ========================================================
-     */
+    /* ========================================================
+       DATA MÍNIMA
+    ======================================================== */
 
     function configurarDataMinima() {
 
       const hoje =
         new Date();
 
-
       const ano =
         hoje.getFullYear();
-
 
       const mes =
         String(
           hoje.getMonth() + 1
         ).padStart(2, "0");
 
-
       const dia =
         String(
           hoje.getDate()
         ).padStart(2, "0");
 
-
-      $("data").min =
-        ano +
-        "-" +
-        mes +
-        "-" +
-        dia;
+      dataInput.min =
+        `${ano}-${mes}-${dia}`;
 
     }
 
 
-    /*
-     * ========================================================
-     * EVENTOS
-     * ========================================================
-     */
+    /* ========================================================
+       EVENTOS
+    ======================================================== */
 
     function configurarEventos() {
 
-      $("profissional")
-        .addEventListener(
-          "change",
-          function() {
+      profissional.addEventListener(
+        "change",
+        function() {
 
-            estado.profissional =
-              this.value;
+          estado.profissionalSelecionado =
+            profissional.value;
 
-            estado.horario =
-              null;
+          estado.horarioSelecionado =
+            null;
 
-            carregarHorarios();
+          atualizarBotaoContinuar();
 
-          }
-        );
+          carregarHorarios();
 
-
-      $("data")
-        .addEventListener(
-          "change",
-          function() {
-
-            estado.data =
-              this.value;
-
-            estado.horario =
-              null;
-
-            carregarHorarios();
-
-          }
-        );
+        }
+      );
 
 
-      $("btnContinuar")
-        .addEventListener(
-          "click",
-          irParaConfirmacao
-        );
+      dataInput.addEventListener(
+        "change",
+        function() {
+
+          estado.dataSelecionada =
+            dataInput.value;
+
+          estado.horarioSelecionado =
+            null;
+
+          atualizarBotaoContinuar();
+
+          carregarHorarios();
+
+        }
+      );
 
 
-      $("btnVoltar")
-        .addEventListener(
-          "click",
-          function() {
-
-            mostrarEtapa(1);
-
-          }
-        );
+      btnContinuar.addEventListener(
+        "click",
+        irParaEtapa2
+      );
 
 
-      $("btnConfirmar")
-        .addEventListener(
-          "click",
-          confirmarAgendamento
-        );
+      btnVoltar.addEventListener(
+        "click",
+        voltarEtapa1
+      );
 
 
-      $("btnNovoAgendamento")
-        .addEventListener(
-          "click",
-          novoAgendamento
-        );
+      btnConfirmar.addEventListener(
+        "click",
+        confirmarAgendamento
+      );
 
 
-      $("telefone")
-        .addEventListener(
-          "input",
-          formatarTelefone
-        );
+      btnNovoAgendamento.addEventListener(
+        "click",
+        novoAgendamento
+      );
+
+
+      telefone.addEventListener(
+        "input",
+        formatarTelefone
+      );
 
     }
 
 
-    /*
-     * ========================================================
-     * SERVIÇOS
-     * ========================================================
-     */
+    /* ========================================================
+       FETCH GET
+    ======================================================== */
 
-    async function carregarServicos() {
+    async function apiGet(
+      params
+    ) {
+
+      const query =
+        new URLSearchParams(
+          params
+        ).toString();
+
+      const url =
+        API_URL +
+        "?" +
+        query;
+
+
+      const resposta =
+        await fetch(
+          url,
+          {
+            method: "GET",
+            redirect: "follow"
+          }
+        );
+
+
+      if (!resposta.ok) {
+
+        throw new Error(
+          "HTTP " +
+          resposta.status
+        );
+
+      }
+
+
+      const texto =
+        await resposta.text();
+
+
+      let dados;
 
       try {
 
-        const resposta =
-          await chamarAPI({
-
-            api: "servicos"
-
-          });
-
-
-        if (
-          !resposta ||
-          !resposta.sucesso
-        ) {
-
-          throw new Error(
-            resposta &&
-            resposta.mensagem
-              ? resposta.mensagem
-              : "Não foi possível carregar os serviços."
+        dados =
+          JSON.parse(
+            texto
           );
-
-        }
-
-
-        estado.servicos =
-          resposta.servicos ||
-          [];
-
-
-        renderizarServicos();
-
 
       }
       catch (erro) {
 
-        $("servicosCards")
-          .innerHTML =
+        console.error(
+          "Resposta da API:",
+          texto
+        );
 
-          '<div class="mensagem-horarios">' +
-          escapeHtml(
-            erro.message
-          ) +
-          "</div>";
+        throw new Error(
+          "A API retornou uma resposta inválida."
+        );
 
       }
+
+
+      if (
+        dados &&
+        dados.sucesso === false
+      ) {
+
+        throw new Error(
+          dados.mensagem ||
+          "Erro na API."
+        );
+
+      }
+
+
+      return dados;
 
     }
 
 
+    /* ========================================================
+       FETCH POST
+    ======================================================== */
+
+    async function apiPost(
+      dados
+    ) {
+
+      /*
+       * Não usamos Content-Type: application/json
+       * para evitar preflight desnecessário.
+       */
+
+      const resposta =
+        await fetch(
+          API_URL,
+          {
+            method: "POST",
+
+            body:
+              JSON.stringify(
+                dados
+              ),
+
+            redirect:
+              "follow"
+          }
+        );
+
+
+      if (!resposta.ok) {
+
+        throw new Error(
+          "HTTP " +
+          resposta.status
+        );
+
+      }
+
+
+      const texto =
+        await resposta.text();
+
+
+      let resultado;
+
+      try {
+
+        resultado =
+          JSON.parse(
+            texto
+          );
+
+      }
+      catch (erro) {
+
+        console.error(
+          "Resposta POST:",
+          texto
+        );
+
+        throw new Error(
+          "Resposta inválida do servidor."
+        );
+
+      }
+
+
+      return resultado;
+
+    }
+
+
+    /* ========================================================
+       CARREGAR SERVIÇOS
+    ======================================================== */
+
+    async function carregarServicos() {
+
+      servicosCards.innerHTML = `
+
+        <div class="loading">
+
+          <span class="spinner"></span>
+
+          Carregando serviços...
+
+        </div>
+
+      `;
+
+
+      const dados =
+        await apiGet({
+          action:
+            "servicos"
+        });
+
+
+      estado.servicos =
+        Array.isArray(
+          dados.servicos
+        )
+          ? dados.servicos
+          : [];
+
+
+      renderizarServicos();
+
+    }
+
+
+    /* ========================================================
+       RENDERIZAR SERVIÇOS
+    ======================================================== */
+
     function renderizarServicos() {
 
-      const container =
-        $("servicosCards");
+      servicosCards.innerHTML =
+        "";
 
 
       if (
         !estado.servicos.length
       ) {
 
-        container.innerHTML =
-          '<div class="mensagem-horarios">' +
-          "Nenhum serviço disponível." +
-          "</div>";
+        servicosCards.innerHTML = `
+
+          <div class="loading">
+
+            Nenhum serviço disponível.
+
+          </div>
+
+        `;
 
         return;
 
       }
 
 
-      container.innerHTML =
-        estado.servicos
-          .map(
-            function(servico, index) {
+      estado.servicos.forEach(
+        function(servico) {
 
-              return (
+          const card =
+            document.createElement(
+              "div"
+            );
 
-                '<div ' +
-                  'class="servico-card" ' +
-                  'data-index="' +
-                  index +
-                  '">' +
 
-                  '<div class="check">✓</div>' +
+          card.className =
+            "servico-card";
 
-                  '<div class="servico-nome">' +
-                    escapeHtml(
-                      servico.nome
-                    ) +
-                  "</div>" +
 
-                  '<div class="servico-duracao">' +
-                    escapeHtml(
-                      String(
-                        servico.duracao
-                      )
-                    ) +
-                    " min" +
-                  "</div>" +
+          card.dataset.nome =
+            servico.nome;
 
-                  '<div class="servico-preco">' +
-                    formatarMoeda(
-                      servico.preco
-                    ) +
-                  "</div>" +
 
-                "</div>"
+          const preco =
+            formatarMoeda(
+              servico.preco
+            );
 
+
+          const duracao =
+            Number(
+              servico.duracao || 0
+            );
+
+
+          card.innerHTML = `
+
+            <div class="servico-nome">
+              ${escapeHTML(servico.nome)}
+            </div>
+
+            <div class="servico-detalhes">
+
+              <span>
+                ${duracao} min
+              </span>
+
+            </div>
+
+            <div class="servico-preco">
+              ${preco}
+            </div>
+
+          `;
+
+
+          card.addEventListener(
+            "click",
+            function() {
+
+              selecionarServico(
+                servico
               );
 
             }
-          )
-          .join("");
+          );
 
 
-      container
-        .querySelectorAll(
-          ".servico-card"
-        )
-        .forEach(
-          function(card) {
+          servicosCards.appendChild(
+            card
+          );
 
-            card.addEventListener(
-              "click",
-              function() {
-
-                selecionarServico(
-                  Number(
-                    this.dataset.index
-                  )
-                );
-
-              }
-            );
-
-          }
-        );
+        }
+      );
 
     }
 
 
-    function selecionarServico(index) {
+    /* ========================================================
+       SELECIONAR SERVIÇO
+    ======================================================== */
 
-      estado.servico =
-        estado.servicos[index] ||
-        null;
+    function selecionarServico(
+      servico
+    ) {
 
+      estado.servicoSelecionado =
+        servico;
 
-      estado.horario =
+      estado.horarioSelecionado =
         null;
 
 
@@ -1625,32 +2538,22 @@
           ".servico-card"
         )
         .forEach(
-          function(card, i) {
+          function(card) {
 
             card.classList.toggle(
               "selecionado",
-              i === index
+              card.dataset.nome ===
+                servico.nome
             );
 
           }
         );
 
 
-      if (
-        estado.servico
-      ) {
-
-        $("servicoInfo").textContent =
-          estado.servico.duracao +
-          " minutos de duração";
-
-      }
-      else {
-
-        $("servicoInfo").textContent =
-          "";
-
-      }
+      document.getElementById(
+        "servicoInfo"
+      ).textContent =
+        `${servico.duracao} minutos • ${formatarMoeda(servico.preco)}`;
 
 
       atualizarBotaoContinuar();
@@ -1660,108 +2563,91 @@
     }
 
 
-    /*
-     * ========================================================
-     * PROFISSIONAIS
-     * ========================================================
-     */
+    /* ========================================================
+       CARREGAR PROFISSIONAIS
+    ======================================================== */
 
     async function carregarProfissionais() {
 
-      try {
+      profissional.innerHTML = `
 
-        const resposta =
-          await chamarAPI({
+        <option value="">
+          Carregando profissionais...
+        </option>
 
-            api:
-              "profissionais"
-
-          });
+      `;
 
 
-        if (
-          !resposta ||
-          !resposta.sucesso
-        ) {
+      const dados =
+        await apiGet({
+          action:
+            "profissionais"
+        });
 
-          throw new Error(
-            resposta &&
-            resposta.mensagem
-              ? resposta.mensagem
-              : "Não foi possível carregar os profissionais."
+
+      estado.profissionais =
+        Array.isArray(
+          dados.profissionais
+        )
+          ? dados.profissionais
+          : [];
+
+
+      profissional.innerHTML = `
+
+        <option value="">
+          Selecione o profissional
+        </option>
+
+      `;
+
+
+      estado.profissionais.forEach(
+        function(item) {
+
+          const option =
+            document.createElement(
+              "option"
+            );
+
+          option.value =
+            item.nome;
+
+          option.textContent =
+            item.nome;
+
+          profissional.appendChild(
+            option
           );
 
         }
+      );
 
 
-        estado.profissionais =
-          resposta.profissionais ||
-          [];
+      if (
+        !estado.profissionais.length
+      ) {
 
+        profissional.innerHTML = `
 
-        const select =
-          $("profissional");
+          <option value="">
+            Nenhum profissional disponível
+          </option>
 
-
-        select.innerHTML =
-          '<option value="">' +
-          "Selecione o profissional" +
-          "</option>";
-
-
-        estado.profissionais
-          .forEach(
-            function(profissional) {
-
-              const option =
-                document.createElement(
-                  "option"
-                );
-
-
-              option.value =
-                profissional.nome;
-
-
-              option.textContent =
-                profissional.nome;
-
-
-              select.appendChild(
-                option
-              );
-
-            }
-          );
-
-      }
-      catch (erro) {
-
-        $("profissional").innerHTML =
-          '<option value="">' +
-          escapeHtml(
-            erro.message
-          ) +
-          "</option>";
+        `;
 
       }
 
     }
 
 
-    /*
-     * ========================================================
-     * HORÁRIOS
-     * ========================================================
-     */
+    /* ========================================================
+       CARREGAR HORÁRIOS
+    ======================================================== */
 
     async function carregarHorarios() {
 
-      const lista =
-        $("listaHorarios");
-
-
-      estado.horario =
+      estado.horarioSelecionado =
         null;
 
 
@@ -1769,17 +2655,23 @@
 
 
       if (
-        !estado.servico ||
-        !estado.profissional ||
-        !estado.data
+        !estado.servicoSelecionado ||
+        !estado.profissionalSelecionado ||
+        !dataInput.value
       ) {
 
-        lista.innerHTML =
-          '<div class="mensagem-horarios">' +
-          "Selecione o serviço, profissional e data." +
-          "</div>";
+        listaHorarios.innerHTML = `
 
-        $("textoSelecao").textContent =
+          <div class="mensagem-horarios">
+
+            Selecione o serviço,
+            profissional e data.
+
+          </div>
+
+        `;
+
+        textoSelecao.textContent =
           "Selecione um horário";
 
         return;
@@ -1787,156 +2679,179 @@
       }
 
 
-      lista.innerHTML =
-        '<div class="mensagem-horarios">' +
-        '<span class="spinner"></span>' +
-        "Carregando horários..." +
-        "</div>";
+      listaHorarios.innerHTML = `
+
+        <div class="mensagem-horarios">
+
+          <span
+            class="spinner"
+            style="display:inline-block;margin:0 7px 0 0"
+          ></span>
+
+          Carregando horários...
+
+        </div>
+
+      `;
 
 
       try {
 
-        const resposta =
-          await chamarAPI({
+        const dados =
+          await apiGet({
 
-            api:
+            action:
               "horarios",
 
             servico:
-              estado.servico.nome,
+              estado.servicoSelecionado.nome,
 
             profissional:
-              estado.profissional,
+              estado.profissionalSelecionado,
 
             data:
-              estado.data
+              dataInput.value
 
           });
 
 
-        if (
-          !resposta ||
-          !resposta.sucesso
-        ) {
-
-          throw new Error(
-            resposta &&
-            resposta.mensagem
-              ? resposta.mensagem
-              : "Não foi possível carregar os horários."
-          );
-
-        }
-
-
-        const horarios =
-          resposta.horarios ||
-          [];
-
-
-        if (
-          !horarios.length
-        ) {
-
-          lista.innerHTML =
-            '<div class="mensagem-horarios">' +
-            "Nenhum horário disponível para esta data." +
-            "</div>";
-
-          return;
-
-        }
-
-
-        lista.innerHTML =
-          horarios
-            .map(
-              function(horario, index) {
-
-                return (
-
-                  '<button ' +
-                    'type="button" ' +
-                    'class="horario" ' +
-                    'data-index="' +
-                    index +
-                  '">' +
-
-                    escapeHtml(
-                      horario.inicio
-                    ) +
-
-                  "</button>"
-
-                );
-
-              }
-            )
-            .join("");
-
-
-        lista
-          .querySelectorAll(
-            ".horario"
-          )
-          .forEach(
-            function(botao) {
-
-              botao.addEventListener(
-                "click",
-                function() {
-
-                  const horario =
-                    horarios[
-                      Number(
-                        this.dataset.index
-                      )
-                    ];
-
-
-                  selecionarHorario(
-                    horario,
-                    this
-                  );
-
-                }
-              );
-
-            }
-          );
+        renderizarHorarios(
+          dados.horarios || []
+        );
 
       }
       catch (erro) {
 
-        lista.innerHTML =
-          '<div class="mensagem-horarios">' +
-          escapeHtml(
-            erro.message
-          ) +
-          "</div>";
+        console.error(
+          erro
+        );
+
+        listaHorarios.innerHTML = `
+
+          <div class="mensagem-horarios">
+
+            Não foi possível carregar
+            os horários.
+
+          </div>
+
+        `;
 
       }
 
     }
 
 
-    function selecionarHorario(
-      horario,
-      elemento
+    /* ========================================================
+       RENDERIZAR HORÁRIOS
+    ======================================================== */
+
+    function renderizarHorarios(
+      horarios
     ) {
 
-      estado.horario =
-        horario;
+      listaHorarios.innerHTML =
+        "";
 
+
+      if (
+        !horarios.length
+      ) {
+
+        listaHorarios.innerHTML = `
+
+          <div class="mensagem-horarios">
+
+            Não há horários disponíveis
+            para esta data.
+
+          </div>
+
+        `;
+
+        textoSelecao.textContent =
+          "Nenhum horário disponível";
+
+        atualizarBotaoContinuar();
+
+        return;
+
+      }
+
+
+      textoSelecao.textContent =
+        "Escolha um horário";
+
+
+      horarios.forEach(
+        function(horario) {
+
+          const botao =
+            document.createElement(
+              "button"
+            );
+
+
+          botao.type =
+            "button";
+
+
+          botao.className =
+            "horario";
+
+
+          botao.textContent =
+            horario.inicio;
+
+
+          botao.dataset.inicio =
+            horario.inicio;
+
+
+          botao.dataset.fim =
+            horario.fim;
+
+
+          botao.addEventListener(
+            "click",
+            function() {
+
+              selecionarHorario(
+                horario,
+                botao
+              );
+
+            }
+          );
+
+
+          listaHorarios.appendChild(
+            botao
+          );
+
+        }
+      );
+
+    }
+
+
+    /* ========================================================
+       SELECIONAR HORÁRIO
+    ======================================================== */
+
+    function selecionarHorario(
+      horario,
+      botao
+    ) {
 
       document
         .querySelectorAll(
           ".horario"
         )
         .forEach(
-          function(botao) {
+          function(item) {
 
-            botao.classList.remove(
+            item.classList.remove(
               "selecionado"
             );
 
@@ -1944,13 +2859,17 @@
         );
 
 
-      elemento.classList.add(
+      botao.classList.add(
         "selecionado"
       );
 
 
-      $("textoSelecao").textContent =
-        "Selecionado: " +
+      estado.horarioSelecionado =
+        horario;
+
+
+      textoSelecao.textContent =
+        "Horário: " +
         horario.inicio;
 
 
@@ -1959,100 +2878,133 @@
     }
 
 
-    /*
-     * ========================================================
-     * BOTÃO CONTINUAR
-     * ========================================================
-     */
+    /* ========================================================
+       ATUALIZAR BOTÃO
+    ======================================================== */
 
     function atualizarBotaoContinuar() {
 
-      $("btnContinuar").disabled =
-        !(
-          estado.servico &&
-          estado.profissional &&
-          estado.data &&
-          estado.horario
-        );
+      btnContinuar.disabled = !(
+        estado.servicoSelecionado &&
+        estado.profissionalSelecionado &&
+        dataInput.value &&
+        estado.horarioSelecionado
+      );
 
     }
 
 
-    function irParaConfirmacao() {
+    /* ========================================================
+       ETAPA 2
+    ======================================================== */
+
+    function irParaEtapa2() {
 
       if (
-        $("btnContinuar").disabled
+        btnContinuar.disabled
       ) {
-
         return;
-
       }
 
 
-      $("resumoServico").textContent =
-        estado.servico.nome;
+      limparErro();
 
 
-      $("resumoProfissional").textContent =
-        estado.profissional;
+      const servico =
+        estado.servicoSelecionado;
 
 
-      $("resumoData").textContent =
+      document.getElementById(
+        "resumoServico"
+      ).textContent =
+        servico.nome;
+
+
+      document.getElementById(
+        "resumoProfissional"
+      ).textContent =
+        estado.profissionalSelecionado;
+
+
+      document.getElementById(
+        "resumoData"
+      ).textContent =
         formatarDataBR(
-          estado.data
+          dataInput.value
         );
 
 
-      $("resumoHorario").textContent =
-        estado.horario.inicio +
+      document.getElementById(
+        "resumoHorario"
+      ).textContent =
+        estado.horarioSelecionado.inicio +
         " às " +
-        estado.horario.fim;
+        estado.horarioSelecionado.fim;
 
 
-      $("resumoPreco").textContent =
+      document.getElementById(
+        "resumoPreco"
+      ).textContent =
         formatarMoeda(
-          estado.servico.preco
+          servico.preco
         );
 
 
-      $("erroFormulario").style.display =
-        "none";
-
-
-      mostrarEtapa(2);
+      mostrarEtapa(
+        2
+      );
 
     }
 
 
-    /*
-     * ========================================================
-     * CONFIRMAR
-     * ========================================================
-     */
+    /* ========================================================
+       VOLTAR
+    ======================================================== */
+
+    function voltarEtapa1() {
+
+      limparErro();
+
+      mostrarEtapa(
+        1
+      );
+
+    }
+
+
+    /* ========================================================
+       CONFIRMAR
+    ======================================================== */
 
     async function confirmarAgendamento() {
 
-      const cliente =
-        $("cliente")
-          .value
-          .trim();
+      if (
+        estado.enviando
+      ) {
+        return;
+      }
 
 
-      const telefone =
-        $("telefone")
-          .value
-          .trim();
+      limparErro();
+
+
+      const nome =
+        cliente.value.trim();
+
+
+      const whatsapp =
+        telefone.value.trim();
 
 
       if (
-        cliente.length < 2
+        nome.length < 2
       ) {
 
         mostrarErro(
           "Digite seu nome."
         );
 
-        $("cliente").focus();
+        cliente.focus();
 
         return;
 
@@ -2060,9 +3012,8 @@
 
 
       if (
-        telefone.replace(
-          /\D/g,
-          ""
+        somenteNumeros(
+          whatsapp
         ).length < 8
       ) {
 
@@ -2070,7 +3021,7 @@
           "Digite um WhatsApp válido."
         );
 
-        $("telefone").focus();
+        telefone.focus();
 
         return;
 
@@ -2078,14 +3029,14 @@
 
 
       if (
-        !estado.servico ||
-        !estado.profissional ||
-        !estado.data ||
-        !estado.horario
+        !estado.servicoSelecionado ||
+        !estado.profissionalSelecionado ||
+        !dataInput.value ||
+        !estado.horarioSelecionado
       ) {
 
         mostrarErro(
-          "Complete os dados do agendamento."
+          "Revise os dados do agendamento."
         );
 
         return;
@@ -2093,183 +3044,203 @@
       }
 
 
-      const botao =
-        $("btnConfirmar");
-
-
-      botao.disabled =
+      estado.enviando =
         true;
 
 
-      botao.textContent =
+      const textoOriginal =
+        btnConfirmar.textContent;
+
+
+      btnConfirmar.disabled =
+        true;
+
+
+      btnConfirmar.textContent =
         "Confirmando...";
-
-
-      $("erroFormulario").style.display =
-        "none";
 
 
       try {
 
-        const resposta =
-          await chamarAPI({
+        const resultado =
+          await apiPost({
 
-            api:
-              "criar",
+            action:
+              "criarAgendamento",
 
             data:
-              estado.data,
+              dataInput.value,
 
             horaInicio:
-              estado.horario.inicio,
+              estado.horarioSelecionado.inicio,
 
-            profissional:
-              estado.profissional,
+            horaFim:
+              estado.horarioSelecionado.fim,
 
             servico:
-              estado.servico.nome,
+              estado.servicoSelecionado.nome,
+
+            profissional:
+              estado.profissionalSelecionado,
 
             cliente:
-              cliente,
+              nome,
 
             telefone:
-              telefone
+              whatsapp
 
           });
 
 
         if (
-          !resposta ||
-          !resposta.sucesso
+          !resultado ||
+          resultado.sucesso !== true
         ) {
 
           throw new Error(
-            resposta &&
-            resposta.mensagem
-              ? resposta.mensagem
+            resultado &&
+            resultado.mensagem
+              ? resultado.mensagem
               : "Não foi possível realizar o agendamento."
           );
 
         }
 
 
-        mostrarConfirmacao(
-          resposta
+        preencherConfirmacao(
+          resultado
         );
 
+
+        mostrarEtapa(
+          3
+        );
+
+
+        mostrarGlobal(
+          "Agendamento confirmado!",
+          "sucesso"
+        );
 
       }
       catch (erro) {
 
-        mostrarErro(
-          erro.message
+        console.error(
+          erro
         );
 
-        botao.disabled =
+        mostrarErro(
+          erro.message ||
+          "Não foi possível realizar o agendamento."
+        );
+
+      }
+      finally {
+
+        estado.enviando =
           false;
 
-        botao.textContent =
-          "Confirmar agendamento";
+        btnConfirmar.disabled =
+          false;
+
+        btnConfirmar.textContent =
+          textoOriginal;
 
       }
 
     }
 
 
-    /*
-     * ========================================================
-     * CONFIRMAÇÃO
-     * ========================================================
-     */
+    /* ========================================================
+       CONFIRMAÇÃO
+    ======================================================== */
 
-    function mostrarConfirmacao(
+    function preencherConfirmacao(
       resultado
     ) {
 
-      $("confirmacaoCliente").textContent =
-        resultado.cliente ||
-        $("cliente").value;
+      document.getElementById(
+        "confirmacaoCliente"
+      ).textContent =
+        resultado.cliente || "-";
 
 
-      $("confirmacaoServico").textContent =
-        resultado.servico ||
-        estado.servico.nome;
+      document.getElementById(
+        "confirmacaoServico"
+      ).textContent =
+        resultado.servico || "-";
 
 
-      $("confirmacaoProfissional").textContent =
-        resultado.profissional ||
-        estado.profissional;
+      document.getElementById(
+        "confirmacaoProfissional"
+      ).textContent =
+        resultado.profissional || "-";
 
 
-      $("confirmacaoData").textContent =
+      document.getElementById(
+        "confirmacaoData"
+      ).textContent =
         resultado.dataBR ||
         formatarDataBR(
-          estado.data
-        );
-
-
-      $("confirmacaoHorario").textContent =
-        (
-          resultado.horaInicio ||
-          estado.horario.inicio
-        ) +
-        " às " +
-        (
-          resultado.horaFim ||
-          estado.horario.fim
-        );
-
-
-      $("confirmacaoId").textContent =
-        resultado.id ||
+          resultado.data
+        ) ||
         "-";
 
 
-      mostrarEtapa(3);
+      document.getElementById(
+        "confirmacaoHorario"
+      ).textContent =
+        (
+          resultado.horaInicio ||
+          "-"
+        ) +
+        (
+          resultado.horaFim
+            ? " às " +
+              resultado.horaFim
+            : ""
+        );
 
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+      document.getElementById(
+        "confirmacaoId"
+      ).textContent =
+        resultado.id || "-";
 
     }
 
 
-    /*
-     * ========================================================
-     * NOVO AGENDAMENTO
-     * ========================================================
-     */
+    /* ========================================================
+       NOVO AGENDAMENTO
+    ======================================================== */
 
     function novoAgendamento() {
 
-      estado.servico =
+      estado.servicoSelecionado =
         null;
 
-      estado.profissional =
+      estado.profissionalSelecionado =
         "";
 
-      estado.data =
+      estado.dataSelecionada =
         "";
 
-      estado.horario =
+      estado.horarioSelecionado =
         null;
 
 
-      $("profissional").value =
+      cliente.value =
+        "";
+
+      telefone.value =
         "";
 
 
-      $("data").value =
+      profissional.value =
         "";
 
 
-      $("cliente").value =
-        "";
-
-
-      $("telefone").value =
+      dataInput.value =
         "";
 
 
@@ -2288,43 +3259,46 @@
         );
 
 
-      $("servicoInfo").textContent =
+      document.getElementById(
+        "servicoInfo"
+      ).textContent =
         "";
 
 
-      $("listaHorarios").innerHTML =
-        '<div class="mensagem-horarios">' +
-        "Selecione o serviço, profissional e data." +
-        "</div>";
+      listaHorarios.innerHTML = `
+
+        <div class="mensagem-horarios">
+
+          Selecione o serviço,
+          profissional e data.
+
+        </div>
+
+      `;
 
 
-      $("textoSelecao").textContent =
+      textoSelecao.textContent =
         "Selecione um horário";
 
 
       atualizarBotaoContinuar();
 
+      limparErro();
 
-      $("btnConfirmar").disabled =
-        false;
-
-
-      $("btnConfirmar").textContent =
-        "Confirmar agendamento";
-
-
-      mostrarEtapa(1);
+      mostrarEtapa(
+        1
+      );
 
     }
 
 
-    /*
-     * ========================================================
-     * ETAPAS
-     * ========================================================
-     */
+    /* ========================================================
+       MOSTRAR ETAPA
+    ======================================================== */
 
-    function mostrarEtapa(numero) {
+    function mostrarEtapa(
+      numero
+    ) {
 
       document
         .querySelectorAll(
@@ -2341,10 +3315,11 @@
         );
 
 
-      $("etapa" + numero)
-        .classList.add(
-          "ativa"
-        );
+      document.getElementById(
+        "etapa" + numero
+      ).classList.add(
+        "ativa"
+      );
 
 
       window.scrollTo({
@@ -2355,35 +3330,74 @@
     }
 
 
-    /*
-     * ========================================================
-     * ERROS
-     * ========================================================
-     */
+    /* ========================================================
+       FORMATAR MOEDA
+    ======================================================== */
 
-    function mostrarErro(mensagem) {
+    function formatarMoeda(
+      valor
+    ) {
 
-      const erro =
-        $("erroFormulario");
+      return Number(
+        valor || 0
+      ).toLocaleString(
+        "pt-BR",
+        {
+          style:
+            "currency",
 
-
-      erro.textContent =
-        mensagem;
-
-
-      erro.style.display =
-        "block";
+          currency:
+            "BRL"
+        }
+      );
 
     }
 
 
-    /*
-     * ========================================================
-     * TELEFONE
-     * ========================================================
-     */
+    /* ========================================================
+       FORMATAR DATA
+    ======================================================== */
 
-    function formatarTelefone(evento) {
+    function formatarDataBR(
+      data
+    ) {
+
+      if (!data) {
+        return "-";
+      }
+
+
+      const partes =
+        data.split("-");
+
+
+      if (
+        partes.length !== 3
+      ) {
+
+        return data;
+
+      }
+
+
+      return (
+        partes[2] +
+        "/" +
+        partes[1] +
+        "/" +
+        partes[0]
+      );
+
+    }
+
+
+    /* ========================================================
+       FORMATAR TELEFONE
+    ======================================================== */
+
+    function formatarTelefone(
+      evento
+    ) {
 
       let valor =
         evento.target.value
@@ -2446,92 +3460,137 @@
     }
 
 
-    /*
-     * ========================================================
-     * FORMATAÇÕES
-     * ========================================================
-     */
+    /* ========================================================
+       SOMENTE NÚMEROS
+    ======================================================== */
 
-    function formatarMoeda(valor) {
-
-      return Number(
-        valor || 0
-      ).toLocaleString(
-        "pt-BR",
-        {
-          style: "currency",
-          currency: "BRL"
-        }
-      );
-
-    }
-
-
-    function formatarDataBR(data) {
-
-      if (!data) {
-        return "-";
-      }
-
-
-      const partes =
-        data.split("-");
-
-
-      if (
-        partes.length !== 3
-      ) {
-
-        return data;
-
-      }
-
-
-      return (
-        partes[2] +
-        "/" +
-        partes[1] +
-        "/" +
-        partes[0]
-      );
-
-    }
-
-
-    /*
-     * ========================================================
-     * SEGURANÇA
-     * ========================================================
-     */
-
-    function escapeHtml(valor) {
+    function somenteNumeros(
+      valor
+    ) {
 
       return String(
-        valor === null ||
-        valor === undefined
-          ? ""
-          : valor
-      )
-      .replace(
-        /&/g,
-        "&amp;"
-      )
-      .replace(
-        /</g,
-        "&lt;"
-      )
-      .replace(
-        />/g,
-        "&gt;"
-      )
-      .replace(
-        /"/g,
-        "&quot;"
-      )
-      .replace(
-        /'/g,
-        "&#039;"
+        valor || ""
+      ).replace(
+        /\D/g,
+        ""
       );
+
+    }
+
+
+    /* ========================================================
+       ESCAPAR HTML
+    ======================================================== */
+
+    function escapeHTML(
+      valor
+    ) {
+
+      return String(
+        valor || ""
+      )
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+
+    /* ========================================================
+       ERRO FORMULÁRIO
+    ======================================================== */
+
+    function mostrarErro(
+      mensagem
+    ) {
+
+      erroFormulario.textContent =
+        mensagem;
+
+      erroFormulario.classList.add(
+        "visivel"
+      );
+
+    }
+
+
+    function limparErro() {
+
+      erroFormulario.textContent =
+        "";
+
+      erroFormulario.classList.remove(
+        "visivel"
+      );
+
+    }
+
+
+    /* ========================================================
+       MENSAGEM GLOBAL
+    ======================================================== */
+
+    let timerMensagem;
+
+
+    function mostrarGlobal(
+      mensagem,
+      tipo
+    ) {
+
+      const elemento =
+        document.getElementById(
+          "mensagemGlobal"
+        );
+
+
+      elemento.textContent =
+        mensagem;
+
+
+      elemento.className =
+        "mensagem-global " +
+        (
+          tipo === "erro"
+            ? "erro"
+            : "sucesso"
+        ) +
+        " visivel";
+
+
+      clearTimeout(
+        timerMensagem
+      );
+
+
+      timerMensagem =
+        setTimeout(
+          function() {
+
+            elemento.classList.remove(
+              "visivel"
+            );
+
+          },
+          3500
+        );
 
     }
 
