@@ -1,113 +1,464 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<title>Barbearia</title>
-<style>
-  /* Se você tiver estilos CSS, cole aqui dentro para funcionarem na página */
-</style>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Agendamento online da barbearia"
+  >
+
+  <title>Agende seu horário</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 </head>
+
 <body>
 
-<div class="container">
-  <h1>Agendar Horário</h1>
-  <input id="cliente" placeholder="Nome">
-  <input id="telefone" placeholder="Telefone">
-  
-  <select id="barbeiro">
-    <option>João</option>
-    <option>Pedro</option>
-  </select>
-  
-  <select id="servico">
-    <option>Corte</option>
-    <option>Barba</option>
-    <option>Corte + Barba</option>
-  </select>
-  
-  <input id="data" type="date">
-  <select id="hora">
-    <option value="">Selecione uma data primeiro</option>
-  </select>
-  
-  <button onclick="agendar()">Agendar</button>
-</div>
+  <main class="container">
 
-<script>
-// Usando a tecnologia nativa do Google para salvar dados
-function agendar() {
-    const cliente = document.getElementById("cliente").value;
-    const telefone = document.getElementById("telefone").value;
-    const barbeiro = document.getElementById("barbeiro").value;
-    const servico = document.getElementById("servico").value;
-    const data = document.getElementById("data").value;
-    const hora = document.getElementById("hora").value;
+    <section class="cabecalho">
 
-    if (!cliente || !telefone || !barbeiro || !servico || !data || !hora) {
-        alert("Por favor, preencha todos os campos!");
-        return;
-    }
+      <div class="logo">
+        ✂
+      </div>
 
-    const dados = {
-        data: data,
-        hora: hora,
-        cliente: cliente,
-        telefone: telefone,
-        servico: servico,
-        barbeiro: barbeiro
-    };
+      <h1>
+        Agende seu horário
+      </h1>
 
-    // Desabilita o botão para evitar cliques duplos
-    document.querySelector("button").disabled = true;
+      <p class="subtitulo">
+        Escolha o serviço, profissional e horário
+      </p>
 
-    // Executa a função do arquivo .gs diretamente!
-    google.script.run
-        .withSuccessHandler(function(resposta) {
-            alert("Agendamento realizado com sucesso!");
-            // Limpa o formulário
-            document.getElementById("cliente").value = "";
-            document.getElementById("telefone").value = "";
-            document.getElementById("hora").innerHTML = '<option value="">Selecione uma data primeiro</option>';
-            document.querySelector("button").disabled = false;
-        })
-        .withFailureHandler(function(erro) {
-            alert("Erro ao salvar agendamento: " + erro);
-            document.querySelector("button").disabled = false;
-        })
-        .salvarAgendamento(dados); // Nome da função lá no seu Código.gs
-}
+    </section>
 
-// Carregar horários disponíveis dinamicamente
-document.getElementById("data").addEventListener("change", function(e) {
-    const dataSelecionada = e.target.value;
-    if (!dataSelecionada) return;
 
-    const selectHora = document.getElementById("hora");
-    selectHora.innerHTML = "<option>Carregando horários...</option>";
+    <!-- ==========================================
+         ETAPA 1
+    =========================================== -->
 
-    // Executa a função de listar os horários que está no seu Código.gs
-    google.script.run
-        .withSuccessHandler(function(respostaJson) {
-            // Como a função original retorna uma 'resposta()' em formato texto JSON, precisamos converter aqui
-            const horariosLivres = JSON.parse(respostaJson);
-            
-            selectHora.innerHTML = "";
-            
-            if(horariosLivres.length === 0) {
-                selectHora.innerHTML = "<option value=''>Nenhum horário disponível</option>";
-                return;
-            }
+    <section
+      class="etapa ativa"
+      id="etapa1"
+    >
 
-            horariosLivres.forEach(function(hora) {
-                const option = document.createElement("option");
-                option.value = hora;
-                option.textContent = hora;
-                selectHora.appendChild(option);
-            });
-        })
-        .listarHorarios(dataSelecionada);
-});
-</script>
+      <div class="progresso">
+        <span class="progresso-item ativo">1</span>
+        <span class="linha"></span>
+        <span class="progresso-item">2</span>
+        <span class="linha"></span>
+        <span class="progresso-item">3</span>
+      </div>
+
+
+      <div class="campo">
+
+        <label>
+          Serviço
+        </label>
+
+        <div class="servicos-wrapper">
+
+          <div
+            id="servicosCards"
+            class="servicos-cards"
+          >
+
+            <div class="loading">
+              <span class="spinner"></span>
+              Carregando serviços...
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="servicoInfo"
+        class="servico-info"
+      ></div>
+
+
+      <div class="campo">
+
+        <label for="profissional">
+          Profissional
+        </label>
+
+        <select id="profissional">
+
+          <option value="">
+            Carregando profissionais...
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="campo">
+
+        <label for="data">
+          Data
+        </label>
+
+        <input
+          type="date"
+          id="data"
+        >
+
+      </div>
+
+
+      <div class="horarios-box">
+
+        <div class="titulo-horarios">
+
+          <strong>
+            Horários disponíveis
+          </strong>
+
+          <span id="textoSelecao">
+            Selecione um horário
+          </span>
+
+        </div>
+
+
+        <div id="listaHorarios">
+
+          <div class="mensagem-horarios">
+            Selecione o serviço,
+            profissional e data.
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        id="btnContinuar"
+        class="btn principal"
+        disabled
+      >
+        Continuar
+      </button>
+
+    </section>
+
+
+    <!-- ==========================================
+         ETAPA 2
+    =========================================== -->
+
+    <section
+      class="etapa"
+      id="etapa2"
+    >
+
+      <div class="progresso">
+        <span class="progresso-item concluido">✓</span>
+        <span class="linha concluida"></span>
+        <span class="progresso-item ativo">2</span>
+        <span class="linha"></span>
+        <span class="progresso-item">3</span>
+      </div>
+
+
+      <div class="resumo">
+
+        <h2>
+          Confira seu agendamento
+        </h2>
+
+        <div class="resumo-item">
+
+          <span>
+            Serviço
+          </span>
+
+          <strong id="resumoServico">
+            -
+          </strong>
+
+        </div>
+
+
+        <div class="resumo-item">
+
+          <span>
+            Profissional
+          </span>
+
+          <strong id="resumoProfissional">
+            -
+          </strong>
+
+        </div>
+
+
+        <div class="resumo-item">
+
+          <span>
+            Data
+          </span>
+
+          <strong id="resumoData">
+            -
+          </strong>
+
+        </div>
+
+
+        <div class="resumo-item">
+
+          <span>
+            Horário
+          </span>
+
+          <strong id="resumoHorario">
+            -
+          </strong>
+
+        </div>
+
+
+        <div class="resumo-item preco">
+
+          <span>
+            Valor
+          </span>
+
+          <strong id="resumoPreco">
+            -
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="campo">
+
+        <label for="cliente">
+          Seu nome
+        </label>
+
+        <input
+          type="text"
+          id="cliente"
+          placeholder="Digite seu nome"
+          autocomplete="name"
+        >
+
+      </div>
+
+
+      <div class="campo">
+
+        <label for="telefone">
+          WhatsApp
+        </label>
+
+        <input
+          type="tel"
+          id="telefone"
+          placeholder="(31) 99999-9999"
+          autocomplete="tel"
+        >
+
+      </div>
+
+
+      <div
+        id="erroFormulario"
+        class="mensagem erro"
+      ></div>
+
+
+      <div class="botoes">
+
+        <button
+          type="button"
+          id="btnVoltar"
+          class="btn secundario"
+        >
+          Voltar
+        </button>
+
+
+        <button
+          type="button"
+          id="btnConfirmar"
+          class="btn principal"
+        >
+          Confirmar agendamento
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         ETAPA 3
+    =========================================== -->
+
+    <section
+      class="etapa"
+      id="etapa3"
+    >
+
+      <div class="confirmacao">
+
+        <div class="icone-sucesso">
+          ✓
+        </div>
+
+        <h2>
+          Agendamento confirmado!
+        </h2>
+
+        <p>
+          Seu horário foi reservado com sucesso.
+        </p>
+
+
+        <div class="comprovante">
+
+          <div class="comprovante-header">
+            <span>
+              ✂
+            </span>
+
+            <strong>
+              Comprovante do agendamento
+            </strong>
+          </div>
+
+
+          <div class="comprovante-linha">
+
+            <span>
+              Cliente
+            </span>
+
+            <strong id="confirmacaoCliente">
+              -
+            </strong>
+
+          </div>
+
+
+          <div class="comprovante-linha">
+
+            <span>
+              Serviço
+            </span>
+
+            <strong id="confirmacaoServico">
+              -
+            </strong>
+
+          </div>
+
+
+          <div class="comprovante-linha">
+
+            <span>
+              Profissional
+            </span>
+
+            <strong id="confirmacaoProfissional">
+              -
+            </strong>
+
+          </div>
+
+
+          <div class="comprovante-linha">
+
+            <span>
+              Data
+            </span>
+
+            <strong id="confirmacaoData">
+              -
+            </strong>
+
+          </div>
+
+
+          <div class="comprovante-linha">
+
+            <span>
+              Horário
+            </span>
+
+            <strong id="confirmacaoHorario">
+              -
+            </strong>
+
+          </div>
+
+
+          <div class="comprovante-linha">
+
+            <span>
+              Código
+            </span>
+
+            <strong id="confirmacaoId">
+              -
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <p class="mensagem-final">
+          Guarde essas informações para consultar
+          seu horário.
+        </p>
+
+
+        <button
+          type="button"
+          id="btnNovoAgendamento"
+          class="btn principal"
+        >
+          Fazer novo agendamento
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <div
+      id="mensagemGlobal"
+      class="mensagem-global"
+    ></div>
+
+  </main>
+
+
+  <script src="script.js"></script>
 
 </body>
 </html>
