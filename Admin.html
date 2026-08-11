@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Painel Administrativo</title>
+  <title>Painel Administrativo - Barbearia</title>
 
 
   <style>
@@ -24,16 +24,18 @@
 
       margin: 0;
 
-      padding: 20px;
+      padding: 0;
 
       font-family:
         Arial,
         Helvetica,
         sans-serif;
 
-      background: #f4f4f4;
+      background:
+        #f4f4f4;
 
-      color: #222;
+      color:
+        #222;
 
     }
 
@@ -46,92 +48,131 @@
 
       margin: 0 auto;
 
+      padding: 25px 18px 50px;
+
     }
 
 
     .topo {
 
-      background: #111;
+      background:
+        #111;
 
-      color: white;
+      color:
+        #fff;
 
-      padding: 22px;
+      border-radius:
+        14px;
 
-      border-radius: 14px;
+      padding:
+        22px;
 
-      margin-bottom: 20px;
+      margin-bottom:
+        20px;
+
+      box-shadow:
+        0 4px 15px rgba(0,0,0,0.10);
 
     }
 
 
     .topo h1 {
 
-      margin: 0 0 6px 0;
+      margin:
+        0 0 6px;
 
-      font-size: 26px;
+      font-size:
+        26px;
 
     }
 
 
     .topo p {
 
-      margin: 0;
+      margin:
+        0;
 
-      color: #ccc;
+      color:
+        #ccc;
 
-      font-size: 14px;
+      font-size:
+        14px;
 
     }
 
 
     .painel {
 
-      background: white;
+      background:
+        #fff;
 
-      border-radius: 14px;
+      border-radius:
+        14px;
 
-      padding: 20px;
+      padding:
+        20px;
+
+      margin-bottom:
+        20px;
 
       box-shadow:
-        0 2px 10px rgba(0,0,0,.08);
+        0 3px 12px rgba(0,0,0,0.08);
 
-      margin-bottom: 20px;
+    }
+
+
+    .painel h2 {
+
+      margin:
+        0 0 18px;
+
+      font-size:
+        20px;
 
     }
 
 
     .filtros {
 
-      display: grid;
+      display:
+        grid;
 
       grid-template-columns:
         1fr 1fr auto;
 
-      gap: 15px;
+      gap:
+        15px;
 
-      align-items: end;
+      align-items:
+        end;
 
     }
 
 
     .campo {
 
-      display: flex;
+      display:
+        flex;
 
-      flex-direction: column;
+      flex-direction:
+        column;
 
-      gap: 7px;
+      gap:
+        7px;
 
     }
 
 
     .campo label {
 
-      font-size: 13px;
+      font-size:
+        13px;
 
-      font-weight: bold;
+      font-weight:
+        bold;
 
-      color: #444;
+      color:
+        #444;
 
     }
 
@@ -139,21 +180,32 @@
     .campo select,
     .campo input {
 
-      width: 100%;
+      width:
+        100%;
 
-      height: 44px;
+      height:
+        44px;
 
-      padding: 0 12px;
+      padding:
+        0 12px;
 
-      border: 1px solid #ccc;
+      border:
+        1px solid #ccc;
 
-      border-radius: 8px;
+      border-radius:
+        8px;
 
-      background: white;
+      background:
+        #fff;
 
-      font-size: 15px;
+      color:
+        #222;
 
-      outline: none;
+      font-size:
+        15px;
+
+      outline:
+        none;
 
     }
 
@@ -161,249 +213,408 @@
     .campo select:focus,
     .campo input:focus {
 
-      border-color: #111;
+      border-color:
+        #111;
 
     }
 
 
     button {
 
-      height: 44px;
+      height:
+        44px;
 
-      border: none;
+      border:
+        none;
 
-      border-radius: 8px;
+      border-radius:
+        8px;
 
-      padding: 0 20px;
+      padding:
+        0 20px;
 
-      background: #111;
+      background:
+        #111;
 
-      color: white;
+      color:
+        #fff;
 
-      font-size: 14px;
+      font-size:
+        14px;
 
-      font-weight: bold;
+      font-weight:
+        bold;
 
-      cursor: pointer;
+      cursor:
+        pointer;
+
+      transition:
+        0.2s;
 
     }
 
 
     button:hover {
 
-      background: #333;
+      background:
+        #333;
 
     }
 
 
     button:disabled {
 
-      background: #999;
+      opacity:
+        0.5;
 
-      cursor: not-allowed;
-
-    }
-
-
-    .status {
-
-      margin-top: 15px;
-
-      padding: 12px;
-
-      border-radius: 8px;
-
-      background: #f1f1f1;
-
-      color: #555;
-
-      font-size: 14px;
-
-      display: none;
+      cursor:
+        not-allowed;
 
     }
 
 
-    .status.mostrar {
+    .mensagem {
 
-      display: block;
+      padding:
+        14px;
 
-    }
+      border-radius:
+        8px;
 
+      background:
+        #f1f1f1;
 
-    .status.erro {
+      color:
+        #555;
 
-      background: #ffe5e5;
+      font-size:
+        14px;
 
-      color: #a00000;
-
-    }
-
-
-    .status.sucesso {
-
-      background: #e5f8e8;
-
-      color: #176b25;
+      text-align:
+        center;
 
     }
 
 
-    .cabecalho-agenda {
+    .mensagem.erro {
 
-      display: flex;
+      background:
+        #ffe8e8;
 
-      justify-content: space-between;
-
-      align-items: center;
-
-      gap: 15px;
-
-      margin-bottom: 15px;
-
-      flex-wrap: wrap;
+      color:
+        #a00000;
 
     }
 
 
-    .cabecalho-agenda h2 {
+    .mensagem.sucesso {
 
-      margin: 0;
+      background:
+        #e7f8ec;
 
-      font-size: 20px;
+      color:
+        #176b32;
+
+    }
+
+
+    .resumo {
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      gap:
+        15px;
+
+      margin-bottom:
+        15px;
+
+      flex-wrap:
+        wrap;
+
+    }
+
+
+    .resumo-titulo {
+
+      font-size:
+        18px;
+
+      font-weight:
+        bold;
+
+    }
+
+
+    .resumo-data {
+
+      color:
+        #666;
+
+      font-size:
+        14px;
 
     }
 
 
     .contador {
 
-      background: #111;
+      background:
+        #111;
 
-      color: white;
+      color:
+        #fff;
 
-      border-radius: 20px;
+      padding:
+        7px 12px;
 
-      padding: 7px 13px;
+      border-radius:
+        20px;
 
-      font-size: 13px;
+      font-size:
+        13px;
 
-    }
-
-
-    .agenda {
-
-      display: flex;
-
-      flex-direction: column;
-
-      gap: 10px;
+      font-weight:
+        bold;
 
     }
 
 
-    .agendamento {
+    .lista-agenda {
 
-      display: grid;
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap:
+        10px;
+
+    }
+
+
+    .agendamento-admin {
+
+      display:
+        grid;
 
       grid-template-columns:
-        130px
-        1fr
-        1fr
-        160px
-        110px;
+        130px 1.3fr 1fr 1fr 120px;
 
-      gap: 15px;
+      gap:
+        15px;
 
-      align-items: center;
+      align-items:
+        center;
 
-      border: 1px solid #e5e5e5;
+      padding:
+        15px;
 
-      border-radius: 10px;
+      border:
+        1px solid #e4e4e4;
 
-      padding: 14px;
+      border-radius:
+        10px;
 
-      background: #fff;
+      background:
+        #fff;
 
-    }
-
-
-    .horario {
-
-      font-size: 16px;
-
-      font-weight: bold;
-
-      color: #111;
+      transition:
+        0.2s;
 
     }
 
 
-    .cliente {
+    .agendamento-admin:hover {
 
-      font-weight: bold;
+      border-color:
+        #bbb;
 
-    }
-
-
-    .servico {
-
-      color: #555;
+      box-shadow:
+        0 2px 8px rgba(0,0,0,0.06);
 
     }
 
 
-    .telefone {
+    .horario-admin {
 
-      color: #555;
+      font-size:
+        17px;
 
-      font-size: 14px;
+      font-weight:
+        bold;
 
-    }
-
-
-    .status-agendamento {
-
-      text-align: center;
-
-      background: #e7f6ea;
-
-      color: #237b32;
-
-      padding: 7px 8px;
-
-      border-radius: 20px;
-
-      font-size: 12px;
-
-      font-weight: bold;
+      color:
+        #111;
 
     }
 
 
-    .vazio {
+    .cliente-admin {
 
-      text-align: center;
+      font-weight:
+        bold;
 
-      padding: 40px 20px;
-
-      color: #777;
-
-      border: 1px dashed #ccc;
-
-      border-radius: 10px;
-
-      background: #fafafa;
+      color:
+        #222;
 
     }
 
 
-    .carregando {
+    .servico-admin {
 
-      text-align: center;
+      color:
+        #555;
 
-      padding: 30px;
+    }
 
-      color: #777;
+
+    .telefone-admin {
+
+      color:
+        #666;
+
+      font-size:
+        14px;
+
+    }
+
+
+    .status-admin {
+
+      display:
+        inline-flex;
+
+      justify-content:
+        center;
+
+      align-items:
+        center;
+
+      min-height:
+        30px;
+
+      padding:
+        5px 9px;
+
+      border-radius:
+        20px;
+
+      background:
+        #e8f7ed;
+
+      color:
+        #177238;
+
+      font-size:
+        12px;
+
+      font-weight:
+        bold;
+
+    }
+
+
+    .sem-agendamentos {
+
+      text-align:
+        center;
+
+      padding:
+        35px 20px;
+
+      border:
+        1px dashed #ccc;
+
+      border-radius:
+        10px;
+
+      color:
+        #666;
+
+    }
+
+
+    .sem-agendamentos strong {
+
+      display:
+        block;
+
+      margin-bottom:
+        6px;
+
+      color:
+        #333;
+
+    }
+
+
+    .loading {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        8px;
+
+    }
+
+
+    .spinner {
+
+      width:
+        16px;
+
+      height:
+        16px;
+
+      border:
+        2px solid #ddd;
+
+      border-top-color:
+        #111;
+
+      border-radius:
+        50%;
+
+      animation:
+        girar 0.8s linear infinite;
+
+    }
+
+
+    @keyframes girar {
+
+      to {
+        transform: rotate(360deg);
+      }
+
+    }
+
+
+    .rodape {
+
+      text-align:
+        center;
+
+      color:
+        #999;
+
+      font-size:
+        12px;
+
+      margin-top:
+        25px;
 
     }
 
@@ -412,28 +623,24 @@
 
       .filtros {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+          1fr;
 
       }
 
 
-      button {
+      .agendamento-admin {
 
-        width: 100%;
-
-      }
-
-
-      .agendamento {
-
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns:
+          1fr 1fr;
 
       }
 
 
-      .horario {
+      .horario-admin {
 
-        grid-column: 1 / -1;
+        grid-column:
+          1 / -1;
 
       }
 
@@ -442,23 +649,53 @@
 
     @media (max-width: 500px) {
 
-      body {
+      .container {
 
-        padding: 10px;
+        padding:
+          15px 10px 40px;
+
+      }
+
+
+      .topo {
+
+        padding:
+          18px;
+
+      }
+
+
+      .topo h1 {
+
+        font-size:
+          22px;
 
       }
 
 
       .painel {
 
-        padding: 14px;
+        padding:
+          15px;
 
       }
 
 
-      .agendamento {
+      .agendamento-admin {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+          1fr;
+
+        gap:
+          8px;
+
+      }
+
+
+      .horario-admin {
+
+        grid-column:
+          auto;
 
       }
 
@@ -472,1071 +709,1217 @@
 <body>
 
 
-<div class="container">
+  <div class="container">
 
 
-  <!-- ===================================================
-       TOPO
-       =================================================== -->
+    <!-- =================================================
+         CABEÇALHO
+         ================================================= -->
 
-  <div class="topo">
+    <div class="topo">
 
-    <h1>Painel Administrativo</h1>
+      <h1>
+        Painel Administrativo
+      </h1>
 
-    <p>
-      Gerenciamento de agendamentos da barbearia
-    </p>
+      <p>
+        Controle dos agendamentos da barbearia
+      </p>
 
-  </div>
-
-
-  <!-- ===================================================
-       FILTROS
-       =================================================== -->
-
-  <div class="painel">
-
-    <div class="filtros">
+    </div>
 
 
-      <div class="campo">
+    <!-- =================================================
+         FILTROS
+         ================================================= -->
 
-        <label for="profissionalAdmin">
-          Profissional
-        </label>
+    <div class="painel">
 
-        <select id="profissionalAdmin">
-
-          <option value="">
-            Carregando profissionais...
-          </option>
-
-        </select>
-
-      </div>
+      <h2>
+        Consultar agenda
+      </h2>
 
 
-      <div class="campo">
-
-        <label for="dataAdmin">
-          Data
-        </label>
-
-        <input
-          type="date"
-          id="dataAdmin"
-        >
-
-      </div>
+      <div class="filtros">
 
 
-      <div class="campo">
+        <!-- PROFISSIONAL -->
+
+        <div class="campo">
+
+          <label
+            for="profissionalAdmin"
+          >
+            Profissional
+          </label>
+
+
+          <select
+            id="profissionalAdmin"
+            disabled
+          >
+
+            <option value="">
+              Carregando profissionais...
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- DATA -->
+
+        <div class="campo">
+
+          <label
+            for="dataAdmin"
+          >
+            Data
+          </label>
+
+
+          <input
+            type="date"
+            id="dataAdmin"
+          >
+
+        </div>
+
+
+        <!-- BOTÃO -->
 
         <button
           type="button"
-          id="btnCarregar"
+          id="btnCarregarAgenda"
           onclick="carregarAgendaAdmin()"
         >
-          Carregar agenda
+          Ver agenda
         </button>
 
+
       </div>
 
-
-    </div>
-
-
-    <div
-      id="mensagemAdmin"
-      class="status"
-    ></div>
-
-  </div>
-
-
-  <!-- ===================================================
-       AGENDA
-       =================================================== -->
-
-  <div class="painel">
-
-    <div class="cabecalho-agenda">
-
-      <h2>
-        Agenda
-      </h2>
 
       <div
-        id="contadorAgenda"
-        class="contador"
+        id="mensagemAdmin"
+        style="margin-top:15px;"
+      ></div>
+
+
+    </div>
+
+
+    <!-- =================================================
+         AGENDA
+         ================================================= -->
+
+    <div class="painel">
+
+      <div class="resumo">
+
+        <div>
+
+          <div
+            class="resumo-titulo"
+            id="tituloAgenda"
+          >
+            Agenda
+          </div>
+
+          <div
+            class="resumo-data"
+            id="subtituloAgenda"
+          >
+            Selecione um profissional e uma data.
+          </div>
+
+        </div>
+
+
+        <div
+          class="contador"
+          id="contadorAgenda"
+        >
+          0 agendamentos
+        </div>
+
+      </div>
+
+
+      <div
+        id="agendaAdmin"
+        class="lista-agenda"
       >
-        0 agendamentos
-      </div>
 
-    </div>
+        <div class="sem-agendamentos">
 
+          <strong>
+            Nenhuma agenda carregada
+          </strong>
 
-    <div
-      id="agendaAdmin"
-      class="agenda"
-    >
+          Selecione um profissional e uma data.
 
-      <div class="vazio">
-
-        Selecione um profissional e uma data.
+        </div>
 
       </div>
 
     </div>
+
+
+    <div class="rodape">
+
+      Sistema de agendamento da barbearia
+
+    </div>
+
 
   </div>
 
 
-</div>
+
+  <script>
 
 
-<script>
+    /********************************************************
+     * INICIALIZAÇÃO
+     ********************************************************/
 
-/************************************************************
- * INICIALIZAÇÃO
- ************************************************************/
+    document.addEventListener(
+      "DOMContentLoaded",
+      function() {
 
-document.addEventListener(
-  "DOMContentLoaded",
-  function() {
+        inicializarAdmin();
 
-    inicializarAdmin();
-
-  }
-);
-
-
-/************************************************************
- * INICIALIZAR ADMIN
- ************************************************************/
-
-function inicializarAdmin() {
-
-  console.log(
-    "========== ADMIN INICIADO =========="
-  );
-
-
-  const dataInput =
-    document.getElementById(
-      "dataAdmin"
+      }
     );
 
 
-  /*
-   * Define a data atual.
-   */
+    function inicializarAdmin() {
 
-  if (dataInput) {
-
-    const hoje =
-      new Date();
+      console.log(
+        "========== ADMIN INICIADO =========="
+      );
 
 
-    const ano =
-      hoje.getFullYear();
+      definirDataAtual();
 
 
-    const mes =
-      String(
-        hoje.getMonth() + 1
-      ).padStart(2, "0");
+      carregarProfissionaisAdmin();
+
+    }
 
 
-    const dia =
-      String(
-        hoje.getDate()
-      ).padStart(2, "0");
 
+    /********************************************************
+     * DATA ATUAL
+     ********************************************************/
 
-    dataInput.value =
-      ano +
-      "-" +
-      mes +
-      "-" +
-      dia;
+    function definirDataAtual() {
 
-  }
-
-
-  carregarProfissionais();
-
-}
-
-
-/************************************************************
- * CARREGAR PROFISSIONAIS
- *
- * Chama diretamente a função do Code.gs.
- ************************************************************/
-
-function carregarProfissionais() {
-
-  console.log(
-    "========== CARREGANDO PROFISSIONAIS =========="
-  );
-
-
-  const select =
-    document.getElementById(
-      "profissionalAdmin"
-    );
-
-
-  if (!select) {
-
-    console.error(
-      "Elemento profissionalAdmin não encontrado."
-    );
-
-    return;
-
-  }
-
-
-  select.innerHTML =
-    '<option value="">Carregando profissionais...</option>';
-
-
-  google.script.run
-
-    .withSuccessHandler(
-      function(profissionais) {
-
-        console.log(
-          "Resposta de getProfissionais:",
-          profissionais
+      const elemento =
+        document.getElementById(
+          "dataAdmin"
         );
 
 
-        /*
-         * A função getProfissionais()
-         * deve retornar um array.
-         */
+      if (!elemento) {
 
-        if (
-          !Array.isArray(profissionais)
-        ) {
+        return;
 
-          console.error(
-            "Resposta inválida:",
-            profissionais
-          );
+      }
 
 
-          select.innerHTML =
-            '<option value="">Erro ao carregar</option>';
+      const agora =
+        new Date();
 
 
-          mostrarMensagem(
-            "A resposta de profissionais é inválida.",
-            true
-          );
+      const ano =
+        agora.getFullYear();
 
 
-          return;
+      const mes =
+        String(
+          agora.getMonth() + 1
+        ).padStart(2, "0");
 
-        }
+
+      const dia =
+        String(
+          agora.getDate()
+        ).padStart(2, "0");
+
+
+      elemento.value =
+        ano +
+        "-" +
+        mes +
+        "-" +
+        dia;
+
+    }
+
+
+
+    /********************************************************
+     * CARREGAR PROFISSIONAIS
+     *
+     * ESTA É A PARTE PRINCIPAL DO AJUSTE.
+     *
+     * O Admin é servido pelo Google Apps Script,
+     * portanto usamos google.script.run.
+     ********************************************************/
+
+    function carregarProfissionaisAdmin() {
+
+      const select =
+        document.getElementById(
+          "profissionalAdmin"
+        );
+
+
+      if (!select) {
+
+        console.error(
+          "Elemento #profissionalAdmin não encontrado."
+        );
+
+        return;
+
+      }
+
+
+      select.disabled =
+        true;
+
+
+      select.innerHTML =
+        '<option value="">Carregando profissionais...</option>';
+
+
+      mostrarMensagemAdmin(
+        "Carregando profissionais...",
+        "normal"
+      );
+
+
+      console.log(
+        "Chamando carregarProfissionaisAdmin() no Apps Script..."
+      );
+
+
+      if (
+        typeof google === "undefined" ||
+        !google.script ||
+        !google.script.run
+      ) {
+
+        console.error(
+          "google.script.run não está disponível."
+        );
 
 
         select.innerHTML =
-          '<option value="">Selecione o profissional</option>';
+          '<option value="">Admin deve ser aberto pelo Google Apps Script</option>';
 
 
-        if (
-          profissionais.length === 0
-        ) {
-
-          select.innerHTML =
-            '<option value="">Nenhum profissional encontrado</option>';
+        mostrarMensagemAdmin(
+          "Este Admin.html precisa ser aberto pela URL do Google Apps Script, não pelo GitHub Pages.",
+          "erro"
+        );
 
 
-          mostrarMensagem(
-            "Nenhum profissional ativo foi encontrado na aba Profissionais.",
-            true
-          );
+        return;
+
+      }
 
 
-          return;
+      google.script.run
 
-        }
+        .withSuccessHandler(
+          function(resposta) {
 
+            console.log(
+              "Resposta dos profissionais:",
+              resposta
+            );
 
-        profissionais.forEach(
-          function(profissional) {
 
             if (
-              !profissional ||
-              !profissional.nome
+              !resposta ||
+              resposta.sucesso !== true
             ) {
+
+              select.innerHTML =
+                '<option value="">Erro ao carregar profissionais</option>';
+
+
+              mostrarMensagemAdmin(
+                resposta &&
+                resposta.mensagem
+                  ? resposta.mensagem
+                  : "Erro ao carregar profissionais.",
+                "erro"
+              );
+
+
+              select.disabled =
+                false;
+
 
               return;
 
             }
 
 
-            const option =
-              document.createElement(
-                "option"
+            const profissionais =
+              Array.isArray(
+                resposta.profissionais
+              )
+                ? resposta.profissionais
+                : [];
+
+
+            console.log(
+              "Profissionais recebidos:",
+              profissionais
+            );
+
+
+            select.innerHTML =
+              '<option value="">Selecione o profissional</option>';
+
+
+            profissionais.forEach(
+              function(profissional) {
+
+                if (
+                  !profissional ||
+                  !profissional.nome
+                ) {
+
+                  return;
+
+                }
+
+
+                const option =
+                  document.createElement(
+                    "option"
+                  );
+
+
+                option.value =
+                  profissional.nome;
+
+
+                option.textContent =
+                  profissional.nome;
+
+
+                select.appendChild(
+                  option
+                );
+
+              }
+            );
+
+
+            select.disabled =
+              false;
+
+
+            if (
+              profissionais.length === 0
+            ) {
+
+              select.innerHTML =
+                '<option value="">Nenhum profissional encontrado</option>';
+
+
+              mostrarMensagemAdmin(
+                "Nenhum profissional ativo foi encontrado na aba Profissionais.",
+                "erro"
               );
 
+              return;
 
-            option.value =
-              String(
-                profissional.nome
-              ).trim();
+            }
 
 
-            option.textContent =
-              String(
-                profissional.nome
-              ).trim();
+            mostrarMensagemAdmin(
+              profissionais.length +
+              " profissional(is) carregado(s).",
+              "sucesso"
+            );
 
 
-            select.appendChild(
-              option
+            /*
+             * Seleciona automaticamente o primeiro
+             * profissional quando existir apenas um.
+             */
+
+            if (
+              profissionais.length === 1
+            ) {
+
+              select.value =
+                profissionais[0].nome;
+
+            }
+
+          }
+        )
+
+        .withFailureHandler(
+          function(erro) {
+
+            console.error(
+              "Erro ao executar carregarProfissionaisAdmin:",
+              erro
+            );
+
+
+            select.innerHTML =
+              '<option value="">Erro ao carregar profissionais</option>';
+
+
+            select.disabled =
+              false;
+
+
+            let mensagem =
+              "Erro ao carregar profissionais.";
+
+
+            if (
+              erro &&
+              erro.message
+            ) {
+
+              mensagem =
+                erro.message;
+
+            }
+
+
+            mostrarMensagemAdmin(
+              mensagem,
+              "erro"
             );
 
           }
-        );
+        )
 
-
-        console.log(
-          "Profissionais carregados:",
-          profissionais.length
-        );
-
-
-        mostrarMensagem(
-          profissionais.length +
-          " profissional(is) carregado(s).",
-          false
-        );
-
-      }
-    )
-
-    .withFailureHandler(
-      function(erro) {
-
-        console.error(
-          "Erro ao carregar profissionais:",
-          erro
-        );
-
-
-        select.innerHTML =
-          '<option value="">Erro ao carregar profissionais</option>';
-
-
-        mostrarMensagem(
-          obterMensagemErro(
-            erro,
-            "Erro ao carregar profissionais."
-          ),
-          true
-        );
-
-      }
-    )
-
-    .getProfissionais();
-
-}
-
-
-/************************************************************
- * CARREGAR AGENDA
- ************************************************************/
-
-function carregarAgendaAdmin() {
-
-  console.log(
-    "========== CARREGAR AGENDA =========="
-  );
-
-
-  const profissionalElement =
-    document.getElementById(
-      "profissionalAdmin"
-    );
-
-
-  const dataElement =
-    document.getElementById(
-      "dataAdmin"
-    );
-
-
-  if (!profissionalElement) {
-
-    mostrarMensagem(
-      "Campo de profissional não encontrado.",
-      true
-    );
-
-    return;
-
-  }
-
-
-  if (!dataElement) {
-
-    mostrarMensagem(
-      "Campo de data não encontrado.",
-      true
-    );
-
-    return;
-
-  }
-
-
-  const profissional =
-    String(
-      profissionalElement.value || ""
-    ).trim();
-
-
-  const data =
-    String(
-      dataElement.value || ""
-    ).trim();
-
-
-  console.log(
-    "Profissional:",
-    profissional
-  );
-
-
-  console.log(
-    "Data:",
-    data
-  );
-
-
-  if (!profissional) {
-
-    mostrarMensagem(
-      "Selecione um profissional.",
-      true
-    );
-
-    return;
-
-  }
-
-
-  if (!data) {
-
-    mostrarMensagem(
-      "Selecione uma data.",
-      true
-    );
-
-    return;
-
-  }
-
-
-  const botao =
-    document.getElementById(
-      "btnCarregar"
-    );
-
-
-  if (botao) {
-
-    botao.disabled = true;
-
-    botao.textContent =
-      "Carregando...";
-
-  }
-
-
-  mostrarMensagem(
-    "Carregando agenda...",
-    false
-  );
-
-
-  const agenda =
-    document.getElementById(
-      "agendaAdmin"
-    );
-
-
-  if (agenda) {
-
-    agenda.innerHTML =
-      '<div class="carregando">⏳ Carregando agendamentos...</div>';
-
-  }
-
-
-  google.script.run
-
-    .withSuccessHandler(
-      function(resposta) {
-
-        console.log(
-          "Resposta de obterAgendamentos:",
-          resposta
-        );
-
-
-        if (botao) {
-
-          botao.disabled = false;
-
-          botao.textContent =
-            "Carregar agenda";
-
-        }
-
-
-        if (
-          !resposta
-        ) {
-
-          mostrarMensagem(
-            "O servidor não retornou nenhuma resposta.",
-            true
-          );
-
-          return;
-
-        }
-
-
-        if (
-          resposta.sucesso !== true
-        ) {
-
-          mostrarMensagem(
-            resposta.mensagem ||
-            "Erro ao carregar agenda.",
-            true
-          );
-
-
-          renderizarAgendaAdmin(
-            [],
-            profissional,
-            data
-          );
-
-
-          return;
-
-        }
-
-
-        const agendamentos =
-          Array.isArray(
-            resposta.agendamentos
-          )
-            ? resposta.agendamentos
-            : [];
-
-
-        renderizarAgendaAdmin(
-          agendamentos,
-          profissional,
-          data
-        );
-
-
-        mostrarMensagem(
-          "Agenda carregada com sucesso.",
-          false
-        );
-
-      }
-    )
-
-    .withFailureHandler(
-      function(erro) {
-
-        console.error(
-          "Erro ao carregar agenda:",
-          erro
-        );
-
-
-        if (botao) {
-
-          botao.disabled = false;
-
-          botao.textContent =
-            "Carregar agenda";
-
-        }
-
-
-        mostrarMensagem(
-          obterMensagemErro(
-            erro,
-            "Erro ao carregar agenda."
-          ),
-          true
-        );
-
-
-        renderizarAgendaAdmin(
-          [],
-          profissional,
-          data
-        );
-
-      }
-    )
-
-    .obterAgendamentos({
-
-      profissional:
-        profissional,
-
-      data:
-        data
-
-    });
-
-}
-
-
-/************************************************************
- * RENDERIZAR AGENDA
- ************************************************************/
-
-function renderizarAgendaAdmin(
-  agendamentos,
-  profissional,
-  data
-) {
-
-  const elemento =
-    document.getElementById(
-      "agendaAdmin"
-    );
-
-
-  const contador =
-    document.getElementById(
-      "contadorAgenda"
-    );
-
-
-  if (!elemento) {
-
-    return;
-
-  }
-
-
-  if (
-    !Array.isArray(
-      agendamentos
-    )
-  ) {
-
-    agendamentos = [];
-
-  }
-
-
-  /*
-   * Ordenar por horário.
-   */
-
-  agendamentos.sort(
-    function(a, b) {
-
-      return converterHoraMinutos(
-        a.horaInicio
-      ) -
-      converterHoraMinutos(
-        b.horaInicio
-      );
+        .carregarProfissionaisAdmin();
 
     }
-  );
 
 
-  if (contador) {
 
-    contador.textContent =
-      agendamentos.length +
-      (
-        agendamentos.length === 1
-          ? " agendamento"
-          : " agendamentos"
+    /********************************************************
+     * CARREGAR AGENDA
+     ********************************************************/
+
+    function carregarAgendaAdmin() {
+
+      const profissionalElement =
+        document.getElementById(
+          "profissionalAdmin"
+        );
+
+
+      const dataElement =
+        document.getElementById(
+          "dataAdmin"
+        );
+
+
+      const botao =
+        document.getElementById(
+          "btnCarregarAgenda"
+        );
+
+
+      if (!profissionalElement) {
+
+        mostrarMensagemAdmin(
+          "Campo de profissional não encontrado.",
+          "erro"
+        );
+
+        return;
+
+      }
+
+
+      if (!dataElement) {
+
+        mostrarMensagemAdmin(
+          "Campo de data não encontrado.",
+          "erro"
+        );
+
+        return;
+
+      }
+
+
+      const profissional =
+        String(
+          profissionalElement.value || ""
+        ).trim();
+
+
+      const data =
+        String(
+          dataElement.value || ""
+        ).trim();
+
+
+      console.log(
+        "========== CARREGAR AGENDA =========="
       );
 
-  }
+
+      console.log(
+        "Profissional:",
+        profissional
+      );
 
 
-  if (
-    agendamentos.length === 0
-  ) {
-
-    elemento.innerHTML = `
-
-      <div class="vazio">
-
-        <strong>
-          Nenhum agendamento encontrado.
-        </strong>
-
-        <br><br>
-
-        ${escaparHtml(
-          profissional
-        )}
-
-        —
-        ${formatarDataBR(
-          data
-        )}
-
-      </div>
-
-    `;
-
-    return;
-
-  }
+      console.log(
+        "Data:",
+        data
+      );
 
 
-  elemento.innerHTML =
-    agendamentos
-      .map(
-        function(agendamento) {
+      if (!profissional) {
 
-          return `
+        mostrarMensagemAdmin(
+          "Selecione um profissional.",
+          "erro"
+        );
 
-            <div class="agendamento">
 
-              <div class="horario">
+        return;
 
-                ${escaparHtml(
+      }
+
+
+      if (!data) {
+
+        mostrarMensagemAdmin(
+          "Selecione uma data.",
+          "erro"
+        );
+
+
+        return;
+
+      }
+
+
+      botao.disabled =
+        true;
+
+
+      botao.innerHTML =
+        '<span class="loading">' +
+          '<span class="spinner"></span>' +
+          'Carregando...' +
+        '</span>';
+
+
+      mostrarMensagemAdmin(
+        "Buscando agendamentos...",
+        "normal"
+      );
+
+
+      document.getElementById(
+        "agendaAdmin"
+      ).innerHTML =
+
+        '<div class="sem-agendamentos">' +
+          '<div class="loading">' +
+            '<span class="spinner"></span>' +
+            'Carregando agenda...' +
+          '</div>' +
+        '</div>';
+
+
+      google.script.run
+
+        .withSuccessHandler(
+          function(resposta) {
+
+            console.log(
+              "Resposta da agenda:",
+              resposta
+            );
+
+
+            botao.disabled =
+              false;
+
+
+            botao.textContent =
+              "Ver agenda";
+
+
+            if (
+              !resposta ||
+              resposta.sucesso !== true
+            ) {
+
+              mostrarMensagemAdmin(
+                resposta &&
+                resposta.mensagem
+                  ? resposta.mensagem
+                  : "Erro ao carregar agenda.",
+                "erro"
+              );
+
+
+              renderizarAgendaAdmin(
+                [],
+                profissional,
+                data
+              );
+
+
+              return;
+
+            }
+
+
+            const agendamentos =
+              Array.isArray(
+                resposta.agendamentos
+              )
+                ? resposta.agendamentos
+                : [];
+
+
+            renderizarAgendaAdmin(
+              agendamentos,
+              profissional,
+              data
+            );
+
+
+            mostrarMensagemAdmin(
+              "Agenda carregada com sucesso.",
+              "sucesso"
+            );
+
+          }
+        )
+
+        .withFailureHandler(
+          function(erro) {
+
+            console.error(
+              "Erro ao carregar agenda:",
+              erro
+            );
+
+
+            botao.disabled =
+              false;
+
+
+            botao.textContent =
+              "Ver agenda";
+
+
+            let mensagem =
+              "Erro ao carregar agenda.";
+
+
+            if (
+              erro &&
+              erro.message
+            ) {
+
+              mensagem =
+                erro.message;
+
+            }
+
+
+            mostrarMensagemAdmin(
+              mensagem,
+              "erro"
+            );
+
+
+            renderizarAgendaAdmin(
+              [],
+              profissional,
+              data
+            );
+
+          }
+        )
+
+        .obterAgendamentos({
+
+          profissional:
+            profissional,
+
+          data:
+            data
+
+        });
+
+    }
+
+
+
+    /********************************************************
+     * RENDERIZAR AGENDA
+     ********************************************************/
+
+    function renderizarAgendaAdmin(
+      agendamentos,
+      profissional,
+      data
+    ) {
+
+      const elemento =
+        document.getElementById(
+          "agendaAdmin"
+        );
+
+
+      const titulo =
+        document.getElementById(
+          "tituloAgenda"
+        );
+
+
+      const subtitulo =
+        document.getElementById(
+          "subtituloAgenda"
+        );
+
+
+      const contador =
+        document.getElementById(
+          "contadorAgenda"
+        );
+
+
+      if (!elemento) {
+
+        return;
+
+      }
+
+
+      titulo.textContent =
+        profissional
+          ? "Agenda de " + profissional
+          : "Agenda";
+
+
+      subtitulo.textContent =
+        data
+          ? "Data: " + formatarDataBR(data)
+          : "Selecione uma data.";
+
+
+      const total =
+        Array.isArray(agendamentos)
+          ? agendamentos.length
+          : 0;
+
+
+      contador.textContent =
+        total +
+        (
+          total === 1
+            ? " agendamento"
+            : " agendamentos"
+        );
+
+
+      if (!total) {
+
+        elemento.innerHTML =
+
+          '<div class="sem-agendamentos">' +
+
+            '<strong>' +
+              'Nenhum agendamento encontrado' +
+            '</strong>' +
+
+            'Não existem agendamentos para ' +
+
+            escaparHtmlAdmin(
+              profissional
+            ) +
+
+            ' em ' +
+
+            escaparHtmlAdmin(
+              formatarDataBR(data)
+            ) +
+
+          '</div>';
+
+
+        return;
+
+      }
+
+
+      /*
+       * Garante ordenação por horário.
+       */
+
+      agendamentos.sort(
+        function(a, b) {
+
+          const horaA =
+            converterHoraParaMinutosAdmin(
+              a.horaInicio
+            );
+
+
+          const horaB =
+            converterHoraParaMinutosAdmin(
+              b.horaInicio
+            );
+
+
+          return horaA - horaB;
+
+        }
+      );
+
+
+      elemento.innerHTML =
+        agendamentos
+          .map(
+            function(agendamento) {
+
+              const horaInicio =
+                escaparHtmlAdmin(
                   agendamento.horaInicio || ""
-                )}
+                );
 
-                -
 
-                ${escaparHtml(
+              const horaFim =
+                escaparHtmlAdmin(
                   agendamento.horaFim || ""
-                )}
-
-              </div>
+                );
 
 
-              <div class="cliente">
-
-                ${escaparHtml(
+              const cliente =
+                escaparHtmlAdmin(
                   agendamento.cliente || ""
-                )}
-
-              </div>
+                );
 
 
-              <div class="servico">
-
-                ${escaparHtml(
+              const servico =
+                escaparHtmlAdmin(
                   agendamento.servico || ""
-                )}
-
-              </div>
+                );
 
 
-              <div class="telefone">
-
-                ${escaparHtml(
+              const telefone =
+                escaparHtmlAdmin(
                   agendamento.telefone || ""
-                )}
-
-              </div>
+                );
 
 
-              <div class="status-agendamento">
-
-                ${escaparHtml(
+              const status =
+                escaparHtmlAdmin(
                   agendamento.status ||
                   "Agendado"
-                )}
+                );
 
-              </div>
 
-            </div>
+              return `
 
-          `;
+                <div class="agendamento-admin">
+
+                  <div class="horario-admin">
+                    ${horaInicio}
+                    -
+                    ${horaFim}
+                  </div>
+
+                  <div class="cliente-admin">
+                    ${cliente || "Cliente não informado"}
+                  </div>
+
+                  <div class="servico-admin">
+                    ${servico || "Serviço não informado"}
+                  </div>
+
+                  <div class="telefone-admin">
+                    ${telefone || "Telefone não informado"}
+                  </div>
+
+                  <div class="status-admin">
+                    ${status}
+                  </div>
+
+                </div>
+
+              `;
+
+            }
+          )
+          .join("");
+
+    }
+
+
+
+    /********************************************************
+     * MENSAGENS
+     ********************************************************/
+
+    function mostrarMensagemAdmin(
+      mensagem,
+      tipo
+    ) {
+
+      const elemento =
+        document.getElementById(
+          "mensagemAdmin"
+        );
+
+
+      if (!elemento) {
+
+        return;
+
+      }
+
+
+      if (!mensagem) {
+
+        elemento.innerHTML =
+          "";
+
+        return;
+
+      }
+
+
+      let classe =
+        "mensagem";
+
+
+      if (
+        tipo === "erro"
+      ) {
+
+        classe +=
+          " erro";
+
+      }
+
+
+      if (
+        tipo === "sucesso"
+      ) {
+
+        classe +=
+          " sucesso";
+
+      }
+
+
+      elemento.innerHTML =
+        '<div class="' +
+        classe +
+        '">' +
+        escaparHtmlAdmin(
+          mensagem
+        ) +
+        '</div>';
+
+    }
+
+
+
+    /********************************************************
+     * FORMATAR DATA
+     ********************************************************/
+
+    function formatarDataBR(
+      data
+    ) {
+
+      if (!data) {
+
+        return "";
+
+      }
+
+
+      const partes =
+        String(data).split("-");
+
+
+      if (
+        partes.length !== 3
+      ) {
+
+        return String(data);
+
+      }
+
+
+      return (
+        partes[2] +
+        "/" +
+        partes[1] +
+        "/" +
+        partes[0]
+      );
+
+    }
+
+
+
+    /********************************************************
+     * CONVERTER HORA NO ADMIN
+     ********************************************************/
+
+    function converterHoraParaMinutosAdmin(
+      valor
+    ) {
+
+      if (
+        valor === null ||
+        typeof valor === "undefined" ||
+        valor === ""
+      ) {
+
+        return 9999;
+
+      }
+
+
+      const texto =
+        String(valor).trim();
+
+
+      const match =
+        texto.match(
+          /^(\d{1,2}):(\d{1,2})/
+        );
+
+
+      if (!match) {
+
+        return 9999;
+
+      }
+
+
+      return (
+        Number(match[1]) * 60 +
+        Number(match[2])
+      );
+
+    }
+
+
+
+    /********************************************************
+     * ESCAPAR HTML
+     ********************************************************/
+
+    function escaparHtmlAdmin(
+      valor
+    ) {
+
+      return String(
+        valor === null ||
+        typeof valor === "undefined"
+          ? ""
+          : valor
+      )
+
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+
+      .replace(
+        /</g,
+        "&lt;"
+      )
+
+      .replace(
+        />/g,
+        "&gt;"
+      )
+
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+    }
+
+
+
+    /********************************************************
+     * ENTER NO CAMPO DE DATA
+     ********************************************************/
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.key !== "Enter"
+        ) {
+
+          return;
 
         }
-      )
-      .join("");
-
-}
 
 
-/************************************************************
- * MENSAGEM
- ************************************************************/
+        const alvo =
+          event.target;
 
-function mostrarMensagem(
-  mensagem,
-  erro
-) {
 
-  const elemento =
-    document.getElementById(
-      "mensagemAdmin"
+        if (
+          alvo &&
+          (
+            alvo.id ===
+              "profissionalAdmin" ||
+
+            alvo.id ===
+              "dataAdmin"
+          )
+        ) {
+
+          carregarAgendaAdmin();
+
+        }
+
+      }
     );
 
 
-  if (!elemento) {
-
-    return;
-
-  }
-
-
-  elemento.textContent =
-    mensagem || "";
-
-
-  elemento.className =
-    "status mostrar " +
-    (
-      erro
-        ? "erro"
-        : "sucesso"
-    );
-
-}
-
-
-/************************************************************
- * ERRO
- ************************************************************/
-
-function obterMensagemErro(
-  erro,
-  padrao
-) {
-
-  if (
-    erro &&
-    erro.message
-  ) {
-
-    return String(
-      erro.message
-    );
-
-  }
-
-
-  if (
-    typeof erro === "string"
-  ) {
-
-    return erro;
-
-  }
-
-
-  return padrao;
-
-}
-
-
-/************************************************************
- * ESCAPAR HTML
- ************************************************************/
-
-function escaparHtml(
-  valor
-) {
-
-  return String(
-    valor === null ||
-    typeof valor === "undefined"
-      ? ""
-      : valor
-  )
-
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-
-  .replace(
-    /</g,
-    "&lt;"
-  )
-
-  .replace(
-    />/g,
-    "&gt;"
-  )
-
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-
-  .replace(
-    /'/g,
-    "&#039;"
-  );
-
-}
-
-
-/************************************************************
- * DATA BR
- ************************************************************/
-
-function formatarDataBR(
-  data
-) {
-
-  if (!data) {
-
-    return "";
-
-  }
-
-
-  const partes =
-    String(data)
-      .split("-");
-
-
-  if (
-    partes.length !== 3
-  ) {
-
-    return String(data);
-
-  }
-
-
-  return (
-    partes[2] +
-    "/" +
-    partes[1] +
-    "/" +
-    partes[0]
-  );
-
-}
-
-
-/************************************************************
- * HORA PARA MINUTOS
- ************************************************************/
-
-function converterHoraMinutos(
-  hora
-) {
-
-  if (!hora) {
-
-    return 9999;
-
-  }
-
-
-  const partes =
-    String(hora)
-      .split(":");
-
-
-  if (
-    partes.length < 2
-  ) {
-
-    return 9999;
-
-  }
-
-
-  const horas =
-    Number(
-      partes[0]
-    );
-
-
-  const minutos =
-    Number(
-      partes[1]
-    );
-
-
-  if (
-    isNaN(horas) ||
-    isNaN(minutos)
-  ) {
-
-    return 9999;
-
-  }
-
-
-  return (
-    horas * 60 +
-    minutos
-  );
-
-}
-
-
-/************************************************************
- * ENTER PARA CARREGAR
- ************************************************************/
-
-document.addEventListener(
-  "keydown",
-  function(event) {
-
-    if (
-      event.key !== "Enter"
-    ) {
-
-      return;
-
-    }
-
-
-    const alvo =
-      event.target;
-
-
-    if (
-      alvo &&
-      (
-        alvo.id === "profissionalAdmin" ||
-        alvo.id === "dataAdmin"
-      )
-    ) {
-
-      carregarAgendaAdmin();
-
-    }
-
-  }
-);
-
-</script>
+  </script>
 
 
 </body>
