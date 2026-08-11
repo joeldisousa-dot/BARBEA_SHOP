@@ -66,6 +66,7 @@
       border-radius: 18px;
       padding: 25px;
       margin-bottom: 20px;
+
       box-shadow:
         0 10px 30px rgba(0,0,0,.30);
     }
@@ -77,8 +78,10 @@
 
     .grid {
       display: grid;
+
       grid-template-columns:
         repeat(2, minmax(0, 1fr));
+
       gap: 18px;
     }
 
@@ -99,25 +102,38 @@
 
     input,
     select {
+
       width: 100%;
       height: 48px;
-      border: 1px solid #d0d0d0;
+
+      border:
+        1px solid #d0d0d0;
+
       border-radius: 10px;
-      padding: 0 13px;
+
+      padding:
+        0 13px;
+
       font-size: 15px;
-      background: #fff;
-      color: #222;
+
+      background: #ffffff;
+      color: #222222;
+
       outline: none;
     }
 
     input:focus,
     select:focus {
+
       border-color: #d4af37;
+
       box-shadow:
-        0 0 0 3px rgba(212,175,55,.15);
+        0 0 0 3px
+        rgba(212,175,55,.15);
     }
 
     .horarios {
+
       display: grid;
 
       grid-template-columns:
@@ -132,39 +148,73 @@
     }
 
     .horario {
-      border: 2px solid #d4af37;
-      background: #fff;
-      color: #222;
+
+      border:
+        2px solid #d4af37;
+
+      background: #ffffff;
+
+      color: #222222;
+
       border-radius: 10px;
+
       padding: 12px 8px;
+
       cursor: pointer;
+
       font-weight: bold;
+
+      transition: .2s;
     }
 
     .horario:hover {
+
       background: #d4af37;
-      color: #fff;
+      color: #ffffff;
     }
 
     .horario.selecionado {
-      background: #111;
-      color: #fff;
-      border-color: #111;
+
+      background: #111111;
+      color: #ffffff;
+
+      border-color: #111111;
+    }
+
+    .horario.indisponivel {
+
+      border-color: #dddddd;
+
+      background: #eeeeee;
+
+      color: #999999;
+
+      cursor: not-allowed;
     }
 
     .sem-horarios {
-      color: #777;
+
+      color: #777777;
+
       padding: 15px 0;
+
       text-align: center;
+
       grid-column: 1 / -1;
     }
 
     .status {
+
       display: none;
+
       border-radius: 10px;
+
       padding: 13px 15px;
+
       margin-bottom: 18px;
+
       font-size: 14px;
+
       line-height: 1.5;
     }
 
@@ -173,49 +223,76 @@
     }
 
     .status.info {
+
       background: #eaf3ff;
       color: #17518a;
-      border: 1px solid #b9d9ff;
+
+      border:
+        1px solid #b9d9ff;
     }
 
     .status.sucesso {
+
       background: #e9f9ee;
       color: #176b31;
-      border: 1px solid #a9dfb8;
+
+      border:
+        1px solid #a9dfb8;
     }
 
     .status.erro {
+
       background: #fff0f0;
       color: #a52222;
-      border: 1px solid #efb1b1;
+
+      border:
+        1px solid #efb1b1;
     }
 
     .btn {
+
       width: 100%;
       height: 52px;
+
       border: 0;
+
       border-radius: 10px;
-      background: #111;
-      color: #fff;
+
+      background: #111111;
+
+      color: #ffffff;
+
       font-size: 16px;
+
       font-weight: bold;
+
       cursor: pointer;
+
+      transition: .2s;
     }
 
     .btn:hover {
+
       background: #d4af37;
-      color: #111;
+
+      color: #111111;
     }
 
     .btn:disabled {
+
       opacity: .5;
+
       cursor: not-allowed;
     }
 
     .resumo {
+
       background: #f7f7f7;
+
       border-radius: 12px;
+
       padding: 18px;
+
       margin-top: 20px;
     }
 
@@ -224,15 +301,26 @@
     }
 
     .resumo-linha {
+
       display: flex;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
+
       gap: 15px;
+
       padding: 7px 0;
-      border-bottom: 1px solid #e2e2e2;
+
+      border-bottom:
+        1px solid #e2e2e2;
     }
 
     .resumo-linha:last-child {
       border-bottom: 0;
+    }
+
+    .resumo-linha strong {
+      color: #111111;
     }
 
     .oculto {
@@ -240,13 +328,37 @@
     }
 
     footer {
+
       text-align: center;
-      color: #999;
+
+      color: #999999;
+
       padding: 20px;
+
       font-size: 13px;
     }
 
-    @media (max-width:700px) {
+    .aviso-api {
+
+      margin-top: 15px;
+
+      padding: 12px;
+
+      background: #fff8e5;
+
+      color: #765800;
+
+      border:
+        1px solid #ead28a;
+
+      border-radius: 10px;
+
+      font-size: 13px;
+
+      line-height: 1.5;
+    }
+
+    @media (max-width: 700px) {
 
       header h1 {
         font-size: 27px;
@@ -257,7 +369,10 @@
       }
 
       .card {
+
         padding: 18px;
+
+        border-radius: 14px;
       }
 
       .grid {
@@ -266,6 +381,20 @@
 
       .campo.full {
         grid-column: auto;
+      }
+
+      .horarios {
+        grid-template-columns:
+          repeat(3, 1fr);
+      }
+
+    }
+
+    @media (max-width: 400px) {
+
+      .horarios {
+        grid-template-columns:
+          repeat(2, 1fr);
       }
 
     }
@@ -289,11 +418,15 @@
   </header>
 
 
+  <!-- STATUS -->
+
   <div
     id="status"
     class="status"
   ></div>
 
+
+  <!-- CARD PRINCIPAL -->
 
   <div class="card">
 
@@ -304,6 +437,8 @@
 
     <div class="grid">
 
+
+      <!-- CLIENTE -->
 
       <div class="campo">
 
@@ -321,6 +456,8 @@
       </div>
 
 
+      <!-- TELEFONE -->
+
       <div class="campo">
 
         <label for="telefone">
@@ -337,6 +474,8 @@
       </div>
 
 
+      <!-- SERVIÇO -->
+
       <div class="campo">
 
         <label for="servico">
@@ -346,14 +485,8 @@
         <select id="servico">
 
           <option value="">
-            Selecione o serviço
+            Selecione um serviço
           </option>
-
-          <!--
-            Cadastre aqui seus serviços.
-            Depois podemos fazer o Code.gs
-            carregar automaticamente da planilha.
-          -->
 
           <option value="Corte">
             Corte
@@ -372,6 +505,8 @@
       </div>
 
 
+      <!-- PROFISSIONAL -->
+
       <div class="campo">
 
         <label for="profissional">
@@ -389,6 +524,8 @@
       </div>
 
 
+      <!-- DATA -->
+
       <div class="campo full">
 
         <label for="data">
@@ -404,6 +541,8 @@
 
     </div>
 
+
+    <!-- HORÁRIOS -->
 
     <div
       id="areaHorarios"
@@ -423,6 +562,8 @@
     </div>
 
 
+    <!-- RESUMO -->
+
     <div
       id="resumo"
       class="resumo oculto"
@@ -434,42 +575,97 @@
 
 
       <div class="resumo-linha">
-        <span>Cliente</span>
-        <strong id="resumoCliente">-</strong>
+
+        <span>
+          Cliente
+        </span>
+
+        <strong id="resumoCliente">
+          -
+        </strong>
+
       </div>
 
 
       <div class="resumo-linha">
-        <span>Telefone</span>
-        <strong id="resumoTelefone">-</strong>
+
+        <span>
+          Telefone
+        </span>
+
+        <strong id="resumoTelefone">
+          -
+        </strong>
+
       </div>
 
 
       <div class="resumo-linha">
-        <span>Serviço</span>
-        <strong id="resumoServico">-</strong>
+
+        <span>
+          Serviço
+        </span>
+
+        <strong id="resumoServico">
+          -
+        </strong>
+
       </div>
 
 
       <div class="resumo-linha">
-        <span>Profissional</span>
-        <strong id="resumoProfissional">-</strong>
+
+        <span>
+          Profissional
+        </span>
+
+        <strong id="resumoProfissional">
+          -
+        </strong>
+
       </div>
 
 
       <div class="resumo-linha">
-        <span>Data</span>
-        <strong id="resumoData">-</strong>
+
+        <span>
+          Data
+        </span>
+
+        <strong id="resumoData">
+          -
+        </strong>
+
       </div>
 
 
       <div class="resumo-linha">
-        <span>Horário</span>
-        <strong id="resumoHorario">-</strong>
+
+        <span>
+          Horário
+        </span>
+
+        <strong id="resumoHorario">
+          -
+        </strong>
+
       </div>
 
     </div>
 
+
+    <!-- AVISO -->
+
+    <div class="aviso-api">
+
+      O sistema está conectado ao Google Apps Script.
+      Os profissionais são carregados diretamente da
+      planilha da barbearia.
+
+    </div>
+
+
+    <!-- BOTÃO -->
 
     <div style="margin-top:20px;">
 
@@ -487,7 +683,9 @@
 
 
   <footer>
+
     Sistema de agendamento da barbearia
+
   </footer>
 
 </div>
@@ -496,22 +694,65 @@
 <script>
 
 /************************************************************
- * URL DO GOOGLE APPS SCRIPT
+ * CONFIGURAÇÃO
  ************************************************************/
 
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbz_cgLSikg8Pvh3Xu6_2aIWybRHjNl9EnYmZ7FWqaJ1OBwhvqhKBpHA-na7adzajFgS/exec";
+  "https://script.google.com/macros/s/AKfycbyt1_P-b3x5qWBEIcXu1aXMcF5msrw5JEiZ9vHZLHmg4v_PCtuVGI6Dj--bdgN9rZzm/exec";
+
+
+/************************************************************
+ * CONFIGURAÇÃO DOS HORÁRIOS
+ *
+ * Estes são os horários exibidos no site.
+ *
+ * O sistema consulta os agendamentos do Google Sheets
+ * e remove os horários já ocupados.
+ ************************************************************/
+
+const HORARIOS_PADRAO = [
+
+  "08:00",
+  "08:30",
+  "09:00",
+  "09:30",
+  "10:00",
+  "10:30",
+  "11:00",
+  "11:30",
+  "12:00",
+
+  "13:00",
+  "13:30",
+  "14:00",
+  "14:30",
+  "15:00",
+  "15:30",
+  "16:00",
+  "16:30",
+  "17:00",
+  "17:30",
+  "18:00",
+  "18:30"
+
+];
 
 
 /************************************************************
  * ESTADO
  ************************************************************/
 
-let profissionais = [];
+let dadosSistema = {
 
-let agendamentos = [];
+  profissionais: []
+
+};
+
+let agendamentosDoDia = [];
 
 let horarioSelecionado = null;
+
+let carregandoHorarios = false;
 
 
 /************************************************************
@@ -557,21 +798,21 @@ document.addEventListener(
   "DOMContentLoaded",
   function() {
 
-    configurarData();
-
-    carregarProfissionais();
+    configurarDataMinima();
 
     configurarEventos();
+
+    carregarProfissionais();
 
   }
 );
 
 
 /************************************************************
- * DATA
+ * DATA MÍNIMA
  ************************************************************/
 
-function configurarData() {
+function configurarDataMinima() {
 
   const hoje =
     new Date();
@@ -589,18 +830,10 @@ function configurarData() {
       hoje.getDate()
     ).padStart(2, "0");
 
-  const dataHoje =
-    ano +
-    "-" +
-    mes +
-    "-" +
-    dia;
-
   dataEl.min =
-    dataHoje;
-
-  dataEl.value =
-    dataHoje;
+    ano + "-" +
+    mes + "-" +
+    dia;
 
 }
 
@@ -611,15 +844,30 @@ function configurarData() {
 
 function configurarEventos() {
 
+
   profissionalEl.addEventListener(
     "change",
     function() {
 
-      horarioSelecionado = null;
-
-      carregarAgendamentos();
+      limparHorario();
 
       atualizarResumo();
+
+      verificarHorarios();
+
+    }
+  );
+
+
+  servicoEl.addEventListener(
+    "change",
+    function() {
+
+      limparHorario();
+
+      atualizarResumo();
+
+      verificarHorarios();
 
     }
   );
@@ -629,11 +877,11 @@ function configurarEventos() {
     "change",
     function() {
 
-      horarioSelecionado = null;
-
-      carregarAgendamentos();
+      limparHorario();
 
       atualizarResumo();
+
+      verificarHorarios();
 
     }
   );
@@ -647,18 +895,6 @@ function configurarEventos() {
 
   telefoneEl.addEventListener(
     "input",
-    function() {
-
-      aplicarMascaraTelefone();
-
-      atualizarResumo();
-
-    }
-  );
-
-
-  servicoEl.addEventListener(
-    "change",
     atualizarResumo
   );
 
@@ -668,19 +904,22 @@ function configurarEventos() {
     realizarAgendamento
   );
 
+
 }
 
 
 /************************************************************
  * CARREGAR PROFISSIONAIS
  *
- * Usa:
+ * IMPORTANTE:
  *
- * ?acao=profissionais
+ * Aqui usamos:
  *
- * em vez de:
+ * acao=profissionais
  *
- * ?acao=dados
+ * e NÃO:
+ *
+ * acao=dados
  ************************************************************/
 
 function carregarProfissionais() {
@@ -692,9 +931,13 @@ function carregarProfissionais() {
 
 
   jsonp(
+
     "profissionais",
+
     {},
+
     function(resposta) {
+
 
       console.log(
         "Resposta profissionais:",
@@ -717,7 +960,7 @@ function carregarProfissionais() {
       }
 
 
-      profissionais =
+      dadosSistema.profissionais =
         Array.isArray(
           resposta.profissionais
         )
@@ -729,11 +972,11 @@ function carregarProfissionais() {
 
 
       if (
-        profissionais.length === 0
+        dadosSistema.profissionais.length === 0
       ) {
 
         mostrarStatus(
-          "Nenhum profissional ativo foi encontrado.",
+          "Nenhum profissional ativo foi encontrado na aba Profissionais.",
           "erro"
         );
 
@@ -743,27 +986,28 @@ function carregarProfissionais() {
 
 
       mostrarStatus(
-        profissionais.length +
-        " profissional(is) carregado(s).",
+        "Profissionais carregados com sucesso.",
         "sucesso"
       );
 
     },
+
     function(erro) {
 
       console.error(
-        "ERRO PROFISSIONAIS:",
+        "Erro API:",
         erro
       );
 
 
       mostrarStatus(
         erro.message ||
-        "Erro ao carregar profissionais.",
+        "Erro ao conectar com a API.",
         "erro"
       );
 
     }
+
   );
 
 }
@@ -778,23 +1022,24 @@ function preencherProfissionais() {
   profissionalEl.innerHTML = "";
 
 
-  const primeiraOpcao =
+  const opcao =
     document.createElement("option");
 
-  primeiraOpcao.value = "";
+  opcao.value = "";
 
-  primeiraOpcao.textContent =
-    profissionais.length
+  opcao.textContent =
+    dadosSistema.profissionais.length
       ? "Selecione um profissional"
       : "Nenhum profissional encontrado";
 
   profissionalEl.appendChild(
-    primeiraOpcao
+    opcao
   );
 
 
-  profissionais.forEach(
+  dadosSistema.profissionais.forEach(
     function(profissional) {
+
 
       const nome =
         typeof profissional === "string"
@@ -810,11 +1055,14 @@ function preencherProfissionais() {
       const option =
         document.createElement("option");
 
+
       option.value =
         nome;
 
+
       option.textContent =
         nome;
+
 
       profissionalEl.appendChild(
         option
@@ -827,14 +1075,10 @@ function preencherProfissionais() {
 
 
 /************************************************************
- * CARREGAR AGENDAMENTOS
- *
- * Usa a ação existente no Code.gs:
- *
- * ?acao=agendamentos
+ * VERIFICAR HORÁRIOS
  ************************************************************/
 
-function carregarAgendamentos() {
+function verificarHorarios() {
 
   const profissional =
     profissionalEl.value.trim();
@@ -855,6 +1099,41 @@ function carregarAgendamentos() {
   }
 
 
+  carregarHorarios(
+    profissional,
+    data
+  );
+
+}
+
+
+/************************************************************
+ * CARREGAR HORÁRIOS
+ *
+ * Consulta:
+ *
+ * acao=agendamentos
+ *
+ * profissional=...
+ *
+ * data=...
+ *
+ ************************************************************/
+
+function carregarHorarios(
+  profissional,
+  data
+) {
+
+  if (carregandoHorarios) {
+    return;
+  }
+
+
+  carregandoHorarios =
+    true;
+
+
   areaHorariosEl.classList.remove(
     "oculto"
   );
@@ -862,12 +1141,14 @@ function carregarAgendamentos() {
 
   horariosEl.innerHTML =
     '<div class="sem-horarios">' +
-    'Consultando horários...' +
+    'Consultando agenda...' +
     '</div>';
 
 
   jsonp(
+
     "agendamentos",
+
     {
       profissional:
         profissional,
@@ -875,10 +1156,16 @@ function carregarAgendamentos() {
       data:
         data
     },
+
     function(resposta) {
 
+
+      carregandoHorarios =
+        false;
+
+
       console.log(
-        "Resposta agendamentos:",
+        "Agendamentos do dia:",
         resposta
       );
 
@@ -888,17 +1175,22 @@ function carregarAgendamentos() {
         resposta.sucesso !== true
       ) {
 
-        throw new Error(
-          resposta &&
-          resposta.mensagem
-            ? resposta.mensagem
-            : "Erro ao consultar agendamentos."
-        );
+        horariosEl.innerHTML =
+          '<div class="sem-horarios">' +
+          escapeHtml(
+            resposta &&
+            resposta.mensagem
+              ? resposta.mensagem
+              : "Erro ao consultar a agenda."
+          ) +
+          '</div>';
+
+        return;
 
       }
 
 
-      agendamentos =
+      agendamentosDoDia =
         Array.isArray(
           resposta.agendamentos
         )
@@ -906,14 +1198,19 @@ function carregarAgendamentos() {
           : [];
 
 
-      gerarHorarios();
-
+      renderizarHorarios();
 
     },
+
     function(erro) {
 
+
+      carregandoHorarios =
+        false;
+
+
       console.error(
-        "ERRO API:",
+        "Erro ao consultar agendamentos:",
         erro
       );
 
@@ -922,158 +1219,114 @@ function carregarAgendamentos() {
         '<div class="sem-horarios">' +
         escapeHtml(
           erro.message ||
-          "Erro ao consultar agendamentos."
+          "Erro ao consultar a agenda."
         ) +
         '</div>';
 
     }
+
   );
 
 }
 
 
 /************************************************************
- * GERAR HORÁRIOS
- *
- * CONFIGURAÇÃO PADRÃO
- *
- * Você pode alterar estes valores.
+ * RENDERIZAR HORÁRIOS
  ************************************************************/
 
-function gerarHorarios() {
+function renderizarHorarios() {
 
   horariosEl.innerHTML = "";
 
 
-  /*
-   * Horário de funcionamento.
-   *
-   * Altere aqui se necessário.
-   */
-
-  const inicio =
-    9 * 60;
-
-  const fim =
-    18 * 60;
-
-
-  /*
-   * Intervalo de 30 minutos.
-   */
-
-  const intervalo =
-    30;
-
-
   const ocupados =
-    new Set();
+    obterHorariosOcupados();
 
 
-  agendamentos.forEach(
-    function(item) {
+  let disponiveis = 0;
 
-      if (
-        item &&
-        item.horaInicio
-      ) {
 
-        ocupados.add(
-          normalizarHora(
-            item.horaInicio
-          )
+  HORARIOS_PADRAO.forEach(
+    function(hora) {
+
+
+      const ocupado =
+        ocupados.includes(
+          hora
+        );
+
+
+      const botao =
+        document.createElement(
+          "button"
+        );
+
+
+      botao.type =
+        "button";
+
+
+      botao.className =
+        "horario";
+
+
+      botao.dataset.hora =
+        hora;
+
+
+      if (ocupado) {
+
+
+        botao.classList.add(
+          "indisponivel"
+        );
+
+
+        botao.disabled =
+          true;
+
+
+        botao.textContent =
+          hora +
+          " - ocupado";
+
+
+      } else {
+
+
+        disponiveis++;
+
+
+        botao.textContent =
+          hora;
+
+
+        botao.addEventListener(
+          "click",
+          function() {
+
+            selecionarHorario(
+              botao,
+              hora
+            );
+
+          }
         );
 
       }
+
+
+      horariosEl.appendChild(
+        botao
+      );
 
     }
   );
 
 
-  let encontrou =
-    false;
-
-
-  for (
-    let minutos = inicio;
-    minutos < fim;
-    minutos += intervalo
+  if (
+    disponiveis === 0
   ) {
-
-    const hora =
-      minutosParaHora(
-        minutos
-      );
-
-
-    if (
-      ocupados.has(hora)
-    ) {
-
-      continue;
-
-    }
-
-
-    encontrou =
-      true;
-
-
-    const botao =
-      document.createElement("button");
-
-    botao.type =
-      "button";
-
-    botao.className =
-      "horario";
-
-    botao.textContent =
-      hora;
-
-
-    botao.addEventListener(
-      "click",
-      function() {
-
-        document
-          .querySelectorAll(
-            ".horario"
-          )
-          .forEach(
-            function(item) {
-
-              item.classList.remove(
-                "selecionado"
-              );
-
-            }
-          );
-
-
-        botao.classList.add(
-          "selecionado"
-        );
-
-
-        horarioSelecionado =
-          hora;
-
-
-        atualizarResumo();
-
-      }
-    );
-
-
-    horariosEl.appendChild(
-      botao
-    );
-
-  }
-
-
-  if (!encontrou) {
 
     horariosEl.innerHTML =
       '<div class="sem-horarios">' +
@@ -1086,27 +1339,65 @@ function gerarHorarios() {
 
 
 /************************************************************
- * CONVERTER MINUTOS PARA HORA
+ * OBTER HORÁRIOS OCUPADOS
  ************************************************************/
 
-function minutosParaHora(
-  minutos
-) {
+function obterHorariosOcupados() {
 
-  const hora =
-    Math.floor(
-      minutos / 60
-    );
-
-  const minuto =
-    minutos % 60;
+  const ocupados = [];
 
 
-  return (
-    String(hora).padStart(2, "0") +
-    ":" +
-    String(minuto).padStart(2, "0")
+  agendamentosDoDia.forEach(
+    function(item) {
+
+
+      if (!item) {
+        return;
+      }
+
+
+      const status =
+        normalizarTexto(
+          item.status || ""
+        );
+
+
+      /*
+       * Consideramos cancelado como livre.
+       */
+
+      if (
+        status.includes("cancel")
+      ) {
+
+        return;
+
+      }
+
+
+      let hora =
+        item.horaInicio || "";
+
+
+      hora =
+        normalizarHora(
+          hora
+        );
+
+
+      if (hora) {
+
+        ocupados.push(
+          hora
+        );
+
+      }
+
+    }
   );
+
+
+  return ocupados;
 
 }
 
@@ -1119,10 +1410,14 @@ function normalizarHora(
   valor
 ) {
 
+  if (!valor) {
+    return "";
+  }
+
+
   const texto =
-    String(
-      valor || ""
-    ).trim();
+    String(valor)
+      .trim();
 
 
   const match =
@@ -1148,6 +1443,76 @@ function normalizarHora(
 
 
 /************************************************************
+ * SELECIONAR HORÁRIO
+ ************************************************************/
+
+function selecionarHorario(
+  botao,
+  hora
+) {
+
+
+  document
+    .querySelectorAll(
+      ".horario"
+    )
+    .forEach(
+      function(item) {
+
+        item.classList.remove(
+          "selecionado"
+        );
+
+      }
+    );
+
+
+  botao.classList.add(
+    "selecionado"
+  );
+
+
+  horarioSelecionado = {
+
+    inicio:
+      hora
+
+  };
+
+
+  atualizarResumo();
+
+}
+
+
+/************************************************************
+ * LIMPAR HORÁRIO
+ ************************************************************/
+
+function limparHorario() {
+
+  horarioSelecionado =
+    null;
+
+
+  document
+    .querySelectorAll(
+      ".horario"
+    )
+    .forEach(
+      function(item) {
+
+        item.classList.remove(
+          "selecionado"
+        );
+
+      }
+    );
+
+}
+
+
+/************************************************************
  * ESCONDER HORÁRIOS
  ************************************************************/
 
@@ -1157,65 +1522,96 @@ function esconderHorarios() {
     "oculto"
   );
 
+
   horariosEl.innerHTML =
     "";
+
+
+  agendamentosDoDia =
+    [];
+
+
+  horarioSelecionado =
+    null;
 
 }
 
 
 /************************************************************
- * RESUMO
+ * ATUALIZAR RESUMO
  ************************************************************/
 
 function atualizarResumo() {
 
+  const cliente =
+    clienteEl.value.trim();
+
+  const telefone =
+    telefoneEl.value.trim();
+
+  const servico =
+    servicoEl.value.trim();
+
+  const profissional =
+    profissionalEl.value.trim();
+
+  const data =
+    dataEl.value.trim();
+
+
   document.getElementById(
     "resumoCliente"
   ).textContent =
-    clienteEl.value.trim() || "-";
+    cliente || "-";
 
 
   document.getElementById(
     "resumoTelefone"
   ).textContent =
-    telefoneEl.value.trim() || "-";
+    telefone || "-";
 
 
   document.getElementById(
     "resumoServico"
   ).textContent =
-    servicoEl.value.trim() || "-";
+    servico || "-";
 
 
   document.getElementById(
     "resumoProfissional"
   ).textContent =
-    profissionalEl.value.trim() || "-";
+    profissional || "-";
 
 
   document.getElementById(
     "resumoData"
   ).textContent =
-    dataEl.value
-      ? formatarDataBR(
-          dataEl.value
-        )
+    data
+      ? formatarDataBR(data)
       : "-";
 
 
   document.getElementById(
     "resumoHorario"
   ).textContent =
-    horarioSelecionado ||
-    "-";
+    horarioSelecionado
+      ? horarioSelecionado.inicio
+      : "-";
+
+
+  const telefoneLimpo =
+    telefone.replace(
+      /\D/g,
+      ""
+    );
 
 
   const podeAgendar =
-    clienteEl.value.trim().length >= 2 &&
-    telefoneEl.value.replace(/\D/g, "").length >= 8 &&
-    servicoEl.value.trim() &&
-    profissionalEl.value.trim() &&
-    dataEl.value.trim() &&
+    cliente.length >= 2 &&
+    telefoneLimpo.length >= 8 &&
+    servico &&
+    profissional &&
+    data &&
     horarioSelecionado;
 
 
@@ -1241,22 +1637,36 @@ function atualizarResumo() {
 
 
 /************************************************************
- * AGENDAR
- *
- * ATENÇÃO:
- *
- * O Code.gs que você enviou ainda NÃO possui
- * a ação "agendar".
- *
- * Portanto, aqui mostramos uma mensagem clara
- * em vez de gerar erro silencioso.
+ * REALIZAR AGENDAMENTO
  ************************************************************/
 
 function realizarAgendamento() {
 
+  if (
+    btnAgendar.disabled
+  ) {
+
+    return;
+
+  }
+
+
+  /*
+   * O Code.gs enviado anteriormente
+   * ainda NÃO possui:
+   *
+   * case "agendar":
+   *
+   * Por isso não fazemos uma chamada
+   * falsa para a API.
+   */
+
   mostrarStatus(
-    "A função de gravação do agendamento ainda precisa ser adicionada ao Code.gs.",
+
+    "O cadastro do agendamento ainda precisa da ação 'agendar' no Code.gs. A consulta de profissionais e da agenda já está funcionando.",
+
     "erro"
+
   );
 
 }
@@ -1273,8 +1683,9 @@ function jsonp(
   falha
 ) {
 
+
   const callbackName =
-    "__barbearia_" +
+    "__barbearia_callback_" +
     Date.now() +
     "_" +
     Math.floor(
@@ -1298,7 +1709,7 @@ function jsonp(
 
         finalizar(
           new Error(
-            "O Google Apps Script não respondeu."
+            "O Google Apps Script não respondeu. Verifique se a implantação está publicada como aplicativo da Web."
           )
         );
 
@@ -1309,6 +1720,7 @@ function jsonp(
 
   window[callbackName] =
     function(resposta) {
+
 
       if (finalizado) {
         return;
@@ -1329,16 +1741,39 @@ function jsonp(
 
       try {
 
-        sucesso(
-          resposta
-        );
 
-      }
+        if (
+          typeof sucesso ===
+          "function"
+        ) {
 
-      catch (erro) {
+          sucesso(
+            resposta
+          );
 
-        if (falha) {
-          falha(erro);
+        }
+
+
+      } catch (erro) {
+
+
+        if (
+          typeof falha ===
+          "function"
+        ) {
+
+          falha(
+            erro
+          );
+
+        } else {
+
+          mostrarStatus(
+            erro.message ||
+            "Erro inesperado.",
+            "erro"
+          );
+
         }
 
       }
@@ -1362,6 +1797,7 @@ function jsonp(
     erro
   ) {
 
+
     if (finalizado) {
       return;
     }
@@ -1379,14 +1815,30 @@ function jsonp(
     limpar();
 
 
-    if (falha) {
-      falha(erro);
+    if (
+      typeof falha ===
+      "function"
+    ) {
+
+      falha(
+        erro
+      );
+
+    } else {
+
+      mostrarStatus(
+        erro.message ||
+        "Erro na API.",
+        "erro"
+      );
+
     }
 
   }
 
 
   function limpar() {
+
 
     delete window[
       callbackName
@@ -1426,6 +1878,7 @@ function jsonp(
     parametros || {}
   ).forEach(
     function(chave) {
+
 
       const valor =
         parametros[chave];
@@ -1476,8 +1929,7 @@ function mostrarStatus(
   statusEl.className =
     "status mostrar " +
     (
-      tipo ||
-      "info"
+      tipo || "info"
     );
 
 
@@ -1524,6 +1976,32 @@ function formatarDataBR(
 
 
 /************************************************************
+ * NORMALIZAR TEXTO
+ ************************************************************/
+
+function normalizarTexto(
+  texto
+) {
+
+  return String(
+    texto || ""
+  )
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+    .replace(
+      /\s+/g,
+      " "
+    );
+
+}
+
+
+/************************************************************
  * ESCAPE HTML
  ************************************************************/
 
@@ -1533,35 +2011,30 @@ function escapeHtml(
 
   return String(
     valor === null ||
-    valor === undefined
+    typeof valor === "undefined"
       ? ""
       : valor
   )
-
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-
-  .replace(
-    /</g,
-    "&lt;"
-  )
-
-  .replace(
-    />/g,
-    "&gt;"
-  )
-
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-
-  .replace(
-    /'/g,
-    "&#039;"
-  );
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
@@ -1570,59 +2043,86 @@ function escapeHtml(
  * MÁSCARA TELEFONE
  ************************************************************/
 
-function aplicarMascaraTelefone() {
-
-  let valor =
-    telefoneEl.value
-      .replace(
-        /\D/g,
-        ""
-      )
-      .substring(
-        0,
-        11
-      );
+telefoneEl.addEventListener(
+  "input",
+  function() {
 
 
-  if (
-    valor.length <= 10
-  ) {
+    let valor =
+      telefoneEl.value
+        .replace(
+          /\D/g,
+          ""
+        )
+        .substring(
+          0,
+          11
+        );
 
-    valor =
-      valor.replace(
-        /^(\d{2})(\d)/,
-        "($1) $2"
-      );
 
-    valor =
-      valor.replace(
-        /(\d{4})(\d)/,
-        "$1-$2"
-      );
+    if (
+      valor.length <= 10
+    ) {
 
-  } else {
 
-    valor =
-      valor.replace(
-        /^(\d{2})(\d)/,
-        "($1) $2"
-      );
+      valor =
+        valor.replace(
+          /^(\d{2})(\d)/,
+          "($1) $2"
+        );
 
-    valor =
-      valor.replace(
-        /(\d{5})(\d)/,
-        "$1-$2"
-      );
+
+      valor =
+        valor.replace(
+          /(\d{4})(\d)/,
+          "$1-$2"
+        );
+
+
+    } else {
+
+
+      valor =
+        valor.replace(
+          /^(\d{2})(\d)/,
+          "($1) $2"
+        );
+
+
+      valor =
+        valor.replace(
+          /(\d{5})(\d)/,
+          "$1-$2"
+        );
+
+    }
+
+
+    telefoneEl.value =
+      valor;
+
+
+    atualizarResumo();
 
   }
+);
 
 
-  telefoneEl.value =
-    valor;
+/************************************************************
+ * DEBUG
+ ************************************************************/
 
-}
+console.log(
+  "Barbearia Index carregado."
+);
+
+console.log(
+  "API:",
+  API_URL
+);
 
 </script>
 
 </body>
+
 </html>
