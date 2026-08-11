@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
@@ -27,6 +28,7 @@
 
     body {
       min-height: 100vh;
+
       font-family:
         Arial,
         Helvetica,
@@ -165,21 +167,17 @@
 
     /* =====================================================
        SERVIÇOS
-       BOTÕES HORIZONTAIS
     ===================================================== */
 
     .service-list {
-
       display: flex;
 
       flex-direction: row;
-
       flex-wrap: nowrap;
 
       gap: 12px;
 
       overflow-x: auto;
-
       overflow-y: hidden;
 
       padding:
@@ -208,9 +206,7 @@
       border-radius: 10px;
     }
 
-
     .service-button {
-
       position: relative;
 
       min-width: 180px;
@@ -248,7 +244,6 @@
     }
 
     .service-button::before {
-
       content: "";
 
       position: absolute;
@@ -261,15 +256,13 @@
 
       background: #d4af37;
 
-      transform:
-        scaleY(0);
+      transform: scaleY(0);
 
       transition:
         transform 0.25s ease;
     }
 
     .service-button:hover {
-
       transform:
         translateY(-3px);
 
@@ -282,7 +275,6 @@
     }
 
     .service-button.selected {
-
       transform:
         translateY(-3px)
         scale(1.02);
@@ -310,11 +302,9 @@
     }
 
     .service-name {
-
       display: block;
 
       font-size: 16px;
-
       font-weight: 800;
 
       margin-bottom: 8px;
@@ -323,7 +313,6 @@
     }
 
     .service-info {
-
       display: flex;
 
       gap: 12px;
@@ -341,15 +330,12 @@
 
     /* =====================================================
        PROFISSIONAIS
-       BOTÕES HORIZONTAIS
     ===================================================== */
 
     .professional-list {
-
       display: flex;
 
       flex-direction: row;
-
       flex-wrap: nowrap;
 
       gap: 12px;
@@ -382,9 +368,7 @@
       border-radius: 10px;
     }
 
-
     .professional-button {
-
       min-width: 150px;
 
       flex: 0 0 auto;
@@ -405,7 +389,6 @@
       cursor: pointer;
 
       font-size: 15px;
-
       font-weight: 700;
 
       transition:
@@ -413,7 +396,6 @@
     }
 
     .professional-button:hover {
-
       transform:
         translateY(-3px);
 
@@ -422,7 +404,6 @@
     }
 
     .professional-button.selected {
-
       color: #111111;
 
       background:
@@ -449,7 +430,6 @@
     ===================================================== */
 
     .form-grid {
-
       display: grid;
 
       grid-template-columns:
@@ -460,7 +440,9 @@
 
     .field {
       display: flex;
+
       flex-direction: column;
+
       gap: 7px;
     }
 
@@ -469,16 +451,13 @@
     }
 
     .field label {
-
       color: #d5d5d5;
 
       font-size: 13px;
-
       font-weight: 700;
     }
 
     .field input {
-
       width: 100%;
 
       padding:
@@ -505,7 +484,6 @@
     }
 
     .field input:focus {
-
       border-color:
         #d4af37;
 
@@ -524,7 +502,6 @@
     ===================================================== */
 
     .time-list {
-
       display: grid;
 
       grid-template-columns:
@@ -537,7 +514,6 @@
     }
 
     .time-button {
-
       padding: 13px 8px;
 
       border:
@@ -554,7 +530,6 @@
       cursor: pointer;
 
       font-size: 14px;
-
       font-weight: 800;
 
       transition:
@@ -562,7 +537,6 @@
     }
 
     .time-button:hover {
-
       transform:
         translateY(-2px);
 
@@ -571,7 +545,6 @@
     }
 
     .time-button.selected {
-
       background:
         #d4af37;
 
@@ -592,7 +565,6 @@
     ===================================================== */
 
     .btn-agendar {
-
       width: 100%;
 
       border: none;
@@ -613,7 +585,6 @@
       color: #111111;
 
       font-size: 16px;
-
       font-weight: 900;
 
       cursor: pointer;
@@ -627,7 +598,6 @@
     }
 
     .btn-agendar:hover {
-
       transform:
         translateY(-2px);
 
@@ -637,7 +607,6 @@
     }
 
     .btn-agendar:disabled {
-
       opacity: 0.45;
 
       cursor: not-allowed;
@@ -647,13 +616,32 @@
       box-shadow: none;
     }
 
+    /* Estado final do botão */
+    .btn-agendar.confirmado {
+      background:
+        linear-gradient(
+          135deg,
+          #49c878,
+          #2f9f5a
+        );
+
+      color: #ffffff;
+
+      opacity: 1;
+
+      cursor: default;
+
+      box-shadow:
+        0 10px 25px
+        rgba(50,190,100,0.20);
+    }
+
 
     /* =====================================================
        RESUMO
     ===================================================== */
 
     .summary {
-
       display: none;
 
       background:
@@ -672,23 +660,21 @@
 
     .summary.show {
       display: block;
+
       animation:
         aparecer 0.3s ease;
     }
 
     .summary-title {
-
       color: #d4af37;
 
       font-size: 15px;
-
       font-weight: 900;
 
       margin-bottom: 12px;
     }
 
     .summary-row {
-
       display: flex;
 
       justify-content: space-between;
@@ -714,6 +700,7 @@
 
     .summary-row span:last-child {
       text-align: right;
+
       font-weight: 700;
     }
 
@@ -723,7 +710,6 @@
     ===================================================== */
 
     .message {
-
       display: none;
 
       padding: 14px 15px;
@@ -739,12 +725,12 @@
 
     .message.show {
       display: block;
+
       animation:
         aparecer 0.3s ease;
     }
 
     .message.loading {
-
       background:
         rgba(212,175,55,0.10);
 
@@ -756,7 +742,6 @@
     }
 
     .message.error {
-
       background:
         rgba(220,50,50,0.10);
 
@@ -768,7 +753,6 @@
     }
 
     .message.success {
-
       background:
         rgba(50,190,100,0.10);
 
@@ -785,7 +769,6 @@
     ===================================================== */
 
     .loading-center {
-
       display: flex;
 
       align-items: center;
@@ -802,7 +785,6 @@
     }
 
     .spinner {
-
       width: 20px;
       height: 20px;
 
@@ -825,7 +807,6 @@
     ===================================================== */
 
     .empty {
-
       color: #777;
 
       font-size: 14px;
@@ -839,7 +820,6 @@
     ===================================================== */
 
     .footer {
-
       text-align: center;
 
       color: #666;
@@ -855,15 +835,12 @@
     ===================================================== */
 
     @keyframes girar {
-
       to {
         transform: rotate(360deg);
       }
-
     }
 
     @keyframes aparecer {
-
       from {
         opacity: 0;
         transform: translateY(8px);
@@ -873,11 +850,9 @@
         opacity: 1;
         transform: translateY(0);
       }
-
     }
 
     @keyframes subir {
-
       from {
         opacity: 0;
         transform: translateY(15px);
@@ -887,7 +862,6 @@
         opacity: 1;
         transform: translateY(0);
       }
-
     }
 
 
@@ -1280,10 +1254,9 @@
     ================================================== -->
 
     <footer class="footer">
-
       Sistema de agendamento da barbearia
-
     </footer>
+
   </main>
 
 
@@ -1317,7 +1290,9 @@
 
       horarioSelecionado: null,
 
-      carregandoHorarios: false
+      carregandoHorarios: false,
+
+      agendamentoConfirmado: false
 
     };
 
@@ -1379,26 +1354,11 @@
     function escaparHTML(valor) {
 
       return String(valor ?? "")
-        .replace(
-          /&/g,
-          "&amp;"
-        )
-        .replace(
-          /</g,
-          "&lt;"
-        )
-        .replace(
-          />/g,
-          "&gt;"
-        )
-        .replace(
-          /"/g,
-          "&quot;"
-        )
-        .replace(
-          /'/g,
-          "&#039;"
-        );
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
     }
 
@@ -1437,9 +1397,7 @@
     }
 
 
-    function formatarMoeda(
-      valor
-    ) {
+    function formatarMoeda(valor) {
 
       const numero =
         Number(valor || 0);
@@ -1455,9 +1413,7 @@
     }
 
 
-    function formatarDataBR(
-      valor
-    ) {
+    function formatarDataBR(valor) {
 
       if (!valor) {
         return "-";
@@ -1483,9 +1439,7 @@
     }
 
 
-    function normalizarTexto(
-      valor
-    ) {
+    function normalizarTexto(valor) {
 
       return String(
         valor ?? ""
@@ -1504,16 +1458,18 @@
     /* ====================================================
        JSONP
        
-       Não usa fetch.
-       Isso evita o problema de CORS do Apps Script.
+       AJUSTE IMPORTANTE:
+       O script agora possui onload.
+
+       Isso evita que a interface fique presa
+       indefinidamente esperando o callback quando
+       o Apps Script já terminou de processar a chamada.
     ==================================================== */
 
     let contadorJSONP = 0;
 
 
-    function chamarAPI(
-      parametros
-    ) {
+    function chamarAPI(parametros) {
 
       return new Promise(
         function(resolve, reject) {
@@ -1524,15 +1480,24 @@
             "_" +
             contadorJSONP++;
 
+
           const script =
             document.createElement(
               "script"
             );
 
+
           let finalizado =
             false;
 
 
+          let callbackRecebido =
+            false;
+
+
+          /*
+           * Timeout de segurança.
+           */
           const timeout =
             setTimeout(
               function() {
@@ -1547,7 +1512,7 @@
 
                 reject(
                   new Error(
-                    "O Google Apps Script não respondeu."
+                    "O Google Apps Script demorou demais para responder."
                   )
                 );
 
@@ -1562,15 +1527,23 @@
               timeout
             );
 
+
             try {
+
               delete window[
                 nomeCallback
               ];
-            } catch (erro) {
+
+            }
+
+            catch (erro) {
+
               window[
                 nomeCallback
               ] = undefined;
+
             }
+
 
             if (
               script.parentNode
@@ -1585,6 +1558,9 @@
           }
 
 
+          /*
+           * Callback normal do JSONP.
+           */
           window[
             nomeCallback
           ] = function(resposta) {
@@ -1593,9 +1569,17 @@
               return;
             }
 
-            finalizado = true;
+
+            callbackRecebido =
+              true;
+
+
+            finalizado =
+              true;
+
 
             cleanup();
+
 
             resolve(
               resposta
@@ -1604,6 +1588,9 @@
           };
 
 
+          /*
+           * Erro real de carregamento.
+           */
           script.onerror =
             function() {
 
@@ -1611,14 +1598,49 @@
                 return;
               }
 
-              finalizado = true;
+
+              finalizado =
+                true;
+
 
               cleanup();
+
 
               reject(
                 new Error(
                   "Não foi possível conectar ao Google Apps Script."
                 )
+              );
+
+            };
+
+
+          /*
+           * Quando o <script> termina de carregar,
+           * verificamos se o callback foi executado.
+           *
+           * Se o callback já foi recebido, não fazemos
+           * absolutamente nada.
+           *
+           * Se o script carregou mas o callback não foi
+           * executado, deixamos o timeout cuidar da situação.
+           *
+           * Isso é importante porque NÃO devemos marcar
+           * um agendamento como sucesso apenas pelo
+           * carregamento do script.
+           */
+          script.onload =
+            function() {
+
+              if (
+                finalizado ||
+                callbackRecebido
+              ) {
+                return;
+              }
+
+              console.warn(
+                "O script JSONP carregou, mas o callback ainda não foi recebido."
               );
 
             };
@@ -1635,6 +1657,7 @@
 
               const valor =
                 parametros[chave];
+
 
               if (
                 valor !== null &&
@@ -1657,6 +1680,10 @@
             "callback",
             nomeCallback
           );
+
+
+          script.async =
+            true;
 
 
           script.src =
@@ -1736,11 +1763,6 @@
           resposta.configuracao ||
           null;
 
-
-        /*
-         * Remove linhas de legenda
-         * caso tenham sido colocadas na planilha.
-         */
 
         estado.servicos =
           estado.servicos.filter(
@@ -1965,9 +1987,14 @@
        SELECIONAR SERVIÇO
     ==================================================== */
 
-    function selecionarServico(
-      indice
-    ) {
+    function selecionarServico(indice) {
+
+      if (
+        estado.agendamentoConfirmado
+      ) {
+        return;
+      }
+
 
       const servico =
         estado.servicos[indice];
@@ -2087,9 +2114,14 @@
        SELECIONAR PROFISSIONAL
     ==================================================== */
 
-    function selecionarProfissional(
-      indice
-    ) {
+    function selecionarProfissional(indice) {
+
+      if (
+        estado.agendamentoConfirmado
+      ) {
+        return;
+      }
+
 
       const profissional =
         estado.profissionais[indice];
@@ -2139,6 +2171,13 @@
       "change",
       function() {
 
+        if (
+          estado.agendamentoConfirmado
+        ) {
+          return;
+        }
+
+
         estado.dataSelecionada =
           inputData.value;
 
@@ -2160,6 +2199,13 @@
     ==================================================== */
 
     async function carregarHorariosSePossivel() {
+
+      if (
+        estado.agendamentoConfirmado
+      ) {
+        return;
+      }
+
 
       const servico =
         estado.servicoSelecionado;
@@ -2291,9 +2337,7 @@
        RENDERIZAR HORÁRIOS
     ==================================================== */
 
-    function renderizarHorarios(
-      horarios
-    ) {
+    function renderizarHorarios(horarios) {
 
       listaHorarios.innerHTML =
         "";
@@ -2399,6 +2443,13 @@
       inicio,
       fim
     ) {
+
+      if (
+        estado.agendamentoConfirmado
+      ) {
+        return;
+      }
+
 
       estado.horarioSelecionado = {
 
@@ -2528,6 +2579,22 @@
       );
 
 
+      /*
+       * Depois de confirmado, o botão permanece
+       * desabilitado definitivamente.
+       */
+      if (
+        estado.agendamentoConfirmado
+      ) {
+
+        btnAgendar.disabled =
+          true;
+
+        return;
+
+      }
+
+
       btnAgendar.disabled =
         !tudoSelecionado;
 
@@ -2542,6 +2609,12 @@
       "input",
       function() {
 
+        if (
+          estado.agendamentoConfirmado
+        ) {
+          return;
+        }
+
         atualizarResumo();
 
       }
@@ -2551,6 +2624,12 @@
     inputTelefone.addEventListener(
       "input",
       function() {
+
+        if (
+          estado.agendamentoConfirmado
+        ) {
+          return;
+        }
 
         atualizarResumo();
 
@@ -2612,8 +2691,12 @@
       "click",
       async function() {
 
+        /*
+         * Proteção contra clique duplicado.
+         */
         if (
-          btnAgendar.disabled
+          btnAgendar.disabled ||
+          estado.agendamentoConfirmado
         ) {
           return;
         }
@@ -2657,12 +2740,20 @@
           inputData.value;
 
 
+        /*
+         * Bloqueia imediatamente.
+         */
         btnAgendar.disabled =
           true;
 
 
         btnAgendar.textContent =
           "Confirmando...";
+
+
+        btnAgendar.classList.remove(
+          "confirmado"
+        );
 
 
         mostrarMensagem(
@@ -2706,6 +2797,11 @@
           );
 
 
+          /*
+           * Só consideramos sucesso quando
+           * o Apps Script informou explicitamente
+           * que a operação foi realizada.
+           */
           if (
             !resposta ||
             resposta.sucesso !== true
@@ -2721,6 +2817,19 @@
           }
 
 
+          /*
+           * =================================================
+           * SUCESSO
+           *
+           * A partir daqui NÃO existe mais estado de loading.
+           * O botão recebe uma classe definitiva.
+           * =================================================
+           */
+
+          estado.agendamentoConfirmado =
+            true;
+
+
           mostrarMensagem(
             resposta.mensagem ||
             "Agendamento realizado com sucesso!",
@@ -2734,14 +2843,15 @@
 
 
           /*
-           * Limpa apenas as seleções
-           * de serviço/profissional/horário.
+           * Remove o horário selecionado.
            */
-
           estado.horarioSelecionado =
             null;
 
 
+          /*
+           * Substitui a lista de horários.
+           */
           listaHorarios.innerHTML =
             `
               <div class="empty">
@@ -2750,9 +2860,35 @@
             `;
 
 
+          /*
+           * Atualiza o botão de forma DEFINITIVA.
+           *
+           * Não existe spinner aqui.
+           */
           btnAgendar.textContent =
-            "Agendamento confirmado";
+            "✓ Agendamento confirmado";
 
+
+          btnAgendar.disabled =
+            true;
+
+
+          btnAgendar.classList.add(
+            "confirmado"
+          );
+
+
+          /*
+           * Garante que nenhum estado visual
+           * antigo de carregamento permaneça.
+           */
+          estado.carregandoHorarios =
+            false;
+
+
+          console.log(
+            "Agendamento finalizado com sucesso."
+          );
 
         }
 
@@ -2762,6 +2898,14 @@
             "Erro agendamento:",
             erro
           );
+
+
+          /*
+           * Se deu erro, libera novamente
+           * o botão.
+           */
+          estado.agendamentoConfirmado =
+            false;
 
 
           mostrarMensagem(
@@ -2777,6 +2921,11 @@
 
           btnAgendar.textContent =
             "Confirmar agendamento";
+
+
+          btnAgendar.classList.remove(
+            "confirmado"
+          );
 
         }
 
