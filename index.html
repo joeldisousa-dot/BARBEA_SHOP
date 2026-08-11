@@ -5,2216 +5,917 @@
 
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    content="width=device-width, initial-scale=1.0"
   >
 
   <title>Barbearia - Agendamento</title>
 
   <style>
-
-    /* =====================================================
-       RESET
-    ===================================================== */
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
-      min-height: 100vh;
-
       font-family:
         Arial,
         Helvetica,
         sans-serif;
 
       background:
-        radial-gradient(
-          circle at top,
-          #292929 0%,
-          #111111 45%,
-          #050505 100%
+        linear-gradient(
+          135deg,
+          #111111,
+          #1c1c1c
         );
 
       color: #ffffff;
+      min-height: 100vh;
     }
-
-
-    /* =====================================================
-       CONTAINER
-    ===================================================== */
 
     .container {
       width: 100%;
-      max-width: 850px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 25px 15px 60px;
+      padding: 20px;
     }
 
-
-    /* =====================================================
-       CABEÇALHO
-    ===================================================== */
-
-    .header {
+    header {
       text-align: center;
-      margin-bottom: 25px;
-      animation: aparecer 0.7s ease;
+      padding: 35px 15px 25px;
     }
 
-    .logo {
-      width: 80px;
-      height: 80px;
-
-      margin: 0 auto 15px;
-
-      border-radius: 50%;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background:
-        linear-gradient(
-          145deg,
-          #d4af37,
-          #8d6b12
-        );
-
-      box-shadow:
-        0 0 30px rgba(212,175,55,0.35);
-
-      font-size: 38px;
+    header h1 {
+      font-size: 34px;
+      margin-bottom: 8px;
+      color: #d4af37;
     }
 
-    .header h1 {
-      font-size: 30px;
-      font-weight: 800;
-      color: #ffffff;
+    header p {
+      color: #cccccc;
+      font-size: 16px;
     }
-
-    .header p {
-      margin-top: 8px;
-      color: #bdbdbd;
-      font-size: 14px;
-    }
-
-
-    /* =====================================================
-       CARD
-    ===================================================== */
 
     .card {
-      background:
-        rgba(20,20,20,0.96);
-
-      border:
-        1px solid rgba(255,255,255,0.08);
-
-      border-radius: 20px;
-
-      padding: 22px;
-
-      margin-bottom: 18px;
-
+      background: #ffffff;
+      color: #222222;
+      border-radius: 18px;
+      padding: 25px;
+      margin-bottom: 20px;
       box-shadow:
-        0 20px 50px rgba(0,0,0,0.35);
-
-      animation: subir 0.5s ease;
+        0 10px 30px rgba(0, 0, 0, 0.30);
     }
 
-
-    /* =====================================================
-       TITULOS
-    ===================================================== */
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      margin-bottom: 14px;
-
-      font-size: 18px;
-      font-weight: 800;
-    }
-
-    .section-number {
-      width: 30px;
-      height: 30px;
-
-      flex-shrink: 0;
-
-      border-radius: 50%;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: #d4af37;
+    .card h2 {
+      margin-bottom: 20px;
       color: #111111;
-
-      font-size: 14px;
-      font-weight: 900;
     }
 
-
-    /* =====================================================
-       SERVIÇOS
-    ===================================================== */
-
-    .service-list {
-      display: flex;
-
-      flex-direction: row;
-      flex-wrap: nowrap;
-
-      gap: 12px;
-
-      overflow-x: auto;
-      overflow-y: hidden;
-
-      padding:
-        5px
-        4px
-        12px;
-
-      scrollbar-width: thin;
-
-      scrollbar-color:
-        #d4af37
-        #222222;
-    }
-
-    .service-list::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .service-list::-webkit-scrollbar-track {
-      background: #222222;
-      border-radius: 10px;
-    }
-
-    .service-list::-webkit-scrollbar-thumb {
-      background: #d4af37;
-      border-radius: 10px;
-    }
-
-    .service-button {
-      position: relative;
-
-      min-width: 180px;
-
-      flex: 0 0 auto;
-
-      padding: 17px 18px;
-
-      border:
-        1px solid
-        rgba(255,255,255,0.10);
-
-      border-radius: 15px;
-
-      background:
-        linear-gradient(
-          145deg,
-          #252525,
-          #151515
-        );
-
-      color: #ffffff;
-
-      cursor: pointer;
-
-      text-align: left;
-
-      transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease,
-        background 0.25s ease;
-
-      overflow: hidden;
-    }
-
-    .service-button::before {
-      content: "";
-
-      position: absolute;
-
-      left: 0;
-      top: 0;
-
-      width: 4px;
-      height: 100%;
-
-      background: #d4af37;
-
-      transform: scaleY(0);
-
-      transition:
-        transform 0.25s ease;
-    }
-
-    .service-button:hover {
-      transform:
-        translateY(-3px);
-
-      border-color:
-        rgba(212,175,55,0.6);
-
-      box-shadow:
-        0 10px 25px
-        rgba(0,0,0,0.4);
-    }
-
-    .service-button.selected {
-      transform:
-        translateY(-3px)
-        scale(1.02);
-
-      border-color:
-        #d4af37;
-
-      background:
-        linear-gradient(
-          145deg,
-          #3a3017,
-          #211d10
-        );
-
-      box-shadow:
-        0 0 0 2px
-        rgba(212,175,55,0.14),
-        0 12px 30px
-        rgba(212,175,55,0.16);
-    }
-
-    .service-button.selected::before {
-      transform:
-        scaleY(1);
-    }
-
-    .service-name {
-      display: block;
-
-      font-size: 16px;
-      font-weight: 800;
-
-      margin-bottom: 8px;
-
-      white-space: nowrap;
-    }
-
-    .service-info {
-      display: flex;
-
-      gap: 12px;
-
-      color: #bcbcbc;
-
-      font-size: 13px;
-    }
-
-    .service-price {
-      color: #d4af37;
-      font-weight: 800;
-    }
-
-
-    /* =====================================================
-       PROFISSIONAIS
-    ===================================================== */
-
-    .professional-list {
-      display: flex;
-
-      flex-direction: row;
-      flex-wrap: nowrap;
-
-      gap: 12px;
-
-      overflow-x: auto;
-
-      padding:
-        5px
-        4px
-        12px;
-
-      scrollbar-width: thin;
-
-      scrollbar-color:
-        #d4af37
-        #222222;
-    }
-
-    .professional-list::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .professional-list::-webkit-scrollbar-track {
-      background: #222;
-      border-radius: 10px;
-    }
-
-    .professional-list::-webkit-scrollbar-thumb {
-      background: #d4af37;
-      border-radius: 10px;
-    }
-
-    .professional-button {
-      min-width: 150px;
-
-      flex: 0 0 auto;
-
-      padding: 16px 20px;
-
-      border:
-        1px solid
-        rgba(255,255,255,0.10);
-
-      border-radius: 14px;
-
-      background:
-        #1b1b1b;
-
-      color: #ffffff;
-
-      cursor: pointer;
-
-      font-size: 15px;
-      font-weight: 700;
-
-      transition:
-        all 0.25s ease;
-    }
-
-    .professional-button:hover {
-      transform:
-        translateY(-3px);
-
-      border-color:
-        rgba(212,175,55,0.6);
-    }
-
-    .professional-button.selected {
-      color: #111111;
-
-      background:
-        linear-gradient(
-          135deg,
-          #f1d36a,
-          #c29a2e
-        );
-
-      border-color:
-        #d4af37;
-
-      box-shadow:
-        0 8px 25px
-        rgba(212,175,55,0.25);
-
-      transform:
-        translateY(-3px);
-    }
-
-
-    /* =====================================================
-       INPUTS
-    ===================================================== */
-
-    .form-grid {
+    .grid {
       display: grid;
-
       grid-template-columns:
-        1fr 1fr;
+        repeat(2, minmax(0, 1fr));
 
-      gap: 14px;
+      gap: 18px;
     }
 
-    .field {
+    .campo {
       display: flex;
-
       flex-direction: column;
-
       gap: 7px;
     }
 
-    .field.full {
+    .campo.full {
       grid-column: 1 / -1;
     }
 
-    .field label {
-      color: #d5d5d5;
-
-      font-size: 13px;
-      font-weight: 700;
+    label {
+      font-weight: bold;
+      color: #333333;
     }
 
-    .field input {
+    input,
+    select {
       width: 100%;
-
-      padding:
-        14px 15px;
-
-      border:
-        1px solid
-        rgba(255,255,255,0.12);
-
-      border-radius: 12px;
-
-      background:
-        #171717;
-
-      color: #ffffff;
-
-      outline: none;
-
+      height: 48px;
+      border: 1px solid #d0d0d0;
+      border-radius: 10px;
+      padding: 0 13px;
       font-size: 15px;
-
-      transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+      background: #ffffff;
+      color: #222222;
+      outline: none;
     }
 
-    .field input:focus {
-      border-color:
-        #d4af37;
-
+    input:focus,
+    select:focus {
+      border-color: #d4af37;
       box-shadow:
-        0 0 0 3px
-        rgba(212,175,55,0.10);
+        0 0 0 3px rgba(212, 175, 55, 0.15);
     }
 
-    .field input::placeholder {
-      color: #666666;
-    }
-
-
-    /* =====================================================
-       HORÁRIOS
-    ===================================================== */
-
-    .time-list {
+    .horarios {
       display: grid;
 
       grid-template-columns:
         repeat(
           auto-fill,
-          minmax(105px, 1fr)
+          minmax(100px, 1fr)
         );
 
       gap: 10px;
-    }
-
-    .time-button {
-      padding: 13px 8px;
-
-      border:
-        1px solid
-        rgba(255,255,255,0.10);
-
-      border-radius: 11px;
-
-      background:
-        #1b1b1b;
-
-      color: #ffffff;
-
-      cursor: pointer;
-
-      font-size: 14px;
-      font-weight: 800;
-
-      transition:
-        all 0.2s ease;
-    }
-
-    .time-button:hover {
-      transform:
-        translateY(-2px);
-
-      border-color:
-        #d4af37;
-    }
-
-    .time-button.selected {
-      background:
-        #d4af37;
-
-      color:
-        #111111;
-
-      border-color:
-        #d4af37;
-
-      box-shadow:
-        0 8px 20px
-        rgba(212,175,55,0.22);
-    }
-
-
-    /* =====================================================
-       BOTÃO AGENDAR
-    ===================================================== */
-
-    .btn-agendar {
-      width: 100%;
-
-      border: none;
-
-      border-radius: 14px;
-
-      padding: 17px;
-
-      margin-top: 18px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #f0d267,
-          #c49a2f
-        );
-
-      color: #111111;
-
-      font-size: 16px;
-      font-weight: 900;
-
-      cursor: pointer;
-
-      transition:
-        all 0.25s ease;
-
-      box-shadow:
-        0 10px 30px
-        rgba(212,175,55,0.18);
-    }
-
-    .btn-agendar:hover {
-      transform:
-        translateY(-2px);
-
-      box-shadow:
-        0 14px 35px
-        rgba(212,175,55,0.28);
-    }
-
-    .btn-agendar:disabled {
-      opacity: 0.45;
-
-      cursor: not-allowed;
-
-      transform: none;
-
-      box-shadow: none;
-    }
-
-    /* Estado final do botão */
-    .btn-agendar.confirmado {
-      background:
-        linear-gradient(
-          135deg,
-          #49c878,
-          #2f9f5a
-        );
-
-      color: #ffffff;
-
-      opacity: 1;
-
-      cursor: default;
-
-      box-shadow:
-        0 10px 25px
-        rgba(50,190,100,0.20);
-    }
-
-
-    /* =====================================================
-       RESUMO
-    ===================================================== */
-
-    .summary {
-      display: none;
-
-      background:
-        #151515;
-
-      border:
-        1px solid
-        rgba(212,175,55,0.25);
-
-      border-radius: 15px;
-
-      padding: 17px;
 
       margin-top: 15px;
     }
 
-    .summary.show {
-      display: block;
-
-      animation:
-        aparecer 0.3s ease;
+    .horario {
+      border: 2px solid #d4af37;
+      background: #ffffff;
+      color: #222222;
+      border-radius: 10px;
+      padding: 12px 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
     }
 
-    .summary-title {
-      color: #d4af37;
-
-      font-size: 15px;
-      font-weight: 900;
-
-      margin-bottom: 12px;
+    .horario:hover {
+      background: #d4af37;
+      color: #ffffff;
     }
 
-    .summary-row {
-      display: flex;
-
-      justify-content: space-between;
-
-      gap: 15px;
-
-      padding: 7px 0;
-
-      border-bottom:
-        1px solid
-        rgba(255,255,255,0.05);
-
-      font-size: 13px;
+    .horario.selecionado {
+      background: #111111;
+      color: #ffffff;
+      border-color: #111111;
     }
 
-    .summary-row:last-child {
-      border-bottom: none;
+    .sem-horarios {
+      color: #777777;
+      padding: 15px 0;
+      text-align: center;
     }
 
-    .summary-row span:first-child {
-      color: #8f8f8f;
-    }
-
-    .summary-row span:last-child {
-      text-align: right;
-
-      font-weight: 700;
-    }
-
-
-    /* =====================================================
-       MENSAGENS
-    ===================================================== */
-
-    .message {
+    .status {
       display: none;
-
-      padding: 14px 15px;
-
-      border-radius: 12px;
-
-      margin-bottom: 15px;
-
+      border-radius: 10px;
+      padding: 13px 15px;
+      margin-bottom: 18px;
       font-size: 14px;
-
       line-height: 1.5;
     }
 
-    .message.show {
+    .status.mostrar {
       display: block;
-
-      animation:
-        aparecer 0.3s ease;
     }
 
-    .message.loading {
-      background:
-        rgba(212,175,55,0.10);
-
-      border:
-        1px solid
-        rgba(212,175,55,0.25);
-
-      color: #e8d484;
+    .status.info {
+      background: #eaf3ff;
+      color: #17518a;
+      border: 1px solid #b9d9ff;
     }
 
-    .message.error {
-      background:
-        rgba(220,50,50,0.10);
-
-      border:
-        1px solid
-        rgba(220,50,50,0.25);
-
-      color: #ff8d8d;
+    .status.sucesso {
+      background: #e9f9ee;
+      color: #176b31;
+      border: 1px solid #a9dfb8;
     }
 
-    .message.success {
-      background:
-        rgba(50,190,100,0.10);
-
-      border:
-        1px solid
-        rgba(50,190,100,0.25);
-
-      color: #78e69d;
+    .status.erro {
+      background: #fff0f0;
+      color: #a52222;
+      border: 1px solid #efb1b1;
     }
 
+    .btn {
+      width: 100%;
+      height: 52px;
+      border: 0;
+      border-radius: 10px;
+      background: #111111;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-    /* =====================================================
-       LOADING
-    ===================================================== */
+    .btn:hover {
+      background: #d4af37;
+      color: #111111;
+    }
 
-    .loading-center {
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .resumo {
+      background: #f7f7f7;
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 20px;
+    }
+
+    .resumo h3 {
+      margin-bottom: 12px;
+    }
+
+    .resumo-linha {
       display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 7px 0;
+      border-bottom: 1px solid #e2e2e2;
+    }
 
-      align-items: center;
+    .resumo-linha:last-child {
+      border-bottom: 0;
+    }
 
-      justify-content: center;
+    .resumo-linha strong {
+      color: #111111;
+    }
 
-      gap: 10px;
-
-      padding: 20px;
-
-      color: #aaa;
-
+    .carregando {
+      color: #777777;
       font-size: 14px;
     }
 
-    .spinner {
-      width: 20px;
-      height: 20px;
-
-      border:
-        3px solid
-        #333;
-
-      border-top-color:
-        #d4af37;
-
-      border-radius: 50%;
-
-      animation:
-        girar 0.8s linear infinite;
+    .oculto {
+      display: none !important;
     }
 
-
-    /* =====================================================
-       VAZIO
-    ===================================================== */
-
-    .empty {
-      color: #777;
-
-      font-size: 14px;
-
-      padding: 15px 5px;
-    }
-
-
-    /* =====================================================
-       RODAPÉ
-    ===================================================== */
-
-    .footer {
+    footer {
       text-align: center;
-
-      color: #666;
-
-      font-size: 12px;
-
-      margin-top: 25px;
+      color: #999999;
+      padding: 20px;
+      font-size: 13px;
     }
 
+    @media (max-width: 700px) {
 
-    /* =====================================================
-       ANIMAÇÕES
-    ===================================================== */
-
-    @keyframes girar {
-      to {
-        transform: rotate(360deg);
+      header h1 {
+        font-size: 27px;
       }
-    }
-
-    @keyframes aparecer {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes subir {
-      from {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-
-    /* =====================================================
-       MOBILE
-    ===================================================== */
-
-    @media (max-width: 650px) {
 
       .container {
-        padding:
-          18px 10px 40px;
+        padding: 12px;
       }
 
       .card {
-        padding: 17px;
-        border-radius: 17px;
+        padding: 18px;
+        border-radius: 14px;
       }
 
-      .header h1 {
-        font-size: 25px;
-      }
-
-      .form-grid {
+      .grid {
         grid-template-columns: 1fr;
       }
 
-      .field.full {
+      .campo.full {
         grid-column: auto;
       }
 
-      .service-button {
-        min-width: 170px;
-      }
-
-      .professional-button {
-        min-width: 135px;
+      .horarios {
+        grid-template-columns:
+          repeat(3, 1fr);
       }
 
     }
 
+    @media (max-width: 400px) {
+
+      .horarios {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+    }
   </style>
 </head>
 
-
 <body>
 
-  <main class="container">
+  <div class="container">
 
-    <!-- =================================================
-         CABEÇALHO
-    ================================================== -->
-
-    <header class="header">
-
-      <div class="logo">
-        💈
-      </div>
-
-      <h1>
-        Agendamento
-      </h1>
-
-      <p>
-        Escolha seu serviço, profissional e horário
-      </p>
-
+    <header>
+      <h1>✂️ Barbearia</h1>
+      <p>Agende seu horário de forma rápida e fácil</p>
     </header>
 
 
-    <!-- =================================================
-         MENSAGEM GLOBAL
-    ================================================== -->
-
+    <!-- STATUS -->
     <div
-      id="mensagem"
-      class="message"
+      id="status"
+      class="status"
     ></div>
 
 
-    <!-- =================================================
-         DADOS DO CLIENTE
-    ================================================== -->
+    <!-- AGENDAMENTO -->
+    <div class="card">
 
-    <section class="card">
+      <h2>Agende seu horário</h2>
 
-      <div class="section-title">
+      <div class="grid">
 
-        <div class="section-number">
-          1
-        </div>
-
-        <span>
-          Seus dados
-        </span>
-
-      </div>
-
-
-      <div class="form-grid">
-
-        <div class="field full">
+        <!-- CLIENTE -->
+        <div class="campo">
 
           <label for="cliente">
             Nome
           </label>
 
           <input
-            id="cliente"
             type="text"
-            placeholder="Digite seu nome"
+            id="cliente"
+            placeholder="Seu nome"
             autocomplete="name"
           >
 
         </div>
 
 
-        <div class="field full">
+        <!-- TELEFONE -->
+        <div class="campo">
 
           <label for="telefone">
             Telefone
           </label>
 
           <input
-            id="telefone"
             type="tel"
-            placeholder="(31) 99999-9999"
+            id="telefone"
+            placeholder="(00) 00000-0000"
             autocomplete="tel"
+          >
+
+        </div>
+
+
+        <!-- SERVIÇO -->
+        <div class="campo">
+
+          <label for="servico">
+            Serviço
+          </label>
+
+          <select id="servico">
+
+            <option value="">
+              Carregando serviços...
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- PROFISSIONAL -->
+        <div class="campo">
+
+          <label for="profissional">
+            Profissional
+          </label>
+
+          <select id="profissional">
+
+            <option value="">
+              Carregando profissionais...
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- DATA -->
+        <div class="campo full">
+
+          <label for="data">
+            Data
+          </label>
+
+          <input
+            type="date"
+            id="data"
           >
 
         </div>
 
       </div>
 
-    </section>
 
-
-    <!-- =================================================
-         SERVIÇOS
-    ================================================== -->
-
-    <section class="card">
-
-      <div class="section-title">
-
-        <div class="section-number">
-          2
-        </div>
-
-        <span>
-          Escolha o serviço
-        </span>
-
-      </div>
-
-
+      <!-- HORÁRIOS -->
       <div
-        id="listaServicos"
-        class="service-list"
+        id="areaHorarios"
+        class="oculto"
+        style="margin-top: 22px;"
       >
 
-        <div class="loading-center">
-
-          <div class="spinner"></div>
-
-          <span>
-            Carregando serviços...
-          </span>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =================================================
-         PROFISSIONAIS
-    ================================================== -->
-
-    <section class="card">
-
-      <div class="section-title">
-
-        <div class="section-number">
-          3
-        </div>
-
-        <span>
-          Escolha o profissional
-        </span>
-
-      </div>
-
-
-      <div
-        id="listaProfissionais"
-        class="professional-list"
-      >
-
-        <div class="loading-center">
-
-          <div class="spinner"></div>
-
-          <span>
-            Carregando profissionais...
-          </span>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =================================================
-         DATA
-    ================================================== -->
-
-    <section class="card">
-
-      <div class="section-title">
-
-        <div class="section-number">
-          4
-        </div>
-
-        <span>
-          Escolha a data
-        </span>
-
-      </div>
-
-
-      <div class="field">
-
-        <label for="data">
-          Data do atendimento
-        </label>
-
-        <input
-          id="data"
-          type="date"
-        >
-
-      </div>
-
-    </section>
-
-
-    <!-- =================================================
-         HORÁRIOS
-    ================================================== -->
-
-    <section class="card">
-
-      <div class="section-title">
-
-        <div class="section-number">
-          5
-        </div>
-
-        <span>
+        <h3>
           Escolha o horário
-        </span>
+        </h3>
+
+        <div
+          id="horarios"
+          class="horarios"
+        ></div>
 
       </div>
 
 
+      <!-- RESUMO -->
       <div
-        id="listaHorarios"
-        class="time-list"
+        id="resumo"
+        class="resumo oculto"
       >
 
-        <div class="empty">
-          Selecione serviço, profissional e data.
+        <h3>
+          Resumo do agendamento
+        </h3>
+
+        <div class="resumo-linha">
+          <span>Cliente</span>
+          <strong id="resumoCliente">-</strong>
+        </div>
+
+        <div class="resumo-linha">
+          <span>Telefone</span>
+          <strong id="resumoTelefone">-</strong>
+        </div>
+
+        <div class="resumo-linha">
+          <span>Serviço</span>
+          <strong id="resumoServico">-</strong>
+        </div>
+
+        <div class="resumo-linha">
+          <span>Profissional</span>
+          <strong id="resumoProfissional">-</strong>
+        </div>
+
+        <div class="resumo-linha">
+          <span>Data</span>
+          <strong id="resumoData">-</strong>
+        </div>
+
+        <div class="resumo-linha">
+          <span>Horário</span>
+          <strong id="resumoHorario">-</strong>
+        </div>
+
+        <div class="resumo-linha">
+          <span>Valor</span>
+          <strong id="resumoPreco">-</strong>
         </div>
 
       </div>
 
-    </section>
 
+      <!-- BOTÃO -->
+      <div style="margin-top: 20px;">
 
-    <!-- =================================================
-         RESUMO
-    ================================================== -->
-
-    <section
-      id="resumo"
-      class="card summary"
-    >
-
-      <div class="summary-title">
-        Resumo do agendamento
-      </div>
-
-
-      <div class="summary-row">
-
-        <span>
-          Cliente
-        </span>
-
-        <span id="resumoCliente">
-          -
-        </span>
+        <button
+          id="btnAgendar"
+          class="btn"
+          disabled
+        >
+          Confirmar agendamento
+        </button>
 
       </div>
 
-
-      <div class="summary-row">
-
-        <span>
-          Serviço
-        </span>
-
-        <span id="resumoServico">
-          -
-        </span>
-
-      </div>
+    </div>
 
 
-      <div class="summary-row">
-
-        <span>
-          Profissional
-        </span>
-
-        <span id="resumoProfissional">
-          -
-        </span>
-
-      </div>
-
-
-      <div class="summary-row">
-
-        <span>
-          Data
-        </span>
-
-        <span id="resumoData">
-          -
-        </span>
-
-      </div>
-
-
-      <div class="summary-row">
-
-        <span>
-          Horário
-        </span>
-
-        <span id="resumoHorario">
-          -
-        </span>
-
-      </div>
-
-
-      <div class="summary-row">
-
-        <span>
-          Valor
-        </span>
-
-        <span id="resumoPreco">
-          -
-        </span>
-
-      </div>
-
-
-      <button
-        id="btnAgendar"
-        class="btn-agendar"
-        type="button"
-        disabled
-      >
-        Confirmar agendamento
-      </button>
-
-    </section>
-
-
-    <!-- =================================================
-         RODAPÉ
-    ================================================== -->
-
-    <footer class="footer">
+    <footer>
       Sistema de agendamento da barbearia
     </footer>
 
-  </main>
+  </div>
 
 
   <script>
 
-    /* ====================================================
-       CONFIGURAÇÃO DA API
-    ==================================================== */
+    /********************************************************
+     * CONFIGURAÇÃO DA API
+     ********************************************************/
 
     const API_URL =
-      "https://script.google.com/macros/s/AKfycbz_cgLSikg8Pvh3Xu6_2aIWybRHjNl9EnYmZ7FWqaJ1OBwhvqhKBpHA-na7adzajFgS/exec";
+  "https://script.google.com/macros/s/AKfycbz_cgLSikg8Pvh3Xu6_2aIWybRHjNl9EnYmZ7FWqaJ1OBwhvqhKBpHA-na7adzajFgS/exec";
 
 
-    /* ====================================================
-       ESTADO DO SISTEMA
-    ==================================================== */
 
-    const estado = {
+    /********************************************************
+     * ESTADO
+     ********************************************************/
+
+    let dadosSistema = {
 
       servicos: [],
 
-      profissionais: [],
-
-      configuracao: null,
-
-      servicoSelecionado: null,
-
-      profissionalSelecionado: null,
-
-      dataSelecionada: "",
-
-      horarioSelecionado: null,
-
-      carregandoHorarios: false,
-
-      agendamentoConfirmado: false
+      profissionais: []
 
     };
 
 
-    /* ====================================================
-       ELEMENTOS
-    ==================================================== */
+    let horarioSelecionado = null;
 
-    const listaServicos =
-      document.getElementById(
-        "listaServicos"
-      );
 
-    const listaProfissionais =
-      document.getElementById(
-        "listaProfissionais"
-      );
+    let carregandoHorarios = false;
 
-    const listaHorarios =
-      document.getElementById(
-        "listaHorarios"
-      );
 
-    const inputData =
-      document.getElementById(
-        "data"
-      );
+    /********************************************************
+     * ELEMENTOS
+     ********************************************************/
 
-    const inputCliente =
-      document.getElementById(
-        "cliente"
-      );
+    const statusEl =
+      document.getElementById("status");
 
-    const inputTelefone =
-      document.getElementById(
-        "telefone"
-      );
+    const clienteEl =
+      document.getElementById("cliente");
 
-    const resumo =
-      document.getElementById(
-        "resumo"
-      );
+    const telefoneEl =
+      document.getElementById("telefone");
+
+    const servicoEl =
+      document.getElementById("servico");
+
+    const profissionalEl =
+      document.getElementById("profissional");
+
+    const dataEl =
+      document.getElementById("data");
+
+    const areaHorariosEl =
+      document.getElementById("areaHorarios");
+
+    const horariosEl =
+      document.getElementById("horarios");
+
+    const resumoEl =
+      document.getElementById("resumo");
 
     const btnAgendar =
-      document.getElementById(
-        "btnAgendar"
-      );
+      document.getElementById("btnAgendar");
 
-    const mensagem =
-      document.getElementById(
-        "mensagem"
-      );
 
+    /********************************************************
+     * INICIALIZAÇÃO
+     ********************************************************/
 
-    /* ====================================================
-       UTILITÁRIOS
-    ==================================================== */
-
-    function escaparHTML(valor) {
-
-      return String(valor ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-    }
-
-
-    function mostrarMensagem(
-      texto,
-      tipo
-    ) {
-
-      mensagem.textContent =
-        texto || "";
-
-      mensagem.className =
-        "message";
-
-      if (!texto) {
-        return;
-      }
-
-      mensagem.classList.add(
-        "show",
-        tipo || "loading"
-      );
-
-    }
-
-
-    function esconderMensagem() {
-
-      mensagem.className =
-        "message";
-
-      mensagem.textContent =
-        "";
-
-    }
-
-
-    function formatarMoeda(valor) {
-
-      const numero =
-        Number(valor || 0);
-
-      return numero.toLocaleString(
-        "pt-BR",
-        {
-          style: "currency",
-          currency: "BRL"
-        }
-      );
-
-    }
-
-
-    function formatarDataBR(valor) {
-
-      if (!valor) {
-        return "-";
-      }
-
-      const partes =
-        String(valor).split("-");
-
-      if (
-        partes.length !== 3
-      ) {
-        return valor;
-      }
-
-      return (
-        partes[2] +
-        "/" +
-        partes[1] +
-        "/" +
-        partes[0]
-      );
-
-    }
-
-
-    function normalizarTexto(valor) {
-
-      return String(
-        valor ?? ""
-      )
-        .trim()
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(
-          /[\u0300-\u036f]/g,
-          ""
-        );
-
-    }
-
-
-    /* ====================================================
-       JSONP
-       
-       AJUSTE IMPORTANTE:
-       O script agora possui onload.
-
-       Isso evita que a interface fique presa
-       indefinidamente esperando o callback quando
-       o Apps Script já terminou de processar a chamada.
-    ==================================================== */
-
-    let contadorJSONP = 0;
-
-
-    function chamarAPI(parametros) {
-
-      return new Promise(
-        function(resolve, reject) {
-
-          const nomeCallback =
-            "__barbeariaCallback_" +
-            Date.now() +
-            "_" +
-            contadorJSONP++;
-
-
-          const script =
-            document.createElement(
-              "script"
-            );
-
-
-          let finalizado =
-            false;
-
-
-          let callbackRecebido =
-            false;
-
-
-          /*
-           * Timeout de segurança.
-           */
-          const timeout =
-            setTimeout(
-              function() {
-
-                if (finalizado) {
-                  return;
-                }
-
-                finalizado = true;
-
-                cleanup();
-
-                reject(
-                  new Error(
-                    "O Google Apps Script demorou demais para responder."
-                  )
-                );
-
-              },
-              20000
-            );
-
-
-          function cleanup() {
-
-            clearTimeout(
-              timeout
-            );
-
-
-            try {
-
-              delete window[
-                nomeCallback
-              ];
-
-            }
-
-            catch (erro) {
-
-              window[
-                nomeCallback
-              ] = undefined;
-
-            }
-
-
-            if (
-              script.parentNode
-            ) {
-
-              script.parentNode.removeChild(
-                script
-              );
-
-            }
-
-          }
-
-
-          /*
-           * Callback normal do JSONP.
-           */
-          window[
-            nomeCallback
-          ] = function(resposta) {
-
-            if (finalizado) {
-              return;
-            }
-
-
-            callbackRecebido =
-              true;
-
-
-            finalizado =
-              true;
-
-
-            cleanup();
-
-
-            resolve(
-              resposta
-            );
-
-          };
-
-
-          /*
-           * Erro real de carregamento.
-           */
-          script.onerror =
-            function() {
-
-              if (finalizado) {
-                return;
-              }
-
-
-              finalizado =
-                true;
-
-
-              cleanup();
-
-
-              reject(
-                new Error(
-                  "Não foi possível conectar ao Google Apps Script."
-                )
-              );
-
-            };
-
-
-          /*
-           * Quando o <script> termina de carregar,
-           * verificamos se o callback foi executado.
-           *
-           * Se o callback já foi recebido, não fazemos
-           * absolutamente nada.
-           *
-           * Se o script carregou mas o callback não foi
-           * executado, deixamos o timeout cuidar da situação.
-           *
-           * Isso é importante porque NÃO devemos marcar
-           * um agendamento como sucesso apenas pelo
-           * carregamento do script.
-           */
-          script.onload =
-            function() {
-
-              if (
-                finalizado ||
-                callbackRecebido
-              ) {
-                return;
-              }
-
-              console.warn(
-                "O script JSONP carregou, mas o callback ainda não foi recebido."
-              );
-
-            };
-
-
-          const query =
-            new URLSearchParams();
-
-
-          Object.keys(
-            parametros || {}
-          ).forEach(
-            function(chave) {
-
-              const valor =
-                parametros[chave];
-
-
-              if (
-                valor !== null &&
-                typeof valor !==
-                  "undefined"
-              ) {
-
-                query.set(
-                  chave,
-                  String(valor)
-                );
-
-              }
-
-            }
-          );
-
-
-          query.set(
-            "callback",
-            nomeCallback
-          );
-
-
-          script.async =
-            true;
-
-
-          script.src =
-            API_URL +
-            "?" +
-            query.toString();
-
-
-          document.body.appendChild(
-            script
-          );
-
-        }
-      );
-
-    }
-
-
-    /* ====================================================
-       CARREGAR DADOS
-    ==================================================== */
-
-    async function carregarDados() {
-
-      mostrarMensagem(
-        "Carregando serviços e profissionais...",
-        "loading"
-      );
-
-
-      try {
-
-        const resposta =
-          await chamarAPI({
-            acao: "dados"
-          });
-
-
-        console.log(
-          "Resposta da API:",
-          resposta
-        );
-
-
-        if (
-          !resposta ||
-          resposta.sucesso !== true
-        ) {
-
-          throw new Error(
-            resposta &&
-            resposta.mensagem
-              ? resposta.mensagem
-              : "A API retornou uma resposta inválida."
-          );
-
-        }
-
-
-        estado.servicos =
-          Array.isArray(
-            resposta.servicos
-          )
-            ? resposta.servicos
-            : [];
-
-
-        estado.profissionais =
-          Array.isArray(
-            resposta.profissionais
-          )
-            ? resposta.profissionais
-            : [];
-
-
-        estado.configuracao =
-          resposta.configuracao ||
-          null;
-
-
-        estado.servicos =
-          estado.servicos.filter(
-            function(servico) {
-
-              const nome =
-                normalizarTexto(
-                  servico.nome
-                );
-
-              return (
-                nome &&
-                !nome.startsWith(
-                  "legenda:"
-                )
-              );
-
-            }
-          );
-
-
-        estado.profissionais =
-          estado.profissionais.filter(
-            function(profissional) {
-
-              const nome =
-                normalizarTexto(
-                  profissional.nome
-                );
-
-              return (
-                nome &&
-                !nome.startsWith(
-                  "legenda:"
-                )
-              );
-
-            }
-          );
-
-
-        renderizarServicos();
-
-        renderizarProfissionais();
-
-
-        if (
-          estado.servicos.length === 0
-        ) {
-
-          mostrarMensagem(
-            "Nenhum serviço ativo foi encontrado na planilha.",
-            "error"
-          );
-
-        }
-
-        else if (
-          estado.profissionais.length === 0
-        ) {
-
-          mostrarMensagem(
-            "Nenhum profissional ativo foi encontrado na planilha.",
-            "error"
-          );
-
-        }
-
-        else {
-
-          esconderMensagem();
-
-        }
-
-
-        atualizarResumo();
-
-      }
-
-      catch (erro) {
-
-        console.error(
-          "ERRO API:",
-          erro
-        );
-
-
-        listaServicos.innerHTML =
-          `
-            <div class="empty">
-              Não foi possível carregar os serviços.
-            </div>
-          `;
-
-
-        listaProfissionais.innerHTML =
-          `
-            <div class="empty">
-              Não foi possível carregar os profissionais.
-            </div>
-          `;
-
-
-        mostrarMensagem(
-          erro.message ||
-          "Não foi possível conectar ao sistema.",
-          "error"
-        );
-
-      }
-
-    }
-
-
-    /* ====================================================
-       RENDERIZAR SERVIÇOS
-    ==================================================== */
-
-    function renderizarServicos() {
-
-      listaServicos.innerHTML =
-        "";
-
-
-      if (
-        estado.servicos.length === 0
-      ) {
-
-        listaServicos.innerHTML =
-          `
-            <div class="empty">
-              Nenhum serviço disponível.
-            </div>
-          `;
-
-        return;
-
-      }
-
-
-      estado.servicos.forEach(
-        function(servico, indice) {
-
-          const botao =
-            document.createElement(
-              "button"
-            );
-
-
-          botao.type =
-            "button";
-
-          botao.className =
-            "service-button";
-
-
-          botao.dataset.index =
-            String(indice);
-
-
-          const nome =
-            String(
-              servico.nome || ""
-            );
-
-
-          const preco =
-            Number(
-              servico.preco || 0
-            );
-
-
-          const duracao =
-            Number(
-              servico.duracao || 0
-            );
-
-
-          botao.innerHTML =
-            `
-              <span class="service-name">
-                ${escaparHTML(nome)}
-              </span>
-
-              <span class="service-info">
-
-                <span class="service-price">
-                  ${formatarMoeda(preco)}
-                </span>
-
-                <span>
-                  ${duracao} min
-                </span>
-
-              </span>
-            `;
-
-
-          botao.addEventListener(
-            "click",
-            function() {
-
-              selecionarServico(
-                indice
-              );
-
-            }
-          );
-
-
-          listaServicos.appendChild(
-            botao
-          );
-
-        }
-      );
-
-    }
-
-
-    /* ====================================================
-       SELECIONAR SERVIÇO
-    ==================================================== */
-
-    function selecionarServico(indice) {
-
-      if (
-        estado.agendamentoConfirmado
-      ) {
-        return;
-      }
-
-
-      const servico =
-        estado.servicos[indice];
-
-
-      if (!servico) {
-        return;
-      }
-
-
-      estado.servicoSelecionado =
-        servico;
-
-
-      estado.horarioSelecionado =
-        null;
-
-
-      document
-        .querySelectorAll(
-          ".service-button"
-        )
-        .forEach(
-          function(botao, i) {
-
-            botao.classList.toggle(
-              "selected",
-              i === indice
-            );
-
-          }
-        );
-
-
-      atualizarResumo();
-
-      carregarHorariosSePossivel();
-
-    }
-
-
-    /* ====================================================
-       RENDERIZAR PROFISSIONAIS
-    ==================================================== */
-
-    function renderizarProfissionais() {
-
-      listaProfissionais.innerHTML =
-        "";
-
-
-      if (
-        estado.profissionais.length === 0
-      ) {
-
-        listaProfissionais.innerHTML =
-          `
-            <div class="empty">
-              Nenhum profissional disponível.
-            </div>
-          `;
-
-        return;
-
-      }
-
-
-      estado.profissionais.forEach(
-        function(profissional, indice) {
-
-          const botao =
-            document.createElement(
-              "button"
-            );
-
-
-          botao.type =
-            "button";
-
-          botao.className =
-            "professional-button";
-
-
-          botao.dataset.index =
-            String(indice);
-
-
-          botao.textContent =
-            String(
-              profissional.nome || ""
-            );
-
-
-          botao.addEventListener(
-            "click",
-            function() {
-
-              selecionarProfissional(
-                indice
-              );
-
-            }
-          );
-
-
-          listaProfissionais.appendChild(
-            botao
-          );
-
-        }
-      );
-
-    }
-
-
-    /* ====================================================
-       SELECIONAR PROFISSIONAL
-    ==================================================== */
-
-    function selecionarProfissional(indice) {
-
-      if (
-        estado.agendamentoConfirmado
-      ) {
-        return;
-      }
-
-
-      const profissional =
-        estado.profissionais[indice];
-
-
-      if (!profissional) {
-        return;
-      }
-
-
-      estado.profissionalSelecionado =
-        profissional;
-
-
-      estado.horarioSelecionado =
-        null;
-
-
-      document
-        .querySelectorAll(
-          ".professional-button"
-        )
-        .forEach(
-          function(botao, i) {
-
-            botao.classList.toggle(
-              "selected",
-              i === indice
-            );
-
-          }
-        );
-
-
-      atualizarResumo();
-
-      carregarHorariosSePossivel();
-
-    }
-
-
-    /* ====================================================
-       DATA
-    ==================================================== */
-
-    inputData.addEventListener(
-      "change",
+    document.addEventListener(
+      "DOMContentLoaded",
       function() {
 
-        if (
-          estado.agendamentoConfirmado
-        ) {
-          return;
-        }
+        configurarDataMinima();
 
+        configurarEventos();
 
-        estado.dataSelecionada =
-          inputData.value;
-
-
-        estado.horarioSelecionado =
-          null;
-
-
-        atualizarResumo();
-
-        carregarHorariosSePossivel();
+        carregarDados();
 
       }
     );
 
 
-    /* ====================================================
-       CARREGAR HORÁRIOS
-    ==================================================== */
+    /********************************************************
+     * DATA MÍNIMA
+     ********************************************************/
 
-    async function carregarHorariosSePossivel() {
+    function configurarDataMinima() {
 
-      if (
-        estado.agendamentoConfirmado
-      ) {
-        return;
-      }
+      const hoje =
+        new Date();
 
+      const ano =
+        hoje.getFullYear();
+
+      const mes =
+        String(
+          hoje.getMonth() + 1
+        ).padStart(
+          2,
+          "0"
+        );
+
+      const dia =
+        String(
+          hoje.getDate()
+        ).padStart(
+          2,
+          "0"
+        );
+
+      dataEl.min =
+        ano + "-" +
+        mes + "-" +
+        dia;
+
+    }
+
+
+    /********************************************************
+     * EVENTOS
+     ********************************************************/
+
+    function configurarEventos() {
+
+      servicoEl.addEventListener(
+        "change",
+        function() {
+
+          limparHorario();
+
+          atualizarResumo();
+
+          verificarHorarios();
+
+        }
+      );
+
+
+      profissionalEl.addEventListener(
+        "change",
+        function() {
+
+          limparHorario();
+
+          atualizarResumo();
+
+          verificarHorarios();
+
+        }
+      );
+
+
+      dataEl.addEventListener(
+        "change",
+        function() {
+
+          limparHorario();
+
+          atualizarResumo();
+
+          verificarHorarios();
+
+        }
+      );
+
+
+      clienteEl.addEventListener(
+        "input",
+        atualizarResumo
+      );
+
+
+      telefoneEl.addEventListener(
+        "input",
+        atualizarResumo
+      );
+
+
+      btnAgendar.addEventListener(
+        "click",
+        realizarAgendamento
+      );
+
+    }
+
+
+    /********************************************************
+     * CARREGAR DADOS
+     ********************************************************/
+
+    function carregarDados() {
+
+      mostrarStatus(
+        "Carregando serviços e profissionais...",
+        "info"
+      );
+
+
+      jsonp(
+        "dados",
+        {},
+        function(resposta) {
+
+          if (
+            !resposta ||
+            resposta.sucesso !== true
+          ) {
+
+            throw new Error(
+              resposta &&
+              resposta.mensagem
+                ? resposta.mensagem
+                : "Não foi possível carregar os dados."
+            );
+
+          }
+
+
+          dadosSistema.servicos =
+            Array.isArray(
+              resposta.servicos
+            )
+              ? resposta.servicos
+              : [];
+
+
+          dadosSistema.profissionais =
+            Array.isArray(
+              resposta.profissionais
+            )
+              ? resposta.profissionais
+              : [];
+
+
+          preencherServicos();
+
+          preencherProfissionais();
+
+
+          if (
+            dadosSistema.servicos.length === 0 &&
+            dadosSistema.profissionais.length === 0
+          ) {
+
+            mostrarStatus(
+              "A API respondeu, mas não existem serviços ou profissionais cadastrados na planilha.",
+              "erro"
+            );
+
+            return;
+
+          }
+
+
+          mostrarStatus(
+            "Serviços e profissionais carregados.",
+            "sucesso"
+          );
+
+        }
+      );
+
+    }
+
+
+    /********************************************************
+     * PREENCHER SERVIÇOS
+     ********************************************************/
+
+    function preencherServicos() {
+
+      servicoEl.innerHTML = "";
+
+      const opcaoInicial =
+        document.createElement("option");
+
+      opcaoInicial.value = "";
+
+      opcaoInicial.textContent =
+        dadosSistema.servicos.length
+          ? "Selecione um serviço"
+          : "Nenhum serviço cadastrado";
+
+      servicoEl.appendChild(
+        opcaoInicial
+      );
+
+
+      dadosSistema.servicos.forEach(
+        function(servico) {
+
+          const option =
+            document.createElement("option");
+
+          option.value =
+            servico.nome || "";
+
+          let texto =
+            servico.nome || "Serviço";
+
+          if (
+            servico.preco !== undefined &&
+            servico.preco !== null
+          ) {
+
+            const preco =
+              Number(
+                servico.preco
+              );
+
+            if (
+              !isNaN(preco) &&
+              preco > 0
+            ) {
+
+              texto +=
+                " - " +
+                formatarMoeda(preco);
+
+            }
+
+          }
+
+
+          if (
+            servico.duracao
+          ) {
+
+            texto +=
+              " (" +
+              servico.duracao +
+              " min)";
+
+          }
+
+
+          option.textContent =
+            texto;
+
+          servicoEl.appendChild(
+            option
+          );
+
+        }
+      );
+
+    }
+
+
+    /********************************************************
+     * PREENCHER PROFISSIONAIS
+     ********************************************************/
+
+    function preencherProfissionais() {
+
+      profissionalEl.innerHTML = "";
+
+      const opcaoInicial =
+        document.createElement("option");
+
+      opcaoInicial.value = "";
+
+      opcaoInicial.textContent =
+        dadosSistema.profissionais.length
+          ? "Selecione um profissional"
+          : "Nenhum profissional cadastrado";
+
+      profissionalEl.appendChild(
+        opcaoInicial
+      );
+
+
+      dadosSistema.profissionais.forEach(
+        function(profissional) {
+
+          const nome =
+            typeof profissional === "string"
+              ? profissional
+              : profissional.nome;
+
+
+          if (!nome) {
+            return;
+          }
+
+
+          const option =
+            document.createElement("option");
+
+          option.value =
+            nome;
+
+          option.textContent =
+            nome;
+
+          profissionalEl.appendChild(
+            option
+          );
+
+        }
+      );
+
+    }
+
+
+    /********************************************************
+     * VERIFICAR HORÁRIOS
+     ********************************************************/
+
+    function verificarHorarios() {
 
       const servico =
-        estado.servicoSelecionado;
+        servicoEl.value.trim();
 
       const profissional =
-        estado.profissionalSelecionado;
+        profissionalEl.value.trim();
 
       const data =
-        estado.dataSelecionada;
+        dataEl.value.trim();
 
 
       if (
@@ -2223,139 +924,130 @@
         !data
       ) {
 
-        listaHorarios.innerHTML =
-          `
-            <div class="empty">
-              Selecione serviço, profissional e data.
-            </div>
-          `;
+        esconderHorarios();
 
         return;
 
       }
 
 
-      estado.carregandoHorarios =
-        true;
-
-
-      listaHorarios.innerHTML =
-        `
-          <div class="loading-center">
-
-            <div class="spinner"></div>
-
-            <span>
-              Carregando horários...
-            </span>
-
-          </div>
-        `;
-
-
-      try {
-
-        const resposta =
-          await chamarAPI({
-
-            acao:
-              "horarios",
-
-            servico:
-              servico.nome,
-
-            profissional:
-              profissional.nome,
-
-            data:
-              data
-
-          });
-
-
-        if (
-          !resposta ||
-          resposta.sucesso !== true
-        ) {
-
-          throw new Error(
-            resposta &&
-            resposta.mensagem
-              ? resposta.mensagem
-              : "Não foi possível carregar os horários."
-          );
-
-        }
-
-
-        const horarios =
-          Array.isArray(
-            resposta.horarios
-          )
-            ? resposta.horarios
-            : [];
-
-
-        renderizarHorarios(
-          horarios
-        );
-
-
-      }
-
-      catch (erro) {
-
-        console.error(
-          "Erro horários:",
-          erro
-        );
-
-
-        listaHorarios.innerHTML =
-          `
-            <div class="empty">
-              ${escaparHTML(
-                erro.message ||
-                "Erro ao carregar horários."
-              )}
-            </div>
-          `;
-
-      }
-
-      finally {
-
-        estado.carregandoHorarios =
-          false;
-
-      }
+      carregarHorarios(
+        servico,
+        profissional,
+        data
+      );
 
     }
 
 
-    /* ====================================================
-       RENDERIZAR HORÁRIOS
-    ==================================================== */
+    /********************************************************
+     * CARREGAR HORÁRIOS
+     ********************************************************/
 
-    function renderizarHorarios(horarios) {
+    function carregarHorarios(
+      servico,
+      profissional,
+      data
+    ) {
 
-      listaHorarios.innerHTML =
-        "";
+      if (carregandoHorarios) {
+        return;
+      }
+
+
+      carregandoHorarios =
+        true;
+
+
+      areaHorariosEl.classList.remove(
+        "oculto"
+      );
+
+
+      horariosEl.innerHTML =
+        '<div class="sem-horarios">' +
+        'Carregando horários...' +
+        '</div>';
+
+
+      jsonp(
+        "horarios",
+        {
+          servico: servico,
+          profissional: profissional,
+          data: data
+        },
+        function(resposta) {
+
+          carregandoHorarios =
+            false;
+
+
+          if (
+            !resposta ||
+            resposta.sucesso !== true
+          ) {
+
+            horariosEl.innerHTML =
+              '<div class="sem-horarios">' +
+              escapeHtml(
+                resposta &&
+                resposta.mensagem
+                  ? resposta.mensagem
+                  : "Erro ao carregar horários."
+              ) +
+              '</div>';
+
+            return;
+
+          }
+
+
+          renderizarHorarios(
+            resposta.horarios || []
+          );
+
+        },
+        function(erro) {
+
+          carregandoHorarios =
+            false;
+
+
+          horariosEl.innerHTML =
+            '<div class="sem-horarios">' +
+            escapeHtml(
+              erro.message ||
+              "Erro ao consultar a API."
+            ) +
+            '</div>';
+
+        }
+      );
+
+    }
+
+
+    /********************************************************
+     * RENDERIZAR HORÁRIOS
+     ********************************************************/
+
+    function renderizarHorarios(
+      horarios
+    ) {
+
+      horariosEl.innerHTML = "";
 
 
       if (
-        !horarios ||
+        !Array.isArray(horarios) ||
         horarios.length === 0
       ) {
 
-        listaHorarios.innerHTML =
-          `
-            <div class="empty">
-              Nenhum horário disponível para esta data.
-            </div>
-          `;
-
-        atualizarResumo();
+        horariosEl.innerHTML =
+          '<div class="sem-horarios">' +
+          'Nenhum horário disponível para esta data.' +
+          '</div>';
 
         return;
 
@@ -2363,48 +1055,31 @@
 
 
       horarios.forEach(
-        function(item, indice) {
+        function(horario) {
 
           const inicio =
-            String(
-              typeof item === "string"
-                ? item
-                : item.inicio || ""
-            );
-
+            horario.inicio || "";
 
           const fim =
-            String(
-              typeof item === "string"
-                ? ""
-                : item.fim || ""
-            );
+            horario.fim || "";
+
+
+          if (!inicio) {
+            return;
+          }
 
 
           const botao =
-            document.createElement(
-              "button"
-            );
-
+            document.createElement("button");
 
           botao.type =
             "button";
 
           botao.className =
-            "time-button";
-
-
-          botao.dataset.index =
-            String(indice);
-
+            "horario";
 
           botao.dataset.hora =
             inicio;
-
-
-          botao.dataset.fim =
-            fim;
-
 
           botao.textContent =
             fim
@@ -2417,6 +1092,7 @@
             function() {
 
               selecionarHorario(
+                botao,
                 inicio,
                 fim
               );
@@ -2425,7 +1101,7 @@
           );
 
 
-          listaHorarios.appendChild(
+          horariosEl.appendChild(
             botao
           );
 
@@ -2435,44 +1111,69 @@
     }
 
 
-    /* ====================================================
-       SELECIONAR HORÁRIO
-    ==================================================== */
+    /********************************************************
+     * SELECIONAR HORÁRIO
+     ********************************************************/
 
     function selecionarHorario(
+      botao,
       inicio,
       fim
     ) {
 
-      if (
-        estado.agendamentoConfirmado
-      ) {
-        return;
-      }
+      document
+        .querySelectorAll(
+          ".horario"
+        )
+        .forEach(
+          function(item) {
+
+            item.classList.remove(
+              "selecionado"
+            );
+
+          }
+        );
 
 
-      estado.horarioSelecionado = {
+      botao.classList.add(
+        "selecionado"
+      );
 
-        inicio:
-          inicio,
 
-        fim:
-          fim
+      horarioSelecionado = {
+
+        inicio: inicio,
+
+        fim: fim
 
       };
 
 
+      atualizarResumo();
+
+    }
+
+
+    /********************************************************
+     * LIMPAR HORÁRIO
+     ********************************************************/
+
+    function limparHorario() {
+
+      horarioSelecionado =
+        null;
+
+
       document
         .querySelectorAll(
-          ".time-button"
+          ".horario"
         )
         .forEach(
-          function(botao) {
+          function(item) {
 
-            botao.classList.toggle(
-              "selected",
-              botao.dataset.hora ===
-                inicio
+            item.classList.remove(
+              "selecionado"
             );
 
           }
@@ -2484,324 +1185,214 @@
     }
 
 
-    /* ====================================================
-       RESUMO
-    ==================================================== */
+    /********************************************************
+     * ESCONDER HORÁRIOS
+     ********************************************************/
+
+    function esconderHorarios() {
+
+      areaHorariosEl.classList.add(
+        "oculto"
+      );
+
+      horariosEl.innerHTML =
+        "";
+
+      horarioSelecionado =
+        null;
+
+    }
+
+
+    /********************************************************
+     * ATUALIZAR RESUMO
+     ********************************************************/
 
     function atualizarResumo() {
 
+      const cliente =
+        clienteEl.value.trim();
+
+      const telefone =
+        telefoneEl.value.trim();
+
       const servico =
-        estado.servicoSelecionado;
+        servicoEl.value.trim();
 
       const profissional =
-        estado.profissionalSelecionado;
+        profissionalEl.value.trim();
 
-      const horario =
-        estado.horarioSelecionado;
+      const data =
+        dataEl.value.trim();
 
 
       document.getElementById(
         "resumoCliente"
       ).textContent =
-        inputCliente.value.trim() ||
-        "-";
+        cliente || "-";
+
+
+      document.getElementById(
+        "resumoTelefone"
+      ).textContent =
+        telefone || "-";
 
 
       document.getElementById(
         "resumoServico"
       ).textContent =
-        servico
-          ? servico.nome
-          : "-";
+        servico || "-";
 
 
       document.getElementById(
         "resumoProfissional"
       ).textContent =
-        profissional
-          ? profissional.nome
-          : "-";
+        profissional || "-";
 
 
       document.getElementById(
         "resumoData"
       ).textContent =
-        estado.dataSelecionada
-          ? formatarDataBR(
-              estado.dataSelecionada
-            )
+        data
+          ? formatarDataBR(data)
           : "-";
 
 
       document.getElementById(
         "resumoHorario"
       ).textContent =
-        horario
+        horarioSelecionado
           ? (
-              horario.fim
-                ? horario.inicio +
-                  " - " +
-                  horario.fim
-                : horario.inicio
+              horarioSelecionado.inicio +
+              (
+                horarioSelecionado.fim
+                  ? " - " +
+                    horarioSelecionado.fim
+                  : ""
+              )
             )
           : "-";
 
 
-      document.getElementById(
-        "resumoPreco"
-      ).textContent =
-        servico
-          ? formatarMoeda(
-              servico.preco
-            )
-          : "-";
-
-
-      const tudoSelecionado =
-        Boolean(
-          inputCliente.value.trim() &&
-          inputTelefone.value.trim() &&
-          servico &&
-          profissional &&
-          estado.dataSelecionada &&
-          horario
+      const servicoObj =
+        encontrarServico(
+          servico
         );
 
 
-      resumo.classList.toggle(
-        "show",
-        Boolean(
-          servico ||
-          profissional ||
-          estado.dataSelecionada ||
-          horario
-        )
-      );
-
-
-      /*
-       * Depois de confirmado, o botão permanece
-       * desabilitado definitivamente.
-       */
       if (
-        estado.agendamentoConfirmado
+        servicoObj &&
+        servicoObj.preco !== undefined
       ) {
 
-        btnAgendar.disabled =
-          true;
+        document.getElementById(
+          "resumoPreco"
+        ).textContent =
+          formatarMoeda(
+            Number(
+              servicoObj.preco
+            ) || 0
+          );
+
+      } else {
+
+        document.getElementById(
+          "resumoPreco"
+        ).textContent =
+          "-";
+
+      }
+
+
+      const podeAgendar =
+        cliente.length >= 2 &&
+        telefone.replace(/\D/g, "").length >= 8 &&
+        servico &&
+        profissional &&
+        data &&
+        horarioSelecionado;
+
+
+      btnAgendar.disabled =
+        !podeAgendar;
+
+
+      if (podeAgendar) {
+
+        resumoEl.classList.remove(
+          "oculto"
+        );
+
+      } else {
+
+        resumoEl.classList.add(
+          "oculto"
+        );
+
+      }
+
+    }
+
+
+    /********************************************************
+     * REALIZAR AGENDAMENTO
+     ********************************************************/
+
+    function realizarAgendamento() {
+
+      if (
+        btnAgendar.disabled
+      ) {
 
         return;
 
       }
 
 
+      const cliente =
+        clienteEl.value.trim();
+
+      const telefone =
+        telefoneEl.value.trim();
+
+      const servico =
+        servicoEl.value.trim();
+
+      const profissional =
+        profissionalEl.value.trim();
+
+      const data =
+        dataEl.value.trim();
+
+      const horaInicio =
+        horarioSelecionado.inicio;
+
+
       btnAgendar.disabled =
-        !tudoSelecionado;
+        true;
 
-    }
+      btnAgendar.textContent =
+        "Agendando...";
 
 
-    /* ====================================================
-       INPUTS DO CLIENTE
-    ==================================================== */
+      mostrarStatus(
+        "Enviando seu agendamento...",
+        "info"
+      );
 
-    inputCliente.addEventListener(
-      "input",
-      function() {
 
-        if (
-          estado.agendamentoConfirmado
-        ) {
-          return;
-        }
+      jsonp(
+        "agendar",
+        {
+          cliente: cliente,
+          telefone: telefone,
+          servico: servico,
+          profissional: profissional,
+          data: data,
+          horaInicio: horaInicio
+        },
+        function(resposta) {
 
-        atualizarResumo();
-
-      }
-    );
-
-
-    inputTelefone.addEventListener(
-      "input",
-      function() {
-
-        if (
-          estado.agendamentoConfirmado
-        ) {
-          return;
-        }
-
-        atualizarResumo();
-
-      }
-    );
-
-
-    /* ====================================================
-       DATA MÍNIMA
-    ==================================================== */
-
-    function configurarDataMinima() {
-
-      const agora =
-        new Date();
-
-
-      const ano =
-        agora.getFullYear();
-
-
-      const mes =
-        String(
-          agora.getMonth() + 1
-        ).padStart(
-          2,
-          "0"
-        );
-
-
-      const dia =
-        String(
-          agora.getDate()
-        ).padStart(
-          2,
-          "0"
-        );
-
-
-      const hoje =
-        ano +
-        "-" +
-        mes +
-        "-" +
-        dia;
-
-
-      inputData.min =
-        hoje;
-
-    }
-
-
-    /* ====================================================
-       CONFIRMAR AGENDAMENTO
-    ==================================================== */
-
-    btnAgendar.addEventListener(
-      "click",
-      async function() {
-
-        /*
-         * Proteção contra clique duplicado.
-         */
-        if (
-          btnAgendar.disabled ||
-          estado.agendamentoConfirmado
-        ) {
-          return;
-        }
-
-
-        const servico =
-          estado.servicoSelecionado;
-
-        const profissional =
-          estado.profissionalSelecionado;
-
-        const horario =
-          estado.horarioSelecionado;
-
-
-        if (
-          !servico ||
-          !profissional ||
-          !horario
-        ) {
-
-          mostrarMensagem(
-            "Complete todas as etapas antes de confirmar.",
-            "error"
-          );
-
-          return;
-
-        }
-
-
-        const cliente =
-          inputCliente.value.trim();
-
-
-        const telefone =
-          inputTelefone.value.trim();
-
-
-        const data =
-          inputData.value;
-
-
-        /*
-         * Bloqueia imediatamente.
-         */
-        btnAgendar.disabled =
-          true;
-
-
-        btnAgendar.textContent =
-          "Confirmando...";
-
-
-        btnAgendar.classList.remove(
-          "confirmado"
-        );
-
-
-        mostrarMensagem(
-          "Registrando seu agendamento...",
-          "loading"
-        );
-
-
-        try {
-
-          const resposta =
-            await chamarAPI({
-
-              acao:
-                "agendar",
-
-              cliente:
-                cliente,
-
-              telefone:
-                telefone,
-
-              servico:
-                servico.nome,
-
-              profissional:
-                profissional.nome,
-
-              data:
-                data,
-
-              horaInicio:
-                horario.inicio
-
-            });
-
-
-          console.log(
-            "Resposta agendamento:",
-            resposta
-          );
-
-
-          /*
-           * Só consideramos sucesso quando
-           * o Apps Script informou explicitamente
-           * que a operação foi realizada.
-           */
           if (
             !resposta ||
             resposta.sucesso !== true
@@ -2817,189 +1408,613 @@
           }
 
 
-          /*
-           * =================================================
-           * SUCESSO
-           *
-           * A partir daqui NÃO existe mais estado de loading.
-           * O botão recebe uma classe definitiva.
-           * =================================================
-           */
-
-          estado.agendamentoConfirmado =
-            true;
-
-
-          mostrarMensagem(
-            resposta.mensagem ||
-            "Agendamento realizado com sucesso!",
-            "success"
+          mostrarStatus(
+            montarMensagemSucesso(
+              resposta
+            ),
+            "sucesso"
           );
 
 
-          mostrarComprovante(
-            resposta
-          );
-
-
-          /*
-           * Remove o horário selecionado.
-           */
-          estado.horarioSelecionado =
-            null;
-
-
-          /*
-           * Substitui a lista de horários.
-           */
-          listaHorarios.innerHTML =
-            `
-              <div class="empty">
-                Agendamento confirmado.
-              </div>
-            `;
-
-
-          /*
-           * Atualiza o botão de forma DEFINITIVA.
-           *
-           * Não existe spinner aqui.
-           */
           btnAgendar.textContent =
-            "✓ Agendamento confirmado";
+            "Agendamento confirmado";
 
 
-          btnAgendar.disabled =
-            true;
+          limparFormulario();
 
-
-          btnAgendar.classList.add(
-            "confirmado"
-          );
-
-
-          /*
-           * Garante que nenhum estado visual
-           * antigo de carregamento permaneça.
-           */
-          estado.carregandoHorarios =
-            false;
-
-
-          console.log(
-            "Agendamento finalizado com sucesso."
-          );
-
-        }
-
-        catch (erro) {
-
-          console.error(
-            "Erro agendamento:",
-            erro
-          );
-
-
-          /*
-           * Se deu erro, libera novamente
-           * o botão.
-           */
-          estado.agendamentoConfirmado =
-            false;
-
-
-          mostrarMensagem(
-            erro.message ||
-            "Erro ao realizar agendamento.",
-            "error"
-          );
-
+        },
+        function(erro) {
 
           btnAgendar.disabled =
             false;
-
 
           btnAgendar.textContent =
             "Confirmar agendamento";
 
 
-          btnAgendar.classList.remove(
-            "confirmado"
+          mostrarStatus(
+            erro.message ||
+            "Não foi possível realizar o agendamento.",
+            "erro"
           );
 
         }
-
-      }
-    );
-
-
-    /* ====================================================
-       COMPROVANTE
-    ==================================================== */
-
-    function mostrarComprovante(
-      resposta
-    ) {
-
-      const protocolo =
-        resposta.id ||
-        "";
-
-
-      const texto =
-        [
-          "Agendamento confirmado!",
-          "",
-          "Protocolo: " +
-            protocolo,
-          "Cliente: " +
-            (resposta.cliente || ""),
-          "Serviço: " +
-            (resposta.servico || ""),
-          "Profissional: " +
-            (resposta.profissional || ""),
-          "Data: " +
-            (
-              resposta.dataBR ||
-              formatarDataBR(
-                resposta.data
-              )
-            ),
-          "Horário: " +
-            (
-              resposta.horaInicio || ""
-            ) +
-            (
-              resposta.horaFim
-                ? " - " +
-                  resposta.horaFim
-                : ""
-            ),
-          "Valor: " +
-            formatarMoeda(
-              resposta.preco
-            )
-        ].join("\n");
-
-
-      console.log(
-        texto
       );
 
     }
 
 
-    /* ====================================================
-       INICIALIZAÇÃO
-    ==================================================== */
+    /********************************************************
+     * MENSAGEM DE SUCESSO
+     ********************************************************/
 
-    document.addEventListener(
-      "DOMContentLoaded",
+    function montarMensagemSucesso(
+      resposta
+    ) {
+
+      let mensagem =
+        "Agendamento realizado com sucesso!";
+
+
+      if (resposta.id) {
+
+        mensagem +=
+          "<br><strong>Protocolo:</strong> " +
+          escapeHtml(
+            resposta.id
+          );
+
+      }
+
+
+      if (resposta.dataBR) {
+
+        mensagem +=
+          "<br><strong>Data:</strong> " +
+          escapeHtml(
+            resposta.dataBR
+          );
+
+      }
+
+
+      if (resposta.horaInicio) {
+
+        mensagem +=
+          "<br><strong>Horário:</strong> " +
+          escapeHtml(
+            resposta.horaInicio
+          );
+
+      }
+
+
+      return mensagem;
+
+    }
+
+
+    /********************************************************
+     * LIMPAR FORMULÁRIO
+     ********************************************************/
+
+    function limparFormulario() {
+
+      clienteEl.value =
+        "";
+
+      telefoneEl.value =
+        "";
+
+      servicoEl.value =
+        "";
+
+      profissionalEl.value =
+        "";
+
+      dataEl.value =
+        "";
+
+      horarioSelecionado =
+        null;
+
+
+      esconderHorarios();
+
+
+      atualizarResumo();
+
+
+      setTimeout(
+        function() {
+
+          btnAgendar.disabled =
+            true;
+
+          btnAgendar.textContent =
+            "Confirmar agendamento";
+
+        },
+        1500
+      );
+
+    }
+
+
+    /********************************************************
+     * JSONP
+     *
+     * IMPORTANTE:
+     *
+     * Não usamos fetch().
+     *
+     * O Google Apps Script devolve:
+     *
+     * callback({...});
+     *
+     * O script é carregado pelo navegador
+     * através de uma tag <script>.
+     ********************************************************/
+
+    function jsonp(
+      acao,
+      parametros,
+      sucesso,
+      falha
+    ) {
+
+      const callbackName =
+        "__barbearia_callback_" +
+        Date.now() +
+        "_" +
+        Math.floor(
+          Math.random() * 100000
+        );
+
+
+      const script =
+        document.createElement(
+          "script"
+        );
+
+
+      let finalizado =
+        false;
+
+
+      const timeout =
+        setTimeout(
+          function() {
+
+            finalizar(
+              new Error(
+                "O Google Apps Script não respondeu. Verifique se a implantação está publicada como aplicativo da Web."
+              )
+            );
+
+          },
+          20000
+        );
+
+
+      window[callbackName] =
+        function(resposta) {
+
+          if (finalizado) {
+            return;
+          }
+
+
+          finalizado =
+            true;
+
+
+          clearTimeout(
+            timeout
+          );
+
+
+          limpar();
+
+
+          try {
+
+            if (
+              typeof sucesso ===
+              "function"
+            ) {
+
+              sucesso(
+                resposta
+              );
+
+            }
+
+          }
+
+          catch (erro) {
+
+            if (
+              typeof falha ===
+              "function"
+            ) {
+
+              falha(
+                erro
+              );
+
+            } else {
+
+              mostrarStatus(
+                erro.message,
+                "erro"
+              );
+
+            }
+
+          }
+
+        };
+
+
+      script.onerror =
+        function() {
+
+          finalizar(
+            new Error(
+              "Não foi possível conectar ao Google Apps Script."
+            )
+          );
+
+        };
+
+
+      function finalizar(
+        erro
+      ) {
+
+        if (finalizado) {
+          return;
+        }
+
+
+        finalizado =
+          true;
+
+
+        clearTimeout(
+          timeout
+        );
+
+
+        limpar();
+
+
+        if (
+          typeof falha ===
+          "function"
+        ) {
+
+          falha(
+            erro
+          );
+
+        } else {
+
+          mostrarStatus(
+            erro.message,
+            "erro"
+          );
+
+        }
+
+      }
+
+
+      function limpar() {
+
+        delete window[
+          callbackName
+        ];
+
+
+        if (
+          script.parentNode
+        ) {
+
+          script.parentNode.removeChild(
+            script
+          );
+
+        }
+
+      }
+
+
+      const query =
+        new URLSearchParams();
+
+
+      query.set(
+        "acao",
+        acao
+      );
+
+
+      query.set(
+        "callback",
+        callbackName
+      );
+
+
+      Object.keys(
+        parametros || {}
+      ).forEach(
+        function(chave) {
+
+          const valor =
+            parametros[chave];
+
+
+          if (
+            valor !== undefined &&
+            valor !== null
+          ) {
+
+            query.set(
+              chave,
+              String(valor)
+            );
+
+          }
+
+        }
+      );
+
+
+      script.src =
+        API_URL +
+        "?" +
+        query.toString();
+
+
+      script.async =
+        true;
+
+
+      document.head.appendChild(
+        script
+      );
+
+    }
+
+
+    /********************************************************
+     * STATUS
+     ********************************************************/
+
+    function mostrarStatus(
+      mensagem,
+      tipo
+    ) {
+
+      statusEl.className =
+        "status mostrar " +
+        (
+          tipo || "info"
+        );
+
+
+      statusEl.innerHTML =
+        mensagem;
+
+    }
+
+
+    /********************************************************
+     * ENCONTRAR SERVIÇO
+     ********************************************************/
+
+    function encontrarServico(
+      nome
+    ) {
+
+      const procurado =
+        normalizarTexto(
+          nome
+        );
+
+
+      return (
+        dadosSistema.servicos.find(
+          function(servico) {
+
+            return (
+              normalizarTexto(
+                servico.nome
+              ) ===
+              procurado
+            );
+
+          }
+        ) ||
+        null
+      );
+
+    }
+
+
+    /********************************************************
+     * NORMALIZAR TEXTO
+     ********************************************************/
+
+    function normalizarTexto(
+      texto
+    ) {
+
+      return String(
+        texto || ""
+      )
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(
+          /[\u0300-\u036f]/g,
+          ""
+        )
+        .replace(
+          /\s+/g,
+          " "
+        );
+
+    }
+
+
+    /********************************************************
+     * MOEDA
+     ********************************************************/
+
+    function formatarMoeda(
+      valor
+    ) {
+
+      return Number(
+        valor || 0
+      ).toLocaleString(
+        "pt-BR",
+        {
+          style: "currency",
+          currency: "BRL"
+        }
+      );
+
+    }
+
+
+    /********************************************************
+     * DATA BR
+     ********************************************************/
+
+    function formatarDataBR(
+      data
+    ) {
+
+      const partes =
+        String(
+          data || ""
+        ).split("-");
+
+
+      if (
+        partes.length !== 3
+      ) {
+
+        return data;
+
+      }
+
+
+      return (
+        partes[2] +
+        "/" +
+        partes[1] +
+        "/" +
+        partes[0]
+      );
+
+    }
+
+
+    /********************************************************
+     * ESCAPE HTML
+     ********************************************************/
+
+    function escapeHtml(
+      valor
+    ) {
+
+      return String(
+        valor || ""
+      )
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+
+    /********************************************************
+     * MÁSCARA DE TELEFONE
+     ********************************************************/
+
+    telefoneEl.addEventListener(
+      "input",
       function() {
 
-        configurarDataMinima();
+        let valor =
+          telefoneEl.value
+            .replace(
+              /\D/g,
+              ""
+            )
+            .substring(
+              0,
+              11
+            );
 
-        carregarDados();
+
+        if (
+          valor.length <= 10
+        ) {
+
+          valor =
+            valor.replace(
+              /^(\d{2})(\d)/,
+              "($1) $2"
+            );
+
+          valor =
+            valor.replace(
+              /(\d{4})(\d)/,
+              "$1-$2"
+            );
+
+        } else {
+
+          valor =
+            valor.replace(
+              /^(\d{2})(\d)/,
+              "($1) $2"
+            );
+
+          valor =
+            valor.replace(
+              /(\d{5})(\d)/,
+              "$1-$2"
+            );
+
+        }
+
+
+        telefoneEl.value =
+          valor;
 
       }
     );
