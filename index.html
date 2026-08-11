@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -11,6 +13,7 @@
   <title>Barbearia - Agendamento</title>
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -64,7 +67,7 @@
       padding: 25px;
       margin-bottom: 20px;
       box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.30);
+        0 10px 30px rgba(0,0,0,.30);
     }
 
     .card h2 {
@@ -76,7 +79,6 @@
       display: grid;
       grid-template-columns:
         repeat(2, minmax(0, 1fr));
-
       gap: 18px;
     }
 
@@ -103,8 +105,8 @@
       border-radius: 10px;
       padding: 0 13px;
       font-size: 15px;
-      background: #ffffff;
-      color: #222222;
+      background: #fff;
+      color: #222;
       outline: none;
     }
 
@@ -112,7 +114,7 @@
     select:focus {
       border-color: #d4af37;
       box-shadow:
-        0 0 0 3px rgba(212, 175, 55, 0.15);
+        0 0 0 3px rgba(212,175,55,.15);
     }
 
     .horarios {
@@ -131,30 +133,30 @@
 
     .horario {
       border: 2px solid #d4af37;
-      background: #ffffff;
-      color: #222222;
+      background: #fff;
+      color: #222;
       border-radius: 10px;
       padding: 12px 8px;
       cursor: pointer;
       font-weight: bold;
-      transition: 0.2s;
     }
 
     .horario:hover {
       background: #d4af37;
-      color: #ffffff;
+      color: #fff;
     }
 
     .horario.selecionado {
-      background: #111111;
-      color: #ffffff;
-      border-color: #111111;
+      background: #111;
+      color: #fff;
+      border-color: #111;
     }
 
     .sem-horarios {
-      color: #777777;
+      color: #777;
       padding: 15px 0;
       text-align: center;
+      grid-column: 1 / -1;
     }
 
     .status {
@@ -193,21 +195,20 @@
       height: 52px;
       border: 0;
       border-radius: 10px;
-      background: #111111;
-      color: #ffffff;
+      background: #111;
+      color: #fff;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      transition: 0.2s;
     }
 
     .btn:hover {
       background: #d4af37;
-      color: #111111;
+      color: #111;
     }
 
     .btn:disabled {
-      opacity: 0.5;
+      opacity: .5;
       cursor: not-allowed;
     }
 
@@ -234,27 +235,18 @@
       border-bottom: 0;
     }
 
-    .resumo-linha strong {
-      color: #111111;
-    }
-
-    .carregando {
-      color: #777777;
-      font-size: 14px;
-    }
-
     .oculto {
       display: none !important;
     }
 
     footer {
       text-align: center;
-      color: #999999;
+      color: #999;
       padding: 20px;
       font-size: 13px;
     }
 
-    @media (max-width: 700px) {
+    @media (max-width:700px) {
 
       header h1 {
         font-size: 27px;
@@ -266,7 +258,6 @@
 
       .card {
         padding: 18px;
-        border-radius: 14px;
       }
 
       .grid {
@@ -277,1749 +268,1361 @@
         grid-column: auto;
       }
 
-      .horarios {
-        grid-template-columns:
-          repeat(3, 1fr);
-      }
-
     }
 
-    @media (max-width: 400px) {
-
-      .horarios {
-        grid-template-columns:
-          repeat(2, 1fr);
-      }
-
-    }
   </style>
+
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <header>
-      <h1>✂️ Barbearia</h1>
-      <p>Agende seu horário de forma rápida e fácil</p>
-    </header>
+  <header>
 
+    <h1>✂️ Barbearia</h1>
 
-    <!-- STATUS -->
-    <div
-      id="status"
-      class="status"
-    ></div>
+    <p>
+      Agende seu horário de forma rápida e fácil
+    </p>
+
+  </header>
 
 
-    <!-- AGENDAMENTO -->
-    <div class="card">
-
-      <h2>Agende seu horário</h2>
-
-      <div class="grid">
-
-        <!-- CLIENTE -->
-        <div class="campo">
-
-          <label for="cliente">
-            Nome
-          </label>
-
-          <input
-            type="text"
-            id="cliente"
-            placeholder="Seu nome"
-            autocomplete="name"
-          >
-
-        </div>
+  <div
+    id="status"
+    class="status"
+  ></div>
 
 
-        <!-- TELEFONE -->
-        <div class="campo">
+  <div class="card">
 
-          <label for="telefone">
-            Telefone
-          </label>
-
-          <input
-            type="tel"
-            id="telefone"
-            placeholder="(00) 00000-0000"
-            autocomplete="tel"
-          >
-
-        </div>
+    <h2>
+      Agende seu horário
+    </h2>
 
 
-        <!-- SERVIÇO -->
-        <div class="campo">
-
-          <label for="servico">
-            Serviço
-          </label>
-
-          <select id="servico">
-
-            <option value="">
-              Carregando serviços...
-            </option>
-
-          </select>
-
-        </div>
+    <div class="grid">
 
 
-        <!-- PROFISSIONAL -->
-        <div class="campo">
+      <div class="campo">
 
-          <label for="profissional">
-            Profissional
-          </label>
+        <label for="cliente">
+          Nome
+        </label>
 
-          <select id="profissional">
-
-            <option value="">
-              Carregando profissionais...
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <!-- DATA -->
-        <div class="campo full">
-
-          <label for="data">
-            Data
-          </label>
-
-          <input
-            type="date"
-            id="data"
-          >
-
-        </div>
-
-      </div>
-
-
-      <!-- HORÁRIOS -->
-      <div
-        id="areaHorarios"
-        class="oculto"
-        style="margin-top: 22px;"
-      >
-
-        <h3>
-          Escolha o horário
-        </h3>
-
-        <div
-          id="horarios"
-          class="horarios"
-        ></div>
-
-      </div>
-
-
-      <!-- RESUMO -->
-      <div
-        id="resumo"
-        class="resumo oculto"
-      >
-
-        <h3>
-          Resumo do agendamento
-        </h3>
-
-        <div class="resumo-linha">
-          <span>Cliente</span>
-          <strong id="resumoCliente">-</strong>
-        </div>
-
-        <div class="resumo-linha">
-          <span>Telefone</span>
-          <strong id="resumoTelefone">-</strong>
-        </div>
-
-        <div class="resumo-linha">
-          <span>Serviço</span>
-          <strong id="resumoServico">-</strong>
-        </div>
-
-        <div class="resumo-linha">
-          <span>Profissional</span>
-          <strong id="resumoProfissional">-</strong>
-        </div>
-
-        <div class="resumo-linha">
-          <span>Data</span>
-          <strong id="resumoData">-</strong>
-        </div>
-
-        <div class="resumo-linha">
-          <span>Horário</span>
-          <strong id="resumoHorario">-</strong>
-        </div>
-
-        <div class="resumo-linha">
-          <span>Valor</span>
-          <strong id="resumoPreco">-</strong>
-        </div>
-
-      </div>
-
-
-      <!-- BOTÃO -->
-      <div style="margin-top: 20px;">
-
-        <button
-          id="btnAgendar"
-          class="btn"
-          disabled
+        <input
+          type="text"
+          id="cliente"
+          placeholder="Seu nome"
+          autocomplete="name"
         >
-          Confirmar agendamento
-        </button>
+
+      </div>
+
+
+      <div class="campo">
+
+        <label for="telefone">
+          Telefone
+        </label>
+
+        <input
+          type="tel"
+          id="telefone"
+          placeholder="(00) 00000-0000"
+          autocomplete="tel"
+        >
+
+      </div>
+
+
+      <div class="campo">
+
+        <label for="servico">
+          Serviço
+        </label>
+
+        <select id="servico">
+
+          <option value="">
+            Selecione o serviço
+          </option>
+
+          <!--
+            Cadastre aqui seus serviços.
+            Depois podemos fazer o Code.gs
+            carregar automaticamente da planilha.
+          -->
+
+          <option value="Corte">
+            Corte
+          </option>
+
+          <option value="Barba">
+            Barba
+          </option>
+
+          <option value="Corte + Barba">
+            Corte + Barba
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="campo">
+
+        <label for="profissional">
+          Profissional
+        </label>
+
+        <select id="profissional">
+
+          <option value="">
+            Carregando profissionais...
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="campo full">
+
+        <label for="data">
+          Data
+        </label>
+
+        <input
+          type="date"
+          id="data"
+        >
 
       </div>
 
     </div>
 
 
-    <footer>
-      Sistema de agendamento da barbearia
-    </footer>
+    <div
+      id="areaHorarios"
+      class="oculto"
+      style="margin-top:22px;"
+    >
+
+      <h3>
+        Escolha o horário
+      </h3>
+
+      <div
+        id="horarios"
+        class="horarios"
+      ></div>
+
+    </div>
+
+
+    <div
+      id="resumo"
+      class="resumo oculto"
+    >
+
+      <h3>
+        Resumo do agendamento
+      </h3>
+
+
+      <div class="resumo-linha">
+        <span>Cliente</span>
+        <strong id="resumoCliente">-</strong>
+      </div>
+
+
+      <div class="resumo-linha">
+        <span>Telefone</span>
+        <strong id="resumoTelefone">-</strong>
+      </div>
+
+
+      <div class="resumo-linha">
+        <span>Serviço</span>
+        <strong id="resumoServico">-</strong>
+      </div>
+
+
+      <div class="resumo-linha">
+        <span>Profissional</span>
+        <strong id="resumoProfissional">-</strong>
+      </div>
+
+
+      <div class="resumo-linha">
+        <span>Data</span>
+        <strong id="resumoData">-</strong>
+      </div>
+
+
+      <div class="resumo-linha">
+        <span>Horário</span>
+        <strong id="resumoHorario">-</strong>
+      </div>
+
+    </div>
+
+
+    <div style="margin-top:20px;">
+
+      <button
+        id="btnAgendar"
+        class="btn"
+        disabled
+      >
+        Confirmar agendamento
+      </button>
+
+    </div>
 
   </div>
 
 
-  <script>
+  <footer>
+    Sistema de agendamento da barbearia
+  </footer>
 
-    /********************************************************
-     * CONFIGURAÇÃO DA API
-     ********************************************************/
+</div>
 
-    const API_URL =
+
+<script>
+
+/************************************************************
+ * URL DO GOOGLE APPS SCRIPT
+ ************************************************************/
+
+const API_URL =
   "https://script.google.com/macros/s/AKfycbz_cgLSikg8Pvh3Xu6_2aIWybRHjNl9EnYmZ7FWqaJ1OBwhvqhKBpHA-na7adzajFgS/exec";
 
 
+/************************************************************
+ * ESTADO
+ ************************************************************/
 
-    /********************************************************
-     * ESTADO
-     ********************************************************/
+let profissionais = [];
 
-    let dadosSistema = {
+let agendamentos = [];
 
-      servicos: [],
-
-      profissionais: []
-
-    };
+let horarioSelecionado = null;
 
 
-    let horarioSelecionado = null;
+/************************************************************
+ * ELEMENTOS
+ ************************************************************/
+
+const statusEl =
+  document.getElementById("status");
+
+const clienteEl =
+  document.getElementById("cliente");
+
+const telefoneEl =
+  document.getElementById("telefone");
+
+const servicoEl =
+  document.getElementById("servico");
+
+const profissionalEl =
+  document.getElementById("profissional");
+
+const dataEl =
+  document.getElementById("data");
+
+const areaHorariosEl =
+  document.getElementById("areaHorarios");
+
+const horariosEl =
+  document.getElementById("horarios");
+
+const resumoEl =
+  document.getElementById("resumo");
+
+const btnAgendar =
+  document.getElementById("btnAgendar");
 
 
-    let carregandoHorarios = false;
+/************************************************************
+ * INICIALIZAÇÃO
+ ************************************************************/
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+    configurarData();
+
+    carregarProfissionais();
+
+    configurarEventos();
+
+  }
+);
 
 
-    /********************************************************
-     * ELEMENTOS
-     ********************************************************/
+/************************************************************
+ * DATA
+ ************************************************************/
 
-    const statusEl =
-      document.getElementById("status");
+function configurarData() {
 
-    const clienteEl =
-      document.getElementById("cliente");
+  const hoje =
+    new Date();
 
-    const telefoneEl =
-      document.getElementById("telefone");
+  const ano =
+    hoje.getFullYear();
 
-    const servicoEl =
-      document.getElementById("servico");
+  const mes =
+    String(
+      hoje.getMonth() + 1
+    ).padStart(2, "0");
 
-    const profissionalEl =
-      document.getElementById("profissional");
+  const dia =
+    String(
+      hoje.getDate()
+    ).padStart(2, "0");
 
-    const dataEl =
-      document.getElementById("data");
+  const dataHoje =
+    ano +
+    "-" +
+    mes +
+    "-" +
+    dia;
 
-    const areaHorariosEl =
-      document.getElementById("areaHorarios");
+  dataEl.min =
+    dataHoje;
 
-    const horariosEl =
-      document.getElementById("horarios");
+  dataEl.value =
+    dataHoje;
 
-    const resumoEl =
-      document.getElementById("resumo");
-
-    const btnAgendar =
-      document.getElementById("btnAgendar");
-
-
-    /********************************************************
-     * INICIALIZAÇÃO
-     ********************************************************/
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      function() {
-
-        configurarDataMinima();
-
-        configurarEventos();
-
-        carregarDados();
-
-      }
-    );
+}
 
 
-    /********************************************************
-     * DATA MÍNIMA
-     ********************************************************/
+/************************************************************
+ * EVENTOS
+ ************************************************************/
 
-    function configurarDataMinima() {
+function configurarEventos() {
 
-      const hoje =
-        new Date();
+  profissionalEl.addEventListener(
+    "change",
+    function() {
 
-      const ano =
-        hoje.getFullYear();
+      horarioSelecionado = null;
 
-      const mes =
-        String(
-          hoje.getMonth() + 1
-        ).padStart(
-          2,
-          "0"
-        );
+      carregarAgendamentos();
 
-      const dia =
-        String(
-          hoje.getDate()
-        ).padStart(
-          2,
-          "0"
-        );
-
-      dataEl.min =
-        ano + "-" +
-        mes + "-" +
-        dia;
-
-    }
-
-
-    /********************************************************
-     * EVENTOS
-     ********************************************************/
-
-    function configurarEventos() {
-
-      servicoEl.addEventListener(
-        "change",
-        function() {
-
-          limparHorario();
-
-          atualizarResumo();
-
-          verificarHorarios();
-
-        }
-      );
-
-
-      profissionalEl.addEventListener(
-        "change",
-        function() {
-
-          limparHorario();
-
-          atualizarResumo();
-
-          verificarHorarios();
-
-        }
-      );
-
-
-      dataEl.addEventListener(
-        "change",
-        function() {
-
-          limparHorario();
-
-          atualizarResumo();
-
-          verificarHorarios();
-
-        }
-      );
-
-
-      clienteEl.addEventListener(
-        "input",
-        atualizarResumo
-      );
-
-
-      telefoneEl.addEventListener(
-        "input",
-        atualizarResumo
-      );
-
-
-      btnAgendar.addEventListener(
-        "click",
-        realizarAgendamento
-      );
+      atualizarResumo();
 
     }
+  );
 
 
-    /********************************************************
-     * CARREGAR DADOS
-     ********************************************************/
+  dataEl.addEventListener(
+    "change",
+    function() {
 
-    function carregarDados() {
+      horarioSelecionado = null;
 
-      mostrarStatus(
-        "Carregando serviços e profissionais...",
-        "info"
-      );
+      carregarAgendamentos();
 
-
-      jsonp(
-        "dados",
-        {},
-        function(resposta) {
-
-          if (
-            !resposta ||
-            resposta.sucesso !== true
-          ) {
-
-            throw new Error(
-              resposta &&
-              resposta.mensagem
-                ? resposta.mensagem
-                : "Não foi possível carregar os dados."
-            );
-
-          }
-
-
-          dadosSistema.servicos =
-            Array.isArray(
-              resposta.servicos
-            )
-              ? resposta.servicos
-              : [];
-
-
-          dadosSistema.profissionais =
-            Array.isArray(
-              resposta.profissionais
-            )
-              ? resposta.profissionais
-              : [];
-
-
-          preencherServicos();
-
-          preencherProfissionais();
-
-
-          if (
-            dadosSistema.servicos.length === 0 &&
-            dadosSistema.profissionais.length === 0
-          ) {
-
-            mostrarStatus(
-              "A API respondeu, mas não existem serviços ou profissionais cadastrados na planilha.",
-              "erro"
-            );
-
-            return;
-
-          }
-
-
-          mostrarStatus(
-            "Serviços e profissionais carregados.",
-            "sucesso"
-          );
-
-        }
-      );
+      atualizarResumo();
 
     }
+  );
 
 
-    /********************************************************
-     * PREENCHER SERVIÇOS
-     ********************************************************/
-
-    function preencherServicos() {
-
-      servicoEl.innerHTML = "";
-
-      const opcaoInicial =
-        document.createElement("option");
-
-      opcaoInicial.value = "";
-
-      opcaoInicial.textContent =
-        dadosSistema.servicos.length
-          ? "Selecione um serviço"
-          : "Nenhum serviço cadastrado";
-
-      servicoEl.appendChild(
-        opcaoInicial
-      );
+  clienteEl.addEventListener(
+    "input",
+    atualizarResumo
+  );
 
 
-      dadosSistema.servicos.forEach(
-        function(servico) {
+  telefoneEl.addEventListener(
+    "input",
+    function() {
 
-          const option =
-            document.createElement("option");
+      aplicarMascaraTelefone();
 
-          option.value =
-            servico.nome || "";
-
-          let texto =
-            servico.nome || "Serviço";
-
-          if (
-            servico.preco !== undefined &&
-            servico.preco !== null
-          ) {
-
-            const preco =
-              Number(
-                servico.preco
-              );
-
-            if (
-              !isNaN(preco) &&
-              preco > 0
-            ) {
-
-              texto +=
-                " - " +
-                formatarMoeda(preco);
-
-            }
-
-          }
-
-
-          if (
-            servico.duracao
-          ) {
-
-            texto +=
-              " (" +
-              servico.duracao +
-              " min)";
-
-          }
-
-
-          option.textContent =
-            texto;
-
-          servicoEl.appendChild(
-            option
-          );
-
-        }
-      );
+      atualizarResumo();
 
     }
+  );
 
 
-    /********************************************************
-     * PREENCHER PROFISSIONAIS
-     ********************************************************/
+  servicoEl.addEventListener(
+    "change",
+    atualizarResumo
+  );
 
-    function preencherProfissionais() {
 
-      profissionalEl.innerHTML = "";
+  btnAgendar.addEventListener(
+    "click",
+    realizarAgendamento
+  );
 
-      const opcaoInicial =
-        document.createElement("option");
+}
 
-      opcaoInicial.value = "";
 
-      opcaoInicial.textContent =
-        dadosSistema.profissionais.length
-          ? "Selecione um profissional"
-          : "Nenhum profissional cadastrado";
+/************************************************************
+ * CARREGAR PROFISSIONAIS
+ *
+ * Usa:
+ *
+ * ?acao=profissionais
+ *
+ * em vez de:
+ *
+ * ?acao=dados
+ ************************************************************/
 
-      profissionalEl.appendChild(
-        opcaoInicial
+function carregarProfissionais() {
+
+  mostrarStatus(
+    "Carregando profissionais...",
+    "info"
+  );
+
+
+  jsonp(
+    "profissionais",
+    {},
+    function(resposta) {
+
+      console.log(
+        "Resposta profissionais:",
+        resposta
       );
-
-
-      dadosSistema.profissionais.forEach(
-        function(profissional) {
-
-          const nome =
-            typeof profissional === "string"
-              ? profissional
-              : profissional.nome;
-
-
-          if (!nome) {
-            return;
-          }
-
-
-          const option =
-            document.createElement("option");
-
-          option.value =
-            nome;
-
-          option.textContent =
-            nome;
-
-          profissionalEl.appendChild(
-            option
-          );
-
-        }
-      );
-
-    }
-
-
-    /********************************************************
-     * VERIFICAR HORÁRIOS
-     ********************************************************/
-
-    function verificarHorarios() {
-
-      const servico =
-        servicoEl.value.trim();
-
-      const profissional =
-        profissionalEl.value.trim();
-
-      const data =
-        dataEl.value.trim();
 
 
       if (
-        !servico ||
-        !profissional ||
-        !data
+        !resposta ||
+        resposta.sucesso !== true
       ) {
 
-        esconderHorarios();
+        throw new Error(
+          resposta &&
+          resposta.mensagem
+            ? resposta.mensagem
+            : "Não foi possível carregar os profissionais."
+        );
+
+      }
+
+
+      profissionais =
+        Array.isArray(
+          resposta.profissionais
+        )
+          ? resposta.profissionais
+          : [];
+
+
+      preencherProfissionais();
+
+
+      if (
+        profissionais.length === 0
+      ) {
+
+        mostrarStatus(
+          "Nenhum profissional ativo foi encontrado.",
+          "erro"
+        );
 
         return;
 
       }
 
 
-      carregarHorarios(
-        servico,
-        profissional,
-        data
+      mostrarStatus(
+        profissionais.length +
+        " profissional(is) carregado(s).",
+        "sucesso"
+      );
+
+    },
+    function(erro) {
+
+      console.error(
+        "ERRO PROFISSIONAIS:",
+        erro
+      );
+
+
+      mostrarStatus(
+        erro.message ||
+        "Erro ao carregar profissionais.",
+        "erro"
       );
 
     }
+  );
+
+}
 
 
-    /********************************************************
-     * CARREGAR HORÁRIOS
-     ********************************************************/
+/************************************************************
+ * PREENCHER PROFISSIONAIS
+ ************************************************************/
 
-    function carregarHorarios(
-      servico,
-      profissional,
-      data
-    ) {
+function preencherProfissionais() {
 
-      if (carregandoHorarios) {
+  profissionalEl.innerHTML = "";
+
+
+  const primeiraOpcao =
+    document.createElement("option");
+
+  primeiraOpcao.value = "";
+
+  primeiraOpcao.textContent =
+    profissionais.length
+      ? "Selecione um profissional"
+      : "Nenhum profissional encontrado";
+
+  profissionalEl.appendChild(
+    primeiraOpcao
+  );
+
+
+  profissionais.forEach(
+    function(profissional) {
+
+      const nome =
+        typeof profissional === "string"
+          ? profissional
+          : profissional.nome;
+
+
+      if (!nome) {
         return;
       }
 
 
-      carregandoHorarios =
-        true;
+      const option =
+        document.createElement("option");
+
+      option.value =
+        nome;
+
+      option.textContent =
+        nome;
+
+      profissionalEl.appendChild(
+        option
+      );
+
+    }
+  );
+
+}
 
 
-      areaHorariosEl.classList.remove(
-        "oculto"
+/************************************************************
+ * CARREGAR AGENDAMENTOS
+ *
+ * Usa a ação existente no Code.gs:
+ *
+ * ?acao=agendamentos
+ ************************************************************/
+
+function carregarAgendamentos() {
+
+  const profissional =
+    profissionalEl.value.trim();
+
+  const data =
+    dataEl.value.trim();
+
+
+  if (
+    !profissional ||
+    !data
+  ) {
+
+    esconderHorarios();
+
+    return;
+
+  }
+
+
+  areaHorariosEl.classList.remove(
+    "oculto"
+  );
+
+
+  horariosEl.innerHTML =
+    '<div class="sem-horarios">' +
+    'Consultando horários...' +
+    '</div>';
+
+
+  jsonp(
+    "agendamentos",
+    {
+      profissional:
+        profissional,
+
+      data:
+        data
+    },
+    function(resposta) {
+
+      console.log(
+        "Resposta agendamentos:",
+        resposta
+      );
+
+
+      if (
+        !resposta ||
+        resposta.sucesso !== true
+      ) {
+
+        throw new Error(
+          resposta &&
+          resposta.mensagem
+            ? resposta.mensagem
+            : "Erro ao consultar agendamentos."
+        );
+
+      }
+
+
+      agendamentos =
+        Array.isArray(
+          resposta.agendamentos
+        )
+          ? resposta.agendamentos
+          : [];
+
+
+      gerarHorarios();
+
+
+    },
+    function(erro) {
+
+      console.error(
+        "ERRO API:",
+        erro
       );
 
 
       horariosEl.innerHTML =
         '<div class="sem-horarios">' +
-        'Carregando horários...' +
+        escapeHtml(
+          erro.message ||
+          "Erro ao consultar agendamentos."
+        ) +
         '</div>';
 
+    }
+  );
 
-      jsonp(
-        "horarios",
-        {
-          servico: servico,
-          profissional: profissional,
-          data: data
-        },
-        function(resposta) {
-
-          carregandoHorarios =
-            false;
+}
 
 
-          if (
-            !resposta ||
-            resposta.sucesso !== true
-          ) {
+/************************************************************
+ * GERAR HORÁRIOS
+ *
+ * CONFIGURAÇÃO PADRÃO
+ *
+ * Você pode alterar estes valores.
+ ************************************************************/
 
-            horariosEl.innerHTML =
-              '<div class="sem-horarios">' +
-              escapeHtml(
-                resposta &&
-                resposta.mensagem
-                  ? resposta.mensagem
-                  : "Erro ao carregar horários."
-              ) +
-              '</div>';
+function gerarHorarios() {
 
-            return;
-
-          }
+  horariosEl.innerHTML = "";
 
 
-          renderizarHorarios(
-            resposta.horarios || []
-          );
+  /*
+   * Horário de funcionamento.
+   *
+   * Altere aqui se necessário.
+   */
 
-        },
-        function(erro) {
+  const inicio =
+    9 * 60;
 
-          carregandoHorarios =
-            false;
+  const fim =
+    18 * 60;
 
 
-          horariosEl.innerHTML =
-            '<div class="sem-horarios">' +
-            escapeHtml(
-              erro.message ||
-              "Erro ao consultar a API."
-            ) +
-            '</div>';
+  /*
+   * Intervalo de 30 minutos.
+   */
 
-        }
+  const intervalo =
+    30;
+
+
+  const ocupados =
+    new Set();
+
+
+  agendamentos.forEach(
+    function(item) {
+
+      if (
+        item &&
+        item.horaInicio
+      ) {
+
+        ocupados.add(
+          normalizarHora(
+            item.horaInicio
+          )
+        );
+
+      }
+
+    }
+  );
+
+
+  let encontrou =
+    false;
+
+
+  for (
+    let minutos = inicio;
+    minutos < fim;
+    minutos += intervalo
+  ) {
+
+    const hora =
+      minutosParaHora(
+        minutos
       );
+
+
+    if (
+      ocupados.has(hora)
+    ) {
+
+      continue;
 
     }
 
 
-    /********************************************************
-     * RENDERIZAR HORÁRIOS
-     ********************************************************/
-
-    function renderizarHorarios(
-      horarios
-    ) {
-
-      horariosEl.innerHTML = "";
+    encontrou =
+      true;
 
 
-      if (
-        !Array.isArray(horarios) ||
-        horarios.length === 0
-      ) {
+    const botao =
+      document.createElement("button");
 
-        horariosEl.innerHTML =
-          '<div class="sem-horarios">' +
-          'Nenhum horário disponível para esta data.' +
-          '</div>';
+    botao.type =
+      "button";
 
-        return;
+    botao.className =
+      "horario";
 
-      }
+    botao.textContent =
+      hora;
 
 
-      horarios.forEach(
-        function(horario) {
+    botao.addEventListener(
+      "click",
+      function() {
 
-          const inicio =
-            horario.inicio || "";
+        document
+          .querySelectorAll(
+            ".horario"
+          )
+          .forEach(
+            function(item) {
 
-          const fim =
-            horario.fim || "";
-
-
-          if (!inicio) {
-            return;
-          }
-
-
-          const botao =
-            document.createElement("button");
-
-          botao.type =
-            "button";
-
-          botao.className =
-            "horario";
-
-          botao.dataset.hora =
-            inicio;
-
-          botao.textContent =
-            fim
-              ? inicio + " - " + fim
-              : inicio;
-
-
-          botao.addEventListener(
-            "click",
-            function() {
-
-              selecionarHorario(
-                botao,
-                inicio,
-                fim
+              item.classList.remove(
+                "selecionado"
               );
 
             }
           );
 
 
-          horariosEl.appendChild(
-            botao
-          );
-
-        }
-      );
-
-    }
+        botao.classList.add(
+          "selecionado"
+        );
 
 
-    /********************************************************
-     * SELECIONAR HORÁRIO
-     ********************************************************/
+        horarioSelecionado =
+          hora;
 
-    function selecionarHorario(
-      botao,
-      inicio,
-      fim
-    ) {
 
-      document
-        .querySelectorAll(
-          ".horario"
+        atualizarResumo();
+
+      }
+    );
+
+
+    horariosEl.appendChild(
+      botao
+    );
+
+  }
+
+
+  if (!encontrou) {
+
+    horariosEl.innerHTML =
+      '<div class="sem-horarios">' +
+      'Nenhum horário disponível para esta data.' +
+      '</div>';
+
+  }
+
+}
+
+
+/************************************************************
+ * CONVERTER MINUTOS PARA HORA
+ ************************************************************/
+
+function minutosParaHora(
+  minutos
+) {
+
+  const hora =
+    Math.floor(
+      minutos / 60
+    );
+
+  const minuto =
+    minutos % 60;
+
+
+  return (
+    String(hora).padStart(2, "0") +
+    ":" +
+    String(minuto).padStart(2, "0")
+  );
+
+}
+
+
+/************************************************************
+ * NORMALIZAR HORA
+ ************************************************************/
+
+function normalizarHora(
+  valor
+) {
+
+  const texto =
+    String(
+      valor || ""
+    ).trim();
+
+
+  const match =
+    texto.match(
+      /(\d{1,2}):(\d{2})/
+    );
+
+
+  if (!match) {
+    return "";
+  }
+
+
+  return (
+    String(
+      match[1]
+    ).padStart(2, "0") +
+    ":" +
+    match[2]
+  );
+
+}
+
+
+/************************************************************
+ * ESCONDER HORÁRIOS
+ ************************************************************/
+
+function esconderHorarios() {
+
+  areaHorariosEl.classList.add(
+    "oculto"
+  );
+
+  horariosEl.innerHTML =
+    "";
+
+}
+
+
+/************************************************************
+ * RESUMO
+ ************************************************************/
+
+function atualizarResumo() {
+
+  document.getElementById(
+    "resumoCliente"
+  ).textContent =
+    clienteEl.value.trim() || "-";
+
+
+  document.getElementById(
+    "resumoTelefone"
+  ).textContent =
+    telefoneEl.value.trim() || "-";
+
+
+  document.getElementById(
+    "resumoServico"
+  ).textContent =
+    servicoEl.value.trim() || "-";
+
+
+  document.getElementById(
+    "resumoProfissional"
+  ).textContent =
+    profissionalEl.value.trim() || "-";
+
+
+  document.getElementById(
+    "resumoData"
+  ).textContent =
+    dataEl.value
+      ? formatarDataBR(
+          dataEl.value
         )
-        .forEach(
-          function(item) {
+      : "-";
 
-            item.classList.remove(
-              "selecionado"
-            );
 
-          }
+  document.getElementById(
+    "resumoHorario"
+  ).textContent =
+    horarioSelecionado ||
+    "-";
+
+
+  const podeAgendar =
+    clienteEl.value.trim().length >= 2 &&
+    telefoneEl.value.replace(/\D/g, "").length >= 8 &&
+    servicoEl.value.trim() &&
+    profissionalEl.value.trim() &&
+    dataEl.value.trim() &&
+    horarioSelecionado;
+
+
+  btnAgendar.disabled =
+    !podeAgendar;
+
+
+  if (podeAgendar) {
+
+    resumoEl.classList.remove(
+      "oculto"
+    );
+
+  } else {
+
+    resumoEl.classList.add(
+      "oculto"
+    );
+
+  }
+
+}
+
+
+/************************************************************
+ * AGENDAR
+ *
+ * ATENÇÃO:
+ *
+ * O Code.gs que você enviou ainda NÃO possui
+ * a ação "agendar".
+ *
+ * Portanto, aqui mostramos uma mensagem clara
+ * em vez de gerar erro silencioso.
+ ************************************************************/
+
+function realizarAgendamento() {
+
+  mostrarStatus(
+    "A função de gravação do agendamento ainda precisa ser adicionada ao Code.gs.",
+    "erro"
+  );
+
+}
+
+
+/************************************************************
+ * JSONP
+ ************************************************************/
+
+function jsonp(
+  acao,
+  parametros,
+  sucesso,
+  falha
+) {
+
+  const callbackName =
+    "__barbearia_" +
+    Date.now() +
+    "_" +
+    Math.floor(
+      Math.random() * 100000
+    );
+
+
+  const script =
+    document.createElement(
+      "script"
+    );
+
+
+  let finalizado =
+    false;
+
+
+  const timeout =
+    setTimeout(
+      function() {
+
+        finalizar(
+          new Error(
+            "O Google Apps Script não respondeu."
+          )
         );
 
+      },
+      20000
+    );
 
-      botao.classList.add(
-        "selecionado"
-      );
 
+  window[callbackName] =
+    function(resposta) {
 
-      horarioSelecionado = {
-
-        inicio: inicio,
-
-        fim: fim
-
-      };
-
-
-      atualizarResumo();
-
-    }
-
-
-    /********************************************************
-     * LIMPAR HORÁRIO
-     ********************************************************/
-
-    function limparHorario() {
-
-      horarioSelecionado =
-        null;
-
-
-      document
-        .querySelectorAll(
-          ".horario"
-        )
-        .forEach(
-          function(item) {
-
-            item.classList.remove(
-              "selecionado"
-            );
-
-          }
-        );
-
-
-      atualizarResumo();
-
-    }
-
-
-    /********************************************************
-     * ESCONDER HORÁRIOS
-     ********************************************************/
-
-    function esconderHorarios() {
-
-      areaHorariosEl.classList.add(
-        "oculto"
-      );
-
-      horariosEl.innerHTML =
-        "";
-
-      horarioSelecionado =
-        null;
-
-    }
-
-
-    /********************************************************
-     * ATUALIZAR RESUMO
-     ********************************************************/
-
-    function atualizarResumo() {
-
-      const cliente =
-        clienteEl.value.trim();
-
-      const telefone =
-        telefoneEl.value.trim();
-
-      const servico =
-        servicoEl.value.trim();
-
-      const profissional =
-        profissionalEl.value.trim();
-
-      const data =
-        dataEl.value.trim();
-
-
-      document.getElementById(
-        "resumoCliente"
-      ).textContent =
-        cliente || "-";
-
-
-      document.getElementById(
-        "resumoTelefone"
-      ).textContent =
-        telefone || "-";
-
-
-      document.getElementById(
-        "resumoServico"
-      ).textContent =
-        servico || "-";
-
-
-      document.getElementById(
-        "resumoProfissional"
-      ).textContent =
-        profissional || "-";
-
-
-      document.getElementById(
-        "resumoData"
-      ).textContent =
-        data
-          ? formatarDataBR(data)
-          : "-";
-
-
-      document.getElementById(
-        "resumoHorario"
-      ).textContent =
-        horarioSelecionado
-          ? (
-              horarioSelecionado.inicio +
-              (
-                horarioSelecionado.fim
-                  ? " - " +
-                    horarioSelecionado.fim
-                  : ""
-              )
-            )
-          : "-";
-
-
-      const servicoObj =
-        encontrarServico(
-          servico
-        );
-
-
-      if (
-        servicoObj &&
-        servicoObj.preco !== undefined
-      ) {
-
-        document.getElementById(
-          "resumoPreco"
-        ).textContent =
-          formatarMoeda(
-            Number(
-              servicoObj.preco
-            ) || 0
-          );
-
-      } else {
-
-        document.getElementById(
-          "resumoPreco"
-        ).textContent =
-          "-";
-
-      }
-
-
-      const podeAgendar =
-        cliente.length >= 2 &&
-        telefone.replace(/\D/g, "").length >= 8 &&
-        servico &&
-        profissional &&
-        data &&
-        horarioSelecionado;
-
-
-      btnAgendar.disabled =
-        !podeAgendar;
-
-
-      if (podeAgendar) {
-
-        resumoEl.classList.remove(
-          "oculto"
-        );
-
-      } else {
-
-        resumoEl.classList.add(
-          "oculto"
-        );
-
-      }
-
-    }
-
-
-    /********************************************************
-     * REALIZAR AGENDAMENTO
-     ********************************************************/
-
-    function realizarAgendamento() {
-
-      if (
-        btnAgendar.disabled
-      ) {
-
+      if (finalizado) {
         return;
-
       }
 
 
-      const cliente =
-        clienteEl.value.trim();
-
-      const telefone =
-        telefoneEl.value.trim();
-
-      const servico =
-        servicoEl.value.trim();
-
-      const profissional =
-        profissionalEl.value.trim();
-
-      const data =
-        dataEl.value.trim();
-
-      const horaInicio =
-        horarioSelecionado.inicio;
-
-
-      btnAgendar.disabled =
-        true;
-
-      btnAgendar.textContent =
-        "Agendando...";
-
-
-      mostrarStatus(
-        "Enviando seu agendamento...",
-        "info"
-      );
-
-
-      jsonp(
-        "agendar",
-        {
-          cliente: cliente,
-          telefone: telefone,
-          servico: servico,
-          profissional: profissional,
-          data: data,
-          horaInicio: horaInicio
-        },
-        function(resposta) {
-
-          if (
-            !resposta ||
-            resposta.sucesso !== true
-          ) {
-
-            throw new Error(
-              resposta &&
-              resposta.mensagem
-                ? resposta.mensagem
-                : "Não foi possível realizar o agendamento."
-            );
-
-          }
-
-
-          mostrarStatus(
-            montarMensagemSucesso(
-              resposta
-            ),
-            "sucesso"
-          );
-
-
-          btnAgendar.textContent =
-            "Agendamento confirmado";
-
-
-          limparFormulario();
-
-        },
-        function(erro) {
-
-          btnAgendar.disabled =
-            false;
-
-          btnAgendar.textContent =
-            "Confirmar agendamento";
-
-
-          mostrarStatus(
-            erro.message ||
-            "Não foi possível realizar o agendamento.",
-            "erro"
-          );
-
-        }
-      );
-
-    }
-
-
-    /********************************************************
-     * MENSAGEM DE SUCESSO
-     ********************************************************/
-
-    function montarMensagemSucesso(
-      resposta
-    ) {
-
-      let mensagem =
-        "Agendamento realizado com sucesso!";
-
-
-      if (resposta.id) {
-
-        mensagem +=
-          "<br><strong>Protocolo:</strong> " +
-          escapeHtml(
-            resposta.id
-          );
-
-      }
-
-
-      if (resposta.dataBR) {
-
-        mensagem +=
-          "<br><strong>Data:</strong> " +
-          escapeHtml(
-            resposta.dataBR
-          );
-
-      }
-
-
-      if (resposta.horaInicio) {
-
-        mensagem +=
-          "<br><strong>Horário:</strong> " +
-          escapeHtml(
-            resposta.horaInicio
-          );
-
-      }
-
-
-      return mensagem;
-
-    }
-
-
-    /********************************************************
-     * LIMPAR FORMULÁRIO
-     ********************************************************/
-
-    function limparFormulario() {
-
-      clienteEl.value =
-        "";
-
-      telefoneEl.value =
-        "";
-
-      servicoEl.value =
-        "";
-
-      profissionalEl.value =
-        "";
-
-      dataEl.value =
-        "";
-
-      horarioSelecionado =
-        null;
-
-
-      esconderHorarios();
-
-
-      atualizarResumo();
-
-
-      setTimeout(
-        function() {
-
-          btnAgendar.disabled =
-            true;
-
-          btnAgendar.textContent =
-            "Confirmar agendamento";
-
-        },
-        1500
-      );
-
-    }
-
-
-    /********************************************************
-     * JSONP
-     *
-     * IMPORTANTE:
-     *
-     * Não usamos fetch().
-     *
-     * O Google Apps Script devolve:
-     *
-     * callback({...});
-     *
-     * O script é carregado pelo navegador
-     * através de uma tag <script>.
-     ********************************************************/
-
-    function jsonp(
-      acao,
-      parametros,
-      sucesso,
-      falha
-    ) {
-
-      const callbackName =
-        "__barbearia_callback_" +
-        Date.now() +
-        "_" +
-        Math.floor(
-          Math.random() * 100000
-        );
-
-
-      const script =
-        document.createElement(
-          "script"
-        );
-
-
-      let finalizado =
-        false;
-
-
-      const timeout =
-        setTimeout(
-          function() {
-
-            finalizar(
-              new Error(
-                "O Google Apps Script não respondeu. Verifique se a implantação está publicada como aplicativo da Web."
-              )
-            );
-
-          },
-          20000
-        );
-
-
-      window[callbackName] =
-        function(resposta) {
-
-          if (finalizado) {
-            return;
-          }
-
-
-          finalizado =
-            true;
-
-
-          clearTimeout(
-            timeout
-          );
-
-
-          limpar();
-
-
-          try {
-
-            if (
-              typeof sucesso ===
-              "function"
-            ) {
-
-              sucesso(
-                resposta
-              );
-
-            }
-
-          }
-
-          catch (erro) {
-
-            if (
-              typeof falha ===
-              "function"
-            ) {
-
-              falha(
-                erro
-              );
-
-            } else {
-
-              mostrarStatus(
-                erro.message,
-                "erro"
-              );
-
-            }
-
-          }
-
-        };
-
-
-      script.onerror =
-        function() {
-
-          finalizar(
-            new Error(
-              "Não foi possível conectar ao Google Apps Script."
-            )
-          );
-
-        };
-
-
-      function finalizar(
-        erro
-      ) {
-
-        if (finalizado) {
-          return;
-        }
-
-
-        finalizado =
-          true;
-
-
-        clearTimeout(
-          timeout
-        );
-
-
-        limpar();
-
-
-        if (
-          typeof falha ===
-          "function"
-        ) {
-
-          falha(
-            erro
-          );
-
-        } else {
-
-          mostrarStatus(
-            erro.message,
-            "erro"
-          );
-
-        }
-
-      }
-
-
-      function limpar() {
-
-        delete window[
-          callbackName
-        ];
-
-
-        if (
-          script.parentNode
-        ) {
-
-          script.parentNode.removeChild(
-            script
-          );
-
-        }
-
-      }
-
-
-      const query =
-        new URLSearchParams();
-
-
-      query.set(
-        "acao",
-        acao
-      );
-
-
-      query.set(
-        "callback",
-        callbackName
-      );
-
-
-      Object.keys(
-        parametros || {}
-      ).forEach(
-        function(chave) {
-
-          const valor =
-            parametros[chave];
-
-
-          if (
-            valor !== undefined &&
-            valor !== null
-          ) {
-
-            query.set(
-              chave,
-              String(valor)
-            );
-
-          }
-
-        }
-      );
-
-
-      script.src =
-        API_URL +
-        "?" +
-        query.toString();
-
-
-      script.async =
+      finalizado =
         true;
 
 
-      document.head.appendChild(
+      clearTimeout(
+        timeout
+      );
+
+
+      limpar();
+
+
+      try {
+
+        sucesso(
+          resposta
+        );
+
+      }
+
+      catch (erro) {
+
+        if (falha) {
+          falha(erro);
+        }
+
+      }
+
+    };
+
+
+  script.onerror =
+    function() {
+
+      finalizar(
+        new Error(
+          "Não foi possível conectar ao Google Apps Script."
+        )
+      );
+
+    };
+
+
+  function finalizar(
+    erro
+  ) {
+
+    if (finalizado) {
+      return;
+    }
+
+
+    finalizado =
+      true;
+
+
+    clearTimeout(
+      timeout
+    );
+
+
+    limpar();
+
+
+    if (falha) {
+      falha(erro);
+    }
+
+  }
+
+
+  function limpar() {
+
+    delete window[
+      callbackName
+    ];
+
+
+    if (
+      script.parentNode
+    ) {
+
+      script.parentNode.removeChild(
         script
       );
 
     }
 
-
-    /********************************************************
-     * STATUS
-     ********************************************************/
-
-    function mostrarStatus(
-      mensagem,
-      tipo
-    ) {
-
-      statusEl.className =
-        "status mostrar " +
-        (
-          tipo || "info"
-        );
+  }
 
 
-      statusEl.innerHTML =
-        mensagem;
-
-    }
+  const query =
+    new URLSearchParams();
 
 
-    /********************************************************
-     * ENCONTRAR SERVIÇO
-     ********************************************************/
-
-    function encontrarServico(
-      nome
-    ) {
-
-      const procurado =
-        normalizarTexto(
-          nome
-        );
+  query.set(
+    "acao",
+    acao
+  );
 
 
-      return (
-        dadosSistema.servicos.find(
-          function(servico) {
-
-            return (
-              normalizarTexto(
-                servico.nome
-              ) ===
-              procurado
-            );
-
-          }
-        ) ||
-        null
-      );
-
-    }
+  query.set(
+    "callback",
+    callbackName
+  );
 
 
-    /********************************************************
-     * NORMALIZAR TEXTO
-     ********************************************************/
+  Object.keys(
+    parametros || {}
+  ).forEach(
+    function(chave) {
 
-    function normalizarTexto(
-      texto
-    ) {
-
-      return String(
-        texto || ""
-      )
-        .trim()
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(
-          /[\u0300-\u036f]/g,
-          ""
-        )
-        .replace(
-          /\s+/g,
-          " "
-        );
-
-    }
-
-
-    /********************************************************
-     * MOEDA
-     ********************************************************/
-
-    function formatarMoeda(
-      valor
-    ) {
-
-      return Number(
-        valor || 0
-      ).toLocaleString(
-        "pt-BR",
-        {
-          style: "currency",
-          currency: "BRL"
-        }
-      );
-
-    }
-
-
-    /********************************************************
-     * DATA BR
-     ********************************************************/
-
-    function formatarDataBR(
-      data
-    ) {
-
-      const partes =
-        String(
-          data || ""
-        ).split("-");
+      const valor =
+        parametros[chave];
 
 
       if (
-        partes.length !== 3
+        valor !== undefined &&
+        valor !== null
       ) {
 
-        return data;
-
-      }
-
-
-      return (
-        partes[2] +
-        "/" +
-        partes[1] +
-        "/" +
-        partes[0]
-      );
-
-    }
-
-
-    /********************************************************
-     * ESCAPE HTML
-     ********************************************************/
-
-    function escapeHtml(
-      valor
-    ) {
-
-      return String(
-        valor || ""
-      )
-        .replace(
-          /&/g,
-          "&amp;"
-        )
-        .replace(
-          /</g,
-          "&lt;"
-        )
-        .replace(
-          />/g,
-          "&gt;"
-        )
-        .replace(
-          /"/g,
-          "&quot;"
-        )
-        .replace(
-          /'/g,
-          "&#039;"
+        query.set(
+          chave,
+          String(valor)
         );
 
-    }
-
-
-    /********************************************************
-     * MÁSCARA DE TELEFONE
-     ********************************************************/
-
-    telefoneEl.addEventListener(
-      "input",
-      function() {
-
-        let valor =
-          telefoneEl.value
-            .replace(
-              /\D/g,
-              ""
-            )
-            .substring(
-              0,
-              11
-            );
-
-
-        if (
-          valor.length <= 10
-        ) {
-
-          valor =
-            valor.replace(
-              /^(\d{2})(\d)/,
-              "($1) $2"
-            );
-
-          valor =
-            valor.replace(
-              /(\d{4})(\d)/,
-              "$1-$2"
-            );
-
-        } else {
-
-          valor =
-            valor.replace(
-              /^(\d{2})(\d)/,
-              "($1) $2"
-            );
-
-          valor =
-            valor.replace(
-              /(\d{5})(\d)/,
-              "$1-$2"
-            );
-
-        }
-
-
-        telefoneEl.value =
-          valor;
-
       }
+
+    }
+  );
+
+
+  script.src =
+    API_URL +
+    "?" +
+    query.toString();
+
+
+  script.async =
+    true;
+
+
+  document.head.appendChild(
+    script
+  );
+
+}
+
+
+/************************************************************
+ * STATUS
+ ************************************************************/
+
+function mostrarStatus(
+  mensagem,
+  tipo
+) {
+
+  statusEl.className =
+    "status mostrar " +
+    (
+      tipo ||
+      "info"
     );
 
-  </script>
+
+  statusEl.innerHTML =
+    escapeHtml(
+      mensagem
+    );
+
+}
+
+
+/************************************************************
+ * DATA BR
+ ************************************************************/
+
+function formatarDataBR(
+  data
+) {
+
+  const partes =
+    String(
+      data || ""
+    ).split("-");
+
+
+  if (
+    partes.length !== 3
+  ) {
+
+    return data;
+
+  }
+
+
+  return (
+    partes[2] +
+    "/" +
+    partes[1] +
+    "/" +
+    partes[0]
+  );
+
+}
+
+
+/************************************************************
+ * ESCAPE HTML
+ ************************************************************/
+
+function escapeHtml(
+  valor
+) {
+
+  return String(
+    valor === null ||
+    valor === undefined
+      ? ""
+      : valor
+  )
+
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+
+  .replace(
+    /</g,
+    "&lt;"
+  )
+
+  .replace(
+    />/g,
+    "&gt;"
+  )
+
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+/************************************************************
+ * MÁSCARA TELEFONE
+ ************************************************************/
+
+function aplicarMascaraTelefone() {
+
+  let valor =
+    telefoneEl.value
+      .replace(
+        /\D/g,
+        ""
+      )
+      .substring(
+        0,
+        11
+      );
+
+
+  if (
+    valor.length <= 10
+  ) {
+
+    valor =
+      valor.replace(
+        /^(\d{2})(\d)/,
+        "($1) $2"
+      );
+
+    valor =
+      valor.replace(
+        /(\d{4})(\d)/,
+        "$1-$2"
+      );
+
+  } else {
+
+    valor =
+      valor.replace(
+        /^(\d{2})(\d)/,
+        "($1) $2"
+      );
+
+    valor =
+      valor.replace(
+        /(\d{5})(\d)/,
+        "$1-$2"
+      );
+
+  }
+
+
+  telefoneEl.value =
+    valor;
+
+}
+
+</script>
 
 </body>
 </html>
