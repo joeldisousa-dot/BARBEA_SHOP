@@ -1714,8 +1714,22 @@
           }
 
 
-          botao.textContent =
-            texto;
+          botao.innerHTML = `
+  <img
+    src="imagens/corte.jpg"
+    alt="Corte de cabelo"
+    style="
+      width: 55px;
+      height: 55px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto 6px;
+    "
+  >
+  <span>${escapeHtml(texto)}</span>
+`;
+
 
 
           botao.addEventListener(
