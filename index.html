@@ -2097,181 +2097,66 @@
      * RESUMO
      ********************************************************/
 
-    function atualizarResumo() {
+ function atualizarResumo() {
 
+  const cliente =
+    clienteEl.value.trim();
 
-      const cliente =
-        clienteEl.value.trim();
+  const telefone =
+    telefoneEl.value.trim();
 
+  const servico =
+    servicoSelecionado || "";
 
-      const telefone =
-        telefoneEl.value.trim();
+  const profissional =
+    profissionalSelecionado || "";
 
+  const data =
+    dataEl.value.trim();
 
-      const servico =
-        servicoSelecionado ||
-        "";
+  document.getElementById("resumoCliente").textContent =
+    cliente || "-";
 
+  document.getElementById("resumoTelefone").textContent =
+    telefone || "-";
 
-      const profissional =
-        profissionalSelecionado ||
-        "";
+  document.getElementById("resumoServico").textContent =
+    servico || "-";
 
+  document.getElementById("resumoProfissional").textContent =
+    profissional || "-";
 
-      const data =
-        dataEl.value.trim();
+  document.getElementById("resumoData").textContent =
+    data
+      ? formatarDataBR(data)
+      : "-";
 
-
-      document.getElementById(
-        "resumoCliente"
-      ).textContent =
-        cliente || "-";
-
-
-      document.getElementById(
-        "resumoTelefone"
-      ).textContent =
-        telefone || "-";
-
-
-      document.getElementById(
-        "resumoServico"
-      ).textContent =
-        servico || "-";
-
-
-      document.getElementById(
-        "resumoProfissional"
-      ).textContent =
-        profissional || "-";
-
-
-      document.getElementById(
-        "resumoData"
-      ).textContent =
-
-        data
-
-          ? formatarDataBR(
-              data
-            )
-
-          : "-";
-
-
-      document.getElementById(
-        "resumoHorario"
-      ).textContent =
-
-        horarioSelecionado
-
-          ? (
-
-              horarioSelecionado.inicio +
-
-              (
-
-                horarioSelecionado.fim
-
-                  ? " - " +
-                    horarioSelecionado.fim
-
-                  : ""
-
-              )
-
-            )
-
-          : "-";
-
-
-      const servicoObj =
-        encontrarServico(
-          servico
-        );
-
-
-      if (
-
-        servicoObj &&
-
-        servicoObj.preco !==
-          undefined
-
-      ) {
-
-        document.getElementById(
-          "resumoPreco"
-        ).textContent =
-
-          formatarMoeda(
-            Number(
-              servicoObj.preco
-            ) || 0
-          );
-
-      } else {
-
-        document.getElementById(
-          "resumoPreco"
-        ).textContent =
-          "-";
-
-      }
-
-
-      /*
-       * IMPORTANTE:
-       *
-       * NÃO desabilitamos mais o botão
-       * quando faltam campos.
-       *
-       * O botão continua habilitado.
-       *
-       * A validação acontece no clique.
-       */
-
-      btnAgendar.disabled =
-        false;
-
-
-      const podeMostrarResumo =
-
-        cliente.length >= 2 &&
-
-        telefone
-          .replace(
-            /\D/g,
-            ""
+  document.getElementById("resumoHorario").textContent =
+    horarioSelecionado
+      ? (
+          horarioSelecionado.inicio +
+          (
+            horarioSelecionado.fim
+              ? " - " + horarioSelecionado.fim
+              : ""
           )
-          .length >= 8 &&
+        )
+      : "-";
 
-        servico &&
+  const servicoObj =
+    encontrarServico(servico);
 
-        profissional &&
+  document.getElementById("resumoPreco").textContent =
+    servicoObj && servicoObj.preco !== undefined
+      ? formatarMoeda(Number(servicoObj.preco) || 0)
+      : "-";
 
-        data &&
+  /*
+   * IMPORTANTE:
+   * O botão NÃO é mais desabilitado aqui.
+   */
+}
 
-        horarioSelecionado;
-
-
-      if (
-        podeMostrarResumo
-      ) {
-
-        resumoEl.classList.remove(
-          "oculto"
-        );
-
-      } else {
-
-        resumoEl.classList.add(
-          "oculto"
-        );
-
-      }
-
-    }
 
 
     /********************************************************
