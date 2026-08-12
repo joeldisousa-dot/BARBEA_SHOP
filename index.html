@@ -12,7 +12,6 @@
 
   <title>Barbearia - Agendamento</title>
 
-
   <style>
 
     * {
@@ -20,7 +19,6 @@
       margin: 0;
       padding: 0;
     }
-
 
     body {
 
@@ -42,7 +40,6 @@
 
     }
 
-
     .container {
 
       width: 100%;
@@ -55,7 +52,6 @@
 
     }
 
-
     header {
 
       text-align: center;
@@ -67,7 +63,6 @@
 
     }
 
-
     header h1 {
 
       font-size: 34px;
@@ -78,7 +73,6 @@
 
     }
 
-
     header p {
 
       color: #cccccc;
@@ -86,7 +80,6 @@
       font-size: 16px;
 
     }
-
 
     .card {
 
@@ -111,12 +104,7 @@
           0.30
         );
 
-      width: 100%;
-
-      overflow: hidden;
-
     }
-
 
     .card h2 {
 
@@ -125,7 +113,6 @@
       color: #111111;
 
     }
-
 
     .grid {
 
@@ -144,7 +131,6 @@
 
     }
 
-
     .campo {
 
       display: flex;
@@ -157,14 +143,12 @@
 
     }
 
-
     .campo.full {
 
       grid-column:
         1 / -1;
 
     }
-
 
     label {
 
@@ -173,7 +157,6 @@
       color: #333333;
 
     }
-
 
     input {
 
@@ -200,10 +183,7 @@
 
       outline: none;
 
-      max-width: 100%;
-
     }
-
 
     input:focus {
 
@@ -224,10 +204,21 @@
 
     }
 
+    /*
+     * DATA
+     * Mantém o campo menor no celular.
+     */
+
+    #data {
+
+      width: 230px;
+
+      max-width: 100%;
+
+    }
 
     /*******************************************************
-     * SERVIÇOS / PROFISSIONAIS
-     * BARRA HORIZONTAL
+     * BOTÕES HORIZONTAIS
      *******************************************************/
 
     .botoes-horizontal {
@@ -235,8 +226,6 @@
       display: flex;
 
       flex-direction: row;
-
-      flex-wrap: nowrap;
 
       gap: 10px;
 
@@ -255,21 +244,16 @@
 
       scroll-behavior: smooth;
 
-      -webkit-overflow-scrolling: touch;
-
-      scrollbar-width: thin;
-
-      touch-action: pan-x;
+      -webkit-overflow-scrolling:
+        touch;
 
     }
-
 
     .botoes-horizontal::-webkit-scrollbar {
 
-      height: 5px;
+      height: 6px;
 
     }
-
 
     .botoes-horizontal::-webkit-scrollbar-track {
 
@@ -281,7 +265,6 @@
 
     }
 
-
     .botoes-horizontal::-webkit-scrollbar-thumb {
 
       background:
@@ -292,21 +275,17 @@
 
     }
 
-
     .botao-opcao {
 
       flex:
         0 0 auto;
 
-      min-width:
-        max-content;
-
       min-height:
-        46px;
+        48px;
 
       padding:
-        10px
-        15px;
+        11px
+        18px;
 
       border:
         2px
@@ -341,7 +320,6 @@
 
     }
 
-
     .botao-opcao:hover {
 
       background:
@@ -354,7 +332,6 @@
         translateY(-1px);
 
     }
-
 
     .botao-opcao.selecionado {
 
@@ -379,7 +356,6 @@
         );
 
     }
-
 
     .sem-opcoes {
 
@@ -406,22 +382,6 @@
 
     }
 
-
-    /*******************************************************
-     * DATA
-     *******************************************************/
-
-    #data {
-
-      width:
-        260px;
-
-      max-width:
-        100%;
-
-    }
-
-
     /*******************************************************
      * HORÁRIOS
      *******************************************************/
@@ -444,7 +404,6 @@
       margin-top: 15px;
 
     }
-
 
     .horario {
 
@@ -477,7 +436,6 @@
 
     }
 
-
     .horario:hover {
 
       background:
@@ -487,7 +445,6 @@
         #ffffff;
 
     }
-
 
     .horario.selecionado {
 
@@ -501,7 +458,6 @@
         #111111;
 
     }
-
 
     .sem-horarios {
 
@@ -519,7 +475,6 @@
         1 / -1;
 
     }
-
 
     /*******************************************************
      * STATUS
@@ -548,14 +503,12 @@
 
     }
 
-
     .status.mostrar {
 
       display:
         block;
 
     }
-
 
     .status.info {
 
@@ -572,7 +525,6 @@
 
     }
 
-
     .status.sucesso {
 
       background:
@@ -588,7 +540,6 @@
 
     }
 
-
     .status.erro {
 
       background:
@@ -603,7 +554,6 @@
         #efb1b1;
 
     }
-
 
     /*******************************************************
      * BOTÃO
@@ -643,7 +593,6 @@
 
     }
 
-
     .btn:hover {
 
       background:
@@ -654,7 +603,6 @@
 
     }
 
-
     .btn:disabled {
 
       opacity:
@@ -664,7 +612,6 @@
         not-allowed;
 
     }
-
 
     /*******************************************************
      * RESUMO
@@ -686,14 +633,12 @@
 
     }
 
-
     .resumo h3 {
 
       margin-bottom:
         12px;
 
     }
-
 
     .resumo-linha {
 
@@ -717,14 +662,12 @@
 
     }
 
-
     .resumo-linha:last-child {
 
       border-bottom:
         0;
 
     }
-
 
     .resumo-linha strong {
 
@@ -734,11 +677,7 @@
       text-align:
         right;
 
-      word-break:
-        break-word;
-
     }
-
 
     .carregando {
 
@@ -750,14 +689,12 @@
 
     }
 
-
     .oculto {
 
       display:
         none !important;
 
     }
-
 
     footer {
 
@@ -775,7 +712,6 @@
 
     }
 
-
     /*******************************************************
      * CELULAR
      *******************************************************/
@@ -784,7 +720,6 @@
       max-width: 700px
     ) {
 
-
       header h1 {
 
         font-size:
@@ -792,32 +727,12 @@
 
       }
 
-
-      header {
-
-        padding:
-          25px
-          10px
-          20px;
-
-      }
-
-
-      header p {
-
-        font-size:
-          14px;
-
-      }
-
-
       .container {
 
         padding:
           12px;
 
       }
-
 
       .card {
 
@@ -829,14 +744,12 @@
 
       }
 
-
       .grid {
 
         grid-template-columns:
           1fr;
 
       }
-
 
       .campo.full {
 
@@ -845,50 +758,30 @@
 
       }
 
-
-      /****************************************
-       * BARRA HORIZONTAL NO CELULAR
-       ****************************************/
-
       .botoes-horizontal {
 
-        width:
-          calc(
-            100vw - 60px
-          );
-
-        max-width:
-          calc(
-            100vw - 60px
-          );
-
-        overflow-x:
-          auto;
-
-        overflow-y:
-          hidden;
+        gap:
+          8px;
 
       }
-
 
       .botao-opcao {
 
         min-height:
-          44px;
+          45px;
 
         padding:
-          9px
-          13px;
+          10px
+          14px;
 
         font-size:
           13px;
 
       }
 
-
-      /****************************************
+      /*
        * DATA MENOR NO CELULAR
-       ****************************************/
+       */
 
       #data {
 
@@ -898,18 +791,7 @@
         max-width:
           190px;
 
-        height:
-          44px;
-
-        font-size:
-          14px;
-
-        padding:
-          0
-          8px;
-
       }
-
 
       .horarios {
 
@@ -921,65 +803,21 @@
 
       }
 
-
-      .horario {
-
-        padding:
-          11px
-          5px;
-
-        font-size:
-          13px;
-
-      }
-
     }
-
 
     @media (
       max-width: 400px
     ) {
 
-
-      .card {
-
-        padding:
-          15px;
-
-      }
-
-
-      .botoes-horizontal {
-
-        width:
-          calc(
-            100vw - 54px
-          );
-
-        max-width:
-          calc(
-            100vw - 54px
-          );
-
-      }
-
-
       #data {
 
         width:
-          175px;
+          180px;
 
         max-width:
-          175px;
-
-        height:
-          42px;
-
-        font-size:
-          13px;
+          180px;
 
       }
-
 
       .horarios {
 
@@ -991,37 +829,15 @@
 
       }
 
-
-      .resumo-linha {
-
-        flex-direction:
-          column;
-
-        gap:
-          3px;
-
-      }
-
-
-      .resumo-linha strong {
-
-        text-align:
-          left;
-
-      }
-
     }
 
   </style>
 
 </head>
 
-
 <body>
 
-
   <div class="container">
-
 
     <header>
 
@@ -1047,7 +863,6 @@
     <!-- AGENDAMENTO -->
 
     <div class="card">
-
 
       <h2>
         Agende seu horário
@@ -1088,7 +903,6 @@
             id="telefone"
             placeholder="(00) 00000-0000"
             autocomplete="tel"
-            inputmode="tel"
           >
 
         </div>
@@ -1102,16 +916,13 @@
             Serviço
           </label>
 
-
           <div
             id="servicos"
             class="botoes-horizontal"
           >
 
             <div class="carregando">
-
               Carregando serviços...
-
             </div>
 
           </div>
@@ -1127,16 +938,13 @@
             Profissional
           </label>
 
-
           <div
             id="profissionais"
             class="botoes-horizontal"
           >
 
             <div class="carregando">
-
               Carregando profissionais...
-
             </div>
 
           </div>
@@ -1175,7 +983,6 @@
           Escolha o horário
         </h3>
 
-
         <div
           id="horarios"
           class="horarios"
@@ -1195,21 +1002,17 @@
           Resumo do agendamento
         </h3>
 
-
         <div class="resumo-linha">
 
           <span>
             Cliente
           </span>
 
-          <strong
-            id="resumoCliente"
-          >
+          <strong id="resumoCliente">
             -
           </strong>
 
         </div>
-
 
         <div class="resumo-linha">
 
@@ -1217,14 +1020,11 @@
             Telefone
           </span>
 
-          <strong
-            id="resumoTelefone"
-          >
+          <strong id="resumoTelefone">
             -
           </strong>
 
         </div>
-
 
         <div class="resumo-linha">
 
@@ -1232,14 +1032,11 @@
             Serviço
           </span>
 
-          <strong
-            id="resumoServico"
-          >
+          <strong id="resumoServico">
             -
           </strong>
 
         </div>
-
 
         <div class="resumo-linha">
 
@@ -1247,14 +1044,11 @@
             Profissional
           </span>
 
-          <strong
-            id="resumoProfissional"
-          >
+          <strong id="resumoProfissional">
             -
           </strong>
 
         </div>
-
 
         <div class="resumo-linha">
 
@@ -1262,14 +1056,11 @@
             Data
           </span>
 
-          <strong
-            id="resumoData"
-          >
+          <strong id="resumoData">
             -
           </strong>
 
         </div>
-
 
         <div class="resumo-linha">
 
@@ -1277,14 +1068,11 @@
             Horário
           </span>
 
-          <strong
-            id="resumoHorario"
-          >
+          <strong id="resumoHorario">
             -
           </strong>
 
         </div>
-
 
         <div class="resumo-linha">
 
@@ -1292,14 +1080,11 @@
             Valor
           </span>
 
-          <strong
-            id="resumoPreco"
-          >
+          <strong id="resumoPreco">
             -
           </strong>
 
         </div>
-
 
       </div>
 
@@ -1310,10 +1095,16 @@
         style="margin-top: 20px;"
       >
 
+        <!--
+          IMPORTANTE:
+          O botão NÃO fica disabled quando existem campos vazios.
+          A validação acontece no clique.
+        -->
+
         <button
           id="btnAgendar"
           class="btn"
-          disabled
+          type="button"
         >
           Confirmar agendamento
         </button>
@@ -1371,6 +1162,10 @@
 
 
     let carregandoHorarios =
+      false;
+
+
+    let enviandoAgendamento =
       false;
 
 
@@ -1452,6 +1247,14 @@
 
         carregarDados();
 
+        /*
+         * O botão começa habilitado.
+         * A validação acontece somente quando clicar.
+         */
+
+        btnAgendar.disabled =
+          false;
+
       }
     );
 
@@ -1465,30 +1268,24 @@
       const hoje =
         new Date();
 
-
       const ano =
         hoje.getFullYear();
-
 
       const mes =
         String(
           hoje.getMonth() + 1
-        )
-        .padStart(
+        ).padStart(
           2,
           "0"
         );
-
 
       const dia =
         String(
           hoje.getDate()
-        )
-        .padStart(
+        ).padStart(
           2,
           "0"
         );
-
 
       dataEl.min =
         ano +
@@ -1532,6 +1329,12 @@
         atualizarResumo
       );
 
+
+      /*
+       * IMPORTANTE:
+       * O botão agora chama realizarAgendamento()
+       * mesmo com campos vazios.
+       */
 
       btnAgendar.addEventListener(
         "click",
@@ -1675,9 +1478,7 @@
         servicosEl.innerHTML =
 
           '<div class="sem-opcoes">' +
-
           'Nenhum serviço cadastrado.' +
-
           '</div>';
 
         return;
@@ -1831,9 +1632,7 @@
         profissionaisEl.innerHTML =
 
           '<div class="sem-opcoes">' +
-
           'Nenhum profissional cadastrado.' +
-
           '</div>';
 
         return;
@@ -2006,9 +1805,7 @@
       horariosEl.innerHTML =
 
         '<div class="sem-horarios">' +
-
         'Carregando horários...' +
-
         '</div>';
 
 
@@ -2179,7 +1976,6 @@
           botao.addEventListener(
             "click",
             function() {
-
 
               selecionarHorario(
                 botao,
@@ -2424,7 +2220,22 @@
       }
 
 
-      const podeAgendar =
+      /*
+       * IMPORTANTE:
+       *
+       * NÃO desabilitamos mais o botão
+       * quando faltam campos.
+       *
+       * O botão continua habilitado.
+       *
+       * A validação acontece no clique.
+       */
+
+      btnAgendar.disabled =
+        false;
+
+
+      const podeMostrarResumo =
 
         cliente.length >= 2 &&
 
@@ -2444,11 +2255,9 @@
         horarioSelecionado;
 
 
-      btnAgendar.disabled =
-        !podeAgendar;
-
-
-      if (podeAgendar) {
+      if (
+        podeMostrarResumo
+      ) {
 
         resumoEl.classList.remove(
           "oculto"
@@ -2466,11 +2275,244 @@
 
 
     /********************************************************
+     * VALIDAÇÃO DOS CAMPOS
+     ********************************************************/
+
+    function validarFormulario() {
+
+
+      const cliente =
+        clienteEl.value.trim();
+
+
+      const telefone =
+        telefoneEl.value.trim();
+
+
+      const numeroTelefone =
+        telefone.replace(
+          /\D/g,
+          ""
+        );
+
+
+      const servico =
+        servicoSelecionado ||
+        "";
+
+
+      const profissional =
+        profissionalSelecionado ||
+        "";
+
+
+      const data =
+        dataEl.value.trim();
+
+
+      /*
+       * 1 - NOME
+       */
+
+      if (!cliente) {
+
+        alert(
+          "⚠️ Por favor, preencha o campo Nome."
+        );
+
+        clienteEl.focus();
+
+        return false;
+
+      }
+
+
+      if (
+        cliente.length < 2
+      ) {
+
+        alert(
+          "⚠️ Informe um nome válido."
+        );
+
+        clienteEl.focus();
+
+        return false;
+
+      }
+
+
+      /*
+       * 2 - TELEFONE
+       */
+
+      if (!telefone) {
+
+        alert(
+          "⚠️ Por favor, preencha o campo Telefone."
+        );
+
+        telefoneEl.focus();
+
+        return false;
+
+      }
+
+
+      if (
+        numeroTelefone.length < 10
+      ) {
+
+        alert(
+          "⚠️ Informe um telefone válido."
+        );
+
+        telefoneEl.focus();
+
+        return false;
+
+      }
+
+
+      /*
+       * 3 - SERVIÇO
+       */
+
+      if (!servico) {
+
+        alert(
+          "⚠️ Selecione um Serviço."
+        );
+
+        document
+          .getElementById(
+            "servicos"
+          )
+          .scrollIntoView({
+            behavior:
+              "smooth",
+            block:
+              "center"
+          });
+
+        return false;
+
+      }
+
+
+      /*
+       * 4 - PROFISSIONAL
+       */
+
+      if (!profissional) {
+
+        alert(
+          "⚠️ Selecione um Profissional."
+        );
+
+        document
+          .getElementById(
+            "profissionais"
+          )
+          .scrollIntoView({
+            behavior:
+              "smooth",
+            block:
+              "center"
+          });
+
+        return false;
+
+      }
+
+
+      /*
+       * 5 - DATA
+       */
+
+      if (!data) {
+
+        alert(
+          "⚠️ Selecione uma Data."
+        );
+
+        dataEl.focus();
+
+        return false;
+
+      }
+
+
+      /*
+       * 6 - HORÁRIO
+       */
+
+      if (
+        !horarioSelecionado
+      ) {
+
+        alert(
+          "⚠️ Selecione um Horário."
+        );
+
+        areaHorariosEl.classList.remove(
+          "oculto"
+        );
+
+        areaHorariosEl.scrollIntoView({
+          behavior:
+            "smooth",
+          block:
+            "center"
+        });
+
+        return false;
+
+      }
+
+
+      return true;
+
+    }
+
+
+    /********************************************************
      * AGENDAR
-     * VALIDAÇÃO COMPLETA
      ********************************************************/
 
     function realizarAgendamento() {
+
+
+      /*
+       * Impede duplo clique enquanto
+       * o primeiro pedido está sendo enviado.
+       */
+
+      if (
+        enviandoAgendamento
+      ) {
+
+        return;
+
+      }
+
+
+      /*
+       * PRIMEIRO:
+       * valida os campos.
+       *
+       * O botão está habilitado,
+       * então o usuário consegue
+       * chegar aqui mesmo com campos vazios.
+       */
+
+      if (
+        !validarFormulario()
+      ) {
+
+        return;
+
+      }
 
 
       const cliente =
@@ -2495,225 +2537,22 @@
         dataEl.value.trim();
 
 
-      const horario =
-        horarioSelecionado;
-
-
-      const faltando = [];
-
-
-      /*
-       * NOME
-       */
-
-      if (!cliente) {
-
-        faltando.push(
-          "Nome"
-        );
-
-      } else if (
-        cliente.length < 2
-      ) {
-
-        faltando.push(
-          "Nome válido"
-        );
-
-      }
-
-
-      /*
-       * TELEFONE
-       */
-
-      const telefoneNumeros =
-        telefone.replace(
-          /\D/g,
-          ""
-        );
-
-
-      if (!telefone) {
-
-        faltando.push(
-          "Telefone"
-        );
-
-      } else if (
-        telefoneNumeros.length < 8
-      ) {
-
-        faltando.push(
-          "Telefone válido"
-        );
-
-      }
-
-
-      /*
-       * SERVIÇO
-       */
-
-      if (!servico) {
-
-        faltando.push(
-          "Serviço"
-        );
-
-      }
-
-
-      /*
-       * PROFISSIONAL
-       */
-
-      if (!profissional) {
-
-        faltando.push(
-          "Profissional"
-        );
-
-      }
-
-
-      /*
-       * DATA
-       */
-
-      if (!data) {
-
-        faltando.push(
-          "Data"
-        );
-
-      }
-
-
-      /*
-       * HORÁRIO
-       */
-
-      if (!horario) {
-
-        faltando.push(
-          "Horário"
-        );
-
-      }
-
-
-      /*
-       * CAMPOS FALTANDO
-       */
-
-      if (
-        faltando.length > 0
-      ) {
-
-
-        const mensagem =
-
-          "Por favor, preencha os seguintes campos:<br><br>" +
-
-          "<strong>• " +
-
-          faltando.join(
-            "<br>• "
-          ) +
-
-          "</strong>";
-
-
-        mostrarStatus(
-          mensagem,
-          "erro"
-        );
-
-
-        /*
-         * Alert para celular
-         */
-
-        alert(
-
-          "Complete os seguintes campos:\n\n• " +
-
-          faltando.join(
-            "\n• "
-          )
-
-        );
-
-
-        /*
-         * Foco no primeiro campo
-         */
-
-        if (
-
-          faltando.includes(
-            "Nome"
-          ) ||
-
-          faltando.includes(
-            "Nome válido"
-          )
-
-        ) {
-
-          clienteEl.focus();
-
-
-        } else if (
-
-          faltando.includes(
-            "Telefone"
-          ) ||
-
-          faltando.includes(
-            "Telefone válido"
-          )
-
-        ) {
-
-          telefoneEl.focus();
-
-
-        } else if (
-
-          faltando.includes(
-            "Data"
-          )
-
-        ) {
-
-          dataEl.focus();
-
-        }
-
-
-        return;
-
-      }
-
-
-      /*
-       * DADOS DO HORÁRIO
-       */
-
       const horaInicio =
-        horario.inicio;
+        horarioSelecionado.inicio;
 
 
       const horaFim =
-        horario.fim ||
+        horarioSelecionado.fim ||
         "";
 
 
       /*
-       * BLOQUEIA O BOTÃO
+       * Agora sim começa o envio.
        */
+
+      enviandoAgendamento =
+        true;
+
 
       btnAgendar.disabled =
         true;
@@ -2728,10 +2567,6 @@
         "info"
       );
 
-
-      /*
-       * ENVIA AO GOOGLE APPS SCRIPT
-       */
 
       jsonp(
         "agendar",
@@ -2759,13 +2594,12 @@
             horaFim
 
         },
-
         function(resposta) {
 
 
-          /*
-           * O SERVIDOR RECUSOU
-           */
+          enviandoAgendamento =
+            false;
+
 
           if (
 
@@ -2775,18 +2609,23 @@
 
           ) {
 
+            /*
+             * O Code.gs deve retornar erro
+             * quando o horário já estiver ocupado.
+             */
 
             btnAgendar.disabled =
               false;
-
 
             btnAgendar.textContent =
               "Confirmar agendamento";
 
 
-            mostrarStatus(
+            alert(
 
-              escapeHtml(
+              "⚠️ " +
+
+              (
 
                 resposta &&
                 resposta.mensagem
@@ -2795,7 +2634,21 @@
 
                   : "Não foi possível realizar o agendamento."
 
-              ),
+              )
+
+            );
+
+
+            mostrarStatus(
+
+              resposta &&
+              resposta.mensagem
+
+                ? escapeHtml(
+                    resposta.mensagem
+                  )
+
+                : "Não foi possível realizar o agendamento.",
 
               "erro"
 
@@ -2803,22 +2656,12 @@
 
 
             /*
-             * Recarrega os horários.
+             * Atualiza novamente os horários,
+             * pois pode ter ocorrido uma disputa
+             * de agendamento.
              */
 
-            carregarHorarios(
-              servico,
-              profissional,
-              data
-            );
-
-
-            horarioSelecionado =
-              null;
-
-
-            atualizarResumo();
-
+            verificarHorarios();
 
             return;
 
@@ -2840,20 +2683,24 @@
           );
 
 
+          alert(
+            "✅ Agendamento realizado com sucesso!"
+          );
+
+
           btnAgendar.textContent =
             "Agendamento confirmado";
 
-
-          /*
-           * LIMPA FORMULÁRIO
-           */
 
           limparFormulario();
 
 
         },
-
         function(erro) {
+
+
+          enviandoAgendamento =
+            false;
 
 
           btnAgendar.disabled =
@@ -2862,6 +2709,21 @@
 
           btnAgendar.textContent =
             "Confirmar agendamento";
+
+
+          alert(
+
+            "❌ " +
+
+            (
+
+              erro.message ||
+
+              "Não foi possível realizar o agendamento."
+
+            )
+
+          );
 
 
           mostrarStatus(
@@ -2879,7 +2741,6 @@
           );
 
         }
-
       );
 
     }
@@ -3000,18 +2861,21 @@
       atualizarResumo();
 
 
-      setTimeout(
-        function() {
+      /*
+       * Botão permanece habilitado
+       * para permitir um novo agendamento.
+       */
 
-          btnAgendar.disabled =
-            true;
+      btnAgendar.disabled =
+        false;
 
-          btnAgendar.textContent =
-            "Confirmar agendamento";
 
-        },
-        1500
-      );
+      btnAgendar.textContent =
+        "Confirmar agendamento";
+
+
+      enviandoAgendamento =
+        false;
 
     }
 
@@ -3536,7 +3400,6 @@
 
 
   </script>
-
 
 </body>
 
