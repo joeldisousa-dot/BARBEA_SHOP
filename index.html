@@ -204,6 +204,11 @@
 
     }
 
+    /*
+     * DATA
+     * Mantém o campo menor no celular.
+     */
+
     #data {
 
       width: 230px;
@@ -551,7 +556,7 @@
     }
 
     /*******************************************************
-     * BOTÃO PRINCIPAL
+     * BOTÃO
      *******************************************************/
 
     .btn {
@@ -691,151 +696,6 @@
 
     }
 
-    /*******************************************************
-     * CONFIRMAÇÃO WHATSAPP
-     *******************************************************/
-
-    .confirmacao-sucesso {
-
-      background:
-        #f7f7f7;
-
-      border:
-        1px
-        solid
-        #dddddd;
-
-      border-radius:
-        12px;
-
-      padding:
-        18px;
-
-      margin-top:
-        15px;
-
-    }
-
-    .confirmacao-titulo {
-
-      color:
-        #176b31;
-
-      font-size:
-        18px;
-
-      font-weight:
-        bold;
-
-      margin-bottom:
-        12px;
-
-    }
-
-    .confirmacao-dados {
-
-      line-height:
-        1.8;
-
-      color:
-        #333333;
-
-    }
-
-    .btn-whatsapp {
-
-      display:
-        block;
-
-      width:
-        100%;
-
-      padding:
-        15px
-        18px;
-
-      margin-top:
-        15px;
-
-      background:
-        #25D366;
-
-      color:
-        #ffffff;
-
-      text-decoration:
-        none;
-
-      border-radius:
-        10px;
-
-      text-align:
-        center;
-
-      font-weight:
-        bold;
-
-      font-size:
-        15px;
-
-      transition:
-        0.2s;
-
-    }
-
-    .btn-whatsapp:hover {
-
-      background:
-        #1ebe5d;
-
-      transform:
-        translateY(-1px);
-
-    }
-
-    .btn-novo-agendamento {
-
-      width:
-        100%;
-
-      margin-top:
-        10px;
-
-      height:
-        48px;
-
-      border:
-        2px
-        solid
-        #111111;
-
-      border-radius:
-        10px;
-
-      background:
-        #ffffff;
-
-      color:
-        #111111;
-
-      font-weight:
-        bold;
-
-      cursor:
-        pointer;
-
-    }
-
-    .btn-novo-agendamento:hover {
-
-      background:
-        #111111;
-
-      color:
-        #ffffff;
-
-    }
-
     footer {
 
       text-align:
@@ -919,6 +779,10 @@
 
       }
 
+      /*
+       * DATA MENOR NO CELULAR
+       */
+
       #data {
 
         width:
@@ -998,10 +862,7 @@
 
     <!-- AGENDAMENTO -->
 
-    <div
-      id="cardAgendamento"
-      class="card"
-    >
+    <div class="card">
 
       <h2>
         Agende seu horário
@@ -1234,6 +1095,12 @@
         style="margin-top: 20px;"
       >
 
+        <!--
+          IMPORTANTE:
+          O botão NÃO fica disabled quando existem campos vazios.
+          A validação acontece no clique.
+        -->
+
         <button
           id="btnAgendar"
           class="btn"
@@ -1244,25 +1111,6 @@
 
       </div>
 
-
-    </div>
-
-
-    <!--
-      ÁREA DE CONFIRMAÇÃO
-
-      Aparece depois que o agendamento
-      for gravado com sucesso.
-    -->
-
-    <div
-      id="confirmacao"
-      class="card oculto"
-    >
-
-      <div
-        id="conteudoConfirmacao"
-      ></div>
 
     </div>
 
@@ -1385,24 +1233,6 @@
       );
 
 
-    const cardAgendamento =
-      document.getElementById(
-        "cardAgendamento"
-      );
-
-
-    const confirmacaoEl =
-      document.getElementById(
-        "confirmacao"
-      );
-
-
-    const conteudoConfirmacaoEl =
-      document.getElementById(
-        "conteudoConfirmacao"
-      );
-
-
     /********************************************************
      * INICIALIZAÇÃO
      ********************************************************/
@@ -1416,6 +1246,11 @@
         configurarEventos();
 
         carregarDados();
+
+        /*
+         * O botão começa habilitado.
+         * A validação acontece somente quando clicar.
+         */
 
         btnAgendar.disabled =
           false;
@@ -1494,6 +1329,12 @@
         atualizarResumo
       );
 
+
+      /*
+       * IMPORTANTE:
+       * O botão agora chama realizarAgendamento()
+       * mesmo com campos vazios.
+       */
 
       btnAgendar.addEventListener(
         "click",
@@ -1714,22 +1555,8 @@
           }
 
 
-          botao.innerHTML = `
-  <img
-    src="imagens/corte.jpg"
-    alt="Corte de cabelo"
-    style="
-      width: 55px;
-      height: 55px;
-      object-fit: cover;
-      border-radius: 8px;
-      display: block;
-      margin: 0 auto 6px;
-    "
-  >
-  <span>${escapeHtml(texto)}</span>
-`;
-
+          botao.textContent =
+            texto;
 
 
           botao.addEventListener(
@@ -2270,174 +2097,70 @@
      * RESUMO
      ********************************************************/
 
-    function atualizarResumo() {
+ function atualizarResumo() {
 
+  const cliente =
+    clienteEl.value.trim();
 
-      const cliente =
-        clienteEl.value.trim();
+  const telefone =
+    telefoneEl.value.trim();
 
+  const servico =
+    servicoSelecionado || "";
 
-      const telefone =
-        telefoneEl.value.trim();
+  const profissional =
+    profissionalSelecionado || "";
 
+  const data =
+    dataEl.value.trim();
 
-      const servico =
-        servicoSelecionado ||
-        "";
+  document.getElementById("resumoCliente").textContent =
+    cliente || "-";
 
+  document.getElementById("resumoTelefone").textContent =
+    telefone || "-";
 
-      const profissional =
-        profissionalSelecionado ||
-        "";
+  document.getElementById("resumoServico").textContent =
+    servico || "-";
 
+  document.getElementById("resumoProfissional").textContent =
+    profissional || "-";
 
-      const data =
-        dataEl.value.trim();
+  document.getElementById("resumoData").textContent =
+    data
+      ? formatarDataBR(data)
+      : "-";
 
-
-      document.getElementById(
-        "resumoCliente"
-      ).textContent =
-        cliente || "-";
-
-
-      document.getElementById(
-        "resumoTelefone"
-      ).textContent =
-        telefone || "-";
-
-
-      document.getElementById(
-        "resumoServico"
-      ).textContent =
-        servico || "-";
-
-
-      document.getElementById(
-        "resumoProfissional"
-      ).textContent =
-        profissional || "-";
-
-
-      document.getElementById(
-        "resumoData"
-      ).textContent =
-
-        data
-
-          ? formatarDataBR(
-              data
-            )
-
-          : "-";
-
-
-      document.getElementById(
-        "resumoHorario"
-      ).textContent =
-
-        horarioSelecionado
-
-          ? (
-
-              horarioSelecionado.inicio +
-
-              (
-
-                horarioSelecionado.fim
-
-                  ? " - " +
-                    horarioSelecionado.fim
-
-                  : ""
-
-              )
-
-            )
-
-          : "-";
-
-
-      const servicoObj =
-        encontrarServico(
-          servico
-        );
-
-
-      if (
-
-        servicoObj &&
-
-        servicoObj.preco !==
-          undefined
-
-      ) {
-
-        document.getElementById(
-          "resumoPreco"
-        ).textContent =
-
-          formatarMoeda(
-            Number(
-              servicoObj.preco
-            ) || 0
-          );
-
-      } else {
-
-        document.getElementById(
-          "resumoPreco"
-        ).textContent =
-          "-";
-
-      }
-
-
-      btnAgendar.disabled =
-        false;
-
-
-      const podeMostrarResumo =
-
-        cliente.length >= 2 &&
-
-        telefone
-          .replace(
-            /\D/g,
-            ""
+  document.getElementById("resumoHorario").textContent =
+    horarioSelecionado
+      ? (
+          horarioSelecionado.inicio +
+          (
+            horarioSelecionado.fim
+              ? " - " + horarioSelecionado.fim
+              : ""
           )
-          .length >= 8 &&
+        )
+      : "-";
 
-        servico &&
+  const servicoObj =
+    encontrarServico(servico);
 
-        profissional &&
+  document.getElementById("resumoPreco").textContent =
+    servicoObj && servicoObj.preco !== undefined
+      ? formatarMoeda(Number(servicoObj.preco) || 0)
+      : "-";
 
-        data &&
+  /*
+   * IMPORTANTE:
+   * O botão NÃO é mais desabilitado aqui.
+   */
+}
 
-        horarioSelecionado;
-
-
-      if (
-        podeMostrarResumo
-      ) {
-
-        resumoEl.classList.remove(
-          "oculto"
-        );
-
-      } else {
-
-        resumoEl.classList.add(
-          "oculto"
-        );
-
-      }
-
-    }
 
 
     /********************************************************
-     * VALIDAÇÃO
+     * VALIDAÇÃO DOS CAMPOS
      ********************************************************/
 
     function validarFormulario() {
@@ -2472,6 +2195,10 @@
         dataEl.value.trim();
 
 
+      /*
+       * 1 - NOME
+       */
+
       if (!cliente) {
 
         alert(
@@ -2499,6 +2226,10 @@
 
       }
 
+
+      /*
+       * 2 - TELEFONE
+       */
 
       if (!telefone) {
 
@@ -2528,6 +2259,10 @@
       }
 
 
+      /*
+       * 3 - SERVIÇO
+       */
+
       if (!servico) {
 
         alert(
@@ -2549,6 +2284,10 @@
 
       }
 
+
+      /*
+       * 4 - PROFISSIONAL
+       */
 
       if (!profissional) {
 
@@ -2572,6 +2311,10 @@
       }
 
 
+      /*
+       * 5 - DATA
+       */
+
       if (!data) {
 
         alert(
@@ -2584,6 +2327,10 @@
 
       }
 
+
+      /*
+       * 6 - HORÁRIO
+       */
 
       if (
         !horarioSelecionado
@@ -2621,6 +2368,11 @@
     function realizarAgendamento() {
 
 
+      /*
+       * Impede duplo clique enquanto
+       * o primeiro pedido está sendo enviado.
+       */
+
       if (
         enviandoAgendamento
       ) {
@@ -2629,6 +2381,15 @@
 
       }
 
+
+      /*
+       * PRIMEIRO:
+       * valida os campos.
+       *
+       * O botão está habilitado,
+       * então o usuário consegue
+       * chegar aqui mesmo com campos vazios.
+       */
 
       if (
         !validarFormulario()
@@ -2669,6 +2430,10 @@
         horarioSelecionado.fim ||
         "";
 
+
+      /*
+       * Agora sim começa o envio.
+       */
 
       enviandoAgendamento =
         true;
@@ -2729,10 +2494,13 @@
 
           ) {
 
+            /*
+             * O Code.gs deve retornar erro
+             * quando o horário já estiver ocupado.
+             */
 
             btnAgendar.disabled =
               false;
-
 
             btnAgendar.textContent =
               "Confirmar agendamento";
@@ -2772,6 +2540,12 @@
             );
 
 
+            /*
+             * Atualiza novamente os horários,
+             * pois pode ter ocorrido uma disputa
+             * de agendamento.
+             */
+
             verificarHorarios();
 
             return;
@@ -2781,60 +2555,29 @@
 
           /*
            * SUCESSO
-           *
-           * IMPORTANTE:
-           * montarMensagemSucesso() é chamada
-           * ANTES de limpar os campos.
            */
-
-          const mensagemSucesso =
-            montarMensagemSucesso(
-              resposta
-            );
-
 
           mostrarStatus(
-            mensagemSucesso,
+
+            montarMensagemSucesso(
+              resposta
+            ),
+
             "sucesso"
+
           );
 
 
-          /*
-           * Mostra também uma área grande
-           * de confirmação abaixo do formulário.
-           */
-
-          mostrarConfirmacao(
-            resposta
+          alert(
+            "✅ Agendamento realizado com sucesso!"
           );
 
 
-          /*
-           * Não usamos mais alert()
-           * para não atrapalhar o botão
-           * do WhatsApp.
-           */
+          btnAgendar.textContent =
+            "Agendamento confirmado";
+
 
           limparFormulario();
-
-
-          /*
-           * Leva o cliente para a confirmação.
-           */
-
-          setTimeout(
-            function() {
-
-              confirmacaoEl.scrollIntoView({
-                behavior:
-                  "smooth",
-                block:
-                  "center"
-              });
-
-            },
-            200
-          );
 
 
         },
@@ -2889,7 +2632,7 @@
 
 
     /********************************************************
-     * MONTAR CONFIRMAÇÃO
+     * SUCESSO
      ********************************************************/
 
     function montarMensagemSucesso(
@@ -2897,151 +2640,13 @@
     ) {
 
 
-      const cliente =
-        clienteEl.value.trim();
-
-
-      const telefone =
-        telefoneEl.value.trim();
-
-
-      const servico =
-        servicoSelecionado ||
-        "";
-
-
-      const profissional =
-        profissionalSelecionado ||
-        "";
-
-
-      const data =
-        dataEl.value.trim();
-
-
-      const horaInicio =
-        resposta.horaInicio ||
-        (
-          horarioSelecionado
-            ? horarioSelecionado.inicio
-            : ""
-        );
-
-
-      const horaFim =
-        resposta.horaFim ||
-        (
-          horarioSelecionado
-            ? horarioSelecionado.fim
-            : ""
-        );
-
-
-      const dataBR =
-        resposta.dataBR ||
-        formatarDataBR(
-          data
-        );
-
-
-      /*
-       * Número do cliente.
-       */
-
-      let numeroWhatsApp =
-        telefone.replace(
-          /\D/g,
-          ""
-        );
-
-
-      /*
-       * Brasil.
-       *
-       * Se o cliente informou somente
-       * o número brasileiro, adicionamos 55.
-       */
-
-      if (
-        numeroWhatsApp.length === 10 ||
-        numeroWhatsApp.length === 11
-      ) {
-
-        numeroWhatsApp =
-          "55" +
-          numeroWhatsApp;
-
-      }
-
-
-      /*
-       * Mensagem que será colocada
-       * automaticamente no WhatsApp.
-       */
-
-      let mensagemWhatsApp =
-
-        "Olá, " +
-        cliente +
-        "! 👋\n\n" +
-
-        "Seu agendamento foi confirmado! ✅\n\n" +
-
-        "✂️ Serviço: " +
-        servico +
-        "\n" +
-
-        "👤 Profissional: " +
-        profissional +
-        "\n" +
-
-        "📅 Data: " +
-        dataBR +
-        "\n" +
-
-        "🕐 Horário: " +
-        horaInicio;
-
-
-      if (horaFim) {
-
-        mensagemWhatsApp +=
-          " - " +
-          horaFim;
-
-      }
-
-
-      mensagemWhatsApp +=
-
-        "\n\n" +
-
-        "Obrigado por agendar conosco! 💈";
-
-
-      /*
-       * Link do WhatsApp.
-       */
-
-      const linkWhatsApp =
-
-        "https://wa.me/" +
-
-        numeroWhatsApp +
-
-        "?text=" +
-
-        encodeURIComponent(
-          mensagemWhatsApp
-        );
-
-
       let mensagem =
-
         "Agendamento realizado com sucesso!";
 
 
-      if (resposta.id) {
+      if (
+        resposta.id
+      ) {
 
         mensagem +=
 
@@ -3054,355 +2659,37 @@
       }
 
 
-      mensagem +=
+      if (
+        resposta.dataBR
+      ) {
 
-        "<br><strong>Data:</strong> " +
+        mensagem +=
 
-        escapeHtml(
-          dataBR
-        );
+          "<br><strong>Data:</strong> " +
 
+          escapeHtml(
+            resposta.dataBR
+          );
 
-      mensagem +=
-
-        "<br><strong>Horário:</strong> " +
-
-        escapeHtml(
-          horaInicio +
-          (
-            horaFim
-              ? " - " + horaFim
-              : ""
-          )
-        );
-
-
-      /*
-       * Botão de WhatsApp.
-       */
-
-      mensagem += `
-
-        <div
-          style="
-            margin-top:15px;
-          "
-        >
-
-          <a
-            href="${linkWhatsApp}"
-            target="_blank"
-            rel="noopener noreferrer"
-            style="
-              display:block;
-              width:100%;
-              padding:14px 18px;
-              background:#25D366;
-              color:#ffffff;
-              text-decoration:none;
-              border-radius:10px;
-              text-align:center;
-              font-weight:bold;
-              font-size:15px;
-            "
-          >
-            📲 Enviar confirmação pelo WhatsApp
-          </a>
-
-        </div>
-
-      `;
-
-
-      return mensagem;
-
-    }
-
-
-    /********************************************************
-     * MOSTRAR CONFIRMAÇÃO
-     ********************************************************/
-
-    function mostrarConfirmacao(
-      resposta
-    ) {
-
-
-      const cliente =
-        clienteEl.value.trim();
-
-
-      const telefone =
-        telefoneEl.value.trim();
-
-
-      const servico =
-        servicoSelecionado ||
-        "";
-
-
-      const profissional =
-        profissionalSelecionado ||
-        "";
-
-
-      const data =
-        dataEl.value.trim();
-
-
-      const horaInicio =
-        resposta.horaInicio ||
-        (
-          horarioSelecionado
-            ? horarioSelecionado.inicio
-            : ""
-        );
-
-
-      const horaFim =
-        resposta.horaFim ||
-        (
-          horarioSelecionado
-            ? horarioSelecionado.fim
-            : ""
-        );
-
-
-      const dataBR =
-        resposta.dataBR ||
-        formatarDataBR(
-          data
-        );
-
-
-      /*
-       * Número para WhatsApp.
-       */
-
-      let numeroWhatsApp =
-        telefone.replace(
-          /\D/g,
-          ""
-        );
+      }
 
 
       if (
-        numeroWhatsApp.length === 10 ||
-        numeroWhatsApp.length === 11
+        resposta.horaInicio
       ) {
 
-        numeroWhatsApp =
-          "55" +
-          numeroWhatsApp;
+        mensagem +=
+
+          "<br><strong>Horário:</strong> " +
+
+          escapeHtml(
+            resposta.horaInicio
+          );
 
       }
 
 
-      /*
-       * Texto da mensagem.
-       */
-
-      let mensagemWhatsApp =
-
-        "Olá, " +
-        cliente +
-        "! 👋\n\n" +
-
-        "Seu agendamento foi confirmado! ✅\n\n" +
-
-        "✂️ Serviço: " +
-        servico +
-        "\n" +
-
-        "👤 Profissional: " +
-        profissional +
-        "\n" +
-
-        "📅 Data: " +
-        dataBR +
-        "\n" +
-
-        "🕐 Horário: " +
-        horaInicio;
-
-
-      if (horaFim) {
-
-        mensagemWhatsApp +=
-          " - " +
-          horaFim;
-
-      }
-
-
-      mensagemWhatsApp +=
-
-        "\n\n" +
-
-        "Obrigado por agendar conosco! 💈";
-
-
-      const linkWhatsApp =
-
-        "https://wa.me/" +
-
-        numeroWhatsApp +
-
-        "?text=" +
-
-        encodeURIComponent(
-          mensagemWhatsApp
-        );
-
-
-      /*
-       * Protocolo.
-       */
-
-      const protocolo =
-        resposta.id
-          ? escapeHtml(
-              resposta.id
-            )
-          : "-";
-
-
-      /*
-       * Monta a tela de confirmação.
-       */
-
-      conteudoConfirmacaoEl.innerHTML = `
-
-        <div class="confirmacao-titulo">
-
-          ✅ Agendamento confirmado!
-
-        </div>
-
-
-        <div class="confirmacao-dados">
-
-          <strong>Cliente:</strong>
-          ${escapeHtml(cliente)}
-
-          <br>
-
-          <strong>Serviço:</strong>
-          ${escapeHtml(servico)}
-
-          <br>
-
-          <strong>Profissional:</strong>
-          ${escapeHtml(profissional)}
-
-          <br>
-
-          <strong>Data:</strong>
-          ${escapeHtml(dataBR)}
-
-          <br>
-
-          <strong>Horário:</strong>
-          ${escapeHtml(
-            horaInicio +
-            (
-              horaFim
-                ? " - " + horaFim
-                : ""
-            )
-          )}
-
-          <br>
-
-          <strong>Protocolo:</strong>
-          ${protocolo}
-
-        </div>
-
-
-        <div class="confirmacao-sucesso">
-
-          <strong>
-            📱 Envie a confirmação para o seu WhatsApp
-          </strong>
-
-          <p
-            style="
-              margin-top:8px;
-              color:#666;
-              line-height:1.5;
-            "
-          >
-            Clique no botão abaixo.
-            O WhatsApp abrirá com a mensagem
-            do seu agendamento já preenchida.
-          </p>
-
-
-          <a
-            class="btn-whatsapp"
-            href="${linkWhatsApp}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-
-            📲 Enviar confirmação pelo WhatsApp
-
-          </a>
-
-
-          <button
-            type="button"
-            class="btn-novo-agendamento"
-            onclick="novoAgendamento()"
-          >
-
-            Fazer novo agendamento
-
-          </button>
-
-        </div>
-
-      `;
-
-
-      confirmacaoEl.classList.remove(
-        "oculto"
-      );
-
-    }
-
-
-    /********************************************************
-     * NOVO AGENDAMENTO
-     ********************************************************/
-
-    function novoAgendamento() {
-
-
-      confirmacaoEl.classList.add(
-        "oculto"
-      );
-
-
-      conteudoConfirmacaoEl.innerHTML =
-        "";
-
-
-      statusEl.className =
-        "status";
-
-
-      statusEl.innerHTML =
-        "";
-
-
-      cardAgendamento.scrollIntoView({
-        behavior:
-          "smooth",
-        block:
-          "start"
-      });
+      return mensagem;
 
     }
 
@@ -3458,6 +2745,11 @@
 
       atualizarResumo();
 
+
+      /*
+       * Botão permanece habilitado
+       * para permitir um novo agendamento.
+       */
 
       btnAgendar.disabled =
         false;
