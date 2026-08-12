@@ -111,6 +111,10 @@
           0.30
         );
 
+      width: 100%;
+
+      overflow: hidden;
+
     }
 
 
@@ -148,6 +152,8 @@
       flex-direction: column;
 
       gap: 7px;
+
+      min-width: 0;
 
     }
 
@@ -194,6 +200,8 @@
 
       outline: none;
 
+      max-width: 100%;
+
     }
 
 
@@ -218,7 +226,8 @@
 
 
     /*******************************************************
-     * BOTÕES HORIZONTAIS
+     * SERVIÇOS / PROFISSIONAIS
+     * BARRA HORIZONTAL
      *******************************************************/
 
     .botoes-horizontal {
@@ -227,9 +236,13 @@
 
       flex-direction: row;
 
+      flex-wrap: nowrap;
+
       gap: 10px;
 
       width: 100%;
+
+      max-width: 100%;
 
       overflow-x: auto;
 
@@ -242,15 +255,18 @@
 
       scroll-behavior: smooth;
 
-      -webkit-overflow-scrolling:
-        touch;
+      -webkit-overflow-scrolling: touch;
+
+      scrollbar-width: thin;
+
+      touch-action: pan-x;
 
     }
 
 
     .botoes-horizontal::-webkit-scrollbar {
 
-      height: 6px;
+      height: 5px;
 
     }
 
@@ -282,12 +298,15 @@
       flex:
         0 0 auto;
 
+      min-width:
+        max-content;
+
       min-height:
-        48px;
+        46px;
 
       padding:
-        11px
-        18px;
+        10px
+        15px;
 
       border:
         2px
@@ -384,6 +403,21 @@
 
       font-size:
         14px;
+
+    }
+
+
+    /*******************************************************
+     * DATA
+     *******************************************************/
+
+    #data {
+
+      width:
+        260px;
+
+      max-width:
+        100%;
 
     }
 
@@ -700,6 +734,9 @@
       text-align:
         right;
 
+      word-break:
+        break-word;
+
     }
 
 
@@ -739,14 +776,37 @@
     }
 
 
+    /*******************************************************
+     * CELULAR
+     *******************************************************/
+
     @media (
       max-width: 700px
     ) {
+
 
       header h1 {
 
         font-size:
           27px;
+
+      }
+
+
+      header {
+
+        padding:
+          25px
+          10px
+          20px;
+
+      }
+
+
+      header p {
+
+        font-size:
+          14px;
 
       }
 
@@ -786,10 +846,27 @@
       }
 
 
+      /****************************************
+       * BARRA HORIZONTAL NO CELULAR
+       ****************************************/
+
       .botoes-horizontal {
 
-        gap:
-          8px;
+        width:
+          calc(
+            100vw - 60px
+          );
+
+        max-width:
+          calc(
+            100vw - 60px
+          );
+
+        overflow-x:
+          auto;
+
+        overflow-y:
+          hidden;
 
       }
 
@@ -797,14 +874,39 @@
       .botao-opcao {
 
         min-height:
-          45px;
+          44px;
 
         padding:
-          10px
-          14px;
+          9px
+          13px;
 
         font-size:
           13px;
+
+      }
+
+
+      /****************************************
+       * DATA MENOR NO CELULAR
+       ****************************************/
+
+      #data {
+
+        width:
+          190px;
+
+        max-width:
+          190px;
+
+        height:
+          44px;
+
+        font-size:
+          14px;
+
+        padding:
+          0
+          8px;
 
       }
 
@@ -819,12 +921,65 @@
 
       }
 
+
+      .horario {
+
+        padding:
+          11px
+          5px;
+
+        font-size:
+          13px;
+
+      }
+
     }
 
 
     @media (
       max-width: 400px
     ) {
+
+
+      .card {
+
+        padding:
+          15px;
+
+      }
+
+
+      .botoes-horizontal {
+
+        width:
+          calc(
+            100vw - 54px
+          );
+
+        max-width:
+          calc(
+            100vw - 54px
+          );
+
+      }
+
+
+      #data {
+
+        width:
+          175px;
+
+        max-width:
+          175px;
+
+        height:
+          42px;
+
+        font-size:
+          13px;
+
+      }
+
 
       .horarios {
 
@@ -833,6 +988,25 @@
             2,
             1fr
           );
+
+      }
+
+
+      .resumo-linha {
+
+        flex-direction:
+          column;
+
+        gap:
+          3px;
+
+      }
+
+
+      .resumo-linha strong {
+
+        text-align:
+          left;
 
       }
 
@@ -914,6 +1088,7 @@
             id="telefone"
             placeholder="(00) 00000-0000"
             autocomplete="tel"
+            inputmode="tel"
           >
 
         </div>
@@ -1168,6 +1343,7 @@
 
     const API_URL =
       "https://script.google.com/macros/s/AKfycbxZF9g0eNIQtfRXpjTDjh4e0Yhhtag0tEmqhnik17MceedYWfZjrECZzimqii_3DdlR/exec";
+
 
     /********************************************************
      * ESTADO
@@ -2291,18 +2467,10 @@
 
     /********************************************************
      * AGENDAR
+     * VALIDAÇÃO COMPLETA
      ********************************************************/
 
     function realizarAgendamento() {
-
-
-      if (
-        btnAgendar.disabled
-      ) {
-
-        return;
-
-      }
 
 
       const cliente =
@@ -2327,14 +2495,225 @@
         dataEl.value.trim();
 
 
+      const horario =
+        horarioSelecionado;
+
+
+      const faltando = [];
+
+
+      /*
+       * NOME
+       */
+
+      if (!cliente) {
+
+        faltando.push(
+          "Nome"
+        );
+
+      } else if (
+        cliente.length < 2
+      ) {
+
+        faltando.push(
+          "Nome válido"
+        );
+
+      }
+
+
+      /*
+       * TELEFONE
+       */
+
+      const telefoneNumeros =
+        telefone.replace(
+          /\D/g,
+          ""
+        );
+
+
+      if (!telefone) {
+
+        faltando.push(
+          "Telefone"
+        );
+
+      } else if (
+        telefoneNumeros.length < 8
+      ) {
+
+        faltando.push(
+          "Telefone válido"
+        );
+
+      }
+
+
+      /*
+       * SERVIÇO
+       */
+
+      if (!servico) {
+
+        faltando.push(
+          "Serviço"
+        );
+
+      }
+
+
+      /*
+       * PROFISSIONAL
+       */
+
+      if (!profissional) {
+
+        faltando.push(
+          "Profissional"
+        );
+
+      }
+
+
+      /*
+       * DATA
+       */
+
+      if (!data) {
+
+        faltando.push(
+          "Data"
+        );
+
+      }
+
+
+      /*
+       * HORÁRIO
+       */
+
+      if (!horario) {
+
+        faltando.push(
+          "Horário"
+        );
+
+      }
+
+
+      /*
+       * CAMPOS FALTANDO
+       */
+
+      if (
+        faltando.length > 0
+      ) {
+
+
+        const mensagem =
+
+          "Por favor, preencha os seguintes campos:<br><br>" +
+
+          "<strong>• " +
+
+          faltando.join(
+            "<br>• "
+          ) +
+
+          "</strong>";
+
+
+        mostrarStatus(
+          mensagem,
+          "erro"
+        );
+
+
+        /*
+         * Alert para celular
+         */
+
+        alert(
+
+          "Complete os seguintes campos:\n\n• " +
+
+          faltando.join(
+            "\n• "
+          )
+
+        );
+
+
+        /*
+         * Foco no primeiro campo
+         */
+
+        if (
+
+          faltando.includes(
+            "Nome"
+          ) ||
+
+          faltando.includes(
+            "Nome válido"
+          )
+
+        ) {
+
+          clienteEl.focus();
+
+
+        } else if (
+
+          faltando.includes(
+            "Telefone"
+          ) ||
+
+          faltando.includes(
+            "Telefone válido"
+          )
+
+        ) {
+
+          telefoneEl.focus();
+
+
+        } else if (
+
+          faltando.includes(
+            "Data"
+          )
+
+        ) {
+
+          dataEl.focus();
+
+        }
+
+
+        return;
+
+      }
+
+
+      /*
+       * DADOS DO HORÁRIO
+       */
+
       const horaInicio =
-        horarioSelecionado.inicio;
+        horario.inicio;
 
 
       const horaFim =
-        horarioSelecionado.fim ||
+        horario.fim ||
         "";
 
+
+      /*
+       * BLOQUEIA O BOTÃO
+       */
 
       btnAgendar.disabled =
         true;
@@ -2349,6 +2728,10 @@
         "info"
       );
 
+
+      /*
+       * ENVIA AO GOOGLE APPS SCRIPT
+       */
 
       jsonp(
         "agendar",
@@ -2376,8 +2759,13 @@
             horaFim
 
         },
+
         function(resposta) {
 
+
+          /*
+           * O SERVIDOR RECUSOU
+           */
 
           if (
 
@@ -2387,19 +2775,59 @@
 
           ) {
 
-            throw new Error(
 
-              resposta &&
-              resposta.mensagem
+            btnAgendar.disabled =
+              false;
 
-                ? resposta.mensagem
 
-                : "Não foi possível realizar o agendamento."
+            btnAgendar.textContent =
+              "Confirmar agendamento";
+
+
+            mostrarStatus(
+
+              escapeHtml(
+
+                resposta &&
+                resposta.mensagem
+
+                  ? resposta.mensagem
+
+                  : "Não foi possível realizar o agendamento."
+
+              ),
+
+              "erro"
 
             );
 
+
+            /*
+             * Recarrega os horários.
+             */
+
+            carregarHorarios(
+              servico,
+              profissional,
+              data
+            );
+
+
+            horarioSelecionado =
+              null;
+
+
+            atualizarResumo();
+
+
+            return;
+
           }
 
+
+          /*
+           * SUCESSO
+           */
 
           mostrarStatus(
 
@@ -2416,10 +2844,15 @@
             "Agendamento confirmado";
 
 
+          /*
+           * LIMPA FORMULÁRIO
+           */
+
           limparFormulario();
 
 
         },
+
         function(erro) {
 
 
@@ -2433,15 +2866,20 @@
 
           mostrarStatus(
 
-            erro.message ||
+            escapeHtml(
 
-            "Não foi possível realizar o agendamento.",
+              erro.message ||
+
+              "Não foi possível realizar o agendamento."
+
+            ),
 
             "erro"
 
           );
 
         }
+
       );
 
     }
